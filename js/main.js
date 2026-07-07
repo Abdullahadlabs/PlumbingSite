@@ -6,16 +6,50 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   const prefix = document.body.getAttribute('data-prefix') || './';
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  // Helper to extract location parameters from query string or pathname
+  function getCurrentLocationParams() {
+    const params = new URLSearchParams(window.location.search);
+    let city = params.get('city');
+    let zip = params.get('zip');
+    let state = params.get('state');
+
+    // Parse path parts if we are on a clean city URL (/city/anchorage/99501)
+    const pathParts = window.location.pathname.split('/');
+    const cityIdx = pathParts.indexOf('city');
+    if (cityIdx !== -1 && cityIdx + 2 < pathParts.length) {
+      if (!city) city = pathParts[cityIdx + 1];
+      if (!zip) zip = pathParts[cityIdx + 2];
+    }
+
+    if (!state && city) {
+      state = 'alaska'; // default state to alaska if city is present but state is missing
+    }
+
+    return { city, zip, state };
+  }
+
+  const getNormalizedPage = (path) => {
+    let page = path.split('/').pop().split('#')[0].split('?')[0];
+    if (page.endsWith('.html')) {
+      page = page.substring(0, page.length - 5);
+    }
+    if (page === 'index' || page === '') {
+      page = 'home';
+    }
+    return page;
+  };
+
+  const currentPage = getNormalizedPage(window.location.pathname);
 
   // ==================== LOCAL HOME MENU LINK DYNAMIC UPDATE ====================
   const homeMenuEl = document.getElementById('homeMenuLink');
   if (homeMenuEl) {
-    const params = new URLSearchParams(window.location.search);
-    const city = params.get('city') || 'Anchorage';
-    const zip = params.get('zip') || '99501';
-    const state = params.get('state') || 'alaska';
-    homeMenuEl.href = `city-zip.html?city=${encodeURIComponent(city)}&zip=${encodeURIComponent(zip)}&state=${encodeURIComponent(state)}`;
+    const loc = getCurrentLocationParams();
+    const city = loc.city || 'Anchorage';
+    const zip = loc.zip || '99501';
+    const state = loc.state || 'alaska';
+    homeMenuEl.href = `${prefix}city/${encodeURIComponent(city.toLowerCase())}/${encodeURIComponent(zip)}?state=${encodeURIComponent(state.toLowerCase())}`;
   }
 
   // ==================== HEADER SCROLL ====================
@@ -380,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ==================== DYNAMIC TEXT REPLACEMENT (service-detail.html) ====================
-  if (currentPage.includes('service-detail.html')) {
+  if (currentPage === 'service-detail') {
     const params = new URLSearchParams(window.location.search);
     let serviceName = params.get('service');
     
@@ -451,13 +485,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ==================== BROWSER HISTORY RESTRICTIONS ====================
-  // From state.html: intercept city-zip.html clicks and use location.replace()
-  if (currentPage.includes('state.html')) {
+  // From state.html: intercept city-zip clicks and use location.replace()
+  if (currentPage === 'state') {
     document.addEventListener('click', function (e) {
       const anchor = e.target.closest('a');
       if (anchor) {
         const href = anchor.getAttribute('href');
-        if (href && (href.includes('city-zip.html') || href === 'city-zip.html')) {
+        if (href && href.includes('/city/')) {
           e.preventDefault();
           window.location.replace(anchor.href);
         }
@@ -466,23 +500,24 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ==================== DYNAMIC PARAMETER PRESERVATION ====================
-  // Intercept links to service-detail.html and append location query parameters if present
+  // Intercept links to service-detail and append location query parameters if present
   document.addEventListener('click', function (e) {
     const anchor = e.target.closest('a');
     if (anchor) {
       const href = anchor.getAttribute('href');
-      if (href && href.includes('service-detail.html')) {
-        const currentParams = new URLSearchParams(window.location.search);
-        const cityVal = currentParams.get('city');
-        const zipVal = currentParams.get('zip');
-        const stateVal = currentParams.get('state');
-
-        if (cityVal || zipVal || stateVal) {
+      if (href && href.includes('service-detail')) {
+        const loc = getCurrentLocationParams();
+        if (loc.city || loc.zip || loc.state) {
           e.preventDefault();
-          const targetUrl = new URL(anchor.href, window.location.origin);
-          if (cityVal) targetUrl.searchParams.set('city', cityVal);
-          if (zipVal) targetUrl.searchParams.set('zip', zipVal);
-          if (stateVal) targetUrl.searchParams.set('state', stateVal);
+          // Strip any existing .html extension in the targeted url
+          let targetHref = anchor.href;
+          if (targetHref.includes('.html')) {
+            targetHref = targetHref.replace('.html', '');
+          }
+          const targetUrl = new URL(targetHref, window.location.origin);
+          if (loc.city) targetUrl.searchParams.set('city', loc.city);
+          if (loc.zip) targetUrl.searchParams.set('zip', loc.zip);
+          if (loc.state) targetUrl.searchParams.set('state', loc.state);
           window.location.href = targetUrl.toString();
         }
       }

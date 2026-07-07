@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# 1. Rewrite clean city paths (/city/anchorage/99501) to city-zip.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^city/([^/]+)/([^/]+)/?$ city-zip.html?city=$1&zip=$2 [QSA,L]
+
+# 2. Rewrite extensionless pages (/about) to their HTML files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^/]+)/?$ $1.html [QSA,L]
