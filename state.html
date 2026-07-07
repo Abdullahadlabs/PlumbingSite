@@ -464,9 +464,17 @@
 
   <script src="/js/main.js"></script>
   <script>
-    // Local script to update the state name from query parameter
+    // Local script to update the state name from query parameter or pathname
     const params = new URLSearchParams(window.location.search);
     let state = params.get('state');
+
+    // Parse path parts if we are on a clean state URL (/state/alaska)
+    const pathParts = window.location.pathname.split('/');
+    const stateIdx = pathParts.indexOf('state');
+    if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+      if (!state) state = pathParts[stateIdx + 1];
+    }
+
     if (state) {
       state = decodeURIComponent(state);
       // Capitalize

@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!zip) zip = pathParts[cityIdx + 2];
     }
 
+    const stateIdx = pathParts.indexOf('state');
+    if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+      if (!state) state = pathParts[stateIdx + 1];
+    }
+
     if (!state && city) {
       state = 'alaska'; // default state to alaska if city is present but state is missing
     }
@@ -30,7 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const getNormalizedPage = (path) => {
-    let page = path.split('/').pop().split('#')[0].split('?')[0];
+    const parts = path.split('/');
+    if (parts.includes('city')) {
+      return 'city-zip';
+    }
+    if (parts.includes('state')) {
+      return 'state';
+    }
+    let page = parts.pop().split('#')[0].split('?')[0];
     if (page.endsWith('.html')) {
       page = page.substring(0, page.length - 5);
     }

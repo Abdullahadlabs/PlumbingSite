@@ -599,7 +599,7 @@
         <div class="footer-col">
           <div class="footer-title">Quick Links</div>
           <a href="/">Home</a>
-          <a href="/state?state=alaska" class="state-link">State Page</a>
+          <a href="/state/alaska" class="state-link">State Page</a>
           <a href="/city-zip" class="city-link">City Page</a>
         </div>
         <div class="footer-col">
@@ -634,7 +634,7 @@
     const capState = state.charAt(0).toUpperCase() + state.slice(1);
     document.querySelectorAll('.state-name').forEach(el => el.textContent = capState);
     document.querySelectorAll('.state-link').forEach(el => {
-      el.innerHTML = `<a href="state?state=${state}">${capState}</a>`;
+      el.innerHTML = `<a href="/state/${state.toLowerCase()}">${capState}</a>`;
     });
     document.querySelectorAll('.city-link').forEach(el => {
       el.innerHTML = `<a href="city/${encodeURIComponent(city.toLowerCase())}/${encodeURIComponent(zip)}?state=${state}">${decodeURIComponent(city)}</a>`;

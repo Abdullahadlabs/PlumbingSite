@@ -5,7 +5,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^city/([^/]+)/([^/]+)/?$ city-zip.html?city=$1&zip=$2 [QSA,L]
 
-# 2. Rewrite extensionless pages (/about) to their HTML files
+# 2. Rewrite clean state paths (/state/alaska) to state.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^state/([^/]+)/?$ state.html?state=$1 [QSA,L]
+
+# 3. Rewrite extensionless pages (/about) to their HTML files
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^([^/]+)/?$ $1.html [QSA,L]
