@@ -978,11 +978,13 @@ img {
   color: white;
 }
 
-.trust-card h3 {
+.trust-card .trust-title {
+  font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 6px;
+  display: block;
 }
 
 .trust-card p {
@@ -1021,11 +1023,13 @@ img {
   margin-bottom: 16px;
 }
 
-.process-card h3 {
+.process-card .process-title {
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 12px;
+  display: block;
 }
 
 .process-card p {
@@ -1077,11 +1081,13 @@ img {
   box-shadow: var(--shadow-glow);
 }
 
-.service-card h3 {
+.service-card .service-title {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 12px;
+  display: block;
 }
 
 .service-card p {
@@ -1138,11 +1144,13 @@ img {
   color: white;
 }
 
-.why-card h3 {
+.why-card .why-title {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 10px;
+  display: block;
 }
 
 .why-card p {
@@ -1244,11 +1252,13 @@ img {
   margin-bottom: 14px;
 }
 
-.area-card h3 {
+.area-card .area-title {
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 4px;
+  display: block;
 }
 
 .area-card .area-zip {
@@ -1293,11 +1303,13 @@ img {
   background: rgba(37, 99, 235, 0.05);
 }
 
-.faq-question h3 {
+.faq-question .faq-title {
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-white);
   flex: 1;
+  display: block;
 }
 
 .faq-question i {
@@ -1437,7 +1449,7 @@ img {
   padding: 24px;
 }
 
-.project-content h3 {
+.project-content h2 {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
@@ -1492,11 +1504,13 @@ img {
   color: var(--primary-light);
 }
 
-.contact-info-card h3 {
+.contact-info-card .contact-title {
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-white);
   margin-bottom: 4px;
+  display: block;
 }
 
 .contact-info-card p,
@@ -1653,13 +1667,15 @@ img {
   margin-bottom: 20px;
 }
 
-.sidebar-card h3 {
+.sidebar-card .sidebar-title {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-color);
+  display: block;
 }
 
 .sidebar-services-list a {
@@ -1688,7 +1704,7 @@ img {
   text-align: center;
 }
 
-.sidebar-cta h3 {
+.sidebar-cta .sidebar-title {
   border: none;
   color: white;
 }
@@ -1828,11 +1844,13 @@ img {
   color: white;
 }
 
-.value-card h3 {
+.value-card .value-title {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 12px;
+  display: block;
 }
 
 .value-card p {
@@ -1855,12 +1873,14 @@ img {
   margin-bottom: 60px;
 }
 
-.footer-about h3,
-.footer-col h3 {
+.footer-about .footer-title,
+.footer-col .footer-title {
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-white);
   margin-bottom: 20px;
+  display: block;
 }
 
 .footer-about p {
