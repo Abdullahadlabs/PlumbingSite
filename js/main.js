@@ -14,12 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let zip = params.get('zip');
     let state = params.get('state');
 
-    // Parse path parts if we are on a clean city URL (/city/anchorage/99501)
+    // Parse path parts if we are on a clean city URL (/city/state/city/zip)
     const pathParts = window.location.pathname.split('/');
     const cityIdx = pathParts.indexOf('city');
-    if (cityIdx !== -1 && cityIdx + 2 < pathParts.length) {
-      if (!city) city = pathParts[cityIdx + 1];
-      if (!zip) zip = pathParts[cityIdx + 2];
+    if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {
+      if (!state) state = pathParts[cityIdx + 1];
+      if (!city) city = pathParts[cityIdx + 2];
+      if (!zip) zip = pathParts[cityIdx + 3];
     }
 
     const stateIdx = pathParts.indexOf('state');
@@ -39,8 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (parts.includes('city')) {
       return 'city-zip';
     }
-    if (parts.includes('state')) {
+    if (parts.includes('state') && parts.indexOf('state') + 1 < parts.length && parts[parts.indexOf('state') + 1] !== '') {
       return 'state';
+    }
+    if (parts.includes('services') && parts.indexOf('services') + 1 < parts.length && parts[parts.indexOf('services') + 1] !== '') {
+      return 'service-detail';
     }
     let page = parts.pop().split('#')[0].split('?')[0];
     if (page.endsWith('.html')) {
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const city = loc.city || 'Anchorage';
     const zip = loc.zip || '99501';
     const state = loc.state || 'alaska';
-    homeMenuEl.href = `${prefix}city/${encodeURIComponent(city.toLowerCase())}/${encodeURIComponent(zip)}?state=${encodeURIComponent(state.toLowerCase())}`;
+    homeMenuEl.href = `/city/${encodeURIComponent(state.toLowerCase())}/${encodeURIComponent(city.toLowerCase())}/${encodeURIComponent(zip)}`;
   }
 
   // ==================== HEADER SCROLL ====================
@@ -228,8 +232,8 @@ document.addEventListener('DOMContentLoaded', function () {
         paths.forEach(p => p.classList.remove('active-state'));
         e.currentTarget.classList.add('active-state');
 
-        // Route to state.html with query parameter
-        window.location.href = `${prefix}state.html?state=${stateSlug}`;
+        // Route to state with clean absolute path
+        window.location.href = `/state/${stateSlug}`;
       });
 
       path.addEventListener('keydown', (e) => {
@@ -429,6 +433,13 @@ document.addEventListener('DOMContentLoaded', function () {
   if (currentPage === 'service-detail') {
     const params = new URLSearchParams(window.location.search);
     let serviceName = params.get('service');
+
+    // Parse service from pathname (/services/drain-cleaning)
+    const pathParts = window.location.pathname.split('/');
+    const servicesIdx = pathParts.indexOf('services');
+    if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
+      if (!serviceName) serviceName = pathParts[servicesIdx + 1];
+    }
     
     if (!serviceName) {
       const hash = window.location.hash;
@@ -439,6 +450,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (serviceName) {
       serviceName = decodeURIComponent(serviceName);
+      
+      // Convert slug (e.g. drain-cleaning) to title case (e.g. Drain Cleaning)
+      if (serviceName.includes('-') && !serviceName.includes(' ')) {
+        serviceName = serviceName.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      } else {
+        serviceName = serviceName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
       
       // Update Page Title
       document.title = document.title.replace(/respective/gi, serviceName);

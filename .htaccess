@@ -1,16 +1,20 @@
 RewriteEngine On
+RewriteBase /
 
-# 1. Rewrite clean city paths (/city/anchorage/99501) to city-zip.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^city/([^/]+)/([^/]+)/?$ city-zip.html?city=$1&zip=$2 [QSA,L]
+# 1. Remove .html extension globally
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
 
-# 2. Rewrite clean state paths (/state/alaska) to state.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^state/([^/]+)/?$ state.html?state=$1 [QSA,L]
+# 2. Route for States (e.g., /state/alaska -> state.html?state=alaska)
+RewriteRule ^state/([^/]+)/?$ state.html?state=$1 [L,QSA]
 
-# 3. Rewrite extensionless pages (/about) to their HTML files
+# 3. Route for Services (e.g., /services/drain-cleaning -> service-detail.html?service=drain-cleaning)
+RewriteRule ^services/([^/]+)/?$ service-detail.html?service=$1 [L,QSA]
+
+# 4. Route for City/Zip (e.g., /city/alaska/anchorage/99501 -> city-zip.html?state=$1&city=$2&zip=$3)
+RewriteRule ^city/([^/]+)/([^/]+)/([^/]+)/?$ city-zip.html?state=$1&city=$2&zip=$3 [L,QSA]
+
+# 5. Fallback to check if actual file exists without extension
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^([^/]+)/?$ $1.html [QSA,L]
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
