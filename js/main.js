@@ -432,34 +432,155 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==================== DYNAMIC TEXT REPLACEMENT (service-detail.html) ====================
   if (currentPage === 'service-detail') {
     const params = new URLSearchParams(window.location.search);
-    let serviceName = params.get('service');
+    let serviceNameRaw = params.get('service');
 
     // Parse service from pathname (/services/drain-cleaning)
     const pathParts = window.location.pathname.split('/');
     const servicesIdx = pathParts.indexOf('services');
     if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
-      if (!serviceName) serviceName = pathParts[servicesIdx + 1];
+      if (!serviceNameRaw) {
+        serviceNameRaw = pathParts[servicesIdx + 1];
+        // Clean trailing slash if present
+        if (serviceNameRaw && serviceNameRaw.endsWith('/')) {
+          serviceNameRaw = serviceNameRaw.slice(0, -1);
+        }
+      }
     }
     
-    if (!serviceName) {
+    if (!serviceNameRaw) {
       const hash = window.location.hash;
       if (hash && hash.length > 1) {
-        serviceName = decodeURIComponent(hash.substring(1));
+        serviceNameRaw = decodeURIComponent(hash.substring(1));
       }
     }
 
-    if (serviceName) {
-      serviceName = decodeURIComponent(serviceName);
+    if (serviceNameRaw) {
+      serviceNameRaw = decodeURIComponent(serviceNameRaw);
       
-      // Convert slug (e.g. drain-cleaning) to title case (e.g. Drain Cleaning)
-      if (serviceName.includes('-') && !serviceName.includes(' ')) {
-        serviceName = serviceName.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-      } else {
-        serviceName = serviceName.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-      }
+      // Convert slug (e.g. drain-cleaning) to proper Title Case
+      let serviceName = serviceNameRaw
+        .split(/[- ]+/)
+        .map(w => {
+          if (w.toLowerCase() === 'b2b') return 'B2B';
+          if (w.toLowerCase() === 'usa') return 'USA';
+          return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+        })
+        .join(' ');
+
+      // Extract current location details for dynamic content formatting
+      const loc = getCurrentLocationParams();
+      const city = loc.city || 'Anchorage';
+      const state = loc.state || 'alaska';
+      const capState = state.charAt(0).toUpperCase() + state.slice(1);
+      const capCity = decodeURIComponent(city)
+        .split(' ')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(' ');
       
       // Update Page Title
-      document.title = document.title.replace(/respective/gi, serviceName);
+      document.title = `${serviceName} in ${capCity}, ${capState.substring(0, 2).toUpperCase()} | Home Plumbing USA`;
+
+      // Update Page Meta Description
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', `Looking for professional ${serviceName.toLowerCase()} in ${capCity}, ${capState}? Our vetted local plumbers offer fast response, flat rates, and 24/7 service.`);
+      }
+
+      // Inject Unique Category-Specific Content
+      let categoryId = 'general';
+      if (window.servicesData) {
+        const slugClean = serviceNameRaw.toLowerCase().trim();
+        if (window.servicesData.slugs[slugClean]) {
+          categoryId = window.servicesData.slugs[slugClean];
+        } else {
+          // Fuzzy match category
+          const keys = Object.keys(window.servicesData.categories);
+          for (const key of keys) {
+            if (slugClean.includes(key)) {
+              categoryId = key;
+              break;
+            }
+          }
+          // Custom mappings
+          if (categoryId === 'general') {
+            if (slugClean.includes('leak') || slugClean.includes('detection')) {
+              categoryId = 'leak-detection';
+            } else if (slugClean.includes('pipe') || slugClean.includes('line') || slugClean.includes('trenching')) {
+              if (slugClean.includes('gas-line')) {
+                categoryId = 'gas-line';
+              } else {
+                categoryId = 'pipe-repair';
+              }
+            } else if (slugClean.includes('faucet') || slugClean.includes('toilet') || slugClean.includes('shower') || slugClean.includes('bath') || slugClean.includes('sink') || slugClean.includes('disp') || slugClean.includes('sump') || slugClean.includes('pump') || slugClean.includes('fixture') || slugClean.includes('machine') || slugClean.includes('valve') || slugClean.includes('regulator')) {
+              categoryId = 'fixtures';
+            } else if (slugClean.includes('filter') || slugClean.includes('softener') || slugClean.includes('filtration')) {
+              categoryId = 'filtration';
+            } else if (slugClean.includes('drain') || slugClean.includes('sewer') || slugClean.includes('clog') || slugClean.includes('jetting') || slugClean.includes('rooter') || slugClean.includes('septic')) {
+              categoryId = 'drain-sewer';
+            }
+          }
+        }
+      }
+
+      const catData = (window.servicesData && window.servicesData.categories[categoryId]) || (window.servicesData && window.servicesData.categories['general']);
+      
+      if (catData) {
+        const format = (str) => {
+          if (!str) return '';
+          return str
+            .replace(/{service}/gi, serviceName)
+            .replace(/{city}/gi, capCity)
+            .replace(/respective/gi, serviceName);
+        };
+
+        // Inject Overview / Why Call Us
+        const whyP1 = document.getElementById('why-call-p1');
+        const whyP2 = document.getElementById('why-call-p2');
+        const whyList = document.getElementById('why-call-list');
+        if (whyP1) whyP1.textContent = format(catData.whyCallUs[0]);
+        if (whyP2) whyP2.textContent = format(catData.whyCallUs[1]);
+        if (whyList && catData.whyCallUsList) {
+          whyList.innerHTML = catData.whyCallUsList.map(item => `<li><i class="fas fa-check"></i> ${format(item)}</li>`).join('');
+        }
+
+        // Inject How We Perform
+        const howP1 = document.getElementById('how-perform-p1');
+        const howP2 = document.getElementById('how-perform-p2');
+        const howList = document.getElementById('how-perform-list');
+        if (howP1) howP1.textContent = format(catData.howWePerform[0]);
+        if (howP2) howP2.textContent = format(catData.howWePerform[1]);
+        if (howList && catData.howWePerformList) {
+          howList.innerHTML = catData.howWePerformList.map(item => `<li><i class="fas fa-check"></i> ${format(item)}</li>`).join('');
+        }
+
+        // Inject Benefits
+        const benP1 = document.getElementById('benefits-p1');
+        const benP2 = document.getElementById('benefits-p2');
+        const benList = document.getElementById('benefits-list');
+        if (benP1) benP1.textContent = format(catData.benefits[0]);
+        if (benP2) benP2.textContent = format(catData.benefits[1]);
+        if (benList && catData.benefitsList) {
+          benList.innerHTML = catData.benefitsList.map(item => `<li><i class="fas fa-check"></i> ${format(item)}</li>`).join('');
+        }
+
+        // Inject Workflow Steps
+        for (let i = 1; i <= 4; i++) {
+          const stepTitle = document.getElementById(`workflow-step-${i}-title`);
+          const stepDesc = document.getElementById(`workflow-step-${i}-desc`);
+          if (stepTitle && catData.workflow[i - 1]) stepTitle.textContent = format(catData.workflow[i - 1].title);
+          if (stepDesc && catData.workflow[i - 1]) stepDesc.textContent = format(catData.workflow[i - 1].desc);
+        }
+
+        // Inject FAQs
+        const faqQ1 = document.getElementById('faq-q1');
+        const faqA1 = document.getElementById('faq-a1');
+        const faqQ2 = document.getElementById('faq-q2');
+        const faqA2 = document.getElementById('faq-a2');
+        if (faqQ1 && catData.faq[0]) faqQ1.textContent = format(catData.faq[0].q);
+        if (faqA1 && catData.faq[0]) faqA1.textContent = format(catData.faq[0].a);
+        if (faqQ2 && catData.faq[1]) faqQ2.textContent = format(catData.faq[1].q);
+        if (faqA2 && catData.faq[1]) faqA2.textContent = format(catData.faq[1].a);
+      }
 
       // Recursive replacement in text nodes helper
       function replaceTextInElement(element, fromText, toText) {
@@ -477,11 +598,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         nodesToReplace.forEach(n => {
           n.nodeValue = n.nodeValue.replace(regex, (match) => {
-            // Match casing: 'Respective' -> capitalized service name, 'respective' -> lowercase/standard service name
-            if (match.charAt(0) === 'R') {
-              return toText.charAt(0).toUpperCase() + toText.slice(1);
-            }
-            return toText.toLowerCase();
+            return toText;
           });
         });
       }
@@ -535,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const anchor = e.target.closest('a');
     if (anchor) {
       const href = anchor.getAttribute('href');
-      if (href && href.includes('service-detail')) {
+      if (href && (href.includes('service-detail') || href.includes('/services/'))) {
         const loc = getCurrentLocationParams();
         if (loc.city || loc.zip || loc.state) {
           e.preventDefault();
