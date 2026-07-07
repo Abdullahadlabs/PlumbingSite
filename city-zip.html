@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Plumbing USA | Local City Plumbing & Drain Services</title>
+  <meta name="description"
+    content="Get fast, reliable plumbing services in your local neighborhood. Same-day service, licensed plumbers, upfront estimates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    /* Specific styling for the restructured elements */
+    .hero-section {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      background: var(--gradient-hero);
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+      background-size: 40px 40px, 40px 40px, auto, auto;
+      pointer-events: none;
+    }
+
+    .hero-section .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 992px) {
+      .hero-section .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .trust-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .trust-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .trust-grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .workflow-steps-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 992px) {
+      .workflow-steps-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .workflow-steps-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .final-cta-section {
+      background: var(--gradient-primary);
+      text-align: center;
+      padding: 80px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .final-cta-section h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .final-cta-section h2 span.dynamic-service {
+      color: var(--accent);
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+
+    .final-cta-section p {
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .final-cta-section .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    @media (max-width: 576px) {
+      .final-cta-section .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .final-cta-section .cta-buttons a {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    .btn-quote,
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .btn-quote {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .btn-quote:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+    }
+
+    .btn-call {
+      background: var(--accent);
+      color: var(--text-white);
+    }
+
+    .btn-call:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body data-prefix="./" data-depth="0">
+
+  <!-- 1. Header -->
+  <header class="header site-header" id="header">
+    <div class="top-bar">
+      <div class="top-bar-content">
+        <span class="pulse-dot"></span>
+        <span>24/7 Emergency Plumbers Nationwide - Same Price, Holidays Included!</span>
+      </div>
+    </div>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img">
+      </a>
+      <nav class="nav" id="mainNav">
+        <a href="index.html" class="nav-link" id="homeMenuLink">Home</a>
+        <div class="nav-item">
+          <a href="services.html" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+          <div class="mega-dropdown">
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Emergency & Repair</div>
+              <a href="service-detail.html?service=24 Hour Emergency Plumbing" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
+              <a href="service-detail.html?service=Same Day Plumbing Repair" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
+              <a href="service-detail.html?service=Burst Pipe Repair" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
+              <a href="service-detail.html?service=Whole House Repiping" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
+              <a href="service-detail.html?service=Plumbing Maintenance" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
+              <a href="service-detail.html?service=Commercial Plumbing" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Water Heater & Drains</div>
+              <a href="service-detail.html?service=Water Heater Repair" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
+              <a href="service-detail.html?service=Water Heater Installation" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
+              <a href="service-detail.html?service=Tankless Water Heater Installation" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
+              <a href="service-detail.html?service=Drain Cleaning" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
+              <a href="service-detail.html?service=Clogged Drain Repair" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
+              <a href="service-detail.html?service=Hydro Jetting" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
+              <a href="service-detail.html?service=Sewer Line Repair" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
+              <a href="service-detail.html?service=Sewer Line Replacement" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Leak & Pipe Services</div>
+              <a href="service-detail.html?service=Leak Detection" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
+              <a href="service-detail.html?service=Slab Leak Repair" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
+              <a href="service-detail.html?service=Pipe Leak Repair" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
+              <a href="service-detail.html?service=Gas Line Installation" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
+              <a href="service-detail.html?service=Gas Leak Detection" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
+              <a href="service-detail.html?service=Gas Line Repair" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
+              <a href="service-detail.html?service=Water Line Repair" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
+              <a href="service-detail.html?service=Water Line Installation" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Fixtures & Specialty</div>
+              <a href="service-detail.html?service=Toilet Repair & Installation" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair & Installation</a>
+              <a href="service-detail.html?service=Faucet & Sink Repair" class="dropdown-link"><i class="fas fa-sink"></i> Faucet & Sink Repair</a>
+              <a href="service-detail.html?service=Garbage Disposal Repair" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
+              <a href="service-detail.html?service=Kitchen Plumbing" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
+              <a href="service-detail.html?service=Bathroom Plumbing" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
+              <a href="service-detail.html?service=Backflow Testing" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
+              <a href="service-detail.html?service=Sump Pump Install & Repair" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install & Repair</a>
+              <a href="service-detail.html?service=Water Pressure Repair" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link dropdown-toggle">Available Areas <i class="fas fa-chevron-down"></i></a>
+          <div class="mega-dropdown" id="areasDropdownMenu" style="grid-template-columns: 1fr; width: 280px; padding: 15px; gap: 4px;">
+            <!-- Dynamic areas list -->
+          </div>
+        </div>
+        <a href="#why-us" class="nav-link">Why Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-star"></i> Serving Local Neighborhoods</div>
+            <h1>Expert Plumbing Services in <span class="city-name">Anchorage</span>, <span
+                class="state-name">Alaska</span> <span class="zip-code">99501</span></h1>
+            <p class="hero-text">Connecting you with vetted, licensed, and background-checked plumbers in <span
+                class="city-name">Anchorage</span>. Fast dispatch, upfront flat-rate pricing, and zero hidden fees.</p>
+            <div class="hero-buttons" style="margin-top: 20px;">
+              <a href="tel:877-516-8705" class="btn btn-accent btn-lg"><i class="fas fa-phone"></i> Call
+                877-516-8705</a>
+              <a href="#overview" class="btn btn-outline btn-lg"><i class="fas fa-wrench"></i> View Services</a>
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div class="hero-image-container">
+              <img src="images/hero-plumbing.png" alt="Local Plumbing Services" class="hero-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Trust Section -->
+    <section class="trust-section" id="trust" style="padding: 40px 0; background: var(--bg-surface);">
+      <div class="container">
+        <div class="trust-grid-4">
+          <div class="trust-card animate-on-scroll">
+            <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>Licensed &amp; Insured</h3>
+            <p>Fully background-checked plumbers matching local safety guidelines</p>
+          </div>
+          <div class="trust-card animate-on-scroll">
+            <div class="trust-icon"><i class="fas fa-medal"></i></div>
+            <h3>Quality Work</h3>
+            <p>Premium replacement parts and code-compliant installations</p>
+          </div>
+          <div class="trust-card animate-on-scroll">
+            <div class="trust-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+            <h3>Upfront Pricing</h3>
+            <p>Flat-rate transparent quotes before any physical repairs begin</p>
+          </div>
+          <div class="trust-card animate-on-scroll">
+            <div class="trust-icon"><i class="fas fa-truck-fast"></i></div>
+            <h3>24/7 Availability</h3>
+            <p>Round-the-clock rapid dispatch for emergencies, weekends, and holidays</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Service Overview -->
+    <section class="service-overview section" id="overview">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-label">Capabilities</div>
+          <h2 class="section-title">Plumbing Services in <span class="city-name">Anchorage</span></h2>
+          <p class="section-desc">Click any card below to view details and request dynamic quotes for that specific
+            plumbing service.</p>
+        </div>
+
+        <div class="services-grid">
+          <a href="service-detail.html?service=24 Hour Emergency Plumbing"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-bolt"></i></div>
+            <h3>24 Hour Emergency Plumbing</h3>
+            <p>Round-the-clock emergency repair for burst pipes, major leaks, and sewer backups in <span
+                class="city-name">Anchorage</span>.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Same Day Plumbing Repair"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-clock"></i></div>
+            <h3>Same Day Plumbing Repair</h3>
+            <p>Fast, same-day plumbing repairs for common issues like dripping faucets, running toilets, and minor
+              leaks.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Water Heater Repair"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-temperature-high"></i></div>
+            <h3>Water Heater Repair</h3>
+            <p>Expert diagnosis and repair for tank, tankless, electric, and gas water heaters in <span
+                class="city-name">Anchorage</span>.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Water Heater Installation"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-fire"></i></div>
+            <h3>Water Heater Installation</h3>
+            <p>Professional installation with proper sizing, local code compliance, and warranty support.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Tankless Water Heater Installation"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-fire-flame-simple"></i></div>
+            <h3>Tankless Water Heater Installation</h3>
+            <p>Upgrade to energy-efficient tankless water heaters with expert installation in <span
+                class="city-name">Anchorage</span>.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Drain Cleaning Service"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-broom"></i></div>
+            <h3>Drain Cleaning Service</h3>
+            <p>Thorough drain cleaning to remove buildup, grease, and debris throughout your home.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Clogged Drain Repair"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-plug-circle-xmark"></i></div>
+            <h3>Clogged Drain Repair</h3>
+            <p>Stubborn clogs cleared fast in sinks, tubs, showers, and main sewer lines.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Hydro Jetting Service"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-water"></i></div>
+            <h3>Hydro Jetting Service</h3>
+            <p>High-pressure water jetting for the toughest clogs and pipe interior cleaning.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Sewer Line Repair" class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+            <h3>Sewer Line Repair</h3>
+            <p>Traditional and trenchless repair for cracks, bellied pipes, and root intrusion.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Sewer Line Replacement"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-arrows-rotate"></i></div>
+            <h3>Sewer Line Replacement</h3>
+            <p>Complete sewer line replacement using modern trenchless technology.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Leak Detection Service"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-magnifying-glass"></i></div>
+            <h3>Leak Detection Service</h3>
+            <p>Electronic equipment and thermal imaging to locate hidden leaks without damage.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Slab Leak Repair" class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-layer-group"></i></div>
+            <h3>Slab Leak Repair</h3>
+            <p>Specialized equipment to locate and fix leaks beneath your home's foundation slab.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Pipe Leak Repair" class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-droplet"></i></div>
+            <h3>Pipe Leak Repair</h3>
+            <p>Fast, reliable repair for copper, PVC, PEX, and galvanized pipes.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Burst Pipe Repair" class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-burst"></i></div>
+            <h3>Burst Pipe Repair</h3>
+            <p>Emergency response to stop flooding and fix pipes broken by freeze stress.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Whole House Repiping"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-house-chimney"></i></div>
+            <h3>Whole House Repiping</h3>
+            <p>Replace old, corroded, or failing pipes with modern, durable materials.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="service-detail.html?service=Toilet Repair &amp; Installation"
+            class="service-card animate-on-scroll clickable-card">
+            <div class="service-icon"><i class="fas fa-toilet"></i></div>
+            <h3>Toilet Repair &amp; Installation</h3>
+            <p>From fixing running toilets and clogs to installing new high-efficiency models.</p>
+            <span class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Workflow Section -->
+    <section class="workflow-section section" id="workflow" style="background: var(--bg-surface);">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-label">How We Work</div>
+          <h2 class="section-title">Our Service <span>Workflow</span></h2>
+          <p class="section-desc">We dispatch technicians directly to your address. Here is our direct local workflow.
+          </p>
+        </div>
+        <div class="workflow-steps-4">
+          <div class="process-card animate-on-scroll">
+            <div class="process-number">01</div>
+            <h3>Call Dispatch</h3>
+            <p>Call us at 877-516-8705. Speak with a coordinator to describe your plumbing problem.</p>
+          </div>
+          <div class="process-card animate-on-scroll">
+            <div class="process-number">02</div>
+            <h3>Technician Dispatched</h3>
+            <p>We locate the nearest certified mobile plumber in <span class="city-name">Anchorage</span> and assign
+              them to your call.</p>
+          </div>
+          <div class="process-card animate-on-scroll">
+            <div class="process-number">03</div>
+            <h3>On-Site Estimate</h3>
+            <p>The plumber arrives at your property, inspects the issue, and presents an upfront written estimate.</p>
+          </div>
+          <div class="process-card animate-on-scroll">
+            <div class="process-number">04</div>
+            <h3>Job Completed</h3>
+            <p>With your approval, the technician performs the repairs immediately using parts from their stocked truck.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Why Choose Us -->
+    <section class="why-us-section section" id="why-us">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-label">Why Choose Us</div>
+          <h2 class="section-title">Why Call Us in <span class="city-name">Anchorage</span>?</h2>
+          <p class="section-desc">We provide direct access to verified plumbers with transparent pricing and fast
+            turnaround times.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card animate-on-scroll">
+            <div class="why-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h3>Fast Local Dispatch</h3>
+              <p>Because our dispatch network is active throughout <span class="city-name">Anchorage</span>, we match
+                you with a nearby tech who can arrive in 45 minutes on average.</p>
+            </div>
+          </div>
+          <div class="why-card animate-on-scroll">
+            <div class="why-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+            <div>
+              <h3>Upfront Diagnostic Pricing</h3>
+              <p>No estimates over the phone that change on arrival. The plumber inspects the work on-site and provides
+                a clear, binding diagnostic quote before starting.</p>
+            </div>
+          </div>
+          <div class="why-card animate-on-scroll">
+            <div class="why-icon"><i class="fas fa-shield-check"></i></div>
+            <div>
+              <h3>Vetted Technicians</h3>
+              <p>All plumbing companies in our matching service are checked for active state licensing, general
+                liability insurance, and background verification.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Service Area Map -->
+    <section class="service-area-section section" id="areas" style="background: var(--bg-surface);">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-label">Service Area Map</div>
+          <h2 class="section-title">Serving <span class="city-name">Anchorage</span> &amp; Surrounding Areas</h2>
+          <p class="section-desc">Our plumbing dispatch trucks cover the entire local region including the following zip
+            code areas:</p>
+        </div>
+        <div class="areas-grid" id="areas-grid"
+          style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-top: 30px;">
+          <!-- Dynamically generated via zipData.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ Section -->
+    <section class="faq-section section" id="faq">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-label">FAQ</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Answers to common plumbing questions from local homeowners in <span
+              class="city-name">Anchorage</span>.</p>
+        </div>
+        <div class="faq-container"
+          style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>How quickly can a plumber arrive at my address in <span class="city-name">Anchorage</span>?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">On average, a certified technician can be dispatched to your location in 45 minutes or less, depending on traffic and local call volume. Because our network contains local professionals across <span class="city-name">Anchorage</span> and nearby zip codes, we ensure the fastest response times possible.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>Do you offer emergency plumbing services 24/7?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes, we connect you with emergency dispatch coordinators 24 hours a day, 7 days a week, including weekends and holidays. Whether you have an urgent sewer backup at midnight or a burst water line, a local technician will be available to help.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>How much does it cost to get an inspection or quote?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Connecting through our referral network is entirely free. Dispatched plumbers charge a standard diagnostic fee to cover the trip and assessment. Once they inspect the issue on-site, they will present a clear, flat-rate estimate. If you approve the work, the diagnostic fee is typically applied directly to the cost of the service.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>Are the plumbers in your network licensed and insured?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Absolutely. Every plumbing business in our network is carefully vetted to verify they hold active state plumbing licenses, valid general liability insurance, and worker's compensation coverage to protect your home.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>What plumbing services can I request in my area?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Technicians in our network handle the full spectrum of plumbing needs, including drain cleaning, leak detection, sewer pipe repair, water heater installation (both tank and tankless), toilet and faucet repairs, and complete water line repiping.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>Do you provide commercial plumbing services as well?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes. We can match you with specialist plumbers who have the heavy-duty equipment and experience required for commercial properties, offices, restaurants, and retail spaces in the local area.</div>
+            </div>
+          </div>
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question">
+              <h3>What should I do in a plumbing emergency before the technician arrives?</h3><i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">In the event of a severe leak or burst pipe, locate and turn off the main water shut-off valve immediately to prevent further property damage. For sewer line back-ups, stop running any water down sinks, showers, or toilets. Our dispatch coordinators can guide you through these safety steps when you call.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Final CTA Banner -->
+    <section class="final-cta-section">
+      <div class="container">
+        <h2>Need Professional <span class="dynamic-service">Plumbing Services</span>?</h2>
+        <p>Get connected with vetted, licensed local plumbers in <span class="city-name">Anchorage</span> immediately.
+          Safe repairs, flat upfront estimates, 24/7 emergency dispatch.</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn-quote">Request a Quote</a>
+          <a href="tel:8775168705" class="btn-call">Call Now: 877-516-8705</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. Footer -->
+  <footer class="footer site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="logo footer-logo">
+            <img src="images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img">
+          </a>
+          <p>Connecting home and business owners with vetted, highly-rated technicians in real-time. Licensed and
+            insured plumbing solutions nationwide.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="state.html?state=alaska" class="state-link">State Page</a>
+          <a href="#overview">Services</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#why-us">Why Choose Us</a>
+        </div>
+        <div class="footer-col">
+          <h3>Local Info</h3>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> <span class="city-name">Anchorage</span>, <span
+              class="zip-code">99501</span></a>
+          <a href="tel:877-516-8705"><i class="fas fa-phone"></i> 877-516-8705</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Nationwide USA</p>
+        <div class="flex justify-center space-x-4 mt-2 text-xs">
+          <a href="./privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <span class="text-white/20">&middot;</span>
+          <a href="./terms-and-conditions.html" class="hover:text-white transition-colors">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/zipData.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    // Local script to update the city, state and zip names from URL parameter
+    const params = new URLSearchParams(window.location.search);
+    let city = params.get('city');
+    let zip = params.get('zip');
+    let state = params.get('state');
+
+    if (city) {
+      city = decodeURIComponent(city);
+      document.querySelectorAll('.city-name').forEach(el => el.textContent = city);
+    }
+    if (zip) {
+      zip = decodeURIComponent(zip);
+      document.querySelectorAll('.zip-code').forEach(el => el.textContent = zip);
+    }
+    if (state) {
+      state = decodeURIComponent(state);
+      const capState = state.charAt(0).toUpperCase() + state.slice(1);
+      document.querySelectorAll('.state-name').forEach(el => el.textContent = capState);
+      document.querySelectorAll('.state-link').forEach(el => {
+        el.innerHTML = `<a href="state.html?state=${state}">${capState}</a>`;
+      });
+    }
+
+    // Render the 10 zip code areas dynamically from zipData.js database
+    const gridEl = document.getElementById('areas-grid');
+    if (gridEl && typeof zipCodeData !== 'undefined') {
+      let lookupZip = zip || '99501';
+      let zipList = zipCodeData[lookupZip];
+      
+      // If no zip parameter or not found, try to look up by city name
+      if (!zipList && city) {
+        const cityLower = city.toLowerCase();
+        for (const z in zipCodeData) {
+          const list = zipCodeData[z];
+          if (list[0]) {
+            const listCity = list[0].split(', ')[0] || '';
+            if (listCity.toLowerCase() === cityLower) {
+              lookupZip = z;
+              zipList = list;
+              break;
+            }
+          }
+        }
+      }
+      
+      // Fallback to a default zip if still not found
+      if (!zipList) {
+        lookupZip = '99501';
+        zipList = zipCodeData[lookupZip];
+      }
+      
+      if (zipList) {
+        let cardsHtml = '';
+        let dropdownHtml = '';
+        zipList.forEach(item => {
+          const parts = item.split(', ');
+          const itemCity = parts[0] || '';
+          const itemZip = parts[1] || '';
+          cardsHtml += `
+            <div class="area-card" style="padding: 16px; text-align: center; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+              <i class="fas fa-map-marker-alt" style="color: var(--primary); margin-bottom: 8px;"></i>
+              <h4 style="color: var(--text-white); font-size: 0.95rem;">${itemCity}</h4>
+              <div class="area-zip" style="font-size: 0.82rem; color: var(--text-muted);">${itemZip}</div>
+            </div>
+          `;
+          dropdownHtml += `
+            <a href="city-zip.html?city=${encodeURIComponent(itemCity)}&zip=${encodeURIComponent(itemZip)}&state=${state || 'alaska'}" class="dropdown-link">
+              <i class="fas fa-map-marker-alt"></i> ${itemCity} - ${itemZip}
+            </a>
+          `;
+        });
+        gridEl.innerHTML = cardsHtml;
+
+        // Populate the Available Areas dropdown in the navigation menu
+        const areasDropdownEl = document.getElementById('areasDropdownMenu');
+        if (areasDropdownEl) {
+          areasDropdownEl.innerHTML = dropdownHtml;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
