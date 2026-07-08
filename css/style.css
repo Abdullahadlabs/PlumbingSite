@@ -2372,7 +2372,8 @@ img {
 }
 
 /* ==================== MOBILE STICKY ACTION BAR ==================== */
-.mobile-sticky-bar {
+.mobile-sticky-bar,
+.sticky-mobile-bar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -2384,7 +2385,8 @@ img {
   z-index: 999999 !important;
 }
 
-.sticky-btn {
+.sticky-btn,
+.bar-btn {
   flex: 1;
   display: flex;
   align-items: center;
@@ -2397,23 +2399,28 @@ img {
   transition: filter 0.2s ease;
 }
 
-.sticky-btn:hover {
+.sticky-btn:hover,
+.bar-btn:hover {
   filter: brightness(1.1);
   color: white;
 }
 
-.call-btn {
+.call-btn,
+.bar-btn-call {
   background-color: #d97706;
   color: #ffffff;
 }
 
-.quote-btn {
+.quote-btn,
+.bar-btn-quote {
   background-color: #003366;
+  color: #ffffff;
 }
 
 /* Hide on Desktop */
 @media (min-width: 768px) {
-  .mobile-sticky-bar {
+  .mobile-sticky-bar,
+  .sticky-mobile-bar {
     display: none !important;
   }
 }
