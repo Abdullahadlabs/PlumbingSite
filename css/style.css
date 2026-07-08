@@ -2454,6 +2454,25 @@ section, header, footer {
     }
 }
 @media screen and (max-width: 768px) {
+    /* Mobile Header Layout Fixes */
+    .header-inner {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .header-cta {
+        display: none !important;
+    }
+    .logo-img {
+        max-width: none !important;
+        height: 52px !important; /* Restored to original scale */
+        width: auto !important;
+    }
+
     h1 {
         font-size: 28px !important; /* Adjust header size for mobile */
         line-height: 1.2;
