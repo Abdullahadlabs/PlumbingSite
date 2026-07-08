@@ -2433,3 +2433,48 @@ img {
   }
 }
 
+/* Mobile Optimization & Responsive Layout Enhancements */
+body, html {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    width: 100%;
+}
+.container, section, header, footer {
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+section, header, footer {
+    max-width: 100%;
+    width: 100%;
+}
+@media screen and (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 28px !important; /* Adjust header size for mobile */
+        line-height: 1.2;
+    }
+    p, span, div {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+    /* Adjust main action buttons to fit within screen padding */
+    .btn, button, a.button, [class*="btn"] { 
+        max-width: 100% !important;
+        width: 100% !important;
+        white-space: normal !important; /* Allows text to wrap into multiple lines if too long */
+        height: auto !important;
+        padding: 12px 15px !important;
+        box-sizing: border-box;
+    }
+    /* Ensure images scale correctly */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
