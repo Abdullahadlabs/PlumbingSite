@@ -1,5 +1,4 @@
 User-agent: *
-Allow: /
-Disallow: /temp-dimensions.js
+Disallow:
 
 Sitemap: https://homeplumbingusa.com/sitemap.xml

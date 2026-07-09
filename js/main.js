@@ -477,14 +477,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(' ');
       
-      // Update Page Title
-      document.title = `${serviceName} in ${capCity}, ${capState.substring(0, 2).toUpperCase()} | Home Plumbing USA`;
-
-      // Update Page Meta Description
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', `Looking for professional ${serviceName.toLowerCase()} in ${capCity}, ${capState}? Our vetted local plumbers offer fast response, flat rates, and 24/7 service.`);
-      }
+      // Dynamic SEO Title & Description handled by global applyDynamicSEO()
 
       // Inject Unique Category-Specific Content
       let categoryId = 'general';
@@ -670,4 +663,179 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  // ==================== SEO AUTOMATION ====================
+  function getSEOContext() {
+    const loc = getCurrentLocationParams(); // returns { city, zip, state }
+    
+    // Parse service name if on service-detail
+    let serviceName = '';
+    if (currentPage === 'service-detail') {
+      const params = new URLSearchParams(window.location.search);
+      let serviceNameRaw = params.get('service');
+      const pathParts = window.location.pathname.split('/');
+      const servicesIdx = pathParts.indexOf('services');
+      if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
+        if (!serviceNameRaw) {
+          serviceNameRaw = pathParts[servicesIdx + 1];
+          if (serviceNameRaw && serviceNameRaw.endsWith('/')) {
+            serviceNameRaw = serviceNameRaw.slice(0, -1);
+          }
+        }
+      }
+      if (!serviceNameRaw) {
+        const hash = window.location.hash;
+        if (hash && hash.length > 1) {
+          serviceNameRaw = decodeURIComponent(hash.substring(1));
+        }
+      }
+      if (serviceNameRaw) {
+        serviceNameRaw = decodeURIComponent(serviceNameRaw);
+        serviceName = serviceNameRaw
+          .split(/[- ]+/)
+          .map(w => {
+            if (w.toLowerCase() === 'b2b') return 'B2B';
+            if (w.toLowerCase() === 'usa') return 'USA';
+            return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+          })
+          .join(' ');
+      }
+    }
+    
+    // Format city
+    let cityName = '';
+    if (loc.city) {
+      cityName = decodeURIComponent(loc.city)
+        .split(' ')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(' ');
+    }
+    
+    // Format state
+    let stateName = '';
+    if (loc.state) {
+      stateName = decodeURIComponent(loc.state)
+        .split(/[- ]+/)
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+        .join(' ');
+    }
+    
+    // State Code mapping
+    const stateCodeMap = {
+      'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
+      'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA',
+      'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+      'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
+      'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+      'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new-hampshire': 'NH', 'new-jersey': 'NJ',
+      'new-mexico': 'NM', 'new-york': 'NY', 'north-carolina': 'NC', 'north-dakota': 'ND', 'ohio': 'OH',
+      'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode-island': 'RI', 'south-carolina': 'SC',
+      'south-dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+      'virginia': 'VA', 'washington': 'WA', 'west-virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY'
+    };
+    const stateKey = loc.state ? loc.state.toLowerCase().replace(/_/g, '-') : '';
+    const stateCode = stateCodeMap[stateKey] || (loc.state ? loc.state.substring(0, 2).toUpperCase() : '');
+    
+    return {
+      city: cityName,
+      state: stateName,
+      stateCode: stateCode,
+      service: serviceName,
+      zip: loc.zip || ''
+    };
+  }
+
+  function applyDynamicSEO() {
+    const seo = getSEOContext();
+    const currentPath = (window.location.pathname + window.location.search).replace(/^\//, '');
+    const pageUrl = `https://homeplumbingusa.com/${currentPath}`;
+
+    let title = '';
+    let description = '';
+    let schemaName = '';
+    let schemaDesc = '';
+    let areaServedName = '';
+
+    if (currentPage === 'state') {
+      const stateName = seo.state || 'Alaska';
+      title = `Best Plumbing Services in ${stateName} | Home Plumbing USA`;
+      description = `Need professional plumbing services in ${stateName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+      schemaName = `Home Plumbing USA - ${stateName}`;
+      schemaDesc = `Professional plumbing and emergency repair services in ${stateName}.`;
+      areaServedName = stateName;
+    } else if (currentPage === 'city-zip') {
+      const cityName = seo.city || 'Anchorage';
+      const stateName = seo.state || 'Alaska';
+      const stateCode = seo.stateCode || 'AK';
+      title = `Emergency Plumbers in ${cityName}, ${stateCode} | Home Plumbing USA`;
+      description = `Need professional plumbing services in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+      schemaName = `Home Plumbing USA - ${cityName}`;
+      schemaDesc = `Professional plumbing and emergency repair services in ${cityName}, ${stateName}.`;
+      areaServedName = cityName;
+    } else if (currentPage === 'service-detail') {
+      const serviceName = seo.service || 'Plumbing Services';
+      const cityName = seo.city || 'Anchorage';
+      const stateName = seo.state || 'Alaska';
+      const stateCode = seo.stateCode || 'AK';
+      title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
+      description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+      schemaName = `Home Plumbing USA - ${cityName}`;
+      schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+      areaServedName = cityName;
+    } else {
+      // Not a dynamic page, don't dynamically override title/desc/schema
+      return;
+    }
+
+    // 1. Update Title
+    if (title) {
+      document.title = title;
+    }
+
+    // 2. Update Description
+    if (description) {
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', description);
+    }
+
+    // 3. Inject JSON-LD Schema Markup
+    // Remove existing dynamic schema if any (to prevent duplicates on client navigation if any)
+    const existingDynamicSchema = document.getElementById('dynamic-seo-schema');
+    if (existingDynamicSchema) {
+      existingDynamicSchema.remove();
+    }
+
+    const schemaObj = {
+      "@context": "https://schema.org",
+      "@type": "PlumbingService",
+      "name": schemaName,
+      "description": schemaDesc,
+      "url": pageUrl,
+      "telephone": "877-516-8705",
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": areaServedName
+      },
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Home Plumbing USA",
+        "image": "https://homeplumbingusa.com/images/logo.png"
+      }
+    };
+
+    const scriptEl = document.createElement('script');
+    scriptEl.id = 'dynamic-seo-schema';
+    scriptEl.type = 'application/ld+json';
+    scriptEl.textContent = JSON.stringify(schemaObj, null, 2);
+    document.head.appendChild(scriptEl);
+  }
+
+  // Execute dynamic SEO automation
+  applyDynamicSEO();
 });
