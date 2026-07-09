@@ -764,6 +764,347 @@
         }
       }
     }
+
+    // Dynamic FAQ generation for 7 relevant, localized questions
+    function getDynamicFAQs(serviceSlug, serviceName, cityName) {
+      const city = cityName || 'your area';
+      const svc = serviceName || 'plumbing';
+      
+      let category = 'general';
+      if (serviceSlug.includes('heater') || serviceSlug.includes('tankless')) {
+        category = 'water-heater';
+      } else if (serviceSlug.includes('drain') || serviceSlug.includes('hydro') || serviceSlug.includes('sewer') || serviceSlug.includes('clog')) {
+        category = 'drain-sewer';
+      } else if (serviceSlug.includes('leak') || serviceSlug.includes('slab')) {
+        category = 'leak-detection';
+      } else if (serviceSlug.includes('pipe') || serviceSlug.includes('burst') || serviceSlug.includes('line-installation') || serviceSlug.includes('line-repair') || serviceSlug.includes('line-replacement')) {
+        if (serviceSlug.includes('gas')) {
+          category = 'gas-line';
+        } else {
+          category = 'pipe-repair';
+        }
+      } else if (serviceSlug.includes('faucet') || serviceSlug.includes('toilet') || serviceSlug.includes('sump') || serviceSlug.includes('fixture') || serviceSlug.includes('disposal')) {
+        category = 'fixtures';
+      } else if (serviceSlug.includes('filter') || serviceSlug.includes('softener') || serviceSlug.includes('treatment') || serviceSlug.includes('filtration')) {
+        category = 'filtration';
+      }
+
+      const faqs = {
+        'water-heater': [
+          {
+            q: `How much does ${svc} cost in ${city}?`,
+            a: `${svc} services in ${city} typically cost between $150 and $600 for repairs, while installations range from $1,200 to $3,500 depending on the tank size, energy type (gas or electric), and model. We provide upfront estimates before starting any work.`
+          },
+          {
+            q: `Who do I call for emergency ${svc} in ${city}?`,
+            a: `You can call Home Plumbing USA at 877-516-8705 for 24/7 emergency ${svc} dispatch in ${city}. We have local plumbers on standby to handle burst tanks and failed elements.`
+          },
+          {
+            q: `What are the signs my ${city} home's water heater needs to be replaced?`,
+            a: `If your water heater in ${city} is over 8-10 years old, has rust-colored water, makes rumbling noises, or is leaking from the main tank shell, replacement is recommended.`
+          },
+          {
+            q: `Do you service tankless water heaters in ${city}?`,
+            a: `Yes, our licensed plumbers in ${city} are fully trained in repairing, flushing, and installing all major brands of modern tankless water heaters.`
+          },
+          {
+            q: `How often should I flush my water heater in ${city}?`,
+            a: `We recommend flushing your water heater in ${city} at least once a year to remove sediment buildup, which improves heating efficiency and tank lifespan.`
+          },
+          {
+            q: `Is a permit required to replace a water heater in ${city}?`,
+            a: `Yes, municipal codes in ${city} generally require a permit and safety inspection for new installations. Our team handles all code compliance and permitting.`
+          },
+          {
+            q: `Why is my water heater in ${city} running out of hot water so fast?`,
+            a: `This is typically caused by a failed lower heating element (in electric units), a broken dip tube, or sediment buildup occupying tank space in your ${city} water heater.`
+          }
+        ],
+        'drain-sewer': [
+          {
+            q: `How much does professional ${svc} cost in ${city}?`,
+            a: `Standard drain snaking in ${city} ranges from $100 to $250. Heavy-duty hydro jetting for tough sewer line blockages ranges from $350 to $600 depending on line accessibility.`
+          },
+          {
+            q: `What is the fastest way to clear a clogged main sewer line in ${city}?`,
+            a: `Hydro jetting is the most effective method for ${city} sewer lines. It uses high-pressure water to scrub grease and tree roots out of pipes, restoring full flow.`
+          },
+          {
+            q: `Do you offer 24/7 emergency ${svc} in ${city}?`,
+            a: `Yes! We offer rapid emergency response in ${city} for main line backups, overflowing toilets, and kitchen sink blockages.`
+          },
+          {
+            q: `How can I tell if tree roots have invaded my ${city} sewer line?`,
+            a: `Common signs in ${city} include multiple clogged drains, gurgling toilets, slow drainage, or wet patches in your yard. We use sewer cameras to inspect the line and verify root intrusion.`
+          },
+          {
+            q: `Is chemical drain cleaner safe to use in ${city} plumbing systems?`,
+            a: `No, we advise against using chemical cleaners in ${city}. The harsh chemicals can corrode older metal pipes and soften PVC lines, leading to leaks.`
+          },
+          {
+            q: `What is a sewer camera inspection, and is it available in ${city}?`,
+            a: `Yes, we offer sewer video inspections in ${city}. We insert a fiber-optic camera into the line to locate cracks, root intrusions, or collapsed segments.`
+          },
+          {
+            q: `How can I prevent grease clogs in my ${city} kitchen drains?`,
+            a: `Never pour cooking oil or food fat down your sink in ${city}. Dispose of oil in the trash, and run plenty of warm water when using the garbage disposal.`
+          }
+        ],
+        'leak-detection': [
+          {
+            q: `How do you find hidden water leaks in ${city} houses without tearing down walls?`,
+            a: `We use advanced acoustic sensors and infrared thermal cameras in ${city} to listen for escaping water and find temperature differentials, pinpointing the leak precisely.`
+          },
+          {
+            q: `What are the signs of a slab leak in a ${city} property?`,
+            a: `Warning signs in ${city} include warm spots on concrete floors, moldy baseboards, the sound of running water when valves are shut, or a sudden jump in your water utility bill.`
+          },
+          {
+            q: `How much does leak detection service cost in ${city}?`,
+            a: `Professional electronic leak detection in ${city} typically ranges from $150 to $350. This diagnostic check saves money by avoiding unnecessary drywall or foundation demolition.`
+          },
+          {
+            q: `What should I do first if I suspect a major pipe leak in ${city}?`,
+            a: `Turn off your home's main water shutoff valve immediately to stop the flow of water and prevent structural mold damage in ${city}. Then call us for leak repair.`
+          },
+          {
+            q: `Will my ${city} homeowner's insurance cover slab leak detection and repair?`,
+            a: `Most policies in ${city} cover the cost of locating the leak and repairing the water damage, though the pipe repair itself may be out of pocket. Check with your local insurance agent.`
+          },
+          {
+            q: `Can a small pinhole leak in ${city} really cause high water bills?`,
+            a: `Yes, a tiny leak running constantly can waste over 10,000 gallons of water a month, leading to a significant increase in your ${city} water bill.`
+          },
+          {
+            q: `Do you locate gas leaks as well as water leaks in ${city}?`,
+            a: `Yes, our licensed plumbers in ${city} use electronic combustible gas detectors to trace natural gas and propane leaks safely.`
+          }
+        ],
+        'pipe-repair': [
+          {
+            q: `What causes copper or galvanized pipes to corrode and leak in ${city}?`,
+            a: `Local water chemistry, mineral scale, high water pressure, and age lead to pipe wall thinning and corrosion in ${city}, eventually causing pinhole leaks.`
+          },
+          {
+            q: `How much does it cost to repair a burst pipe in ${city}?`,
+            a: `Repairing a simple exposed burst pipe in ${city} ranges from $150 to $350. Repairs involving crawlspaces, walls, or underground lines will be priced on inspection.`
+          },
+          {
+            q: `What is the best material for repiping a house in ${city}?`,
+            a: `PEX piping is highly recommended for ${city} homes due to its flexibility, resistance to scale buildup, and lower cost compared to copper.`
+          },
+          {
+            q: `How can I protect my pipes from freezing during cold ${city} winters?`,
+            a: `Insulate exposed pipes in unheated areas, seal foundation vents, and let faucets drip slowly during extreme sub-zero weather in ${city}.`
+          },
+          {
+            q: `Do you offer trenchless pipe repair or water line replacement in ${city}?`,
+            a: `Yes, we offer trenchless pipe lining and pipe bursting options in ${city} to replace water and sewer lines without digging up yards.`
+          },
+          {
+            q: `How long does a whole-house repiping project take in ${city}?`,
+            a: `A standard home repiping in ${city} takes about 2 to 5 days, depending on house size. We ensure water service is restored at the end of each workday.`
+          },
+          {
+            q: `Why is my home's water pressure suddenly very low in ${city}?`,
+            a: `This can be caused by a failing pressure regulator valve, a main line leak, or mineral scaling inside older galvanized pipes in ${city}.`
+          }
+        ],
+        'gas-line': [
+          {
+            q: `What should I do if I smell gas in my ${city} home?`,
+            a: `Evacuate the property immediately. Do not switch lights on/off or use appliances. From outside, call your utility provider and an emergency gas plumber in ${city}.`
+          },
+          {
+            q: `Can any plumber install gas lines in ${city}?`,
+            a: `No, only plumbers with a certified gas utility license are permitted to work on gas systems in ${city}. All our gas technicians are fully certified.`
+          },
+          {
+            q: `How much does it cost to run a new gas line in ${city}?`,
+            a: `Running a gas line in ${city} ranges from $15 to $35 per linear foot, depending on pipe material (black iron or CSST) and line accessibility.`
+          },
+          {
+            q: `How do plumbers check for gas leaks in ${city}?`,
+            a: `We use highly sensitive electronic gas sniffers to trace natural gas or propane, and apply bubble leak test solutions to connections in ${city}.`
+          },
+          {
+            q: `What is CSST gas piping and is it allowed in ${city}?`,
+            a: `Corrugated Stainless Steel Tubing (CSST) is flexible gas piping allowed in ${city}. It must be properly bonded and grounded to satisfy electrical safety codes.`
+          },
+          {
+            q: `Can a gas leak cause health symptoms in ${city}?`,
+            a: `Yes, gas leaks can cause headaches, dizziness, nausea, or breathing difficulties. Long-term slow leaks also present severe fire and explosion risks in ${city}.`
+          },
+          {
+            q: `Do you install gas lines for outdoor fire pits and kitchens in ${city}?`,
+            a: `Yes! We run exterior gas lines for outdoor kitchens, barbecues, pool heaters, and patio fire pits across the ${city} area.`
+          }
+        ],
+        'fixtures': [
+          {
+            q: `Why is my toilet constantly running in my ${city} home?`,
+            a: `This is usually caused by a faulty flapper seal, a misadjusted float valve, or a leaking fill valve. We repair toilet tanks in ${city} quickly on the same visit.`
+          },
+          {
+            q: `How much does it cost to install a kitchen or bathroom faucet in ${city}?`,
+            a: `Professional faucet installation in ${city} ranges from $150 to $250 plus the cost of the fixture. We ensure supply lines and shutoffs are also updated.`
+          },
+          {
+            q: `How long do sump pumps typically last in ${city} basements?`,
+            a: `Sump pumps in ${city} last about 5 to 7 years. Because they protect against basement flooding, we recommend annual testing and installing battery backups.`
+          },
+          {
+            q: `Why is my garbage disposal humming but not spinning in ${city}?`,
+            a: `A humming disposal is jammed, usually by food waste or a foreign object. Do not run it. We can clear jams or replace disposals in ${city}.`
+          },
+          {
+            q: `What are the benefits of low-flow showerheads and toilets in ${city}?`,
+            a: `Low-flow fixtures use up to 50% less water, immediately reducing utility bills and preserving local water resources in ${city} without losing pressure.`
+          },
+          {
+            q: `Can a leaking faucet really cause damage in ${city}?`,
+            a: `Yes, slow leaks under sinks rot cabinet wood, promote mold growth, and waste hundreds of gallons of water in ${city} over time.`
+          },
+          {
+            q: `Do you repair shower valves and tub cartridges in ${city}?`,
+            a: `Yes, we replace failed shower cartridges to resolve leaks, temperature fluctuations, and low pressure in ${city} showers.`
+          }
+        ],
+        'filtration': [
+          {
+            q: `What are the signs of hard water in ${city} homes?`,
+            a: `Signs in ${city} include white scale buildup on faucets, dry skin or hair, soap scum on showers, and reduced efficiency in washing machines and water heaters.`
+          },
+          {
+            q: `How much does a whole-house water softener cost in ${city}?`,
+            a: `Installing a water softener in ${city} costs between $1,500 and $3,500 depending on water hardness levels, plumbing entrance access, and unit capacity.`
+          },
+          {
+            q: `What is the difference between a water filter and a water softener in ${city}?`,
+            a: `Softeners specifically remove calcium and magnesium to prevent pipe scale. Filters remove contaminants like chlorine, lead, sediment, and chemicals in ${city}.`
+          },
+          {
+            q: `How often should I add salt to my water softener in ${city}?`,
+            a: `Most ${city} water softeners require salt refills once a month. The salt level should stay about 3 to 4 inches above the water line in the brine tank.`
+          },
+          {
+            q: `Do you install reverse osmosis drinking water systems in ${city}?`,
+            a: `Yes, we install under-sink reverse osmosis (RO) systems in ${city} to deliver pure, bottled-quality drinking water directly from a dedicated tap.`
+          },
+          {
+            q: `Can hard water cause pipe damage in ${city}?`,
+            a: `Yes, over time, mineral scale narrows the interior of pipes, reducing water pressure and accelerating water heater element failure in ${city}.`
+          },
+          {
+            q: `Are salt-free water conditioners as effective as salt softeners in ${city}?`,
+            a: `Salt-free systems condition water to prevent scale from sticking to pipes, but they do not remove minerals. They are ideal for ${city} residents wanting a low-maintenance option.`
+          }
+        ],
+        'general': [
+          {
+            q: `How much does a plumber charge per hour in ${city}?`,
+            a: `Plumbers in ${city} typically charge hourly rates between $75 and $150, but Home Plumbing USA uses flat-rate pricing so you know the exact cost upfront.`
+          },
+          {
+            q: `Do you offer 24/7 emergency plumbing dispatch in ${city}?`,
+            a: `Yes, we have local emergency plumbers on standby in ${city} to handle pipe bursts, sewer backups, gas leaks, and water heater failures day or night.`
+          },
+          {
+            q: `How quickly can a plumber arrive at my ${city} property?`,
+            a: `Our average dispatch time for emergencies in ${city} is under 60 minutes. Standard repairs can usually be scheduled for the same or next day.`
+          },
+          {
+            q: `Are your plumbing services in ${city} backed by a warranty?`,
+            a: `Yes, all our ${city} service calls are covered by a 100% satisfaction guarantee on workmanship, in addition to standard manufacturer warranties.`
+          },
+          {
+            q: `Do I need to shut off my water before a plumber arrives in ${city}?`,
+            a: `If you have an active leak, turning off the main water shutoff valve in ${city} is highly recommended to minimize structural damage.`
+          },
+          {
+            q: `What are the most common plumbing issues in ${city} homes?`,
+            a: `The most common calls in ${city} are for clogged drains, running toilets, dripping faucets, water heater repairs, and slab leak detection.`
+          },
+          {
+            q: `How can I find my home's main water shutoff valve in ${city}?`,
+            a: `In ${city}, the valve is usually located in the basement, utility closet, garage, or near the street curb inside a water meter box.`
+          }
+        ]
+      };
+
+      return faqs[category] || faqs['general'];
+    }
+
+    const faqContainer = document.querySelector('.faq-container');
+    if (faqContainer && svc) {
+      const dynamicFaqs = getDynamicFAQs(svc, decodeURIComponent(params.get('service') || svc.replace(/-/g, ' ')), decodeURIComponent(city));
+      let faqHtml = '';
+      dynamicFaqs.forEach((faq, index) => {
+        faqHtml += `
+          <div class="faq-item animate-on-scroll">
+            <div class="faq-question"><span class="faq-title" id="faq-q${index+1}">${faq.q}</span><i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer"><div class="faq-answer-inner" id="faq-a${index+1}">${faq.a}</div></div>
+          </div>
+        `;
+      });
+      faqContainer.innerHTML = faqHtml;
+
+      // Re-attach accordion toggle functionality for these dynamic elements
+      const dynamicFaqItems = faqContainer.querySelectorAll('.faq-item');
+      dynamicFaqItems.forEach(function (item) {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        if (question && answer) {
+          question.addEventListener('click', function () {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other FAQ items
+            dynamicFaqItems.forEach(function (otherItem) {
+              if (otherItem !== item) {
+                otherItem.classList.remove('active');
+                const otherAnswer = otherItem.querySelector('.faq-answer');
+                if (otherAnswer) otherAnswer.style.maxHeight = null;
+              }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+            
+            if (!isActive) {
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+              answer.style.maxHeight = null;
+            }
+          });
+        }
+      });
+
+      // Inject dynamic FAQPage schema markup in head
+      const existingFaqSchema = document.getElementById('dynamic-faq-schema');
+      if (existingFaqSchema) {
+        existingFaqSchema.remove();
+      }
+
+      const faqSchemaObj = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": dynamicFaqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.a
+          }
+        }))
+      };
+
+      const faqScriptEl = document.createElement('script');
+      faqScriptEl.id = 'dynamic-faq-schema';
+      faqScriptEl.type = 'application/ld+json';
+      faqScriptEl.textContent = JSON.stringify(faqSchemaObj, null, 2);
+      document.head.appendChild(faqScriptEl);
+    }
   </script>
 
   <!-- Mobile Sticky Action Bar -->
