@@ -690,7 +690,8 @@
     const heroImg = document.getElementById('img-hero');
     
     if (service_slug) {
-      const imgPath = `/images/services/${service_slug}.jpg`;
+      const rawPath = `/images/services/${service_slug}.jpg`;
+      const imgPath = typeof resolveAssetPath === 'function' ? resolveAssetPath(rawPath) : rawPath;
       const prettyServiceName = service_slug.replace(/-/g, ' ');
       
       if (heroImg) {

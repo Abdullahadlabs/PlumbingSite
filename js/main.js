@@ -4,7 +4,62 @@
    Dynamic text replacement, and History Restrictions.
    ================================================ */
 
+// Helper to determine the path prefix relative to the site root,
+// based on the path of js/main.js as loaded in the document.
+function getAssetPrefix() {
+  const scriptEl = document.querySelector('script[src*="js/main.js"]');
+  if (scriptEl) {
+    const src = scriptEl.getAttribute('src');
+    const parts = src.split('js/main.js');
+    if (parts.length > 0) {
+      let prefix = parts[0];
+      if (!prefix) return './';
+      return prefix;
+    }
+  }
+  return './';
+}
+
+// Helper function to resolve absolute and relative asset paths
+// to their correct location in the public/images directory.
+function resolveAssetPath(originalPath) {
+  if (!originalPath) return '';
+  if (originalPath.startsWith('http://') || originalPath.startsWith('https://') || originalPath.startsWith('data:')) {
+    return originalPath;
+  }
+  
+  const prefix = getAssetPrefix();
+  
+  // Clean prefix and path to avoid duplication
+  let cleanPath = originalPath;
+  cleanPath = cleanPath.replace(/^(\.\.\/)+/, ''); // strip leading ../
+  cleanPath = cleanPath.replace(/^\.\//, '');       // strip leading ./
+  if (cleanPath.startsWith('/')) {
+    cleanPath = cleanPath.substring(1);           // strip leading /
+  }
+  
+  // Resolve image paths to public/images/
+  if (cleanPath.startsWith('public/')) {
+    return prefix + cleanPath;
+  } else if (cleanPath.startsWith('images/')) {
+    return prefix + 'public/' + cleanPath;
+  }
+  
+  return prefix + cleanPath;
+}
+
+// Expose globally for inline scripts
+window.resolveAssetPath = resolveAssetPath;
+
 document.addEventListener('DOMContentLoaded', function () {
+  // Automatically correct all static image sources on the page
+  document.querySelectorAll('img').forEach(img => {
+    const src = img.getAttribute('src');
+    if (src && !src.startsWith('data:')) {
+      img.src = resolveAssetPath(src);
+    }
+  });
+
   const prefix = document.body.getAttribute('data-prefix') || './';
 
   // Helper to extract location parameters from query string or pathname

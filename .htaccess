@@ -1,6 +1,9 @@
 RewriteEngine On
 RewriteBase /
 
+# Rewrite /images/* requests to public/images/*
+RewriteRule ^images/(.*)$ public/images/$1 [L]
+
 # 1. Remove .html extension globally
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
