@@ -690,26 +690,73 @@
     const heroImg = document.getElementById('img-hero');
     
     if (service_slug) {
-      const rawPath = `/images/services/${service_slug}.jpg`;
+      // Find the most appropriate service image asset name from the 8 available files
+      const availableImages = [
+        'burst-pipe-repair',
+        'drain-cleaning',
+        'emergency-plumbing',
+        'gas-line-repair',
+        'leak-detection',
+        'sewer-line-repair',
+        'water-heater-repair',
+        'water-line-repair'
+      ];
+      
+      let image_slug = 'emergency-plumbing'; // default fallback
+      if (availableImages.includes(service_slug)) {
+        image_slug = service_slug;
+      } else if (service_slug.includes('heater') || service_slug.includes('tankless')) {
+        image_slug = 'water-heater-repair';
+      } else if (service_slug.includes('drain') || service_slug.includes('hydro') || service_slug.includes('clog')) {
+        image_slug = 'drain-cleaning';
+      } else if (service_slug.includes('sewer')) {
+        image_slug = 'sewer-line-repair';
+      } else if (service_slug.includes('gas')) {
+        image_slug = 'gas-line-repair';
+      } else if (service_slug.includes('leak') || service_slug.includes('detection')) {
+        image_slug = 'leak-detection';
+      } else if (service_slug.includes('pipe') || service_slug.includes('burst')) {
+        image_slug = 'burst-pipe-repair';
+      } else if (service_slug.includes('water-line') || service_slug.includes('water-pipe')) {
+        image_slug = 'water-line-repair';
+      }
+      
+      const rawPath = `/images/services/${image_slug}.jpg`;
       const imgPath = typeof resolveAssetPath === 'function' ? resolveAssetPath(rawPath) : rawPath;
+      
+      const rawFallbackPath = '/images/services/emergency-plumbing.jpg';
+      const fallbackPath = typeof resolveAssetPath === 'function' ? resolveAssetPath(rawFallbackPath) : rawFallbackPath;
+      
       const prettyServiceName = service_slug.replace(/-/g, ' ');
       
-      if (heroImg) {
-        heroImg.src = imgPath;
-        heroImg.alt = `Professional ${prettyServiceName} services`;
-      }
-      if (whyImg) {
-        whyImg.src = imgPath;
-        whyImg.alt = `Inspection for ${prettyServiceName}`;
-      }
-      if (performImg) {
-        performImg.src = imgPath;
-        performImg.alt = `Performing ${prettyServiceName}`;
-      }
-      if (benefitsImg) {
-        benefitsImg.src = imgPath;
-        benefitsImg.alt = `Benefits of ${prettyServiceName}`;
-      }
+      // Determine deterministic separate images for other sections to prevent repetitive images
+      const remainingImages = availableImages.filter(img => img !== image_slug);
+      const indexOffset = service_slug.length;
+      
+      const getSectionImgPath = (offset) => {
+        const sectionSlug = remainingImages[(indexOffset + offset) % remainingImages.length];
+        const sectionRawPath = `/images/services/${sectionSlug}.jpg`;
+        return typeof resolveAssetPath === 'function' ? resolveAssetPath(sectionRawPath) : sectionRawPath;
+      };
+      
+      const setImgSource = (imgEl, path, altText) => {
+        if (imgEl) {
+          imgEl.src = path;
+          imgEl.alt = altText;
+          imgEl.onerror = function() {
+            this.src = fallbackPath;
+            this.onerror = null; // Avoid infinite loop if fallback fails
+          };
+        }
+      };
+      
+      // Main hero image gets the specific service image (or best match)
+      setImgSource(heroImg, imgPath, `Professional ${prettyServiceName} services`);
+      
+      // Other sections get dynamic, rotated, unique plumbing photos
+      setImgSource(whyImg, getSectionImgPath(0), `Inspection for ${prettyServiceName}`);
+      setImgSource(performImg, getSectionImgPath(1), `Performing ${prettyServiceName}`);
+      setImgSource(benefitsImg, getSectionImgPath(2), `Benefits of ${prettyServiceName}`);
     }
 
     // Render the 10 zip code areas dynamically from zipData.js database
