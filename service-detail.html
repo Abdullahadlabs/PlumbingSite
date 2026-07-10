@@ -679,15 +679,19 @@
     if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
       if (!svc) svc = pathParts[servicesIdx + 1];
     }
-    svc = (svc || '').toLowerCase();
+    
+    // Ensure that the service slug variable is converted to lowercase and formatted correctly to match the image filenames
+    const service_slug = decodeURIComponent(svc || '').toLowerCase().replace(/ /g, '-');
+    svc = service_slug; // Maintain compatibility with other code blocks referencing svc
+    
     const whyImg = document.getElementById('img-why-call');
     const performImg = document.getElementById('img-how-perform');
     const benefitsImg = document.getElementById('img-benefits');
     const heroImg = document.getElementById('img-hero');
     
-    if (svc) {
-      const imgPath = `/images/services/${svc}.jpg`;
-      const prettyServiceName = svc.replace(/-/g, ' ');
+    if (service_slug) {
+      const imgPath = `/images/services/${service_slug}.jpg`;
+      const prettyServiceName = service_slug.replace(/-/g, ' ');
       
       if (heroImg) {
         heroImg.src = imgPath;
