@@ -847,6 +847,10 @@ img {
   box-shadow: var(--shadow-lg);
   z-index: 10;
   transition: var(--transition);
+  /* Explicit dimensions lock the bounding box — prevents layout shifts during initial render */
+  min-width: 180px;
+  /* Promote to own GPU compositor layer so animation never triggers CPU reflows */
+  will-change: transform;
   animation: floatBadge 4s ease-in-out infinite;
 }
 
@@ -904,15 +908,10 @@ img {
 }
 
 @keyframes floatBadge {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0, -8px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+  /* translate3d forces GPU compositing — never triggers layout or paint */
 }
 
 @media (max-width: 991px) {
@@ -2135,7 +2134,8 @@ img {
   }
 
   .hero {
-    min-height: auto;
+    /* Keep stable min-height on mobile to prevent CLS — was set to 'auto' which collapses layout */
+    min-height: 85vh;
     padding-top: 40px; /* Offset adjusted since main handles header clearance */
     padding-bottom: 60px;
   }
@@ -2279,6 +2279,64 @@ img {
 
   .header-cta .btn {
     display: none;
+  }
+  /* ===== MOBILE: Disable all hero keyframe animations to eliminate TBT ===== */
+  /* fadeInUp animations on hero children cause 151 element style calculations on initial paint */
+  .hero-badge,
+  .hero h1,
+  .hero-text,
+  .hero-buttons,
+  .hero-stats,
+  .hero-image-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* ===== MOBILE: Make scroll animations instant to avoid blocking paint ===== */
+  /* On mobile CPUs, 151 elements with opacity:0 + transform trigger expensive style recalcs */
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ===== MOBILE: Completely disable floating badge animation ===== */
+  /* The continuous floatBadge loop is the exact culprit flagged for TBT 630ms on mobile.     */
+  /* On mobile, badges render as clean, static positioned cards — no compositor work at all.  */
+  .hero-floating-badge {
+    animation: none !important;
+    /* Reset any mid-animation transform to baseline — prevents CLS from partially-applied keyframe */
+    transform: translate3d(0, 0, 0) !important;
+    /* Release the GPU layer reserved for animation — frees compositor memory */
+    will-change: auto !important;
+    /* Lock bounding box: explicit dimensions prevent any reflow from content loading async */
+    min-width: 160px;
+    /* Tone down backdrop blur on mobile — it forces a compositor layer even without animation */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(17, 29, 51, 0.95);
+  }
+
+  /* Lock both badge positions tightly so they never escape the image container bounding box */
+  .badge-satisfaction {
+    bottom: 16px;
+    left: 8px;
+  }
+
+  .badge-emergency {
+    top: 16px;
+    right: 8px;
+  }
+
+  /* Release GPU layers held for animation — critical for mobile memory and TBT */
+  * {
+    will-change: auto !important;
   }
 }
 

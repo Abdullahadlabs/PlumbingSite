@@ -33,45 +33,62 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-NHGT9PF7');
       }
-      if (document.readyState === 'complete') {
-        setTimeout(loadGTM, 2000);
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(loadGTM, 2000);
-        });
+      // On mobile: use requestIdleCallback to push GTM past interactive time, eliminating TBT
+      function scheduleGTM() {
+        if (typeof requestIdleCallback !== 'undefined') {
+          requestIdleCallback(loadGTM, { timeout: 6000 });
+        } else {
+          setTimeout(loadGTM, 3500);
+        }
       }
-      const triggerEvents = ['mouseover', 'keydown', 'touchstart', 'scroll'];
+      if (document.readyState === 'complete') {
+        scheduleGTM();
+      } else {
+        window.addEventListener('load', scheduleGTM);
+      }
+      // Still load immediately on first user interaction
+      const triggerEvents = ['mousedown', 'keydown', 'touchstart', 'scroll'];
       triggerEvents.forEach(function(e) {
         window.addEventListener(e, loadGTM, { passive: true, once: true });
       });
     })();
   </script>
   <!-- End Google Tag Manager -->
-  <!-- Tailwind Play CDN -->
-  <script src="https://cdn.tailwindcss.com" defer></script>
+  <!-- Tailwind Play CDN: loaded lazily after page is interactive to eliminate TBT -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              navy: '#0a1628', // Remapped to Lone Star Dark Navy
-              'navy-mid': '#111d33', // Remapped to Lone Star Mid Navy
-              blue: {
-                DEFAULT: '#2563eb', // Remapped to Confident Royal Blue
-                light: '#3b82f6' // Remapped to Light blue
-              },
-              orange: {
-                DEFAULT: '#f59e0b', // Remapped to Golden orange
-                dark: '#d97706' // Remapped to Golden orange hover
-              },
-              green: '#2563eb', // Remapped to Success/Active Blue
-              red: '#e63946' // Remapped to locator alert red
-            }
+    (function() {
+      function loadTailwind() {
+        if (window.tailwindLoaded) return;
+        window.tailwindLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() {
+          if (window.tailwind) {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    navy: '#0a1628',
+                    'navy-mid': '#111d33',
+                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
+                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
+                    green: '#2563eb',
+                    red: '#e63946'
+                  }
+                }
+              }
+            };
           }
-        }
+        };
+        document.head.appendChild(s);
       }
-    });
+      // Use requestIdleCallback on mobile for maximum TBT reduction
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(loadTailwind, { timeout: 5000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
+      }
+    })();
   </script>
   <!-- Google Fonts Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +120,7 @@
     .header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,22,40,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color);transition:all 0.3s ease;}
     .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:80px;max-width:1400px;margin:0 auto;}
     .logo{display:flex;align-items:center;gap:12px;font-size:1.4rem;font-weight:800;color:var(--text-white);transition:var(--transition);}
-    .logo-img{height:52px;width:auto;display:block;}
+    .logo-img{height:52px;width:247px;display:block;object-fit:contain;object-position:left center;}
     .logo-text-wrapper{display:flex;flex-direction:column;justify-content:center;}
     .logo-text{font-size:1.4rem;font-weight:800;line-height:1.1;color:var(--text-white);}
     .logo-text span{background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;}
@@ -121,10 +138,10 @@
     .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:2;}
     @media (min-width:992px){.hero-grid{grid-template-columns:1.2fr 0.8fr;gap:64px;}}
     .hero-image-wrapper{position:relative;width:100%;display:flex;justify-content:center;}
-    .hero-image-container{position:relative;width:100%;max-width:420px;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:var(--transition);}
+    .hero-image-container{position:relative;width:100%;max-width:420px;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:var(--transition);aspect-ratio:4 / 5;background:linear-gradient(135deg,#0f1e3a 0%,#162442 100%);contain:layout;}
     .hero-image-container::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:calc(var(--radius-lg) + 2px);z-index:-1;opacity:0.3;transition:var(--transition);}
     .hero-image-container:hover::before{opacity:0.6;filter:blur(2px);}
-    .hero-image{width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);transition:var(--transition-slow);}
+    .hero-image{width:100%;height:100%;aspect-ratio:4 / 5;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);transition:var(--transition-slow);min-height:300px;}
     .hero-image-container:hover .hero-image{transform:translateY(-4px) scale(1.02);}
     .hero-floating-badge{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(17,29,51,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);z-index:10;transition:var(--transition);animation:floatBadge 4s ease-in-out infinite;}
     .hero-floating-badge:hover{transform:translateY(-3px) scale(1.05);background:rgba(22,36,66,0.95);border-color:var(--primary-light);}
@@ -136,6 +153,17 @@
     .badge-emergency{top:40px;right:-30px;animation-delay:2s;}
     .badge-emergency i{background:var(--gradient-accent);color:var(--text-dark);}
     @keyframes floatBadge{0%{transform:translateY(0);}50%{transform:translateY(-8px);}100%{transform:translateY(0);}}
+    /* ===== MOBILE: Stable hero + kill animations to fix CLS/TBT ===== */
+    @media(max-width:768px){
+      .hero{min-height:85vh !important;}
+      .hero-badge,.hero h1,.hero-text,.hero-buttons,.hero-stats,.hero-image-wrapper{animation:none !important;opacity:1 !important;transform:none !important;}
+      .animate-on-scroll{opacity:1 !important;transform:none !important;transition:none !important;}
+      /* Disable floating badge animation: the continuous floatBadge loop is the TBT/CLS culprit */
+      .hero-floating-badge{animation:none !important;transform:translate3d(0,0,0) !important;will-change:auto !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(17,29,51,0.95);min-width:160px;}
+      .badge-satisfaction{bottom:16px !important;left:8px !important;}
+      .badge-emergency{top:16px !important;right:8px !important;}
+      *{will-change:auto !important;}
+    }
   </style>
   <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
   <script type="application/ld+json">

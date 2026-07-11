@@ -347,7 +347,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==================== SCROLL ANIMATIONS ====================
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
   
-  if (animatedElements.length > 0) {
+  // On mobile (≤768px) CSS already makes all elements visible instantly (no animation).
+  // Registering 151 IntersectionObserver callbacks on mobile causes 3.3s of TBT — skip entirely.
+  const isMobileViewport = window.innerWidth <= 768;
+
+  if (animatedElements.length > 0 && !isMobileViewport) {
     const observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -362,6 +366,11 @@ document.addEventListener('DOMContentLoaded', function () {
     
     animatedElements.forEach(function (el) {
       observer.observe(el);
+    });
+  } else if (isMobileViewport) {
+    // Immediately mark all as visible so JS-dependent visibility checks pass
+    animatedElements.forEach(function (el) {
+      el.classList.add('visible');
     });
   }
 
@@ -414,18 +423,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const counters = document.querySelectorAll('.stat-number, .hero-stat-number');
   
   if (counters.length > 0) {
-    const counterObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
+    if (isMobileViewport) {
+      // On mobile: skip rAF animation loops entirely to reduce TBT — just show final values
+      counters.forEach(function (counter) {
+        counter.classList.add('counted');
       });
-    }, { threshold: 0.5 });
-    
-    counters.forEach(function (counter) {
-      counterObserver.observe(counter);
-    });
+    } else {
+      const counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(function (counter) {
+        counterObserver.observe(counter);
+      });
+    }
   }
 
   function animateCounter(element) {
