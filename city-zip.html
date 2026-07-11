@@ -175,7 +175,13 @@
         scriptEl.textContent = JSON.stringify(schemaObj, null, 2);
         document.head.appendChild(scriptEl);
 
-        if (currentPage === 'service-detail') {
+        const isMobile = window.innerWidth <= 600;
+        let preloadHeroPath = '';
+        if (currentPage === 'home') {
+          preloadHeroPath = isMobile ? '/public/images/hero-plumbing-team-mobile.webp' : '/public/images/hero-plumbing-team.webp';
+        } else if (currentPage === 'state' || currentPage === 'city-zip') {
+          preloadHeroPath = isMobile ? '/public/images/hero-plumbing-mobile.webp' : '/public/images/hero-plumbing.webp';
+        } else if (currentPage === 'service-detail') {
           let image_slug = 'emergency-plumbing';
           const availableImages = [
             'burst-pipe-repair', 'drain-cleaning', 'emergency-plumbing', 'gas-line-repair',
@@ -199,10 +205,16 @@
           } else if (service_slug.includes('water-line') || service_slug.includes('water-pipe')) {
             image_slug = 'water-line-repair';
           }
+          preloadHeroPath = isMobile 
+            ? `/public/images/services/${image_slug}-mobile.webp`
+            : `/public/images/services/${image_slug}.webp`;
+        }
+
+        if (preloadHeroPath) {
           const preloadLink = document.createElement('link');
           preloadLink.rel = 'preload';
           preloadLink.as = 'image';
-          preloadLink.href = `/public/images/services/${image_slug}.webp`;
+          preloadLink.href = preloadHeroPath;
           preloadLink.setAttribute('fetchpriority', 'high');
           document.head.appendChild(preloadLink);
         }
@@ -211,10 +223,12 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     /* Specific styling for the restructured elements */
@@ -501,7 +515,7 @@
           </div>
           <div class="hero-image-wrapper">
             <div class="hero-image-container">
-              <img src="/images/hero-plumbing.webp" alt="Local Plumbing Services" class="hero-image" width="600" height="750">
+              <img src="/images/hero-plumbing.webp" srcset="/images/hero-plumbing-mobile.webp 480w, /images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Local Plumbing Services" class="hero-image" width="600" height="750" fetchpriority="high">
             </div>
           </div>
         </div>

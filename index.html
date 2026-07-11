@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Plumbing USA | 24/7 Vetted Local Plumbing &amp; Drain Cleaning</title>
   <meta name="description" content="Connect with background-checked, licensed local plumbers across the USA. 24/7 emergency dispatch, same-day repairs, upfront pricing. Call 877-516-8705.">
+  <script>
+    (function() {
+      const isMobile = window.innerWidth <= 600;
+      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-team-mobile.webp' : '/public/images/hero-plumbing-team.webp';
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      preloadLink.href = preloadHeroPath;
+      preloadLink.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(preloadLink);
+    })();
+  </script>
   <meta name="google-site-verification" content="qh-X9fjhWBAv1oLQd3N9iIIB6S8pjz0PcEDxk4UIt08" />
   <meta name="robots" content="index, follow">
   <meta name="author" content="Home Plumbing USA">
@@ -45,9 +57,13 @@
   <!-- Google Fonts Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
   <link rel="stylesheet" href="/css/style.css">
   <script type="application/ld+json">
   {
@@ -156,7 +172,7 @@
         </div>
         <div class="hero-image-wrapper">
           <div class="hero-image-container">
-            <img src="/images/hero-plumbing-team.webp" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" fetchpriority="high">
+            <img src="/images/hero-plumbing-team.webp" srcset="/images/hero-plumbing-team-mobile.webp 480w, /images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" fetchpriority="high">
             <div class="hero-floating-badge badge-satisfaction">
               <i class="fas fa-shield-halved"></i>
               <div>
