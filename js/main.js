@@ -53,7 +53,7 @@ window.resolveAssetPath = resolveAssetPath;
 
 document.addEventListener('DOMContentLoaded', function () {
   // Automatically correct all static image sources on the page
-  document.querySelectorAll('img').forEach(img => {
+  document.querySelectorAll('img:not([data-manual-resolve])').forEach(img => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('data:')) {
       img.src = resolveAssetPath(src);
@@ -801,6 +801,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function applyDynamicSEO() {
+    if (document.getElementById('dynamic-seo-schema')) {
+      return;
+    }
     const seo = getSEOContext();
     const currentPath = (window.location.pathname + window.location.search).replace(/^\//, '');
     const pageUrl = `https://homeplumbingusa.com/${currentPath}`;

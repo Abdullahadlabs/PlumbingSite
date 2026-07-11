@@ -15,6 +15,198 @@
   <meta name="publisher" content="Home Plumbing USA">
   <title>Local Plumbing &amp; Drain Cleaning Services | Home Plumbing USA</title>
   <meta name="description" content="Get fast, professional plumbing and drain cleaning services from licensed plumbing technicians. 24/7 availability, upfront flat rates, quality guarantee.">
+  <script>
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/');
+      let currentPage = 'home';
+      if (parts.includes('city')) {
+        currentPage = 'city-zip';
+      } else if (parts.includes('state') && parts.indexOf('state') + 1 < parts.length && parts[parts.indexOf('state') + 1] !== '') {
+        currentPage = 'state';
+      } else if (parts.includes('services') && parts.indexOf('services') + 1 < parts.length && parts[parts.indexOf('services') + 1] !== '') {
+        currentPage = 'service-detail';
+      } else {
+        let page = parts.pop().split('#')[0].split('?')[0];
+        if (page.endsWith('.html')) {
+          page = page.substring(0, page.length - 5);
+        }
+        if (page === 'index' || page === '') {
+          currentPage = 'home';
+        } else {
+          currentPage = page;
+        }
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      let city = params.get('city');
+      let zip = params.get('zip');
+      let state = params.get('state');
+
+      const pathParts = window.location.pathname.split('/');
+      const cityIdx = pathParts.indexOf('city');
+      if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {
+        if (!state) state = pathParts[cityIdx + 1];
+        if (!city) city = pathParts[cityIdx + 2];
+        if (!zip) zip = pathParts[cityIdx + 3];
+      }
+      const stateIdx = pathParts.indexOf('state');
+      if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+        if (!state) state = pathParts[stateIdx + 1];
+      }
+      if (!state && city) {
+        state = 'alaska';
+      }
+
+      function capitalize(str) {
+        if (!str) return '';
+        return decodeURIComponent(str)
+          .split(/[- ]+/)
+          .map(w => {
+            if (w.toLowerCase() === 'b2b') return 'B2B';
+            if (w.toLowerCase() === 'usa') return 'USA';
+            return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+          })
+          .join(' ');
+      }
+
+      const cityName = capitalize(city) || 'Anchorage';
+      const stateName = capitalize(state) || 'Alaska';
+      const stateKey = state ? state.toLowerCase().replace(/_/g, '-') : '';
+      const stateCodeMap = {
+        'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
+        'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA',
+        'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+        'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
+        'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+        'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new-hampshire': 'NH', 'new-jersey': 'NJ',
+        'new-mexico': 'NM', 'new-york': 'NY', 'north-carolina': 'NC', 'north-dakota': 'ND', 'ohio': 'OH',
+        'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode-island': 'RI', 'south-carolina': 'SC',
+        'south-dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+        'virginia': 'VA', 'washington': 'WA', 'west-virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY'
+      };
+      const stateCode = stateCodeMap[stateKey] || (state ? state.substring(0, 2).toUpperCase() : 'AK');
+
+      let serviceName = 'Plumbing Services';
+      if (currentPage === 'service-detail') {
+        let serviceNameRaw = params.get('service');
+        const servicesIdx = pathParts.indexOf('services');
+        if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
+          if (!serviceNameRaw) {
+            serviceNameRaw = pathParts[servicesIdx + 1];
+            if (serviceNameRaw && serviceNameRaw.endsWith('/')) {
+              serviceNameRaw = serviceNameRaw.slice(0, -1);
+            }
+          }
+        }
+        if (!serviceNameRaw) {
+          const hash = window.location.hash;
+          if (hash && hash.length > 1) {
+            serviceNameRaw = decodeURIComponent(hash.substring(1));
+          }
+        }
+        if (serviceNameRaw) {
+          serviceName = capitalize(serviceNameRaw);
+        }
+      }
+
+      let title = '';
+      let description = '';
+      let schemaName = '';
+      let schemaDesc = '';
+      let areaServedName = '';
+
+      if (currentPage === 'state') {
+        title = `Best Plumbing Services in ${stateName} | Home Plumbing USA`;
+        description = `Need professional plumbing services in ${stateName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${stateName}`;
+        schemaDesc = `Professional plumbing and emergency repair services in ${stateName}.`;
+        areaServedName = stateName;
+      } else if (currentPage === 'city-zip') {
+        title = `Emergency Plumbers in ${cityName}, ${stateCode} | Home Plumbing USA`;
+        description = `Need professional plumbing services in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${cityName}`;
+        schemaDesc = `Professional plumbing and emergency repair services in ${cityName}, ${stateName}.`;
+        areaServedName = cityName;
+      } else if (currentPage === 'service-detail') {
+        title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
+        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${cityName}`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+        areaServedName = cityName;
+      }
+
+      if (title && description) {
+        document.title = title;
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (!metaDesc) {
+          metaDesc = document.createElement('meta');
+          metaDesc.setAttribute('name', 'description');
+          document.head.appendChild(metaDesc);
+        }
+        metaDesc.setAttribute('content', description);
+
+        const currentPath = (window.location.pathname + window.location.search).replace(/^\//, '');
+        const pageUrl = `https://homeplumbingusa.com/${currentPath}`;
+        const schemaObj = {
+          "@context": "https://schema.org",
+          "@type": "PlumbingService",
+          "name": schemaName,
+          "description": schemaDesc,
+          "url": pageUrl,
+          "telephone": "877-516-8705",
+          "priceRange": "$$",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": areaServedName
+          },
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Home Plumbing USA",
+            "image": "https://homeplumbingusa.com/images/logo.png"
+          }
+        };
+
+        const scriptEl = document.createElement('script');
+        scriptEl.id = 'dynamic-seo-schema';
+        scriptEl.type = 'application/ld+json';
+        scriptEl.textContent = JSON.stringify(schemaObj, null, 2);
+        document.head.appendChild(scriptEl);
+
+        if (currentPage === 'service-detail') {
+          let image_slug = 'emergency-plumbing';
+          const availableImages = [
+            'burst-pipe-repair', 'drain-cleaning', 'emergency-plumbing', 'gas-line-repair',
+            'leak-detection', 'sewer-line-repair', 'water-heater-repair', 'water-line-repair'
+          ];
+          const service_slug = decodeURIComponent(serviceName || '').toLowerCase().replace(/ /g, '-');
+          if (availableImages.includes(service_slug)) {
+            image_slug = service_slug;
+          } else if (service_slug.includes('heater') || service_slug.includes('tankless')) {
+            image_slug = 'water-heater-repair';
+          } else if (service_slug.includes('drain') || service_slug.includes('hydro') || service_slug.includes('clog')) {
+            image_slug = 'drain-cleaning';
+          } else if (service_slug.includes('sewer')) {
+            image_slug = 'sewer-line-repair';
+          } else if (service_slug.includes('gas')) {
+            image_slug = 'gas-line-repair';
+          } else if (service_slug.includes('leak') || service_slug.includes('detection')) {
+            image_slug = 'leak-detection';
+          } else if (service_slug.includes('pipe') || service_slug.includes('burst')) {
+            image_slug = 'burst-pipe-repair';
+          } else if (service_slug.includes('water-line') || service_slug.includes('water-pipe')) {
+            image_slug = 'water-line-repair';
+          }
+          const preloadLink = document.createElement('link');
+          preloadLink.rel = 'preload';
+          preloadLink.as = 'image';
+          preloadLink.href = `/public/images/services/${image_slug}.webp`;
+          preloadLink.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(preloadLink);
+        }
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -386,7 +578,7 @@
           </div>
           <div class="hero-image-wrapper">
             <div class="hero-image-container">
-              <img id="img-hero" src="/images/hero-plumbing.png" alt="Local respective Services" class="hero-image">
+              <img id="img-hero" src="/images/hero-plumbing.webp" alt="Local respective Services" class="hero-image" width="600" height="750" fetchpriority="high" data-manual-resolve>
             </div>
           </div>
         </div>
@@ -440,7 +632,7 @@
                 <li><i class="fas fa-check"></i> Safety inspection post-installation</li>
               </ul>
               <div class="card-image-wrap">
-                <img id="img-why-call" src="/images/about-plumbing.png" alt="Inspection for respective">
+                 <img id="img-why-call" src="/images/about-plumbing.webp" alt="Inspection for respective" width="600" height="400" loading="lazy" data-manual-resolve>
               </div>
             </div>
           </div>
@@ -461,7 +653,7 @@
                 <li><i class="fas fa-check"></i> Multi-point pipe integrity verification</li>
               </ul>
               <div class="card-image-wrap">
-                <img id="img-how-perform" src="/images/hero-plumbing.png" alt="Performing respective">
+                 <img id="img-how-perform" src="/images/hero-plumbing.webp" alt="Performing respective" width="600" height="400" loading="lazy" data-manual-resolve>
               </div>
             </div>
           </div>
@@ -494,7 +686,7 @@
                 <li><i class="fas fa-check"></i> Clean, respectful, and licensed plumbing crews</li>
               </ul>
               <div class="card-image-wrap">
-                <img id="img-benefits" src="/images/hero-plumbing-team.png" alt="Benefits of respective">
+                 <img id="img-benefits" src="/images/hero-plumbing-team.webp" alt="Benefits of respective" width="600" height="400" loading="lazy" data-manual-resolve>
               </div>
             </div>
           </div>
