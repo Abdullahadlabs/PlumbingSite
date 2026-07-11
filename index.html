@@ -15,28 +15,30 @@
   })(window,document,'script','dataLayer','GTM-NHGT9PF7');</script>
   <!-- End Google Tag Manager -->
   <!-- Tailwind Play CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: '#0a1628', // Remapped to Lone Star Dark Navy
-            'navy-mid': '#111d33', // Remapped to Lone Star Mid Navy
-            blue: {
-              DEFAULT: '#2563eb', // Remapped to Confident Royal Blue
-              light: '#3b82f6' // Remapped to Light blue
-            },
-            orange: {
-              DEFAULT: '#f59e0b', // Remapped to Golden orange
-              dark: '#d97706' // Remapped to Golden orange hover
-            },
-            green: '#2563eb', // Remapped to Success/Active Blue
-            red: '#e63946' // Remapped to locator alert red
+    document.addEventListener('DOMContentLoaded', () => {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: '#0a1628', // Remapped to Lone Star Dark Navy
+              'navy-mid': '#111d33', // Remapped to Lone Star Mid Navy
+              blue: {
+                DEFAULT: '#2563eb', // Remapped to Confident Royal Blue
+                light: '#3b82f6' // Remapped to Light blue
+              },
+              orange: {
+                DEFAULT: '#f59e0b', // Remapped to Golden orange
+                dark: '#d97706' // Remapped to Golden orange hover
+              },
+              green: '#2563eb', // Remapped to Success/Active Blue
+              red: '#e63946' // Remapped to locator alert red
+            }
           }
         }
       }
-    }
+    });
   </script>
   <!-- Google Fonts Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,7 +99,7 @@
     </div>
     <div class="header-inner">
       <a href="/" class="logo">
-        <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img">
+        <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
       </a>
 
       <nav class="nav" id="mainNav">
@@ -152,18 +154,18 @@
         </div>
         <div class="hero-image-wrapper">
           <div class="hero-image-container">
-            <img src="/images/hero-plumbing-team.png" alt="Vetted Professional Plumbing Team" class="hero-image">
+            <img src="/images/hero-plumbing-team.webp" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750">
             <div class="hero-floating-badge badge-satisfaction">
               <i class="fas fa-shield-halved"></i>
               <div>
-                <h4>100% Satisfaction</h4>
+                <div class="badge-title">100% Satisfaction</div>
                 <p>Guaranteed Quality</p>
               </div>
             </div>
             <div class="hero-floating-badge badge-emergency">
               <i class="fas fa-bolt"></i>
               <div>
-                <h4>24/7 Emergency</h4>
+                <div class="badge-title">24/7 Emergency</div>
                 <p>Fast Dispatch</p>
               </div>
             </div>
@@ -870,7 +872,7 @@
         
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">What areas do you serve?</span>
+            <h3 class="faq-title">What areas do you serve?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -882,7 +884,7 @@
 
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">Do you offer 24/7 emergency plumbing services?</span>
+            <h3 class="faq-title">Do you offer 24/7 emergency plumbing services?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -894,7 +896,7 @@
 
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">How much do plumbing repairs typically cost?</span>
+            <h3 class="faq-title">How much do plumbing repairs typically cost?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -906,7 +908,7 @@
 
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">Are your plumbers licensed and insured?</span>
+            <h3 class="faq-title">Are your plumbers licensed and insured?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -918,7 +920,7 @@
 
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">How quickly can you respond to a plumbing emergency?</span>
+            <h3 class="faq-title">How quickly can you respond to a plumbing emergency?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -930,7 +932,7 @@
 
         <div class="faq-item animate-on-scroll">
           <div class="faq-question">
-            <span class="faq-title">Do you provide free estimates for plumbing work?</span>
+            <h3 class="faq-title">Do you provide free estimates for plumbing work?</h3>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div class="faq-answer">
@@ -952,7 +954,7 @@
         <!-- Column 1 -->
         <div class="footer-about">
           <a href="/" class="logo footer-logo">
-            <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img">
+            <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
           </a>
           <p>Your trusted nationwide directory for local professional plumbing. Connecting home and business owners with vetted, highly-rated technicians in real-time.</p>
         </div>
@@ -996,8 +998,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js"></script>
-  <script src="/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
 
   <!-- Mobile Sticky Action Bar -->
   <div class="mobile-sticky-bar">

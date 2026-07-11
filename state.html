@@ -449,143 +449,144 @@
     </div>
   </footer>
 
-  <script src="/js/zipData.js"></script>
-  <script src="/js/main.js"></script>
+  <script src="/js/zipData.js" defer></script>
+  <script src="/js/main.js" defer></script>
   <script>
-    // US Zip-to-State Range Mapping Helper
-    function getZipState(zip) {
-      const z = parseInt(zip, 10);
-      if (isNaN(z)) return 'unknown';
-      if (z >= 99500 && z <= 99999) return 'alaska';
-      if (z >= 99000 && z <= 99499) return 'washington';
-      if (z >= 98000 && z <= 98999) return 'washington';
-      if (z >= 73300 && z <= 79999) return 'texas';
-      if (z >= 88500 && z <= 88599) return 'texas';
-      if (z >= 10000 && z <= 14999) return 'new-york';
-      if (z >= 35000 && z <= 36999) return 'alabama';
-      if (z >= 85000 && z <= 86999) return 'arizona';
-      if (z >= 71000 && z <= 72999) return 'arkansas';
-      if (z >= 90000 && z <= 96199) return 'california';
-      if (z >= 80000 && z <= 81999) return 'colorado';
-      if (z >= 6000 && z <= 6999) return 'connecticut';
-      if (z >= 19700 && z <= 19999) return 'delaware';
-      if (z >= 20000 && z <= 20099) return 'district-of-columbia';
-      if (z >= 32000 && z <= 34999) return 'florida';
-      if (z >= 30000 && z <= 31999) return 'georgia';
-      if (z >= 96700 && z <= 96899) return 'hawaii';
-      if (z >= 83200 && z <= 83999) return 'idaho';
-      if (z >= 60000 && z <= 62999) return 'illinois';
-      if (z >= 46000 && z <= 47999) return 'indiana';
-      if (z >= 50000 && z <= 52999) return 'iowa';
-      if (z >= 66000 && z <= 67999) return 'kansas';
-      if (z >= 40000 && z <= 42999) return 'kentucky';
-      if (z >= 70000 && z <= 70999) return 'louisiana';
-      if (z >= 3900 && z <= 4999) return 'maine';
-      if (z >= 20600 && z <= 21999) return 'maryland';
-      if (z >= 1000 && z <= 2799) return 'massachusetts';
-      if (z >= 48000 && z <= 49999) return 'michigan';
-      if (z >= 55000 && z <= 56999) return 'minnesota';
-      if (z >= 38600 && z <= 39999) return 'mississippi';
-      if (z >= 63000 && z <= 65999) return 'missouri';
-      if (z >= 59000 && z <= 59999) return 'montana';
-      if (z >= 68000 && z <= 69999) return 'nebraska';
-      if (z >= 89000 && z <= 89899) return 'nevada';
-      if (z >= 3000 && z <= 3899) return 'new-hampshire';
-      if (z >= 7000 && z <= 8999) return 'new-jersey';
-      if (z >= 87000 && z <= 88499) return 'new-mexico';
-      if (z >= 27000 && z <= 28999) return 'north-carolina';
-      if (z >= 58000 && z <= 58999) return 'north-dakota';
-      if (z >= 43000 && z <= 45999) return 'ohio';
-      if (z >= 73000 && z <= 74999) return 'oklahoma';
-      if (z >= 97000 && z <= 97999) return 'oregon';
-      if (z >= 15000 && z <= 19699) return 'pennsylvania';
-      if (z >= 2800 && z <= 2999) return 'rhode-island';
-      if (z >= 29000 && z <= 29999) return 'south-carolina';
-      if (z >= 57000 && z <= 57999) return 'south-dakota';
-      if (z >= 37000 && z <= 38599) return 'tennessee';
-      if (z >= 84000 && z <= 84999) return 'utah';
-      if (z >= 5000 && z <= 5999) return 'vermont';
-      if (z >= 20100 && z <= 20199) return 'virginia';
-      if (z >= 22000 && z <= 24699) return 'virginia';
-      if (z >= 24700 && z <= 26999) return 'west-virginia';
-      if (z >= 53000 && z <= 54999) return 'wisconsin';
-      if (z >= 82000 && z <= 83199) return 'wyoming';
-      return 'unknown';
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      // US Zip-to-State Range Mapping Helper
+      function getZipState(zip) {
+        const z = parseInt(zip, 10);
+        if (isNaN(z)) return 'unknown';
+        if (z >= 99500 && z <= 99999) return 'alaska';
+        if (z >= 99000 && z <= 99499) return 'washington';
+        if (z >= 98000 && z <= 98999) return 'washington';
+        if (z >= 73300 && z <= 79999) return 'texas';
+        if (z >= 88500 && z <= 88599) return 'texas';
+        if (z >= 10000 && z <= 14999) return 'new-york';
+        if (z >= 35000 && z <= 36999) return 'alabama';
+        if (z >= 85000 && z <= 86999) return 'arizona';
+        if (z >= 71000 && z <= 72999) return 'arkansas';
+        if (z >= 90000 && z <= 96199) return 'california';
+        if (z >= 80000 && z <= 81999) return 'colorado';
+        if (z >= 6000 && z <= 6999) return 'connecticut';
+        if (z >= 19700 && z <= 19999) return 'delaware';
+        if (z >= 20000 && z <= 20099) return 'district-of-columbia';
+        if (z >= 32000 && z <= 34999) return 'florida';
+        if (z >= 30000 && z <= 31999) return 'georgia';
+        if (z >= 96700 && z <= 96899) return 'hawaii';
+        if (z >= 83200 && z <= 83999) return 'idaho';
+        if (z >= 60000 && z <= 62999) return 'illinois';
+        if (z >= 46000 && z <= 47999) return 'indiana';
+        if (z >= 50000 && z <= 52999) return 'iowa';
+        if (z >= 66000 && z <= 67999) return 'kansas';
+        if (z >= 40000 && z <= 42999) return 'kentucky';
+        if (z >= 70000 && z <= 70999) return 'louisiana';
+        if (z >= 3900 && z <= 4999) return 'maine';
+        if (z >= 20600 && z <= 21999) return 'maryland';
+        if (z >= 1000 && z <= 2799) return 'massachusetts';
+        if (z >= 48000 && z <= 49999) return 'michigan';
+        if (z >= 55000 && z <= 56999) return 'minnesota';
+        if (z >= 38600 && z <= 39999) return 'mississippi';
+        if (z >= 63000 && z <= 65999) return 'missouri';
+        if (z >= 59000 && z <= 59999) return 'montana';
+        if (z >= 68000 && z <= 69999) return 'nebraska';
+        if (z >= 89000 && z <= 89899) return 'nevada';
+        if (z >= 3000 && z <= 3899) return 'new-hampshire';
+        if (z >= 7000 && z <= 8999) return 'new-jersey';
+        if (z >= 87000 && z <= 88499) return 'new-mexico';
+        if (z >= 27000 && z <= 28999) return 'north-carolina';
+        if (z >= 58000 && z <= 58999) return 'north-dakota';
+        if (z >= 43000 && z <= 45999) return 'ohio';
+        if (z >= 73000 && z <= 74999) return 'oklahoma';
+        if (z >= 97000 && z <= 97999) return 'oregon';
+        if (z >= 15000 && z <= 19699) return 'pennsylvania';
+        if (z >= 2800 && z <= 2999) return 'rhode-island';
+        if (z >= 29000 && z <= 29999) return 'south-carolina';
+        if (z >= 57000 && z <= 57999) return 'south-dakota';
+        if (z >= 37000 && z <= 38599) return 'tennessee';
+        if (z >= 84000 && z <= 84999) return 'utah';
+        if (z >= 5000 && z <= 5999) return 'vermont';
+        if (z >= 20100 && z <= 20199) return 'virginia';
+        if (z >= 22000 && z <= 24699) return 'virginia';
+        if (z >= 24700 && z <= 26999) return 'west-virginia';
+        if (z >= 53000 && z <= 54999) return 'wisconsin';
+        if (z >= 82000 && z <= 83199) return 'wyoming';
+        return 'unknown';
+      }
 
-    // Local script to update the state name from query parameter or pathname
-    const params = new URLSearchParams(window.location.search);
-    let state = params.get('state');
+      // Local script to update the state name from query parameter or pathname
+      const params = new URLSearchParams(window.location.search);
+      let state = params.get('state');
 
-    // Parse path parts if we are on a clean state URL (/state/alaska)
-    const pathParts = window.location.pathname.split('/');
-    const stateIdx = pathParts.indexOf('state');
-    if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
-      if (!state) state = pathParts[stateIdx + 1];
-    }
+      // Parse path parts if we are on a clean state URL (/state/alaska)
+      const pathParts = window.location.pathname.split('/');
+      const stateIdx = pathParts.indexOf('state');
+      if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+        if (!state) state = pathParts[stateIdx + 1];
+      }
 
-    if (state) {
-      state = decodeURIComponent(state);
-      // Capitalize
-      const capState = state.split(/[- ]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-      document.querySelectorAll('.state-name').forEach(el => {
-        el.textContent = capState;
-      });
-      document.title = `Home Plumbing USA | Professional Plumbing in ${capState}`;
-
-      // Dynamically load cities for the state from zipCodeData
-      const gridEl = document.getElementById('areas-grid');
-      if (gridEl && typeof zipCodeData !== 'undefined') {
+      if (state) {
+        state = decodeURIComponent(state);
         const stateLower = state.toLowerCase().replace(/_/g, '-');
-        const citiesInState = {};
+        const capState = stateLower.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        
+        document.querySelectorAll('.state-name').forEach(el => {
+          el.textContent = capState;
+        });
 
-        for (const zipKey in zipCodeData) {
-          const matchedState = getZipState(zipKey);
-          if (matchedState === stateLower) {
-            const list = zipCodeData[zipKey];
-            if (list && list[0]) {
-              const cityName = list[0].split(', ')[0] || '';
-              if (cityName && !citiesInState[cityName.toLowerCase()]) {
-                citiesInState[cityName.toLowerCase()] = {
-                  name: cityName,
-                  zip: zipKey
-                };
+        // Dynamically load cities for the state from zipCodeData
+        const gridEl = document.getElementById('areas-grid');
+        if (gridEl && typeof zipCodeData !== 'undefined') {
+          const citiesInState = {};
+
+          for (const zipKey in zipCodeData) {
+            const matchedState = getZipState(zipKey);
+            if (matchedState === stateLower) {
+              const list = zipCodeData[zipKey];
+              if (list && list[0]) {
+                const cityName = list[0].split(', ')[0] || '';
+                if (cityName && !citiesInState[cityName.toLowerCase()]) {
+                  citiesInState[cityName.toLowerCase()] = {
+                    name: cityName,
+                    zip: zipKey
+                  };
+                }
               }
             }
           }
-        }
 
-        const sortedCities = Object.values(citiesInState).sort((a, b) => a.name.localeCompare(b.name));
+          const sortedCities = Object.values(citiesInState).sort((a, b) => a.name.localeCompare(b.name));
 
-        if (sortedCities.length > 0) {
-          let cardsHtml = '';
-          sortedCities.forEach(cityObj => {
-            cardsHtml += `
-              <a href="/city/${stateLower}/${encodeURIComponent(cityObj.name.toLowerCase())}/${cityObj.zip}" class="area-card animate-on-scroll">
-                <i class="fas fa-map-marker-alt"></i>
-                <span class="area-title">${cityObj.name}</span>
-                <div class="area-zip">${cityObj.zip}</div>
-              </a>
+          if (sortedCities.length > 0) {
+            let cardsHtml = '';
+            sortedCities.forEach(cityObj => {
+              cardsHtml += `
+                <a href="/city/${stateLower}/${encodeURIComponent(cityObj.name.toLowerCase())}/${cityObj.zip}" class="area-card animate-on-scroll">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span class="area-title">${cityObj.name}</span>
+                  <div class="area-zip">${cityObj.zip}</div>
+                </a>
+              `;
+            });
+            gridEl.innerHTML = cardsHtml;
+          } else {
+            // Render the form and message indicating no providers are found
+            gridEl.style.display = 'block';
+            gridEl.innerHTML = `
+              <div class="no-providers-container" style="text-align: center; padding: 50px 30px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 600px; margin: 0 auto;">
+                <i class="fas fa-exclamation-circle" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; display: block;"></i>
+                <h3 style="color: var(--text-white); margin-bottom: 12px; font-size: 1.5rem;">No Local Providers Found Yet</h3>
+                <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">We are currently expanding our network of vetted plumbers in ${capState}. Enter your email below to be notified as soon as local plumbing technicians become active in your region.</p>
+                <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you when coverage becomes active in ${capState}.'); this.reset();" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+                  <input type="email" placeholder="Enter your email" style="padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-white); font-size: 0.95rem;" required>
+                  <button type="submit" class="btn btn-accent" style="padding: 12px; font-weight: 600; cursor: pointer; border: none; border-radius: var(--radius-sm);">Notify Me</button>
+                </form>
+              </div>
             `;
-          });
-          gridEl.innerHTML = cardsHtml;
-        } else {
-          // Render the form and message indicating no providers are found
-          gridEl.style.display = 'block';
-          gridEl.innerHTML = `
-            <div class="no-providers-container" style="text-align: center; padding: 50px 30px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 600px; margin: 0 auto;">
-              <i class="fas fa-exclamation-circle" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; display: block;"></i>
-              <h3 style="color: var(--text-white); margin-bottom: 12px; font-size: 1.5rem;">No Local Providers Found Yet</h3>
-              <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">We are currently expanding our network of vetted plumbers in ${capState}. Enter your email below to be notified as soon as local plumbing technicians become active in your region.</p>
-              <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you when coverage becomes active in ${capState}.'); this.reset();" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
-                <input type="email" placeholder="Enter your email" style="padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-white); font-size: 0.95rem;" required>
-                <button type="submit" class="btn btn-accent" style="padding: 12px; font-weight: 600; cursor: pointer; border: none; border-radius: var(--radius-sm);">Notify Me</button>
-              </form>
-            </div>
-          `;
+          }
         }
       }
-    }
+    });
   </script>
 
   <!-- Mobile Sticky Action Bar -->
