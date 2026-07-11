@@ -126,6 +126,18 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==================== HEADER SCROLL ====================
   const header = document.getElementById('header') || document.querySelector('.header');
   
+  // Cache header height to avoid forced reflow on every scroll tick
+  let cachedHeaderHeight = header ? header.offsetHeight : 80;
+  
+  // Update cached height only when header size actually changes (e.g. mobile menu open)
+  if (header && typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(function(entries) {
+      for (const entry of entries) {
+        cachedHeaderHeight = Math.round(entry.contentRect.height);
+      }
+    }).observe(header);
+  }
+  
   function handleScroll() {
     if (header) {
       if (window.scrollY > 50) {
@@ -136,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
   
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
   // ==================== MOBILE MENU ====================
@@ -466,8 +478,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         e.preventDefault();
-        const headerHeight = header ? header.offsetHeight : 0;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        // Use cachedHeaderHeight to avoid forced reflow on click
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - cachedHeaderHeight;
         
         window.scrollTo({
           top: targetPosition,

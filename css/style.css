@@ -108,6 +108,8 @@ ul, ol {
 img {
   max-width: 100%;
   display: block;
+  /* Prevent layout shifts: never let browser auto-size images with unknown dimensions */
+  height: auto;
 }
 
 /* ==================== UTILITY CLASSES ==================== */
@@ -230,7 +232,10 @@ img {
   color: var(--text-white);
   font-size: 0.85rem;
   font-weight: 600;
+  /* Use max-height instead of fixed height so it can animate smoothly to 0 */
   height: 40px;
+  max-height: 40px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,6 +243,8 @@ img {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   z-index: 1001;
+  /* Smooth collapse transition when .scrolled is applied to parent */
+  transition: max-height 0.3s ease, border 0.3s ease;
 }
 
 .top-bar-content {
@@ -286,9 +293,15 @@ img {
 }
 
 .header.scrolled {
-  top: -40px;
   background: rgba(10, 22, 40, 0.98);
   box-shadow: var(--shadow-lg);
+}
+
+/* Collapse top-bar smoothly without shifting page content (was top:-40px which causes CLS) */
+.header.scrolled .top-bar {
+  max-height: 0;
+  overflow: hidden;
+  border-bottom: none;
 }
 
 .header-inner {
@@ -318,9 +331,13 @@ img {
 
 .logo-img {
   height: 52px;
-  width: auto;
+  /* Explicit width reserves space before SVG loads — prevents CLS */
+  width: 247px;
   display: block;
   transition: var(--transition);
+  /* Object-fit ensures it scales correctly if container changes */
+  object-fit: contain;
+  object-position: left center;
 }
 
 .logo:hover .logo-img {
@@ -589,13 +606,17 @@ img {
 /* ==================== HERO SECTION ==================== */
 .hero {
   position: relative;
+  /* Explicit min-height prevents hero from collapsing before JS/fonts load */
   min-height: 100vh;
+  min-height: 100svh; /* Use svh on modern browsers to avoid mobile URL bar CLS */
   display: flex;
   align-items: center;
   padding-top: 40px; /* Offset adjusted since main handles header clearance */
   padding-bottom: 120px; /* Safe spacing to prevent bottom stats from overlapping with trust cards */
   background: var(--gradient-hero);
   overflow: hidden;
+  /* contain prevents child geometry changes from triggering ancestor reflows */
+  contain: layout style;
 }
 
 .hero::before {
@@ -768,6 +789,11 @@ img {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   transition: var(--transition);
+  /* Reserve intrinsic space: 4:5 ratio at max-width=420px → 525px height */
+  /* Prevents container collapse during the async image fetch */
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, #0f1e3a 0%, #162442 100%);
+  contain: layout;
 }
 
 .hero-image-container::before {
@@ -791,12 +817,15 @@ img {
 
 .hero-image {
   width: 100%;
-  height: auto;
+  /* Height must be explicit so the browser can calculate layout before image loads */
+  height: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: var(--transition-slow);
+  /* Prevents img element from collapsing to 0 height on 1×1 placeholder */
+  min-height: 300px;
 }
 
 .hero-image-container:hover .hero-image {
@@ -888,12 +917,20 @@ img {
 
 @media (max-width: 991px) {
   .hero {
-    min-height: auto;
+    /* Keep a stable min-height on mobile to prevent CLS from content reflow */
+    min-height: 80vh;
     padding-top: 50px; /* Offset adjusted since main handles header clearance */
     padding-bottom: 60px;
   }
   .hero-image-wrapper {
     margin-top: 20px;
+  }
+  .hero-image {
+    min-height: 250px;
+  }
+  .hero-image-container {
+    aspect-ratio: 4 / 5;
+    max-width: 100%;
   }
 }
 
