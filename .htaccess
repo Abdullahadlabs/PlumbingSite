@@ -1,6 +1,48 @@
 RewriteEngine On
 RewriteBase /
 
+# --- Server-Side 301 Redirect Rules for Clean Canonical URLs ---
+
+# A. Redirect city URLs containing spaces, %20, %25 or percent signs in the path
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%20|%25|%)(.*)\sHTTP [NC]
+RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+# B. Redirect state or city URLs containing underscores to hyphens
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)_(.*)\sHTTP [NC]
+RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+# C. Redirect state or city URLs containing consecutive hyphens to a single hyphen
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)--(.*)\sHTTP [NC]
+RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+# D. Redirect uppercase state names in state routes (e.g., /state/Alaska -> /state/alaska)
+RewriteCond %{REQUEST_URI} ^/state/alaska$ [NC]
+RewriteCond %{REQUEST_URI} !^/state/alaska$
+RewriteRule ^ /state/alaska [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/state/texas$ [NC]
+RewriteCond %{REQUEST_URI} !^/state/texas$
+RewriteRule ^ /state/texas [R=301,L]
+
+# E. Redirect uppercase state names in city routes (e.g., /city/Alaska/... -> /city/alaska/...)
+RewriteCond %{REQUEST_URI} ^/city/alaska/ [NC]
+RewriteCond %{REQUEST_URI} !^/city/alaska/
+RewriteRule ^city/([^/]+)(.*)$ /city/alaska$2 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/city/texas/ [NC]
+RewriteCond %{REQUEST_URI} !^/city/texas/
+RewriteRule ^city/([^/]+)(.*)$ /city/texas$2 [R=301,L]
+
+# F. Remove trailing slashes for state/city routes (e.g., /state/alaska/ -> /state/alaska)
+RewriteCond %{REQUEST_URI} ^/state/[^/]+/+$ [NC]
+RewriteRule ^(state/[^/]+)/+$ /$1 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/city/[^/]+/[^/]+/[^/]+/+$ [NC]
+RewriteRule ^(city/[^/]+/[^/]+/[^/]+)/+$ /$1 [R=301,L]
+
+# --- End Redirect Rules ---
+
+
 # Rewrite /images/* requests to public/images/*
 RewriteRule ^images/(.*)$ public/images/$1 [L]
 
