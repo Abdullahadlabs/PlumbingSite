@@ -4,7 +4,7 @@ RewriteBase /
 # --- Server-Side 301 Redirect Rules for Clean Canonical URLs ---
 
 # A. Redirect city URLs containing spaces, %20, %25 or percent signs in the path
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%20|%25|%)(.*)\sHTTP [NC]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%25252520|%252520|%2520|%20|%2525|%25|%)(.*)\sHTTP [NC]
 RewriteRule ^ /%1-%2 [R=301,L,NE]
 
 # B. Redirect state or city URLs containing underscores to hyphens
