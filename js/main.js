@@ -51,6 +51,25 @@ function resolveAssetPath(originalPath) {
 // Expose globally for inline scripts
 window.resolveAssetPath = resolveAssetPath;
 
+function slugify(text) {
+  if (!text) return '';
+  let decoded = text;
+  try {
+    let prev;
+    do {
+      prev = decoded;
+      decoded = decodeURIComponent(decoded);
+    } while (decoded !== prev);
+  } catch (e) {}
+  return decoded
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-_]/g, '')
+    .trim()
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+window.slugify = slugify;
+
 document.addEventListener('DOMContentLoaded', function () {
   // Automatically correct all static image sources on the page
   document.querySelectorAll('img:not([data-manual-resolve])').forEach(img => {
@@ -120,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const city = loc.city || 'Anchorage';
     const zip = loc.zip || '99501';
     const state = loc.state || 'alaska';
-    homeMenuEl.href = `/city/${encodeURIComponent(state.toLowerCase())}/${encodeURIComponent(city.toLowerCase())}/${encodeURIComponent(zip)}`;
+    homeMenuEl.href = `/city/${slugify(state)}/${slugify(city)}/${zip}`;
   }
 
   // ==================== HEADER SCROLL ====================
@@ -738,9 +757,9 @@ document.addEventListener('DOMContentLoaded', function () {
             targetHref = targetHref.replace('.html', '');
           }
           const targetUrl = new URL(targetHref, window.location.origin);
-          if (loc.city) targetUrl.searchParams.set('city', loc.city);
-          if (loc.zip) targetUrl.searchParams.set('zip', loc.zip);
-          if (loc.state) targetUrl.searchParams.set('state', loc.state);
+          if (loc.city) targetUrl.searchParams.set('city', slugify(loc.city));
+          if (loc.zip) targetUrl.searchParams.set('zip', loc.zip.replace(/[^0-9]/g, ''));
+          if (loc.state) targetUrl.searchParams.set('state', slugify(loc.state));
           window.location.href = targetUrl.toString();
         }
       }
@@ -789,7 +808,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let cityName = '';
     if (loc.city) {
       cityName = decodeURIComponent(loc.city)
-        .split(' ')
+        .split(/[- ]+/)
         .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(' ');
     }
