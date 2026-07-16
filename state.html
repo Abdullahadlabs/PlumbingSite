@@ -344,6 +344,7 @@
     }
   </style>
   <link rel="icon" type="image/png" href="/images/favicon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body data-prefix="/" data-depth="0">
 
@@ -756,7 +757,7 @@
   <script src="/js/zipData.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       // US Zip-to-State Range Mapping Helper
       function getZipState(zip) {
         const z = parseInt(zip, 10);
@@ -838,55 +839,115 @@
           el.textContent = capState;
         });
 
-        // Dynamically load cities for the state from zipCodeData
         const gridEl = document.getElementById('areas-grid');
-        if (gridEl && typeof zipCodeData !== 'undefined') {
-          const citiesInState = {};
+        if (gridEl) {
+          // Render loading indicator
+          gridEl.innerHTML = `
+            <div class="loading-container" style="text-align: center; padding: 50px 30px; width: 100%; grid-column: 1 / -1;">
+              <i class="fas fa-spinner fa-spin" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px;"></i>
+              <p style="color: var(--text-muted);">Loading local areas for ${capState}...</p>
+            </div>
+          `;
 
-          for (const zipKey in zipCodeData) {
-            const matchedState = getZipState(zipKey);
-            if (matchedState === stateLower) {
-              const list = zipCodeData[zipKey];
-              if (list && list[0]) {
-                const cityName = list[0].split(', ')[0] || '';
-                if (cityName && !citiesInState[cityName.toLowerCase()]) {
-                  citiesInState[cityName.toLowerCase()] = {
-                    name: cityName,
-                    zip: zipKey
-                  };
-                }
-              }
-            }
+          const stateCodeMap = {
+            'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
+            'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA',
+            'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+            'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
+            'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+            'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new-hampshire': 'NH', 'new-jersey': 'NJ',
+            'new-mexico': 'NM', 'new-york': 'NY', 'north-carolina': 'NC', 'north-dakota': 'ND', 'ohio': 'OH',
+            'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode-island': 'RI', 'south-carolina': 'SC',
+            'south-dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+            'virginia': 'VA', 'washington': 'WA', 'west-virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY'
+          };
+          const stateCode = stateCodeMap[stateLower] || stateLower.substring(0, 2).toUpperCase();
+
+          let fetchedData = [];
+          try {
+            const supabaseUrl = 'https://rokjdhlqigfmfpbkaqlq.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJva2pkaGxxaWdmbWZwYmthcWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5ODI2NzAsImV4cCI6MjA5ODU1ODY3MH0.x5n0OI8sVRafJYPlEGuysv8xGFnEOP8wRiuCevJgTzI';
+            const { createClient } = window.supabase;
+            const _supabase = createClient(supabaseUrl, supabaseKey);
+
+            const { data, error } = await _supabase
+              .from('seo_pages')
+              .select('zip, city, folder_name, url_path')
+              .eq('state', stateCode)
+              .limit(5000);
+
+            if (error) throw error;
+            fetchedData = data || [];
+          } catch (err) {
+            console.error('Error fetching from Supabase:', err);
           }
 
-          const sortedCities = Object.values(citiesInState).sort((a, b) => a.name.localeCompare(b.name));
+          if (fetchedData.length > 0) {
+            // Sort alphabetically by city name
+            fetchedData.sort((a, b) => a.city.localeCompare(b.city));
 
-          if (sortedCities.length > 0) {
             let cardsHtml = '';
-            sortedCities.forEach(cityObj => {
+            fetchedData.forEach(item => {
               cardsHtml += `
-                <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card animate-on-scroll">
+                <a href="${item.url_path}" class="area-card animate-on-scroll">
                   <i class="fas fa-map-marker-alt"></i>
-                  <span class="area-title">${cityObj.name}</span>
-                  <div class="area-zip">${cityObj.zip}</div>
+                  <span class="area-title">${item.city}</span>
+                  <div class="area-zip">${item.zip}</div>
                 </a>
               `;
             });
             gridEl.innerHTML = cardsHtml;
           } else {
-            // Render the form and message indicating no providers are found
-            gridEl.style.display = 'block';
-            gridEl.innerHTML = `
-              <div class="no-providers-container" style="text-align: center; padding: 50px 30px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 600px; margin: 0 auto;">
-                <i class="fas fa-exclamation-circle" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; display: block;"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 12px; font-size: 1.5rem;">No Local Providers Found Yet</h3>
-                <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">We are currently expanding our network of vetted plumbers in ${capState}. Enter your email below to be notified as soon as local plumbing technicians become active in your region.</p>
-                <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you when coverage becomes active in ${capState}.'); this.reset();" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
-                  <input type="email" placeholder="Enter your email" style="padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-white); font-size: 0.95rem;" required>
-                  <button type="submit" class="btn btn-accent" style="padding: 12px; font-weight: 600; cursor: pointer; border: none; border-radius: var(--radius-sm);">Notify Me</button>
-                </form>
-              </div>
-            `;
+            // Fallback to local zipCodeData if offline or database fetch failed/returned empty
+            console.log('Falling back to local zipCodeData...');
+            const citiesInState = {};
+            if (typeof zipCodeData !== 'undefined') {
+              for (const zipKey in zipCodeData) {
+                const matchedState = getZipState(zipKey);
+                if (matchedState === stateLower) {
+                  const list = zipCodeData[zipKey];
+                  if (list && list[0]) {
+                    const cityName = list[0].split(', ')[0] || '';
+                    if (cityName && !citiesInState[cityName.toLowerCase()]) {
+                      citiesInState[cityName.toLowerCase()] = {
+                        name: cityName,
+                        zip: zipKey
+                      };
+                    }
+                  }
+                }
+              }
+            }
+
+            const sortedCities = Object.values(citiesInState).sort((a, b) => a.name.localeCompare(b.name));
+
+            if (sortedCities.length > 0) {
+              let cardsHtml = '';
+              sortedCities.forEach(cityObj => {
+                cardsHtml += `
+                  <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card animate-on-scroll">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="area-title">${cityObj.name}</span>
+                    <div class="area-zip">${cityObj.zip}</div>
+                  </a>
+                `;
+              });
+              gridEl.innerHTML = cardsHtml;
+            } else {
+              // Render the form and message indicating no providers are found
+              gridEl.style.display = 'block';
+              gridEl.innerHTML = `
+                <div class="no-providers-container" style="text-align: center; padding: 50px 30px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 600px; margin: 0 auto; grid-column: 1 / -1;">
+                  <i class="fas fa-exclamation-circle" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; display: block;"></i>
+                  <h3 style="color: var(--text-white); margin-bottom: 12px; font-size: 1.5rem;">No Local Providers Found Yet</h3>
+                  <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">We are currently expanding our network of vetted plumbers in ${capState}. Enter your email below to be notified as soon as local plumbing technicians become active in your region.</p>
+                  <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you when coverage becomes active in ${capState}.'); this.reset();" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+                    <input type="email" placeholder="Enter your email" style="padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-white); font-size: 0.95rem;" required>
+                    <button type="submit" class="btn btn-accent" style="padding: 12px; font-weight: 600; cursor: pointer; border: none; border-radius: var(--radius-sm);">Notify Me</button>
+                  </form>
+                </div>
+              `;
+            }
           }
         }
       }
