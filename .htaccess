@@ -24,6 +24,10 @@ RewriteCond %{REQUEST_URI} ^/state/texas$ [NC]
 RewriteCond %{REQUEST_URI} !^/state/texas$
 RewriteRule ^ /state/texas [R=301,L]
 
+RewriteCond %{REQUEST_URI} ^/state/florida$ [NC]
+RewriteCond %{REQUEST_URI} !^/state/florida$
+RewriteRule ^ /state/florida [R=301,L]
+
 # E. Redirect uppercase state names in city routes (e.g., /city/Alaska/... -> /city/alaska/...)
 RewriteCond %{REQUEST_URI} ^/city/alaska/ [NC]
 RewriteCond %{REQUEST_URI} !^/city/alaska/
@@ -32,6 +36,10 @@ RewriteRule ^city/([^/]+)(.*)$ /city/alaska$2 [R=301,L]
 RewriteCond %{REQUEST_URI} ^/city/texas/ [NC]
 RewriteCond %{REQUEST_URI} !^/city/texas/
 RewriteRule ^city/([^/]+)(.*)$ /city/texas$2 [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/city/florida/ [NC]
+RewriteCond %{REQUEST_URI} !^/city/florida/
+RewriteRule ^city/([^/]+)(.*)$ /city/florida$2 [R=301,L]
 
 # F. Remove trailing slashes for state/city routes (e.g., /state/alaska/ -> /state/alaska)
 RewriteCond %{REQUEST_URI} ^/state/[^/]+/+$ [NC]

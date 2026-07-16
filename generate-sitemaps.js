@@ -43,7 +43,8 @@ function main() {
       const stateCode = parts[0].toLowerCase();
       const stateMap = {
         'ak': 'alaska',
-        'tx': 'texas'
+        'tx': 'texas',
+        'fl': 'florida'
       };
       const stateName = stateMap[stateCode] || stateCode;
       statesSet.add(stateName);
