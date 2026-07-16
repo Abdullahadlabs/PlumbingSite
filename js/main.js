@@ -985,10 +985,10 @@ document.addEventListener('DOMContentLoaded', function () {
         schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
         areaServedName = cityName;
       } else {
-        title = `${serviceName} ${cityName} | Home Plumbing USA`;
-        description = `Need professional ${serviceName} ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        title = `${serviceName} in ${cityName} | Home Plumbing USA`;
+        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
         schemaName = `Home Plumbing USA - ${cityName}`;
-        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services ${cityName}.`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}.`;
         areaServedName = cityName;
       }
     } else {

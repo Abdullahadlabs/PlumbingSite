@@ -1049,6 +1049,29 @@
 
     const hasLocation = !!(city || state);
 
+    // Helper to map state name to 2-letter code
+    function getStateCode(stateName) {
+      if (!stateName) return '';
+      const s = stateName.toLowerCase().trim();
+      const map = {
+        'alaska': 'AK', 'ak': 'AK',
+        'texas': 'TX', 'tx': 'TX',
+        'florida': 'FL', 'fl': 'FL'
+      };
+      return map[s] || stateName.toUpperCase();
+    }
+
+    // Simple slugify helper
+    function slugify(text) {
+      if (!text) return '';
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-_]/g, '')
+        .trim()
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
     let capCity = 'Your Local Area';
     let capState = '';
     let displayZip = '';
@@ -1071,6 +1094,9 @@
       }
     }
 
+    const stateCode = state ? getStateCode(state) : '';
+    const locationText = hasLocation ? capCity + (stateCode ? ", " + stateCode : "") : 'Your Local Area';
+
     // Resolve service name for fallbacks
     let serviceName = 'Plumbing Services';
     let svc = params.get('service');
@@ -1084,12 +1110,12 @@
     }
 
     if (hasLocation) {
-      document.querySelectorAll('.city-name').forEach(el => el.textContent = capCity);
+      document.querySelectorAll('.city-name').forEach(el => el.textContent = locationText);
       document.querySelectorAll('.zip-code').forEach(el => {
         el.textContent = displayZip;
         const parent = el.closest('a');
         if (parent) {
-          parent.innerHTML = `<i class="fas fa-map-marker-alt"></i> <span class="city-name">${capCity}</span>, <span class="zip-code">${displayZip}</span>`;
+          parent.innerHTML = `<i class="fas fa-map-marker-alt"></i> <span class="city-name">${locationText}</span>`;
         }
       });
       if (state) {
