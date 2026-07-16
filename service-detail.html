@@ -1002,21 +1002,49 @@
       }
     }
 
-    // Save to localStorage if we parsed a valid location from URL or pathname
-    const hasParsedLocation = !!(params.get('city') || params.get('state') || params.get('zip') || cityIdx !== -1 || stateIdx !== -1 || serviceAreasIdx !== -1);
+    const hasParsedLocation = !!(city || state);
     if (hasParsedLocation) {
-      if (city) localStorage.setItem('plumbing_city', city);
-      if (state) localStorage.setItem('plumbing_state', state);
-      if (zip) {
-        localStorage.setItem('plumbing_zip', zip);
-      } else {
-        localStorage.removeItem('plumbing_zip');
+      try {
+        let capCity = '';
+        if (city) {
+          capCity = decodeURIComponent(city)
+            .split(/[- ]+/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(' ');
+        }
+        let capState = '';
+        if (state) {
+          capState = decodeURIComponent(state)
+            .split(/[- ]+/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(' ');
+        }
+        const displayZip = zip ? decodeURIComponent(zip) : '';
+        
+        // Save user active location immediately to localStorage
+        localStorage.setItem('user_active_location', JSON.stringify({ city: capCity, state: capState, zip: displayZip }));
+        
+        city = capCity;
+        state = capState;
+        zip = displayZip;
+      } catch (e) {
+        console.error('Error saving user_active_location:', e);
       }
     } else {
-      // Fallback to localStorage
-      if (!city) city = localStorage.getItem('plumbing_city');
-      if (!state) state = localStorage.getItem('plumbing_state');
-      if (!zip) zip = localStorage.getItem('plumbing_zip');
+      // Fallback to localStorage user_active_location
+      try {
+        const cached = localStorage.getItem('user_active_location');
+        if (cached) {
+          const locObj = JSON.parse(cached);
+          if (locObj) {
+            city = locObj.city || '';
+            state = locObj.state || '';
+            zip = locObj.zip || '';
+          }
+        }
+      } catch (e) {
+        console.error('Error reading user_active_location:', e);
+      }
     }
 
     const hasLocation = !!(city || state);

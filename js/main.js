@@ -81,6 +81,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const prefix = document.body.getAttribute('data-prefix') || './';
 
+  // Helper to map state name to 2-letter code
+  function getStateCode(stateName) {
+    if (!stateName) return '';
+    const s = stateName.toLowerCase().trim();
+    const map = {
+      'alaska': 'AK', 'ak': 'AK',
+      'texas': 'TX', 'tx': 'TX',
+      'florida': 'FL', 'fl': 'FL'
+    };
+    return map[s] || stateName.toUpperCase();
+  }
+
   // Helper to extract location parameters from query string or pathname
   function getCurrentLocationParams() {
     const params = new URLSearchParams(window.location.search);
@@ -121,28 +133,70 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Save to localStorage if we parsed a valid location from URL or pathname
-    const hasParsedLocation = !!(params.get('city') || params.get('state') || params.get('zip') || cityIdx !== -1 || stateIdx !== -1 || serviceAreasIdx !== -1);
+    const hasParsedLocation = !!(city || state);
+
     if (hasParsedLocation) {
-      if (city) localStorage.setItem('plumbing_city', city);
-      if (state) localStorage.setItem('plumbing_state', state);
-      if (zip) {
-        localStorage.setItem('plumbing_zip', zip);
-      } else {
-        localStorage.removeItem('plumbing_zip');
+      try {
+        let capCity = '';
+        if (city) {
+          capCity = decodeURIComponent(city)
+            .split(/[- ]+/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(' ');
+        }
+        let capState = '';
+        if (state) {
+          capState = decodeURIComponent(state)
+            .split(/[- ]+/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(' ');
+        }
+        const displayZip = zip ? decodeURIComponent(zip) : '';
+        
+        // Save user active location immediately to localStorage
+        localStorage.setItem('user_active_location', JSON.stringify({ city: capCity, state: capState, zip: displayZip }));
+        
+        city = capCity;
+        state = capState;
+        zip = displayZip;
+      } catch (e) {
+        console.error('Error saving user_active_location:', e);
       }
     } else {
-      // Fallback to localStorage
-      if (!city) city = localStorage.getItem('plumbing_city');
-      if (!state) state = localStorage.getItem('plumbing_state');
-      if (!zip) zip = localStorage.getItem('plumbing_zip');
+      // Priority 2: Check localStorage user_active_location
+      try {
+        const cached = localStorage.getItem('user_active_location');
+        if (cached) {
+          const locObj = JSON.parse(cached);
+          if (locObj) {
+            city = locObj.city || '';
+            state = locObj.state || '';
+            zip = locObj.zip || '';
+          }
+        }
+      } catch (e) {
+        console.error('Error reading user_active_location:', e);
+      }
     }
 
-    if (!state && city) {
-      state = 'alaska'; // default state to alaska if city is present but state is missing
-    }
+    return { city: city || '', zip: zip || '', state: state || '' };
+  }
 
-    return { city, zip, state };
+  // Dynamically rewrite all service links on the page on load
+  const currentLoc = getCurrentLocationParams();
+  if (currentLoc.city || currentLoc.state) {
+    document.querySelectorAll('a').forEach(anchor => {
+      const href = anchor.getAttribute('href');
+      if (href && (href.startsWith('/services/') || href.includes('service-detail')) && !href.includes('?')) {
+        try {
+          const url = new URL(anchor.href, window.location.origin);
+          if (currentLoc.city) url.searchParams.set('city', currentLoc.city);
+          if (currentLoc.state) url.searchParams.set('state', getStateCode(currentLoc.state));
+          if (currentLoc.zip) url.searchParams.set('zip', currentLoc.zip);
+          anchor.href = url.pathname + url.search;
+        } catch (e) {}
+      }
+    });
   }
 
   const getNormalizedPage = (path) => {
@@ -796,9 +850,9 @@ document.addEventListener('DOMContentLoaded', function () {
             targetHref = targetHref.replace('.html', '');
           }
           const targetUrl = new URL(targetHref, window.location.origin);
-          if (loc.city) targetUrl.searchParams.set('city', slugify(loc.city));
+          if (loc.city) targetUrl.searchParams.set('city', loc.city);
           if (loc.zip) targetUrl.searchParams.set('zip', loc.zip.replace(/[^0-9]/g, ''));
-          if (loc.state) targetUrl.searchParams.set('state', slugify(loc.state));
+          if (loc.state) targetUrl.searchParams.set('state', getStateCode(loc.state));
           window.location.href = targetUrl.toString();
         }
       }

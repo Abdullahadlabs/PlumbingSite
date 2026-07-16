@@ -175,6 +175,8 @@ function compilePage(loc) {
   // Canonical path (sanitize double slashes)
   const canonicalUrl = `https://homeplumbingusa.com/service-areas/${loc.folder_name}/`;
 
+  const queryStr = `?city=${encodeURIComponent(city)}&state=${encodeURIComponent(stateCode)}&zip=${encodeURIComponent(zip)}`;
+
   // Full HTML Template
   return `<!DOCTYPE html>
 <html lang="en">
@@ -386,45 +388,45 @@ function compilePage(loc) {
           <div class="mega-dropdown">
             <div class="dropdown-category">
               <div class="dropdown-category-title">Emergency &amp; Repair</div>
-              <a href="/services/24-hour-emergency-plumbing" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
-              <a href="/services/same-day-plumbing-repair" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
-              <a href="/services/burst-pipe-repair" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
-              <a href="/services/whole-house-repiping" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
-              <a href="/services/plumbing-maintenance" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
-              <a href="/services/commercial-plumbing" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
+              <a href="/services/24-hour-emergency-plumbing\${queryStr}" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
+              <a href="/services/same-day-plumbing-repair\${queryStr}" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
+              <a href="/services/burst-pipe-repair\${queryStr}" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
+              <a href="/services/whole-house-repiping\${queryStr}" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
+              <a href="/services/plumbing-maintenance\${queryStr}" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
+              <a href="/services/commercial-plumbing\${queryStr}" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
             </div>
             <div class="dropdown-category">
               <div class="dropdown-category-title">Water Heater &amp; Drains</div>
-              <a href="/services/water-heater-repair" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
-              <a href="/services/water-heater-installation" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
-              <a href="/services/tankless-water-heater-installation" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
-              <a href="/services/drain-cleaning" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
-              <a href="/services/clogged-drain-repair" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
-              <a href="/services/hydro-jetting" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
-              <a href="/services/sewer-line-repair" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
-              <a href="/services/sewer-line-replacement" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
+              <a href="/services/water-heater-repair\${queryStr}" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
+              <a href="/services/water-heater-installation\${queryStr}" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
+              <a href="/services/tankless-water-heater-installation\${queryStr}" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
+              <a href="/services/drain-cleaning\${queryStr}" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
+              <a href="/services/clogged-drain-repair\${queryStr}" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
+              <a href="/services/hydro-jetting\${queryStr}" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
+              <a href="/services/sewer-line-repair\${queryStr}" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
+              <a href="/services/sewer-line-replacement\${queryStr}" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
             </div>
             <div class="dropdown-category">
               <div class="dropdown-category-title">Leak &amp; Pipe Services</div>
-              <a href="/services/leak-detection" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
-              <a href="/services/slab-leak-repair" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
-              <a href="/services/pipe-leak-repair" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
-              <a href="/services/gas-line-installation" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
-              <a href="/services/gas-leak-detection" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
-              <a href="/services/gas-line-repair" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
-              <a href="/services/water-line-repair" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
-              <a href="/services/water-line-installation" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
+              <a href="/services/leak-detection\${queryStr}" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
+              <a href="/services/slab-leak-repair\${queryStr}" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
+              <a href="/services/pipe-leak-repair\${queryStr}" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
+              <a href="/services/gas-line-installation\${queryStr}" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
+              <a href="/services/gas-leak-detection\${queryStr}" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
+              <a href="/services/gas-line-repair\${queryStr}" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
+              <a href="/services/water-line-repair\${queryStr}" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
+              <a href="/services/water-line-installation\${queryStr}" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
             </div>
             <div class="dropdown-category">
               <div class="dropdown-category-title">Fixtures &amp; Specialty</div>
-              <a href="/services/toilet-repair&amp; Installation" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair &amp; Installation</a>
-              <a href="/services/faucet&amp; Sink Repair" class="dropdown-link"><i class="fas fa-sink"></i> Faucet &amp; Sink Repair</a>
-              <a href="/services/garbage-disposal-repair" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
-              <a href="/services/kitchen-plumbing" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
-              <a href="/services/bathroom-plumbing" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
-              <a href="/services/backflow-testing" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
-              <a href="/services/sump-pump-install&amp; Repair" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install &amp; Repair</a>
-              <a href="/services/water-pressure-repair" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
+              <a href="/services/toilet-repair&amp; Installation\${queryStr}" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair &amp; Installation</a>
+              <a href="/services/faucet&amp; Sink Repair\${queryStr}" class="dropdown-link"><i class="fas fa-sink"></i> Faucet &amp; Sink Repair</a>
+              <a href="/services/garbage-disposal-repair\${queryStr}" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
+              <a href="/services/kitchen-plumbing\${queryStr}" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
+              <a href="/services/bathroom-plumbing\${queryStr}" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
+              <a href="/services/backflow-testing\${queryStr}" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
+              <a href="/services/sump-pump-install&amp; Repair\${queryStr}" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install &amp; Repair</a>
+              <a href="/services/water-pressure-repair\${queryStr}" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
             </div>
           </div>
         </div>
