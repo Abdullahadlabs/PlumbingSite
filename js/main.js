@@ -102,6 +102,42 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!state) state = pathParts[stateIdx + 1];
     }
 
+    const serviceAreasIdx = pathParts.indexOf('service-areas');
+    if (serviceAreasIdx !== -1 && serviceAreasIdx + 1 < pathParts.length) {
+      const folder = pathParts[serviceAreasIdx + 1];
+      if (folder) {
+        const parts = folder.split('-');
+        if (parts.length >= 3) {
+          const stateCode = parts[0].toLowerCase();
+          const stateMap = {
+            'ak': 'alaska',
+            'tx': 'texas',
+            'fl': 'florida'
+          };
+          if (!state) state = stateMap[stateCode] || stateCode;
+          if (!zip) zip = parts[parts.length - 1];
+          if (!city) city = parts.slice(1, -1).join(' ');
+        }
+      }
+    }
+
+    // Save to localStorage if we parsed a valid location from URL or pathname
+    const hasParsedLocation = !!(params.get('city') || params.get('state') || params.get('zip') || cityIdx !== -1 || stateIdx !== -1 || serviceAreasIdx !== -1);
+    if (hasParsedLocation) {
+      if (city) localStorage.setItem('plumbing_city', city);
+      if (state) localStorage.setItem('plumbing_state', state);
+      if (zip) {
+        localStorage.setItem('plumbing_zip', zip);
+      } else {
+        localStorage.removeItem('plumbing_zip');
+      }
+    } else {
+      // Fallback to localStorage
+      if (!city) city = localStorage.getItem('plumbing_city');
+      if (!state) state = localStorage.getItem('plumbing_state');
+      if (!zip) zip = localStorage.getItem('plumbing_zip');
+    }
+
     if (!state && city) {
       state = 'alaska'; // default state to alaska if city is present but state is missing
     }
@@ -571,10 +607,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Extract current location details for dynamic content formatting
       const loc = getCurrentLocationParams();
-      const city = loc.city || 'Anchorage';
-      const state = loc.state || 'alaska';
-      const capState = state.charAt(0).toUpperCase() + state.slice(1);
-      const capCity = decodeURIComponent(city)
+      const hasLocation = !!(loc.city || loc.state);
+      
+      const city = loc.city || 'Your Local Area';
+      const state = loc.state || '';
+      
+      const capState = state ? state.charAt(0).toUpperCase() + state.slice(1) : '';
+      const capCity = city === 'Your Local Area' ? city : decodeURIComponent(city)
         .split(' ')
         .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(' ');
@@ -811,6 +850,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .split(/[- ]+/)
         .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
         .join(' ');
+    } else {
+      cityName = 'Your Local Area';
     }
     
     // Format state
@@ -879,14 +920,23 @@ document.addEventListener('DOMContentLoaded', function () {
       areaServedName = cityName;
     } else if (currentPage === 'service-detail') {
       const serviceName = seo.service || 'Plumbing Services';
-      const cityName = seo.city || 'Anchorage';
-      const stateName = seo.state || 'Alaska';
-      const stateCode = seo.stateCode || 'AK';
-      title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
-      description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
-      schemaName = `Home Plumbing USA - ${cityName}`;
-      schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
-      areaServedName = cityName;
+      const cityName = seo.city || 'Your Local Area';
+      const stateName = seo.state || '';
+      const stateCode = seo.stateCode || '';
+
+      if (stateCode) {
+        title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
+        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${cityName}`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+        areaServedName = cityName;
+      } else {
+        title = `${serviceName} ${cityName} | Home Plumbing USA`;
+        description = `Need professional ${serviceName} ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${cityName}`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services ${cityName}.`;
+        areaServedName = cityName;
+      }
     } else {
       // Not a dynamic page, don't dynamically override title/desc/schema
       return;

@@ -971,21 +971,161 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Local script to update details from query parameter
     const params = new URLSearchParams(window.location.search);
-    let city = params.get('city') || 'Anchorage';
-    let zip = params.get('zip') || '99501';
-    let state = params.get('state') || 'alaska';
+    let city = params.get('city');
+    let zip = params.get('zip');
+    let state = params.get('state');
 
-    document.querySelectorAll('.city-name').forEach(el => el.textContent = decodeURIComponent(city));
-    document.querySelectorAll('.zip-code').forEach(el => el.textContent = decodeURIComponent(zip));
-    
-    const capState = state.charAt(0).toUpperCase() + state.slice(1);
-    document.querySelectorAll('.state-name').forEach(el => el.textContent = capState);
-    document.querySelectorAll('.state-link').forEach(el => {
-      el.innerHTML = `<a href="/state/${state.toLowerCase()}">${capState}</a>`;
-    });
-    document.querySelectorAll('.city-link').forEach(el => {
-      el.innerHTML = `<a href="/city/${slugify(state)}/${slugify(city)}/${zip}">${decodeURIComponent(city)}</a>`;
-    });
+    // Parse path parts if we are on a clean city URL (/city/state/city/zip) or service-areas
+    const pathParts = window.location.pathname.split('/');
+    const cityIdx = pathParts.indexOf('city');
+    if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {
+      if (!state) state = pathParts[cityIdx + 1];
+      if (!city) city = pathParts[cityIdx + 2];
+      if (!zip) zip = pathParts[cityIdx + 3];
+    }
+    const stateIdx = pathParts.indexOf('state');
+    if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+      if (!state) state = pathParts[stateIdx + 1];
+    }
+    const serviceAreasIdx = pathParts.indexOf('service-areas');
+    if (serviceAreasIdx !== -1 && serviceAreasIdx + 1 < pathParts.length) {
+      const folder = pathParts[serviceAreasIdx + 1];
+      if (folder) {
+        const parts = folder.split('-');
+        if (parts.length >= 3) {
+          const stateCode = parts[0].toLowerCase();
+          const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
+          if (!state) state = stateMap[stateCode] || stateCode;
+          if (!zip) zip = parts[parts.length - 1];
+          if (!city) city = parts.slice(1, -1).join(' ');
+        }
+      }
+    }
+
+    // Save to localStorage if we parsed a valid location from URL or pathname
+    const hasParsedLocation = !!(params.get('city') || params.get('state') || params.get('zip') || cityIdx !== -1 || stateIdx !== -1 || serviceAreasIdx !== -1);
+    if (hasParsedLocation) {
+      if (city) localStorage.setItem('plumbing_city', city);
+      if (state) localStorage.setItem('plumbing_state', state);
+      if (zip) {
+        localStorage.setItem('plumbing_zip', zip);
+      } else {
+        localStorage.removeItem('plumbing_zip');
+      }
+    } else {
+      // Fallback to localStorage
+      if (!city) city = localStorage.getItem('plumbing_city');
+      if (!state) state = localStorage.getItem('plumbing_state');
+      if (!zip) zip = localStorage.getItem('plumbing_zip');
+    }
+
+    const hasLocation = !!(city || state);
+
+    let capCity = 'Your Local Area';
+    let capState = '';
+    let displayZip = '';
+
+    if (hasLocation) {
+      if (city) {
+        capCity = decodeURIComponent(city)
+          .split(/[- ]+/)
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(' ');
+      }
+      if (state) {
+        capState = decodeURIComponent(state)
+          .split(/[- ]+/)
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(' ');
+      }
+      if (zip) {
+        displayZip = decodeURIComponent(zip);
+      }
+    }
+
+    // Resolve service name for fallbacks
+    let serviceName = 'Plumbing Services';
+    let svc = params.get('service');
+    const servicesIdx = pathParts.indexOf('services');
+    if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
+      if (!svc) svc = pathParts[servicesIdx + 1];
+    }
+    if (svc) {
+      const service_slug = decodeURIComponent(svc).toLowerCase().replace(/ /g, '-');
+      serviceName = service_slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+    }
+
+    if (hasLocation) {
+      document.querySelectorAll('.city-name').forEach(el => el.textContent = capCity);
+      document.querySelectorAll('.zip-code').forEach(el => {
+        el.textContent = displayZip;
+        const parent = el.closest('a');
+        if (parent) {
+          parent.innerHTML = `<i class="fas fa-map-marker-alt"></i> <span class="city-name">${capCity}</span>, <span class="zip-code">${displayZip}</span>`;
+        }
+      });
+      if (state) {
+        document.querySelectorAll('.state-name').forEach(el => el.textContent = capState);
+        document.querySelectorAll('.state-link').forEach(el => {
+          el.style.display = '';
+          el.innerHTML = `<a href="/state/${state.toLowerCase()}">${capState} Page</a>`;
+        });
+      } else {
+        document.querySelectorAll('.state-link').forEach(el => el.style.display = 'none');
+      }
+      if (city && state && zip) {
+        document.querySelectorAll('.city-link').forEach(el => {
+          el.style.display = '';
+          el.innerHTML = `<a href="/city/${slugify(state)}/${slugify(city)}/${zip}">${capCity} Page</a>`;
+        });
+      } else {
+        document.querySelectorAll('.city-link').forEach(el => el.style.display = 'none');
+      }
+    } else {
+      document.querySelectorAll('.city-name').forEach(el => el.textContent = 'Your Local Area');
+      document.querySelectorAll('.zip-code').forEach(el => {
+        el.textContent = '';
+        const parent = el.closest('a');
+        if (parent) {
+          parent.innerHTML = `<i class="fas fa-map-marker-alt"></i> Nationwide Services`;
+        }
+        const p = el.closest('p');
+        if (p && p.textContent.includes('active in')) {
+          p.innerHTML = `Technicians are active in your local region for ${serviceName.toLowerCase()} repairs and installations. Call for immediate dispatch.`;
+        }
+      });
+      document.querySelectorAll('.state-name').forEach(el => el.textContent = '');
+      document.querySelectorAll('.state-link').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.city-link').forEach(el => el.style.display = 'none');
+
+      // Change Service Area section into a nationwide state selection
+      const areasSec = document.getElementById('areas');
+      if (areasSec) {
+        const titleEl = areasSec.querySelector('.section-title');
+        const descEl = areasSec.querySelector('.section-desc');
+        if (titleEl) titleEl.textContent = 'Available Service Areas Nationwide';
+        if (descEl) descEl.textContent = 'Home Plumbing USA provides 24/7 plumbing matching and rapid dispatch in multiple states across the country. Select a state below to view local service areas:';
+        
+        const gridEl = document.getElementById('areas-grid');
+        if (gridEl) {
+          gridEl.style.gridTemplateColumns = 'repeat(auto-fit, minmax(150px, 1fr))';
+          gridEl.innerHTML = `
+            <a href="/state/alaska" class="area-card" style="padding: 20px; text-align: center; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); text-decoration: none;">
+              <i class="fas fa-map-location-dot" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px;"></i>
+              <h3 style="color: var(--text-white); font-size: 1.1rem; margin: 0;">Alaska</h3>
+            </a>
+            <a href="/state/florida" class="area-card" style="padding: 20px; text-align: center; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); text-decoration: none;">
+              <i class="fas fa-map-location-dot" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px;"></i>
+              <h3 style="color: var(--text-white); font-size: 1.1rem; margin: 0;">Florida</h3>
+            </a>
+            <a href="/state/texas" class="area-card" style="padding: 20px; text-align: center; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); text-decoration: none;">
+              <i class="fas fa-map-location-dot" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px;"></i>
+              <h3 style="color: var(--text-white); font-size: 1.1rem; margin: 0;">Texas</h3>
+            </a>
+          `;
+        }
+      }
+    }
 
     // Dynamic Image Replacements according to plumbing service topics
     let svc = params.get('service');
