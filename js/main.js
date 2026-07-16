@@ -70,7 +70,7 @@ function slugify(text) {
 }
 window.slugify = slugify;
 
-document.addEventListener('DOMContentLoaded', function () {
+function initMain() {
   // Automatically correct all static image sources on the page
   document.querySelectorAll('img:not([data-manual-resolve])').forEach(img => {
     const src = img.getAttribute('src');
@@ -1048,4 +1048,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Execute dynamic SEO automation
   applyDynamicSEO();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMain);
+} else {
+  initMain();
+}

@@ -967,7 +967,7 @@
   <script src="/js/servicesData.js?v=1.0.1" defer></script>
   <script src="/js/main.js?v=1.0.1" defer></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function initDetail() {
       // Local script to update details from query parameter
     const params = new URLSearchParams(window.location.search);
     let city = params.get('city');
@@ -1180,13 +1180,7 @@
       }
     }
 
-    // Dynamic Image Replacements according to plumbing service topics
-    let svc = params.get('service');
-    const pathParts = window.location.pathname.split('/');
-    const servicesIdx = pathParts.indexOf('services');
-    if (servicesIdx !== -1 && servicesIdx + 1 < pathParts.length) {
-      if (!svc) svc = pathParts[servicesIdx + 1];
-    }
+
     
     // Ensure that the service slug variable is converted to lowercase and formatted correctly to match the image filenames
     const service_slug = decodeURIComponent(svc || '').toLowerCase().replace(/ /g, '-');
@@ -1619,7 +1613,7 @@
 
     const faqContainer = document.querySelector('.faq-container');
     if (faqContainer && svc) {
-      const dynamicFaqs = getDynamicFAQs(svc, decodeURIComponent(params.get('service') || svc.replace(/-/g, ' ')), decodeURIComponent(city));
+      const dynamicFaqs = getDynamicFAQs(svc, serviceName, city);
       let faqHtml = '';
       dynamicFaqs.forEach((faq, index) => {
         faqHtml += `
@@ -1687,7 +1681,13 @@
       faqScriptEl.textContent = JSON.stringify(faqSchemaObj, null, 2);
       document.head.appendChild(faqScriptEl);
     }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDetail);
+    } else {
+      initDetail();
+    }
   </script>
 
   <!-- Mobile Sticky Action Bar -->
