@@ -160,9 +160,7 @@
       if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
         if (!state) state = pathParts[stateIdx + 1];
       }
-      if (!state && city) {
-        state = 'alaska';
-      }
+      // No hardcoded state fallback — keep empty if not provided
 
       function capitalize(str) {
         if (!str) return '';
@@ -176,8 +174,8 @@
           .join(' ');
       }
 
-      const cityName = capitalize(city) || 'Anchorage';
-      const stateName = capitalize(state) || 'Alaska';
+      const cityName = capitalize(city) || 'Your Local Area';
+      const stateName = capitalize(state) || '';
       const stateKey = state ? state.toLowerCase().replace(/_/g, '-') : '';
       const stateCodeMap = {
         'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
@@ -191,7 +189,7 @@
         'south-dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
         'virginia': 'VA', 'washington': 'WA', 'west-virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY'
       };
-      const stateCode = stateCodeMap[stateKey] || (state ? state.substring(0, 2).toUpperCase() : 'AK');
+      const stateCode = stateCodeMap[stateKey] || (state ? state.substring(0, 2).toUpperCase() : '');
 
       let serviceName = 'Plumbing Services';
       if (currentPage === 'service-detail') {
@@ -235,10 +233,11 @@
         schemaDesc = `Professional plumbing and emergency repair services in ${cityName}, ${stateName}.`;
         areaServedName = cityName;
       } else if (currentPage === 'service-detail') {
-        title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
-        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
-        schemaName = `Home Plumbing USA - ${cityName}`;
-        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+        const locationLabel = stateCode ? `${cityName}, ${stateCode}` : cityName;
+        title = `${serviceName} in ${locationLabel} | Home Plumbing USA`;
+        description = `Need professional ${serviceName} in ${locationLabel}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        schemaName = `Home Plumbing USA - ${locationLabel}`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${locationLabel}.`;
         areaServedName = cityName;
       }
 
@@ -692,8 +691,8 @@
         <div class="hero-grid">
           <div class="hero-content">
             <div class="hero-badge"><i class="fas fa-star"></i> Dedicated Service Option</div>
-            <h1>Premium <span class="dynamic-service">respective</span> Services in <span class="city-name">Anchorage</span></h1>
-            <p class="hero-text">Need fast, professional respective services? Our licensed local technicians in <span class="city-name">Anchorage</span> provide diagnostic inspections and reliable repairs 24/7.</p>
+            <h1>Premium <span class="dynamic-service">respective</span> Services in <span class="city-name">Your Local Area</span></h1>
+            <p class="hero-text">Need fast, professional respective services? Our licensed local technicians in <span class="city-name">Your Local Area</span> provide diagnostic inspections and reliable repairs 24/7.</p>
             <div class="hero-buttons" style="margin-top: 20px;">
               <a href="tel:877-516-8705" class="btn btn-accent btn-lg"><i class="fas fa-phone"></i> Request a respective Quote</a>
             </div>
@@ -740,10 +739,10 @@
       <div class="container">
         <div class="split-content-grid">
           <div class="split-text animate-on-scroll">
-            <h2 class="section-title-split">Why Call Us for <span class="dynamic-service">respective</span> in <span class="city-name">Anchorage</span></h2>
+            <h2 class="section-title-split">Why Call Us for <span class="dynamic-service">respective</span> in <span class="city-name">Your Local Area</span></h2>
             <div class="title-underline"></div>
             <p id="why-call-p1">Our team provides expert respective solutions designed to address pipe stress, system issues, and immediate repairs. We prioritize safety and upfront flat rates for all local residential and B2B requests.</p>
-            <p id="why-call-p2">Our matching plumbers in <span class="city-name">Anchorage</span> are fully licensed, insured, and trained to perform respective services according to the highest industry standards. To ensure lasting durability, we use code-compliant materials and heavy-duty fittings for every installation and repair.</p>
+            <p id="why-call-p2">Our matching plumbers in <span class="city-name">Your Local Area</span> are fully licensed, insured, and trained to perform respective services according to the highest industry standards. To ensure lasting durability, we use code-compliant materials and heavy-duty fittings for every installation and repair.</p>
           </div>
           <div class="split-card animate-on-scroll">
             <div class="card-inner">
@@ -862,7 +861,7 @@
             <div class="why-icon"><i class="fas fa-clock"></i></div>
             <div>
               <p class="why-title">Fast local respective Dispatch</p>
-              <p>We connect you with a nearby plumber in <span class="city-name">Anchorage</span> who can arrive in 45 minutes on average for any urgent respective requests.</p>
+              <p>We connect you with a nearby plumber in <span class="city-name">Your Local Area</span> who can arrive in 45 minutes on average for any urgent respective requests.</p>
             </div>
           </div>
           <div class="why-card animate-on-scroll">
@@ -888,7 +887,7 @@
       <div class="container">
         <div class="section-header animate-on-scroll">
           <div class="section-label">Service Area Map</div>
-          <h2 class="section-title">Servicing <span class="city-name">Anchorage</span> &amp; Surrounding Areas for respective</h2>
+          <h2 class="section-title">Servicing <span class="city-name">Your Local Area</span> &amp; Surrounding Areas for respective</h2>
           <p class="section-desc">Our plumbing dispatch trucks cover the entire local region for respective services, including the following zip code areas:</p>
         </div>
         <div class="areas-grid" id="areas-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-top: 30px;">
@@ -903,7 +902,7 @@
         <div class="section-header animate-on-scroll">
           <div class="section-label">FAQ</div>
           <h2 class="section-title">respective FAQ</h2>
-          <p class="section-desc">Common questions regarding respective services in <span class="city-name">Anchorage</span>.</p>
+          <p class="section-desc">Common questions regarding respective services in <span class="city-name">Your Local Area</span>.</p>
         </div>
         <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
           <div class="faq-item animate-on-scroll">
@@ -922,7 +921,7 @@
     <section class="final-cta-section">
       <div class="container">
         <h2>Need Professional <span class="dynamic-service">respective</span>?</h2>
-        <p>Technicians are active in <span class="zip-code">99501</span> and nearby regions for respective repairs and installations. Call for immediate dispatch.</p>
+        <p>Technicians are active in <span class="city-name">Your Local Area</span> <span class="zip-code"></span>and nearby regions for respective repairs and installations. Call for immediate dispatch.</p>
         <div class="cta-buttons">
           <a href="/contact" class="btn-quote">Request a Quote</a>
           <a href="tel:8775168705" class="btn-call">Call Now: 877-516-8705</a>
@@ -949,7 +948,7 @@
         </div>
         <div class="footer-col">
           <div class="footer-title">Local Info</div>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> <span class="city-name">Anchorage</span>, <span class="zip-code">99501</span></a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> <span class="city-name">Your Local Area</span>, <span class="zip-code"></span></a>
           <a href="tel:877-516-8705"><i class="fas fa-phone"></i> 877-516-8705</a>
         </div>
       </div>
@@ -1278,10 +1277,20 @@
     }
 
     // Render the 10 zip code areas dynamically from zipData.js database
+    // Helper to map state name to default zip code
+    function getDefaultZipForState(stateName) {
+      if (!stateName) return '';
+      const s = stateName.toLowerCase().trim();
+      if (s === 'alaska' || s === 'ak') return '99501';
+      if (s === 'florida' || s === 'fl') return '32003';
+      if (s === 'texas' || s === 'tx') return '75001';
+      return '';
+    }
+
     const gridEl = document.getElementById('areas-grid');
     if (gridEl && typeof zipCodeData !== 'undefined') {
-      let lookupZip = zip || '99501';
-      let zipList = zipCodeData[lookupZip];
+      let lookupZip = zip || '';
+      let zipList = lookupZip ? zipCodeData[lookupZip] : null;
       
       // If no zip parameter or not found, try to look up by city name
       if (!zipList && city) {
@@ -1299,10 +1308,13 @@
         }
       }
       
-      // Fallback to a default zip if still not found
-      if (!zipList) {
-        lookupZip = '99501';
-        zipList = zipCodeData[lookupZip];
+      // Fallback to a state default zip if still not found
+      if (!zipList && state) {
+        const stateDefaultZip = getDefaultZipForState(state);
+        if (stateDefaultZip && zipCodeData[stateDefaultZip]) {
+          lookupZip = stateDefaultZip;
+          zipList = zipCodeData[lookupZip];
+        }
       }
       
       if (zipList) {

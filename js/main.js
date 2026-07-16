@@ -226,10 +226,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const homeMenuEl = document.getElementById('homeMenuLink');
   if (homeMenuEl) {
     const loc = getCurrentLocationParams();
-    const city = loc.city || 'Anchorage';
-    const zip = loc.zip || '99501';
-    const state = loc.state || 'alaska';
-    homeMenuEl.href = `/city/${slugify(state)}/${slugify(city)}/${zip}`;
+    if (loc.city && loc.state) {
+      homeMenuEl.href = `/city/${slugify(loc.state)}/${slugify(loc.city)}/${loc.zip || ''}`;
+    } else {
+      homeMenuEl.href = '/';
+    }
   }
 
   // ==================== HEADER SCROLL ====================
@@ -964,9 +965,9 @@ document.addEventListener('DOMContentLoaded', function () {
       schemaDesc = `Professional plumbing and emergency repair services in ${stateName}.`;
       areaServedName = stateName;
     } else if (currentPage === 'city-zip') {
-      const cityName = seo.city || 'Anchorage';
-      const stateName = seo.state || 'Alaska';
-      const stateCode = seo.stateCode || 'AK';
+      const cityName = seo.city || 'Your Local Area';
+      const stateName = seo.state || '';
+      const stateCode = seo.stateCode || '';
       title = `Emergency Plumbers in ${cityName}, ${stateCode} | Home Plumbing USA`;
       description = `Need professional plumbing services in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
       schemaName = `Home Plumbing USA - ${cityName}`;

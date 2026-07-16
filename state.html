@@ -166,8 +166,8 @@
           .join(' ');
       }
 
-      const cityName = capitalize(city) || 'Anchorage';
-      const stateName = capitalize(state) || 'Alaska';
+      const cityName = capitalize(city) || 'Your Local Area';
+      const stateName = capitalize(state) || '';
       const stateKey = state ? state.toLowerCase().replace(/_/g, '-') : '';
       const stateCodeMap = {
         'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
