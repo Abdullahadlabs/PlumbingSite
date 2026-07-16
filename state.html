@@ -632,11 +632,6 @@
     <!-- ==================== CITIES & ZIPS LIST ==================== -->
     <section class="section" id="cities">
       <div class="container">
-    </section>
-
-    <!-- ==================== CITIES & ZIPS LIST ==================== -->
-    <section class="section" id="cities">
-      <div class="container">
         <div class="section-header animate-on-scroll">
           <div class="section-label">Service Directory</div>
           <h2 class="section-title">Select Your <span>City or Zip Code</span></h2>
@@ -889,7 +884,7 @@
             let cardsHtml = '';
             fetchedData.forEach(item => {
               cardsHtml += `
-                <a href="${item.url_path}" class="area-card animate-on-scroll">
+                <a href="${item.url_path}" class="area-card">
                   <i class="fas fa-map-marker-alt"></i>
                   <span class="area-title">${item.city}</span>
                   <div class="area-zip">${item.zip}</div>
@@ -925,7 +920,7 @@
               let cardsHtml = '';
               sortedCities.forEach(cityObj => {
                 cardsHtml += `
-                  <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card animate-on-scroll">
+                  <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card">
                     <i class="fas fa-map-marker-alt"></i>
                     <span class="area-title">${cityObj.name}</span>
                     <div class="area-zip">${cityObj.zip}</div>
