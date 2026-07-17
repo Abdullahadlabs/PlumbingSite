@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
+    <loc>https://homeplumbingusa.com/sitemap-ak.xml</loc>
+    <lastmod>2026-07-17</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://homeplumbingusa.com/sitemap-fl.xml</loc>
+    <lastmod>2026-07-17</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://homeplumbingusa.com/sitemap-tx.xml</loc>
+    <lastmod>2026-07-17</lastmod>
+  </sitemap>
+  <sitemap>
     <loc>https://homeplumbingusa.com/sitemap-pages.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://homeplumbingusa.com/sitemap-states.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://homeplumbingusa.com/sitemap-cities.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://homeplumbingusa.com/sitemap-services.xml</loc>
+    <lastmod>2026-07-17</lastmod>
   </sitemap>
 </sitemapindex>

@@ -8,6 +8,8 @@ async function main() {
   console.log('Fetching SEO pages from Supabase...');
   let allPages = [];
   let offset = 0;
+  // Supabase REST API has a default server-side limit of 1000 rows per request.
+  // We implement robust offset-based pagination to bypass this limit and retrieve all 50,000+ future records.
   const limit = 1000;
   let hasMore = true;
 
@@ -22,11 +24,16 @@ async function main() {
     });
 
     if (!response.ok) {
-      console.error(`Error fetching data: ${response.statusText}`);
+      console.error(`Error fetching data: ${response.statusText} (${response.status})`);
       process.exit(1);
     }
 
     const data = await response.json();
+    if (!Array.isArray(data)) {
+      console.error('Expected an array of pages from Supabase REST API.');
+      process.exit(1);
+    }
+
     allPages = allPages.concat(data);
     console.log(`Fetched ${data.length} rows. Total so far: ${allPages.length}`);
 
