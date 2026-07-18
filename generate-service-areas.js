@@ -44,9 +44,44 @@ function compilePage(loc) {
   const h1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} ${zip}`;
   const intro = loc.intro_paragraph || `When you need fast, reliable plumbing services in ${city}, ${stateName} (${zip}), our team of experienced professionals is here to help 24/7. Whether you are dealing with an emergency leak, a clogged drain, or need a routine water heater installation, we provide top-rated service tailored to local residents and businesses.`;
 
-  // 2. Service Spotlight Section (Conditional / Fallback)
+  // 2. Service Spotlight & Grid Section (Conditional / Fallback)
   let serviceSpotlightHtml = '';
-  if (loc.service_spotlight && loc.service_spotlight.trim() !== '') {
+  if (loc.service_grid && Array.isArray(loc.service_grid) && loc.service_grid.length > 0) {
+    const serviceIcons = {
+      'emergency-plumbing': 'fa-bolt',
+      'water-heater-repair': 'fa-temperature-high',
+      'gas-line-repair': 'fa-fire',
+      'sewer-line-repair': 'fa-screwdriver-wrench',
+      'drain-cleaning': 'fa-broom',
+      'leak-detection': 'fa-magnifying-glass',
+      'burst-pipe-repair': 'fa-water',
+      'water-line-repair': 'fa-faucet'
+    };
+
+    const gridCards = loc.service_grid.map(s => {
+      const icon = serviceIcons[s.service_slug] || 'fa-wrench';
+      const detailUrl = `/service-areas/${loc.folder_name}/${s.service_slug}/`;
+      return `
+        <div class="service-card animate-on-scroll">
+          <div class="service-icon"><i class="fas ${icon}"></i></div>
+          <p class="service-title">${s.service_name}</p>
+          <p>${s.description}</p>
+          <a href="${detailUrl}" class="service-card-link" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none; margin-top: 10px; display: inline-flex; align-items: center; gap: 4px;">Learn More <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i></a>
+        </div>
+      `;
+    }).join('\n');
+
+    serviceSpotlightHtml = `
+      <div class="section-header animate-on-scroll">
+        <div class="section-label">Expertise</div>
+        <h2 class="section-title">Our Local Plumbing Capabilities</h2>
+        <p class="section-desc">We match you with qualified, licensed technicians in ${city} for the following primary plumbing services:</p>
+      </div>
+      <div class="services-grid" style="margin-top: 30px;">
+        ${gridCards}
+      </div>
+    `;
+  } else if (loc.service_spotlight && loc.service_spotlight.trim() !== '') {
     serviceSpotlightHtml = `
       <div class="service-spotlight-box animate-on-scroll" style="background: var(--bg-card); border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 32px; margin-bottom: 40px; position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; background: var(--primary); color: #fff; padding: 4px 16px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; border-bottom-right-radius: var(--radius-sm);">Local Spotlight</div>
@@ -86,6 +121,7 @@ function compilePage(loc) {
       </div>
     `;
   }
+
 
   // 3. FAQs Section (Crucial Fallback Logic)
   let faqsHtml = '';
@@ -648,15 +684,283 @@ function compilePage(loc) {
 </html>`;
 }
 
+function compileServicePage(sub) {
+  const city = sub.city || 'Local Area';
+  const stateCode = (sub.state || 'FL').toUpperCase();
+  const zip = sub.zip || '';
+  
+  const stateMap = {
+    'AK': 'Alaska',
+    'TX': 'Texas',
+    'FL': 'Florida'
+  };
+  const stateName = stateMap[stateCode] || stateCode;
+
+  const title = sub.title_tag || `${sub.service_name} in ${city}, ${stateCode} ${zip} | Home Plumbing USA`;
+  const metaDesc = sub.meta_description || `Home Plumbing USA provides ${sub.service_name.toLowerCase()} in ${city}, ${stateCode} ${zip}. Licensed, insured, and available for same-day service. Call 877-516-8705.`;
+  
+  const h1 = sub.h1 || `${sub.service_name} in ${city}, ${stateCode} ${zip}`;
+  
+  // Format workflow steps
+  let workflowHtml = '';
+  if (sub.workflow_steps && Array.isArray(sub.workflow_steps)) {
+    workflowHtml = sub.workflow_steps.map((step, index) => `
+      <div class="workflow-step">
+        <div class="step-num">${index + 1}</div>
+        <div><h4>${step.title}</h4><p>${step.description}</p></div>
+      </div>
+    `).join('\n');
+  }
+
+  // Format FAQs
+  let faqsHtml = '';
+  if (sub.faqs && Array.isArray(sub.faqs)) {
+    faqsHtml = sub.faqs.map(faq => `
+      <div class="faq-item">
+        <div class="faq-question"><h3>${faq.question}</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-answer"><p>${faq.answer}</p></div>
+      </div>
+    `).join('\n');
+  }
+
+  // Format other services
+  let otherServicesHtml = '';
+  if (sub.other_services && Array.isArray(sub.other_services)) {
+    otherServicesHtml = sub.other_services.map(s => `
+      <a href="${s.url}" class="list-link">${s.service_name} <i class="fas fa-chevron-right"></i></a>
+    `).join('\n');
+  }
+
+  // Format nearby areas
+  let nearbyAreasHtml = '';
+  if (sub.nearby_areas && Array.isArray(sub.nearby_areas)) {
+    nearbyAreasHtml = sub.nearby_areas.map(n => `
+      <a href="${n.url}" class="list-link">${n.city}, ${n.zip} <i class="fas fa-chevron-right"></i></a>
+    `).join('\n');
+  }
+
+  const parentUrl = `/service-areas/${sub.zip_folder_name}/`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <meta name="description" content="${metaDesc}">
+  <link rel="canonical" href="https://homeplumbingusa.com/service-areas/${sub.folder_name}/">
+  <link rel="stylesheet" href="../../../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .detail-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; margin-top: 40px; }
+    .detail-main { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 40px; }
+    .detail-main h2 { font-size: 1.5rem; color: var(--text-white); margin-top: 28px; margin-bottom: 14px; }
+    .detail-main h2:first-of-type { margin-top: 0; }
+    .detail-main p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; }
+    .workflow-list { display: flex; flex-direction: column; gap: 18px; margin-top: 10px; }
+    .workflow-step { display: flex; gap: 16px; align-items: flex-start; }
+    .workflow-step .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+    .workflow-step h4 { color: var(--text-white); font-size: 1rem; margin-bottom: 4px; }
+    .workflow-step p { font-size: 0.92rem; margin: 0; }
+    .detail-sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-widget { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 26px; }
+    .sidebar-widget h3 { font-size: 1.1rem; color: var(--text-white); margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .sidebar-widget a.list-link { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 8px; font-size: 0.88rem; color: var(--text-muted); transition: var(--transition); text-decoration: none; }
+    .sidebar-widget a.list-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .cta-widget { background: var(--gradient-primary); border: none; text-align: center; }
+    .cta-widget h3 { border: none; color: #fff; }
+    .cta-widget p { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "${sub.service_name}",
+    "provider": {"@type": "Plumber", "name": "Home Plumbing USA", "telephone": "+1-877-516-8705"},
+    "areaServed": {"@type": "PostalAddress", "postalCode": "${zip}", "addressLocality": "${city}", "addressRegion": "${stateCode}", "addressCountry": "US"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://homeplumbingusa.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Service Areas", "item": "https://homeplumbingusa.com/areas.html"},
+      {"@type": "ListItem", "position": 3, "name": "${city}, ${stateCode} ${zip}", "item": "https://homeplumbingusa.com/service-areas/${sub.zip_folder_name}/"},
+      {"@type": "ListItem", "position": 4, "name": "${sub.service_name}", "item": "https://homeplumbingusa.com/service-areas/${sub.folder_name}/"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+    ${(sub.faqs || []).map(f => `{"@type": "Question", "name": "${f.question.replace(/"/g, '\\"')}", "acceptedAnswer": {"@type": "Answer", "text": "${f.answer.replace(/"/g, '\\"')}"}}`).join(',\n    ')}
+  ]}
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NHGT9PF7');</script>
+  <!-- End Google Tag Manager -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHGT9PF7"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo">
+        <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+      </a>
+      <nav class="nav" id="mainNav">
+        <a href="../../../index.html" class="nav-link">Home</a>
+        <a href="../../../about.html" class="nav-link">About</a>
+        <a href="../../../services.html" class="nav-link">Services</a>
+        <a href="../../../areas.html" class="nav-link active">Areas We Serve</a>
+        <a href="../../../projects.html" class="nav-link">Projects</a>
+        <a href="../../../contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="../../../contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero hero-sub" style="background: var(--gradient-hero); padding: 100px 0 50px; position: relative;">
+    <div class="container">
+      <div class="hero-content">
+        <div class="breadcrumbs" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px;">
+          <a href="../../../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a><span> / </span>
+          <a href="../../../areas.html" style="color: var(--text-muted); text-decoration: none;">Service Areas</a><span> / </span>
+          <a href="${parentUrl}" style="color: var(--text-muted); text-decoration: none;">${city}, ${stateCode} ${zip}</a><span> / </span>
+          <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
+        </div>
+        <h1>${h1}</h1>
+        <p class="hero-text" style="color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin-top: 10px;">${sub.intro_paragraph}</p>
+        <div class="hero-buttons" style="margin-top: 20px;">
+          <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="detail-layout">
+        <div class="detail-main animate-on-scroll">
+          <h2>Why ${city} Residents Call Us for ${sub.service_name}</h2>
+          <p>${sub.problem_paragraph}</p>
+
+          <h2>How We Handle It</h2>
+          <p>${sub.technique_paragraph}</p>
+
+          <h2>Our Process</h2>
+          <div class="workflow-list">
+            ${workflowHtml}
+          </div>
+        </div>
+
+        <div class="detail-sidebar">
+          <div class="sidebar-widget">
+            <h3>Other Services in ${city}</h3>
+            ${otherServicesHtml}
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>Nearby Areas</h3>
+            ${nearbyAreasHtml}
+          </div>
+
+          <div class="sidebar-widget cta-widget">
+            <h3>Need ${sub.service_name} in ${city}?</h3>
+            <p>Call now for same-day service in ${zip} and the surrounding area.</p>
+            <a href="tel:877-516-8705" class="btn btn-lg" style="background:#fff; color: var(--primary); width: 100%; justify-content: center; text-decoration: none; font-weight: 600;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 40px;">
+        <div class="section-label" style="color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">FAQ</div>
+        <h2 class="section-title">${sub.service_name} Questions &mdash; ${city}, ${zip}</h2>
+      </div>
+      <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+        ${faqsHtml}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section" style="background: var(--gradient-primary); text-align: center; padding: 60px 0; color: #fff;">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Get ${sub.service_name} in ${city}, ${stateCode} ${zip}</h2>
+        <div class="cta-phone" style="font-size: 2.2rem; font-weight: 800; margin: 15px 0;"><i class="fas fa-phone"></i> <a href="tel:877-516-8705" style="color: #fff; text-decoration: none;">877-516-8705</a></div>
+        <div class="cta-buttons" style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
+          <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now</a>
+          <a href="${parentUrl}" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: #fff; text-decoration: none;"><i class="fas fa-map-location-dot"></i> View All ${city} Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" style="background: var(--bg-footer); padding: 40px 0; color: var(--text-muted);">
+    <div class="container">
+      <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+        <div class="footer-about">
+          <h3 style="color: #fff;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
+          <p>Mobile plumbing service covering ${city}, ${stateCode} ${zip} and surrounding areas.</p>
+        </div>
+        <div class="footer-col">
+          <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Quick Links</h3>
+          <a href="../../../index.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Home</a>
+          <a href="../../../about.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">About Us</a>
+          <a href="../../../services.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Services</a>
+          <a href="../../../areas.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Areas We Serve</a>
+          <a href="../../../contact.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">This ZIP</h3>
+          <a href="${parentUrl}" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">${city}, ${stateCode} ${zip} Overview</a>
+        </div>
+        <div class="footer-col">
+          <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Contact Info</h3>
+          <a href="tel:877-516-8705" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;"><i class="fas fa-phone"></i> 877-516-8705</a>
+          <span style="display: block; margin-bottom: 8px;"><i class="fas fa-map-marker-alt"></i> Serving ${city}, ${stateCode} ${zip}</span>
+          <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
+        </div>
+      </div>
+      <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 30px; padding-top: 20px;"><p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Serving ${stateName} Statewide</p></div>
+    </div>
+  </footer>
+
+  <script src="../../../js/main.js"></script>
+</body>
+</html>`;
+}
+
 function main() {
-  console.log('Loading JSON data...');
+  console.log('Loading ZIP hub pages from seo-pages.json...');
   if (!fs.existsSync(dataFilePath)) {
     console.error('Data file not found!');
     process.exit(1);
   }
 
   const seoPages = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
-  console.log(`Loaded ${seoPages.length} records.`);
+  console.log(`Loaded ${seoPages.length} ZIP hub records.`);
 
   if (!fs.existsSync(serviceAreasOutputDir)) {
     console.log(`Creating directory: ${serviceAreasOutputDir}`);
@@ -670,7 +974,6 @@ function main() {
       return;
     }
     
-    // Resolve output path
     const pageDir = path.join(serviceAreasOutputDir, loc.folder_name);
     if (!fs.existsSync(pageDir)) {
       fs.mkdirSync(pageDir, { recursive: true });
@@ -681,11 +984,43 @@ function main() {
     
     count++;
     if (count % 500 === 0) {
-      console.log(`Generated ${count} / ${seoPages.length} pages...`);
+      console.log(`Generated ${count} / ${seoPages.length} ZIP hub pages...`);
     }
   });
+  console.log(`Successfully generated ${count} ZIP hub pages.`);
 
-  console.log(`Finished! Successfully generated ${count} service area pages.`);
+  const servicePagesPath = path.join(__dirname, 'database', 'service-area-pages.json');
+  if (fs.existsSync(servicePagesPath)) {
+    console.log('Loading service subpages from service-area-pages.json...');
+    const servicePages = JSON.parse(fs.readFileSync(servicePagesPath, 'utf8'));
+    console.log(`Loaded ${servicePages.length} service subpage records.`);
+    
+    let subCount = 0;
+    servicePages.forEach(sub => {
+      if (!sub.folder_name || !sub.zip_folder_name) {
+        console.warn(`Skipping service row without folder details: ${JSON.stringify(sub)}`);
+        return;
+      }
+      
+      const subPageDir = path.join(serviceAreasOutputDir, sub.zip_folder_name, sub.service_slug);
+      if (!fs.existsSync(subPageDir)) {
+        fs.mkdirSync(subPageDir, { recursive: true });
+      }
+      
+      const subPageHtml = compileServicePage(sub);
+      fs.writeFileSync(path.join(subPageDir, 'index.html'), subPageHtml, 'utf8');
+      
+      subCount++;
+      if (subCount % 1000 === 0) {
+        console.log(`Generated ${subCount} / ${servicePages.length} service subpages...`);
+      }
+    });
+    console.log(`Successfully generated ${subCount} service subpages.`);
+  } else {
+    console.log('No service-area-pages.json found. Skipping service subpages compilation.');
+  }
+  console.log('Static site generation complete.');
 }
 
 main();
+

@@ -1,0 +1,11 @@
+{
+  "name": "home-plumbing-usa-seo",
+  "version": "1.0.0",
+  "description": "Programmatic SEO pipeline for Home Plumbing USA",
+  "main": "generate-service-areas.js",
+  "scripts": {
+    "generate:seo": "node scripts/generate-state-seo.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
