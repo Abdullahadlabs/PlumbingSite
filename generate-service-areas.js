@@ -560,35 +560,66 @@ function compilePage(loc) {
     </section>
 
     <!-- Trust Section -->
-    <section class="trust-section" id="trust" style="padding: 30px 0; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
-      <div class="container">
-        <div class="trust-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-          <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <div class="trust-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-shield-halved"></i></div>
-            <div>
-              <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Safety Compliant</p>
-              <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Licensed &amp; Insured professionals</p>
+    <section class="trust-section" id="trust" style="background: #0b0f19; border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
+      <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Column: Image Container -->
+        <div class="lg:col-span-5 animate-on-scroll">
+          <div class="rounded-2xl shadow-2xl overflow-hidden border border-slate-800" style="position: relative; aspect-ratio: 4/5;">
+            <img src="/images/hero-plumbing.webp" alt="Professional Plumbers in ${city}" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85);">
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+              <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-certificate"></i></div>
+              <div>
+                <div style="color: #fff; font-weight: 700; font-size: 0.95rem;">Vetted &amp; Certified</div>
+                <div style="color: var(--text-muted); font-size: 0.78rem; font-weight: 500;">Uniform Plumbing Code Compliant</div>
+              </div>
             </div>
           </div>
-          <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <div class="trust-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--accent); width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-truck-fast"></i></div>
-            <div>
-              <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">24/7 Fast Dispatch</p>
-              <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Plumbers on standby in ${city}</p>
-            </div>
+        </div>
+
+        <!-- Right Column: Text & 2x2 Grid -->
+        <div class="lg:col-span-7 animate-on-scroll">
+          <!-- Header Block -->
+          <div class="mb-8">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Engineered For Trust, Built For Reliability in ${city}, ${stateCode}</h2>
+            <p class="text-slate-400 text-base mb-8">We deliver premium, code-compliant plumbing solutions backed by certified local technicians and transparent guarantees.</p>
           </div>
-          <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <div class="trust-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981; width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-hand-holding-dollar"></i></div>
-            <div>
-              <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Flat-Rate Quotes</p>
-              <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Upfront pricing, no hidden fees</p>
+
+          <!-- 2x2 Glass Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Certified Plumbers -->
+            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-user-shield"></i></div>
+                <span class="text-lg font-semibold text-white">Certified Plumbers</span>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed">Our locally dispatched technicians are meticulously vetted and understand ${stateName} building codes.</p>
             </div>
-          </div>
-          <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <div class="trust-icon" style="background: rgba(99, 102, 241, 0.1); color: #6366f1; width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-award"></i></div>
-            <div>
-              <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Quality Work</p>
-              <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">100% satisfaction guaranteed</p>
+
+            <!-- Card 2: 24/7 Rapid Response -->
+            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-truck-fast"></i></div>
+                <span class="text-lg font-semibold text-white">24/7 Rapid Response</span>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed">Active dispatch networks ensuring an average arrival time of under 45 minutes for urgent repairs.</p>
+            </div>
+
+            <!-- Card 3: Upfront Estimates -->
+            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-file-invoice-dollar"></i></div>
+                <span class="text-lg font-semibold text-white">Upfront Estimates</span>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed">No phone guesstimates or surprises. Bounded flat-rate quotes presented transparently on-site before we work.</p>
+            </div>
+
+            <!-- Card 4: Guaranteed Craftsmanship -->
+            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+              <div class="flex items-center space-x-4 mb-3">
+                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-award"></i></div>
+                <span class="text-lg font-semibold text-white">Guaranteed Craftsmanship</span>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed">Every single diagnostic, pipe repair, and install is backed by parts and labor warranties.</p>
             </div>
           </div>
         </div>
@@ -1064,35 +1095,66 @@ function compileServicePage(sub) {
   </section>
 
   <!-- Trust Section -->
-  <section class="trust-section" id="trust" style="padding: 30px 0; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
-    <div class="container">
-      <div class="trust-grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-        <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-          <div class="trust-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-shield-halved"></i></div>
-          <div>
-            <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Safety Compliant</p>
-            <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Licensed &amp; Insured professionals</p>
+  <section class="trust-section" id="trust" style="background: #0b0f19; border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
+    <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Column: Image Container -->
+      <div class="lg:col-span-5 animate-on-scroll">
+        <div class="rounded-2xl shadow-2xl overflow-hidden border border-slate-800" style="position: relative; aspect-ratio: 4/5;">
+          <img src="/images/hero-plumbing.webp" alt="Professional Plumbers in ${city}" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85);">
+          <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+            <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-certificate"></i></div>
+            <div>
+              <div style="color: #fff; font-weight: 700; font-size: 0.95rem;">Vetted &amp; Certified</div>
+              <div style="color: var(--text-muted); font-size: 0.78rem; font-weight: 500;">Uniform Plumbing Code Compliant</div>
+            </div>
           </div>
         </div>
-        <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-          <div class="trust-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--accent); width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-truck-fast"></i></div>
-          <div>
-            <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">24/7 Fast Dispatch</p>
-            <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Plumbers on standby in ${city}</p>
-          </div>
+      </div>
+
+      <!-- Right Column: Text & 2x2 Grid -->
+      <div class="lg:col-span-7 animate-on-scroll">
+        <!-- Header Block -->
+        <div class="mb-8">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Engineered For Trust, Built For Reliability in ${city}, ${stateCode}</h2>
+          <p class="text-slate-400 text-base mb-8">We deliver premium, code-compliant plumbing solutions backed by certified local technicians and transparent guarantees.</p>
         </div>
-        <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-          <div class="trust-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981; width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-hand-holding-dollar"></i></div>
-          <div>
-            <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Flat-Rate Quotes</p>
-            <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">Upfront pricing, no hidden fees</p>
+
+        <!-- 2x2 Glass Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card 1: Certified Plumbers -->
+          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center space-x-4 mb-3">
+              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-user-shield"></i></div>
+              <span class="text-lg font-semibold text-white">Certified Plumbers</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed">Our locally dispatched technicians are meticulously vetted and understand ${stateName} building codes.</p>
           </div>
-        </div>
-        <div class="trust-card animate-on-scroll" style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-          <div class="trust-icon" style="background: rgba(99, 102, 241, 0.1); color: #6366f1; width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;"><i class="fas fa-award"></i></div>
-          <div>
-            <p class="trust-title" style="color: var(--text-white); font-weight: 700; font-size: 0.95rem; margin: 0 0 2px 0;">Quality Work</p>
-            <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0; line-height: 1.4;">100% satisfaction guaranteed</p>
+
+          <!-- Card 2: 24/7 Rapid Response -->
+          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center space-x-4 mb-3">
+              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-truck-fast"></i></div>
+              <span class="text-lg font-semibold text-white">24/7 Rapid Response</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed">Active dispatch networks ensuring an average arrival time of under 45 minutes for urgent repairs.</p>
+          </div>
+
+          <!-- Card 3: Upfront Estimates -->
+          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center space-x-4 mb-3">
+              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-file-invoice-dollar"></i></div>
+              <span class="text-lg font-semibold text-white">Upfront Estimates</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed">No phone guesstimates or surprises. Bounded flat-rate quotes presented transparently on-site before we work.</p>
+          </div>
+
+          <!-- Card 4: Guaranteed Craftsmanship -->
+          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center space-x-4 mb-3">
+              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-award"></i></div>
+              <span class="text-lg font-semibold text-white">Guaranteed Craftsmanship</span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed">Every single diagnostic, pipe repair, and install is backed by parts and labor warranties.</p>
           </div>
         </div>
       </div>
