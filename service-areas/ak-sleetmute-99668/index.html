@@ -36,6 +36,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .hero-section {
@@ -320,66 +321,50 @@
     </section>
 
     <!-- Trust Section -->
-    <section class="trust-section" id="trust" style="background: #0b0f19; border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
-      <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- Left Column: Image Container -->
-        <div class="lg:col-span-5 animate-on-scroll">
-          <div class="rounded-2xl shadow-2xl overflow-hidden border border-slate-800" style="position: relative; aspect-ratio: 4/5;">
-            <img src="/images/hero-plumbing.webp" alt="Professional Plumbers in Sleetmute" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85);">
-            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-              <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-certificate"></i></div>
-              <div>
-                <div style="color: #fff; font-weight: 700; font-size: 0.95rem;">Vetted &amp; Certified</div>
-                <div style="color: var(--text-muted); font-size: 0.78rem; font-weight: 500;">Uniform Plumbing Code Compliant</div>
-              </div>
+    <section class="trust-section" id="trust" style="position: relative; z-index: 10;">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Card 1: Certified Plumbers -->
+          <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <div>
+              <h3 class="text-white font-semibold text-base leading-snug">Certified Plumbers</h3>
+              <p class="text-slate-400 text-sm mt-1 leading-relaxed">Vetted technicians who know Alaska building codes.</p>
             </div>
           </div>
-        </div>
 
-        <!-- Right Column: Text & 2x2 Grid -->
-        <div class="lg:col-span-7 animate-on-scroll">
-          <!-- Header Block -->
-          <div class="mb-8">
-            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Engineered For Trust, Built For Reliability in Sleetmute, AK</h2>
-            <p class="text-slate-400 text-base mb-8">We deliver premium, code-compliant plumbing solutions backed by certified local technicians and transparent guarantees.</p>
+          <!-- Card 2: 24/7 Rapid Response -->
+          <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+              <i class="fas fa-truck-fast"></i>
+            </div>
+            <div>
+              <h3 class="text-white font-semibold text-base leading-snug">24/7 Rapid Response</h3>
+              <p class="text-slate-400 text-sm mt-1 leading-relaxed">Average arrival under 45 minutes for urgent repairs.</p>
+            </div>
           </div>
 
-          <!-- 2x2 Glass Cards Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Card 1: Certified Plumbers -->
-            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-              <div class="flex items-center space-x-4 mb-3">
-                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-user-shield"></i></div>
-                <span class="text-lg font-semibold text-white">Certified Plumbers</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed">Our locally dispatched technicians are meticulously vetted and understand Alaska building codes.</p>
+          <!-- Card 3: Upfront Estimates -->
+          <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+              <i class="fas fa-file-invoice-dollar"></i>
             </div>
-
-            <!-- Card 2: 24/7 Rapid Response -->
-            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-              <div class="flex items-center space-x-4 mb-3">
-                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-truck-fast"></i></div>
-                <span class="text-lg font-semibold text-white">24/7 Rapid Response</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed">Active dispatch networks ensuring an average arrival time of under 45 minutes for urgent repairs.</p>
+            <div>
+              <h3 class="text-white font-semibold text-base leading-snug">Upfront Estimates</h3>
+              <p class="text-slate-400 text-sm mt-1 leading-relaxed">Flat-rate quotes presented on-site, no surprises.</p>
             </div>
+          </div>
 
-            <!-- Card 3: Upfront Estimates -->
-            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-              <div class="flex items-center space-x-4 mb-3">
-                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-file-invoice-dollar"></i></div>
-                <span class="text-lg font-semibold text-white">Upfront Estimates</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed">No phone guesstimates or surprises. Bounded flat-rate quotes presented transparently on-site before we work.</p>
+          <!-- Card 4: Guaranteed Craftsmanship -->
+          <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+              <i class="fas fa-award"></i>
             </div>
-
-            <!-- Card 4: Guaranteed Craftsmanship -->
-            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-              <div class="flex items-center space-x-4 mb-3">
-                <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-award"></i></div>
-                <span class="text-lg font-semibold text-white">Guaranteed Craftsmanship</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed">Every single diagnostic, pipe repair, and install is backed by parts and labor warranties.</p>
+            <div>
+              <h3 class="text-white font-semibold text-base leading-snug">Guaranteed Craftsmanship</h3>
+              <p class="text-slate-400 text-sm mt-1 leading-relaxed">Every repair backed by parts and labor warranties.</p>
             </div>
           </div>
         </div>
