@@ -2624,4 +2624,16 @@ section, header, footer {
 }
 
 
+/* FAQ Global White Text Fix */
+[class*="faq"] h3, 
+[class*="faq"] button, 
+[class*="faq"] p, 
+[class*="faq"] div,
+.faq-question, 
+.faq-answer {
+    color: #ffffff !important;
+}
 
+[class*="faq"] p, .faq-answer {
+    color: #d1d5db !important;
+}
