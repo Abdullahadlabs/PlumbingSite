@@ -2592,7 +2592,7 @@ section, header, footer {
     }
 }
 
-/* Force visible FAQ colors */
+/* Force visible FAQ text and background */
 .faq-item, .faq-question, .faq-answer {
     display: block !important;
 }
@@ -2601,8 +2601,8 @@ section, header, footer {
     color: #ffffff !important;
     background-color: #111827 !important;
     border: 1px solid #374151 !important;
-    border-radius: 8px !important;
     padding: 16px !important;
+    border-radius: 8px !important;
     cursor: pointer !important;
 }
 
@@ -2622,5 +2622,6 @@ section, header, footer {
 .faq-answer * {
     color: #d1d5db !important;
 }
+
 
 
