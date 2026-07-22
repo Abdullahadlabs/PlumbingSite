@@ -152,13 +152,13 @@ function compilePage(loc) {
   }
 
   faqsHtml = faqsList.map((faq, index) => `
-    <div class="faq-item animate-on-scroll bg-[#111827] border border-gray-800 rounded-xl mb-4 overflow-hidden">
-      <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; width: 100%; text-align: left; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+    <div class="faq-item animate-on-scroll" style="background: transparent !important; border: none !important; box-shadow: none !important; margin-bottom: 0 !important; overflow: visible !important;">
+      <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; border-radius: 8px; margin-bottom: 8px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
         <h3 class="faq-title text-white font-semibold text-base sm:text-lg" style="color: inherit !important; font-size: inherit !important; font-weight: inherit !important; margin: 0 !important;">${faq.question}</h3>
-        <i class="fas fa-chevron-down" style="color: #3b82f6 !important;"></i>
+        <i class="fas fa-chevron-down" style="color: #3b82f6 !important; fill: currentColor;"></i>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
+        <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; border-radius: 0 0 8px 8px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
       </div>
     </div>
   `).join('\n');
@@ -838,13 +838,13 @@ function compileServicePage(sub) {
   let faqsHtml = '';
   if (sub.faqs && Array.isArray(sub.faqs)) {
     faqsHtml = sub.faqs.map(faq => `
-      <div class="faq-item bg-[#111827] border border-gray-800 rounded-xl mb-4 overflow-hidden">
-        <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; width: 100%; text-align: left; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+      <div class="faq-item" style="background: transparent !important; border: none !important; box-shadow: none !important; margin-bottom: 0 !important; overflow: visible !important;">
+        <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; border-radius: 8px; margin-bottom: 8px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
           <h3 class="text-white font-semibold text-base sm:text-lg" style="color: inherit !important; font-size: inherit !important; font-weight: inherit !important; margin: 0 !important;">${faq.question}</h3>
-          <span class="faq-icon"><i class="fas fa-plus" style="color: #3b82f6 !important;"></i></span>
+          <span class="faq-icon"><i class="fas fa-plus" style="color: #3b82f6 !important; fill: currentColor;"></i></span>
         </div>
         <div class="faq-answer">
-          <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
+          <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; border-radius: 0 0 8px 8px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
         </div>
       </div>
     `).join('\n');
