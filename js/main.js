@@ -423,36 +423,55 @@ function initMain() {
   }
 
   // ==================== FAQ ACCORDION ====================
-  const faqItems = document.querySelectorAll('.faq-item');
-  
-  faqItems.forEach(function (item) {
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(function (item) {
     const question = item.querySelector('.faq-question');
     const answer = item.querySelector('.faq-answer');
-    
-    if (question && answer) {
-      question.addEventListener('click', function () {
-        const isActive = item.classList.contains('active');
-        
-        // Close all other FAQ items
-        faqItems.forEach(function (otherItem) {
-          if (otherItem !== item) {
-            otherItem.classList.remove('active');
-            const otherAnswer = otherItem.querySelector('.faq-answer');
-            if (otherAnswer) otherAnswer.style.maxHeight = null;
-          }
-        });
-        
-        // Toggle current item
-        item.classList.toggle('active');
-        
-        if (!isActive) {
-          answer.style.maxHeight = answer.scrollHeight + 'px';
-        } else {
-          answer.style.maxHeight = null;
-        }
-      });
+
+    // FORCE VISIBLE COLORS (Fix dark text issue)
+    if (question) {
+        question.style.color = '#ffffff';
+        question.style.backgroundColor = '#111827';
+        question.style.padding = '16px';
+        question.style.borderRadius = '8px';
+        question.style.border = '1px solid #374151';
+        question.style.cursor = 'pointer';
     }
-  });
+
+    if (answer) {
+        answer.style.color = '#d1d5db';
+        answer.style.backgroundColor = '#0b0f17';
+        answer.style.padding = '16px';
+        answer.style.borderRadius = '0 0 8px 8px';
+        answer.style.border = '1px solid #374151';
+        answer.style.borderTop = 'none';
+    }
+
+    if (question && answer) {
+        question.addEventListener('click', function () {
+            const isActive = item.classList.contains('active');
+
+            // Close all other FAQ items
+            faqItems.forEach(function (otherItem) {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    if (otherAnswer) otherAnswer.style.maxHeight = null;
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+
+            if (!isActive) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = null;
+            }
+        });
+    }
+});
 
   // ==================== SCROLL ANIMATIONS ====================
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
