@@ -152,13 +152,13 @@ function compilePage(loc) {
   }
 
   faqsHtml = faqsList.map((faq, index) => `
-    <div class="faq-item animate-on-scroll">
-      <div class="faq-question">
-        <h3 class="faq-title">${faq.question}</h3>
-        <i class="fas fa-chevron-down"></i>
+    <div class="faq-item animate-on-scroll bg-[#111827] border border-gray-800 rounded-xl mb-4 overflow-hidden">
+      <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer">
+        <h3 class="faq-title text-white font-semibold text-base sm:text-lg">${faq.question}</h3>
+        <i class="fas fa-chevron-down text-blue-500"></i>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner">${faq.answer}</div>
+        <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]">${faq.answer}</div>
       </div>
     </div>
   `).join('\n');
@@ -838,9 +838,14 @@ function compileServicePage(sub) {
   let faqsHtml = '';
   if (sub.faqs && Array.isArray(sub.faqs)) {
     faqsHtml = sub.faqs.map(faq => `
-      <div class="faq-item">
-        <div class="faq-question"><h3>${faq.question}</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>${faq.answer}</p></div>
+      <div class="faq-item bg-[#111827] border border-gray-800 rounded-xl mb-4 overflow-hidden">
+        <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer">
+          <h3 class="text-white font-semibold text-base sm:text-lg">${faq.question}</h3>
+          <span class="faq-icon"><i class="fas fa-plus text-blue-500"></i></span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]">${faq.answer}</div>
+        </div>
       </div>
     `).join('\n');
   }
