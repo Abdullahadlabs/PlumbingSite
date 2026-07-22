@@ -427,33 +427,36 @@ function initMain() {
 function applyFaqStyles() {
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(function (item) {
+        item.style.setProperty('opacity', '1', 'important');
+        item.style.setProperty('visibility', 'visible', 'important');
+        item.style.setProperty('transform', 'none', 'important');
+        item.classList.remove('animate-on-scroll');
+
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
+        const answerInner = item.querySelector('.faq-answer-inner');
 
         if (question) {
             question.style.setProperty('color', '#ffffff', 'important');
             question.style.setProperty('background-color', '#111827', 'important');
-            question.style.setProperty('border', '1px solid #374151', 'important');
-            question.style.padding = '16px';
-            question.style.borderRadius = '8px';
             question.style.cursor = 'pointer';
         }
 
         if (answer) {
-            answer.style.setProperty('color', '#d1d5db', 'important');
             answer.style.setProperty('background-color', '#0b0f17', 'important');
-            answer.style.setProperty('border', '1px solid #374151', 'important');
-            answer.style.setProperty('border-top', 'none', 'important');
-            answer.style.padding = '16px';
-            answer.style.borderRadius = '0 0 8px 8px';
+        }
+
+        if (answerInner) {
+            answerInner.style.setProperty('color', '#d1d5db', 'important');
+            answerInner.style.setProperty('background-color', '#0b0f17', 'important');
         }
     });
 }
 
 // Run immediately and also set a slight delay for dynamic render
 applyFaqStyles();
-setTimeout(applyFaqStyles, 500);
-setTimeout(applyFaqStyles, 1500);
+setTimeout(applyFaqStyles, 300);
+setTimeout(applyFaqStyles, 1000);
 
 // Click event listener using event delegation
 document.addEventListener('click', function (e) {

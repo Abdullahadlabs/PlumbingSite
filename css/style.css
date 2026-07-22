@@ -2613,36 +2613,77 @@ section, header, footer {
     }
 }
 
-/* Force visible FAQ text and background */
-.faq-item, .faq-question, .faq-answer {
+/* Force visible FAQ text, background, and accordion functionality */
+.faq-item {
     display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background: #111827 !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    overflow: hidden !important;
+    transition: border-color 0.3s ease !important;
+}
+
+.faq-item.active {
+    border-color: #3b82f6 !important;
 }
 
 .faq-question {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     color: #ffffff !important;
     background-color: #111827 !important;
-    border: 1px solid #374151 !important;
-    padding: 16px !important;
+    border: none !important;
+    padding: 18px 20px !important;
     border-radius: 8px !important;
     cursor: pointer !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .faq-question * {
     color: #ffffff !important;
 }
 
-.faq-answer {
-    color: #d1d5db !important;
-    background-color: #0b0f17 !important;
-    border: 1px solid #374151 !important;
-    border-top: none !important;
-    padding: 16px !important;
-    border-radius: 0 0 8px 8px !important;
+.faq-question i {
+    color: #3b82f6 !important;
+    transition: transform 0.3s ease !important;
 }
 
-.faq-answer * {
+.faq-item.active .faq-question i {
+    transform: rotate(180deg) !important;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease !important;
+    background-color: #0b0f17 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 1000px;
+}
+
+.faq-answer-inner {
+    color: #d1d5db !important;
+    background-color: #0b0f17 !important;
+    border-top: 1px solid #374151 !important;
+    padding: 18px 20px !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+}
+
+.faq-answer-inner * {
     color: #d1d5db !important;
 }
+
 
 
 /* FAQ Global White Text Fix */
