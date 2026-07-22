@@ -422,54 +422,67 @@ function initMain() {
     });
   }
 
-  // ==================== FAQ ACCORDION ====================
-const faqItems = document.querySelectorAll('.faq-item');
+  // ==================== FAQ ACCORDION (DYNAMIC FIX) ====================
+// Observer for dynamically added FAQ items
+function applyFaqStyles() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(function (item) {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
 
-faqItems.forEach(function (item) {
-    const question = item.querySelector('.faq-question');
+        if (question) {
+            question.style.setProperty('color', '#ffffff', 'important');
+            question.style.setProperty('background-color', '#111827', 'important');
+            question.style.setProperty('border', '1px solid #374151', 'important');
+            question.style.padding = '16px';
+            question.style.borderRadius = '8px';
+            question.style.cursor = 'pointer';
+        }
+
+        if (answer) {
+            answer.style.setProperty('color', '#d1d5db', 'important');
+            answer.style.setProperty('background-color', '#0b0f17', 'important');
+            answer.style.setProperty('border', '1px solid #374151', 'important');
+            answer.style.setProperty('border-top', 'none', 'important');
+            answer.style.padding = '16px';
+            answer.style.borderRadius = '0 0 8px 8px';
+        }
+    });
+}
+
+// Run immediately and also set a slight delay for dynamic render
+applyFaqStyles();
+setTimeout(applyFaqStyles, 500);
+setTimeout(applyFaqStyles, 1500);
+
+// Click event listener using event delegation
+document.addEventListener('click', function (e) {
+    const question = e.target.closest('.faq-question');
+    if (!question) return;
+
+    const item = question.closest('.faq-item');
+    if (!item) return;
+
     const answer = item.querySelector('.faq-answer');
+    const isActive = item.classList.contains('active');
 
-    // FORCE VISIBLE COLORS (Fix dark text issue)
-    if (question) {
-        question.style.color = '#ffffff';
-        question.style.backgroundColor = '#111827';
-        question.style.padding = '16px';
-        question.style.borderRadius = '8px';
-        question.style.border = '1px solid #374151';
-        question.style.cursor = 'pointer';
-    }
+    // Close others
+    document.querySelectorAll('.faq-item').forEach(function (other) {
+        if (other !== item) {
+            other.classList.remove('active');
+            const otherAns = other.querySelector('.faq-answer');
+            if (otherAns) otherAns.style.maxHeight = null;
+        }
+    });
 
+    // Toggle current
+    item.classList.toggle('active');
     if (answer) {
-        answer.style.color = '#d1d5db';
-        answer.style.backgroundColor = '#0b0f17';
-        answer.style.padding = '16px';
-        answer.style.borderRadius = '0 0 8px 8px';
-        answer.style.border = '1px solid #374151';
-        answer.style.borderTop = 'none';
-    }
-
-    if (question && answer) {
-        question.addEventListener('click', function () {
-            const isActive = item.classList.contains('active');
-
-            // Close all other FAQ items
-            faqItems.forEach(function (otherItem) {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    if (otherAnswer) otherAnswer.style.maxHeight = null;
-                }
-            });
-
-            // Toggle current item
-            item.classList.toggle('active');
-
-            if (!isActive) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                answer.style.maxHeight = null;
-            }
-        });
+        if (!isActive) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+            answer.style.maxHeight = null;
+        }
     }
 });
 
