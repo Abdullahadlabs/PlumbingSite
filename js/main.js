@@ -38,11 +38,9 @@ function resolveAssetPath(originalPath) {
     cleanPath = cleanPath.substring(1);           // strip leading /
   }
   
-  // Resolve image paths to public/images/
+  // Resolve image paths
   if (cleanPath.startsWith('public/')) {
-    return prefix + cleanPath;
-  } else if (cleanPath.startsWith('images/')) {
-    return prefix + 'public/' + cleanPath;
+    cleanPath = cleanPath.substring(7);
   }
   
   return prefix + cleanPath;
