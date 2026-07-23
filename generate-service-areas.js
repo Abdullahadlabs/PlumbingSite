@@ -41,7 +41,8 @@ function compilePage(loc) {
   const title = loc.title_tag || `Emergency Plumbers in ${city}, ${stateCode} ${zip} | Home Plumbing USA`;
   const metaDesc = loc.meta_description || `Need professional plumbing services in ${city}, ${stateCode}? Certified, insured, and available 24/7. Call us today at 877-516-8705 for a free quote!`;
   
-  const h1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} ${zip}`;
+  const rawH1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} (${zip})`;
+  const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
   const intro = loc.intro_paragraph || `When you need fast, reliable plumbing services in ${city}, ${stateName} (${zip}), our team of experienced professionals is here to help 24/7. Whether you are dealing with an emergency leak, a clogged drain, or need a routine water heater installation, we provide top-rated service tailored to local residents and businesses.`;
 
   // 2. Service Spotlight & Grid Section (Conditional / Fallback)
@@ -287,6 +288,30 @@ function compilePage(loc) {
       padding: 140px 0 80px;
       background: var(--gradient-hero);
       overflow: hidden;
+    }
+    .hero-title, .hero-content h1, .hero-section h1 {
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      font-size: 3.25rem !important;
+      font-weight: 900 !important;
+      line-height: 1.18 !important;
+      color: #ffffff !important;
+      margin-top: 12px !important;
+      margin-bottom: 24px !important;
+      letter-spacing: -0.025em !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .hero-title span.highlight, .hero-content h1 span.highlight, .hero-section h1 span.highlight {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #f59e0b 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      display: inline-block;
+    }
+    @media (max-width: 992px) {
+      .hero-title, .hero-content h1, .hero-section h1 { font-size: 2.5rem !important; }
+    }
+    @media (max-width: 576px) {
+      .hero-title, .hero-content h1, .hero-section h1 { font-size: 2rem !important; line-height: 1.25 !important; }
     }
     .hero-section::before {
       content: '';
@@ -537,7 +562,7 @@ function compilePage(loc) {
         <div class="hero-grid">
           <div class="hero-content">
             <div class="hero-badge"><i class="fas fa-star"></i> Serving Local Neighborhoods</div>
-            <h1>${h1}</h1>
+            <h1 class="hero-title">${h1Formatted}</h1>
             <p class="hero-text">${intro}</p>
             <div class="hero-buttons" style="margin-top: 30px; display: flex; gap: 16px;">
               <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
@@ -821,7 +846,8 @@ function compileServicePage(sub) {
   const title = sub.title_tag || `${sub.service_name} in ${city}, ${stateCode} ${zip} | Home Plumbing USA`;
   const metaDesc = sub.meta_description || `Home Plumbing USA provides ${sub.service_name.toLowerCase()} in ${city}, ${stateCode} ${zip}. Licensed, insured, and available for same-day service. Call 877-516-8705.`;
   
-  const h1 = sub.h1 || `${sub.service_name} in ${city}, ${stateCode} ${zip}`;
+  const rawH1 = sub.h1 || `${sub.service_name} in ${city}, ${stateCode} (${zip})`;
+  const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
   
   // Format workflow steps
   let workflowHtml = '';
@@ -916,6 +942,30 @@ function compileServicePage(sub) {
       background: var(--gradient-hero);
       padding: 140px 0 80px;
       overflow: hidden;
+    }
+    .hero-title, .hero-content h1, .hero-sub h1 {
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      font-size: 3.25rem !important;
+      font-weight: 900 !important;
+      line-height: 1.18 !important;
+      color: #ffffff !important;
+      margin-top: 12px !important;
+      margin-bottom: 24px !important;
+      letter-spacing: -0.025em !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .hero-title span.highlight, .hero-content h1 span.highlight, .hero-sub h1 span.highlight {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #f59e0b 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      display: inline-block;
+    }
+    @media (max-width: 992px) {
+      .hero-title, .hero-content h1, .hero-sub h1 { font-size: 2.5rem !important; }
+    }
+    @media (max-width: 576px) {
+      .hero-title, .hero-content h1, .hero-sub h1 { font-size: 2rem !important; line-height: 1.25 !important; }
     }
     .hero-sub::before {
       content: '';
@@ -1061,7 +1111,7 @@ function compileServicePage(sub) {
             <a href="${parentUrl}" style="color: var(--text-muted); text-decoration: none;">${city}, ${stateCode} ${zip}</a><span> / </span>
             <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
           </div>
-          <h1>${h1}</h1>
+          <h1 class="hero-title">${h1Formatted}</h1>
           <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">${sub.intro_paragraph}</p>
           <div class="hero-buttons" style="margin-top: 20px;">
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
