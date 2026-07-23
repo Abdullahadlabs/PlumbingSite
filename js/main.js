@@ -808,9 +808,9 @@ function initMain() {
   // Intercept links to service-detail and append location query parameters if present
   document.addEventListener('click', function (e) {
     const anchor = e.target.closest('a');
-    if (anchor) {
+    if (anchor && !anchor.classList.contains('dropdown-toggle')) {
       const href = anchor.getAttribute('href');
-      if (href && (href.includes('service-detail') || href.includes('/services/'))) {
+      if (href && href !== '/services' && href !== '/services/' && (href.includes('service-detail') || href.includes('/services/'))) {
         const loc = getCurrentLocationParams();
         if (loc.city || loc.zip || loc.state) {
           e.preventDefault();

@@ -494,7 +494,7 @@ function compilePage(loc) {
       <nav class="nav" id="mainNav">
         <a href="/" class="nav-link" id="homeMenuLink">Home</a>
         <div class="nav-item">
-          <a href="/services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
           <div class="mega-dropdown">
             <div class="dropdown-category">
               <div class="dropdown-category-title">Emergency &amp; Repair</div>
