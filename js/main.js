@@ -271,8 +271,8 @@ function initMain() {
     });
   }
 
-  // Close mobile menu on link click
-  document.querySelectorAll('.nav .dropdown-link, .nav .nav-link').forEach(function (link) {
+  // Close mobile menu on destination link click (exclude dropdown toggles)
+  document.querySelectorAll('.nav .dropdown-link, .nav .nav-link:not(.dropdown-toggle)').forEach(function (link) {
     link.addEventListener('click', function () {
       if (window.innerWidth <= 768 && nav && mobileToggle) {
         nav.classList.remove('active');
@@ -289,7 +289,8 @@ function initMain() {
     toggle.addEventListener('click', function (e) {
       if (window.innerWidth <= 768) {
         e.preventDefault();
-        const dropdown = this.nextElementSibling;
+        e.stopPropagation();
+        const dropdown = this.nextElementSibling || this.parentElement.querySelector('.mega-dropdown');
         if (dropdown && dropdown.classList.contains('mega-dropdown')) {
           dropdown.classList.toggle('mobile-open');
         }
