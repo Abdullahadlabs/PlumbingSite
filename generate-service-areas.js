@@ -853,9 +853,10 @@ function compileServicePage(sub) {
   let workflowHtml = '';
   if (sub.workflow_steps && Array.isArray(sub.workflow_steps)) {
     workflowHtml = sub.workflow_steps.map((step, index) => `
-      <div class="workflow-step">
-        <div class="step-num">${index + 1}</div>
-        <div><h4>${step.title}</h4><p>${step.description}</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">0${index + 1}</div>
+        <h3 class="process-title">${step.title}</h3>
+        <p>${step.description}</p>
       </div>
     `).join('\n');
   }
