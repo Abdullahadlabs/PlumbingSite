@@ -2616,9 +2616,6 @@ section, header, footer {
 /* Force visible FAQ text, background, and accordion functionality */
 .faq-item {
     display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
     background: #111827 !important;
     border: 1px solid #374151 !important;
     border-radius: 8px !important;
@@ -2643,32 +2640,48 @@ section, header, footer {
     cursor: pointer !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+    user-select: none !important;
 }
 
-.faq-question * {
+.faq-question h3,
+.faq-question .faq-title,
+.faq-question span {
     color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
 }
 
-.faq-question i {
+.faq-question i,
+.faq-icon i {
     color: #3b82f6 !important;
     transition: transform 0.3s ease !important;
 }
 
-.faq-item.active .faq-question i {
+.faq-item.active .faq-question i,
+.faq-item.active .faq-icon i {
     transform: rotate(180deg) !important;
 }
 
 .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease !important;
-    background-color: #0b0f17 !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    overflow: hidden !important;
     padding: 0 !important;
+    margin: 0 !important;
     border: none !important;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, visibility 0.35s !important;
+    background-color: #0b0f17 !important;
 }
 
 .faq-item.active .faq-answer {
-    max-height: 1000px;
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: hidden !important;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease !important;
 }
 
 .faq-answer-inner {
@@ -2684,18 +2697,15 @@ section, header, footer {
     color: #d1d5db !important;
 }
 
-
-
 /* FAQ Global White Text Fix */
 [class*="faq"] h3, 
 [class*="faq"] button, 
 [class*="faq"] p, 
 [class*="faq"] div,
-.faq-question, 
-.faq-answer {
+.faq-question {
     color: #ffffff !important;
 }
 
-[class*="faq"] p, .faq-answer {
+[class*="faq"] p, .faq-answer-inner {
     color: #d1d5db !important;
 }

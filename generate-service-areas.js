@@ -151,14 +151,14 @@ function compilePage(loc) {
     ];
   }
 
-  faqsHtml = faqsList.map((faq, index) => `
-    <div class="faq-item animate-on-scroll" style="background: transparent !important; border: none !important; box-shadow: none !important; margin-bottom: 0 !important; overflow: visible !important;">
-      <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; border-radius: 8px; margin-bottom: 8px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-        <h3 class="faq-title text-white font-semibold text-base sm:text-lg" style="color: inherit !important; font-size: inherit !important; font-weight: inherit !important; margin: 0 !important;">${faq.question}</h3>
-        <i class="fas fa-chevron-down" style="color: #3b82f6 !important; fill: currentColor;"></i>
+  faqsHtml = faqsList.map((faq) => `
+    <div class="faq-item animate-on-scroll">
+      <div class="faq-question">
+        <h3 class="faq-title">${faq.question}</h3>
+        <i class="fas fa-chevron-down"></i>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; border-radius: 0 0 8px 8px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
+        <div class="faq-answer-inner">${faq.answer}</div>
       </div>
     </div>
   `).join('\n');
@@ -277,7 +277,7 @@ function compilePage(loc) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <style>
     .hero-section {
       position: relative;
@@ -792,7 +792,7 @@ function compilePage(loc) {
     </div>
   </footer>
 
-  <script src="/js/main.js" defer></script>
+  <script src="../../js/main.js" defer></script>
   <div class="mobile-sticky-bar">
     <a href="tel:877-516-8705" class="sticky-btn call-btn">
       <i class="fas fa-phone-alt"></i> Call Now
@@ -836,19 +836,17 @@ function compileServicePage(sub) {
 
   // Format FAQs
   let faqsHtml = '';
-  if (sub.faqs && Array.isArray(sub.faqs)) {
-    faqsHtml = sub.faqs.map(faq => `
-      <div class="faq-item" style="background: transparent !important; border: none !important; box-shadow: none !important; margin-bottom: 0 !important; overflow: visible !important;">
-        <div class="faq-question text-white font-semibold text-base sm:text-lg flex justify-between items-center w-full p-5 text-left hover:bg-gray-800/50 transition-all cursor-pointer" style="color: #ffffff !important; background-color: #111827 !important; border: 1px solid #374151 !important; padding: 16px; border-radius: 8px; margin-bottom: 8px; width: 100%; text-align: left; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-          <h3 class="text-white font-semibold text-base sm:text-lg" style="color: inherit !important; font-size: inherit !important; font-weight: inherit !important; margin: 0 !important;">${faq.question}</h3>
-          <span class="faq-icon"><i class="fas fa-plus" style="color: #3b82f6 !important; fill: currentColor;"></i></span>
+  faqsHtml = sub.faqs.map(faq => `
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">${faq.question}</h3>
+          <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
-          <div class="faq-answer-inner text-gray-300 text-sm leading-relaxed p-5 border-t border-gray-800/80 bg-[#0b0f17]" style="color: #d1d5db !important; background-color: #0b0f17 !important; border: 1px solid #374151 !important; border-top: none !important; padding: 16px; border-radius: 0 0 8px 8px; font-size: 14px; line-height: 1.6;">${faq.answer}</div>
+          <div class="faq-answer-inner">${faq.answer}</div>
         </div>
       </div>
     `).join('\n');
-  }
 
   // Format other services
   let otherServicesHtml = '';
@@ -1271,7 +1269,7 @@ function compileServicePage(sub) {
     </div>
   </footer>
 
-  <script src="../../../js/main.js"></script>
+  <script src="../../../js/main.js" defer></script>
 </body>
 </html>`;
 }

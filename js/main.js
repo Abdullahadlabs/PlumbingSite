@@ -422,72 +422,7 @@ function initMain() {
     });
   }
 
-  // ==================== FAQ ACCORDION (DYNAMIC FIX) ====================
-// Observer for dynamically added FAQ items
-function applyFaqStyles() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(function (item) {
-        item.style.setProperty('opacity', '1', 'important');
-        item.style.setProperty('visibility', 'visible', 'important');
-        item.style.setProperty('transform', 'none', 'important');
-        item.classList.remove('animate-on-scroll');
 
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const answerInner = item.querySelector('.faq-answer-inner');
-
-        if (question) {
-            question.style.setProperty('color', '#ffffff', 'important');
-            question.style.setProperty('background-color', '#111827', 'important');
-            question.style.cursor = 'pointer';
-        }
-
-        if (answer) {
-            answer.style.setProperty('background-color', '#0b0f17', 'important');
-        }
-
-        if (answerInner) {
-            answerInner.style.setProperty('color', '#d1d5db', 'important');
-            answerInner.style.setProperty('background-color', '#0b0f17', 'important');
-        }
-    });
-}
-
-// Run immediately and also set a slight delay for dynamic render
-applyFaqStyles();
-setTimeout(applyFaqStyles, 300);
-setTimeout(applyFaqStyles, 1000);
-
-// Click event listener using event delegation
-document.addEventListener('click', function (e) {
-    const question = e.target.closest('.faq-question');
-    if (!question) return;
-
-    const item = question.closest('.faq-item');
-    if (!item) return;
-
-    const answer = item.querySelector('.faq-answer');
-    const isActive = item.classList.contains('active');
-
-    // Close others
-    document.querySelectorAll('.faq-item').forEach(function (other) {
-        if (other !== item) {
-            other.classList.remove('active');
-            const otherAns = other.querySelector('.faq-answer');
-            if (otherAns) otherAns.style.maxHeight = null;
-        }
-    });
-
-    // Toggle current
-    item.classList.toggle('active');
-    if (answer) {
-        if (!isActive) {
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-        } else {
-            answer.style.maxHeight = null;
-        }
-    }
-});
 
   // ==================== SCROLL ANIMATIONS ====================
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
@@ -1080,6 +1015,51 @@ document.addEventListener('click', function (e) {
     scriptEl.textContent = JSON.stringify(schemaObj, null, 2);
     document.head.appendChild(scriptEl);
   }
+
+  // ==================== FAQ ACCORDION INTERACTIVITY ====================
+  document.addEventListener('click', function (e) {
+    const faqQuestion = e.target.closest('.faq-question');
+    if (!faqQuestion) return;
+    
+    const faqItem = faqQuestion.closest('.faq-item');
+    if (!faqItem) return;
+    
+    const isAlreadyActive = faqItem.classList.contains('active');
+    
+    // Close other active FAQ items in the same container for clean accordion behavior
+    const parentContainer = faqItem.closest('.faq-container, section') || faqItem.parentElement;
+    if (parentContainer) {
+      parentContainer.querySelectorAll('.faq-item.active').forEach(function (openItem) {
+        if (openItem !== faqItem) {
+          openItem.classList.remove('active');
+          const openIcon = openItem.querySelector('.fa-minus');
+          if (openIcon) {
+            openIcon.classList.remove('fa-minus');
+            openIcon.classList.add('fa-plus');
+          }
+        }
+      });
+    }
+    
+    // Toggle active state on current FAQ item
+    faqItem.classList.toggle('active', !isAlreadyActive);
+    
+    // Swap plus/minus icon if used
+    const icon = faqQuestion.querySelector('.faq-icon i, i.fa-plus, i.fa-minus');
+    if (icon) {
+      if (!isAlreadyActive) {
+        if (icon.classList.contains('fa-plus')) {
+          icon.classList.remove('fa-plus');
+          icon.classList.add('fa-minus');
+        }
+      } else {
+        if (icon.classList.contains('fa-minus')) {
+          icon.classList.remove('fa-minus');
+          icon.classList.add('fa-plus');
+        }
+      }
+    }
+  });
 
   // Execute dynamic SEO automation
   applyDynamicSEO();
