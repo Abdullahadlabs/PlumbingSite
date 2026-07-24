@@ -2803,7 +2803,10 @@ section, header, footer {
 
 /* ==================== WORKFLOW CARDS & CONNECTOR ARROWS ==================== */
 .workflow-steps-4,
-.workflow-steps {
+.workflow-steps,
+.process-steps,
+.process-grid,
+.workflow-grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 28px !important;
@@ -2814,6 +2817,7 @@ section, header, footer {
 
 .workflow-steps-4 > div,
 .workflow-steps > div,
+.process-steps > div,
 .process-card,
 .step-card,
 .workflow-card,
@@ -2834,6 +2838,7 @@ section, header, footer {
 /* Card Hover Glow & Elevator Effect */
 .workflow-steps-4 > div:hover,
 .workflow-steps > div:hover,
+.process-steps > div:hover,
 .process-card:hover,
 .step-card:hover,
 .workflow-card:hover,
@@ -2890,6 +2895,7 @@ section, header, footer {
 @media (min-width: 993px) {
   .workflow-steps-4 > div:not(:last-child)::after,
   .workflow-steps > div:not(:last-child)::after,
+  .process-steps > div:not(:last-child)::after,
   .process-card:not(:last-child)::after,
   .step-card:not(:last-child)::after,
   .workflow-card:not(:last-child)::after {
@@ -2917,6 +2923,7 @@ section, header, footer {
 
   .workflow-steps-4 > div:not(:last-child):hover::after,
   .workflow-steps > div:not(:last-child):hover::after,
+  .process-steps > div:not(:last-child):hover::after,
   .process-card:not(:last-child):hover::after,
   .step-card:not(:last-child):hover::after {
     background: #3b82f6 !important;
@@ -2929,13 +2936,17 @@ section, header, footer {
 /* Responsive Grid & Vertical Connector Arrows on Tablet / Mobile */
 @media (max-width: 992px) {
   .workflow-steps-4,
-  .workflow-steps {
+  .workflow-steps,
+  .process-steps,
+  .process-grid,
+  .workflow-grid {
     grid-template-columns: 1fr !important;
     gap: 28px !important;
   }
 
   .workflow-steps-4 > div:not(:last-child)::after,
   .workflow-steps > div:not(:last-child)::after,
+  .process-steps > div:not(:last-child)::after,
   .process-card:not(:last-child)::after,
   .step-card:not(:last-child)::after,
   .workflow-card:not(:last-child)::after {
@@ -2959,6 +2970,53 @@ section, header, footer {
     z-index: 10 !important;
     box-shadow: 0 0 14px rgba(59, 130, 246, 0.5) !important;
   }
+}
+
+/* ==================== VERIFIED CUSTOMER REVIEWS VISIBILITY FIX ==================== */
+.reviews-section,
+#reviews,
+[id="reviews"],
+.testimonials-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+.reviews-grid,
+.testimonial-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 24px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100% !important;
+  margin-top: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .reviews-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+.review-card,
+.testimonial-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  background: var(--bg-card, #111d33) !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* ==================== STYLIZED FOOTER CALL BUTTON ==================== */
