@@ -237,6 +237,20 @@ function initMain() {
     }
   }
 
+  // Standardize Header & Hero phone CTA buttons to "📞 Speak to an Expert"
+  document.querySelectorAll('.header-phone, .header-cta a[href^="tel:"]').forEach(el => {
+    el.innerHTML = `<i class="fas fa-phone"></i> Speak to an Expert`;
+  });
+  document.querySelectorAll('.hero-buttons a[href^="tel:"], .hero-content a[href^="tel:"]').forEach(el => {
+    el.innerHTML = `<i class="fas fa-phone"></i> Speak to an Expert`;
+  });
+
+  // Standardize Footer call CTA buttons to "📞 Call 24/7"
+  document.querySelectorAll('.footer-col a[href^="tel:"], .footer-about a[href^="tel:"], .footer-dispatch-btn').forEach(el => {
+    el.classList.add('footer-call-btn');
+    el.innerHTML = `<i class="fas fa-phone"></i> Call 24/7`;
+  });
+
   const getNormalizedPage = (path) => {
     const parts = path.split('/');
     if (parts.includes('city')) {

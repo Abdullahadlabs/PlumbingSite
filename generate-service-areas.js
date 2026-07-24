@@ -545,7 +545,7 @@ function compilePage(loc) {
       </nav>
 
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Speak to an Expert</a>
         <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
 
@@ -805,7 +805,7 @@ function compilePage(loc) {
         <div class="footer-col">
           <div class="footer-title">Local Info</div>
           <a href="#"><i class="fas fa-map-marker-alt"></i> ${city}, ${stateCode} ${zip}</a>
-          <a href="tel:877-516-8705"><i class="fas fa-phone"></i> 877-516-8705</a>
+          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1104,7 +1104,7 @@ function compileServicePage(sub) {
         <a href="../../../contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Speak to an Expert</a>
         <a href="../../../contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
@@ -1321,7 +1321,7 @@ function compileServicePage(sub) {
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Contact Info</h3>
-          <a href="tel:877-516-8705" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;"><i class="fas fa-phone"></i> 877-516-8705</a>
+          <a href="tel:877-516-8705" class="footer-call-btn" style="color: #fff; text-decoration: none; display: inline-flex; margin-bottom: 8px;"><i class="fas fa-phone"></i> Call 24/7</a>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-map-marker-alt"></i> Serving ${city}, ${stateCode} ${zip}</span>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
         </div>
