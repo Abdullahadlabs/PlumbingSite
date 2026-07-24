@@ -791,15 +791,16 @@ function compilePage(loc) {
           <a href="/" class="logo footer-logo">
             <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
           </a>
-          <h3 class="footer-title">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h3>
-          <p>We connect homeowners in ${city} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
+          <h3 class="footer-title footer-brand-heading">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h3>
+          <p class="footer-brand-subheading">We connect homeowners in ${city}, ${stateCode} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
         </div>
         <div class="footer-col">
           <div class="footer-title">Quick Links</div>
           <a href="/">Home</a>
           <a href="/services">Services</a>
-          <a href="#overview">Capabilities</a>
-          <a href="#why-us">Why Choose Us</a>
+          <a href="/#states">Service Areas</a>
+          <a href="/about">About Us</a>
+          <a href="/contact">Contact Us</a>
         </div>
         <div class="footer-col">
           <div class="footer-title">Local Info</div>
@@ -811,14 +812,14 @@ function compilePage(loc) {
         <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
         <!-- Footer Links -->
         <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
-          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
+          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Privacy Policy</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a>
+          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Terms &amp; Conditions</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Disclaimer</a>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Disclaimer</a>
         </div>
         <!-- Visible One-Liner Disclaimer Text -->
-        <p style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-align: center;">
+        <p class="footer-legal-disclaimer" style="color: #6b7280; font-size: 11.5px; margin-top: 8px; text-align: center;">
           <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
         </p>
       </div>
@@ -1303,16 +1304,16 @@ function compileServicePage(sub) {
       <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
         <div class="footer-about">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
-          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 8px;">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h4>
-          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">We connect homeowners in ${city} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
+          <h4 class="footer-title footer-brand-heading" style="color: #fff; font-size: 1rem; margin-bottom: 8px;">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h4>
+          <p class="footer-brand-subheading" style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">We connect homeowners in ${city}, ${stateCode} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Quick Links</h3>
-          <a href="../../../index.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Home</a>
-          <a href="../../../about.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">About Us</a>
-          <a href="../../../services.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Services</a>
-          <a href="../../../areas.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Areas We Serve</a>
-          <a href="../../../contact.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Contact</a>
+          <a href="/" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Home</a>
+          <a href="/services" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Services</a>
+          <a href="/#states" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Service Areas</a>
+          <a href="/about" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">About Us</a>
+          <a href="/contact" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Contact Us</a>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">This ZIP</h3>
@@ -1329,14 +1330,14 @@ function compileServicePage(sub) {
         <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
         <!-- Footer Links -->
         <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
-          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
+          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Privacy Policy</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a>
+          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Terms &amp; Conditions</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Disclaimer</a>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Disclaimer</a>
         </div>
         <!-- Visible One-Liner Disclaimer Text -->
-        <p style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-align: center;">
+        <p class="footer-legal-disclaimer" style="color: #6b7280; font-size: 11.5px; margin-top: 8px; text-align: center;">
           <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
         </p>
       </div>

@@ -198,12 +198,13 @@ function initMain() {
   }
 
   // Update footer brand heading and subheading dynamically if location parameters exist
-  const footerBrandHeading = document.querySelector('.footer-about .footer-brand-heading');
-  const footerBrandSubheading = document.querySelector('.footer-about .footer-brand-subheading');
+  const footerBrandHeading = document.querySelector('.footer-about .footer-brand-heading') || document.querySelector('.footer-about .footer-title') || document.querySelector('.footer-about h3') || document.querySelector('.footer-about h4');
+  const footerBrandSubheading = document.querySelector('.footer-about .footer-brand-subheading') || document.querySelector('.footer-about p');
   if (footerBrandHeading && footerBrandSubheading) {
     if (currentLoc.city && currentLoc.state) {
-      footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${currentLoc.city}, ${getStateCode(currentLoc.state)}`;
-      footerBrandSubheading.textContent = `We connect homeowners in ${currentLoc.city} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
+      const stateCode = getStateCode(currentLoc.state);
+      footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${currentLoc.city}, ${stateCode}`;
+      footerBrandSubheading.textContent = `We connect homeowners in ${currentLoc.city}, ${stateCode} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     } else if (currentLoc.city) {
       footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${currentLoc.city}`;
       footerBrandSubheading.textContent = `We connect homeowners in ${currentLoc.city} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
