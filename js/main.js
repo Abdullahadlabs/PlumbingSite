@@ -197,6 +197,26 @@ function initMain() {
     });
   }
 
+  // Update footer brand heading and subheading dynamically if location parameters exist
+  const footerBrandHeading = document.querySelector('.footer-about .footer-brand-heading');
+  const footerBrandSubheading = document.querySelector('.footer-about .footer-brand-subheading');
+  if (footerBrandHeading && footerBrandSubheading) {
+    if (currentLoc.city && currentLoc.state) {
+      footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${currentLoc.city}, ${getStateCode(currentLoc.state)}`;
+      footerBrandSubheading.textContent = `We connect homeowners in ${currentLoc.city} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
+    } else if (currentLoc.city) {
+      footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${currentLoc.city}`;
+      footerBrandSubheading.textContent = `We connect homeowners in ${currentLoc.city} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
+    } else if (currentLoc.state) {
+      const stateName = currentLoc.state.charAt(0).toUpperCase() + currentLoc.state.slice(1);
+      footerBrandHeading.innerHTML = `Find Top-Rated Local Plumbing Experts in ${stateName}`;
+      footerBrandSubheading.textContent = `We connect homeowners in ${stateName} with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
+    } else {
+      footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
+      footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
+    }
+  }
+
   const getNormalizedPage = (path) => {
     const parts = path.split('/');
     if (parts.includes('city')) {

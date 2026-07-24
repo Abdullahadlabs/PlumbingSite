@@ -791,7 +791,8 @@ function compilePage(loc) {
           <a href="/" class="logo footer-logo">
             <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
           </a>
-          <p>Disclaimer: Home Plumbing USA is a referral service that connects homeowners with independent local plumbing contractors. All contractors are independent, licensed, and insured local businesses. Home Plumbing USA does not directly perform plumbing services, and it is the responsibility of the homeowner to verify licensing and insurance for any contractor hired.</p>
+          <h3 class="footer-title">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h3>
+          <p>We connect homeowners in ${city} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
         </div>
         <div class="footer-col">
           <div class="footer-title">Quick Links</div>
@@ -1301,8 +1302,9 @@ function compileServicePage(sub) {
     <div class="container">
       <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
         <div class="footer-about">
-          <h3 style="color: #fff;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
-          <p>Disclaimer: Home Plumbing USA is a referral service that connects homeowners with independent local plumbing contractors. All contractors are independent, licensed, and insured local businesses. Home Plumbing USA does not directly perform plumbing services, and it is the responsibility of the homeowner to verify licensing and insurance for any contractor hired.</p>
+          <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
+          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 8px;">Find Top-Rated Local Plumbing Experts in ${city}, ${stateCode}</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">We connect homeowners in ${city} with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Quick Links</h3>
