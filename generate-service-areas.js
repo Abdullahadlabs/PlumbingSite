@@ -807,7 +807,7 @@ function compilePage(loc) {
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Nationwide USA</p>
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
         <!-- Footer Links -->
         <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
           <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
@@ -1324,7 +1324,7 @@ function compileServicePage(sub) {
         </div>
       </div>
       <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 30px; padding-top: 20px;">
-        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Serving ${stateName} Statewide</p>
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
         <!-- Footer Links -->
         <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
           <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
