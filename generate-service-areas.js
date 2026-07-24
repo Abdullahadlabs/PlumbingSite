@@ -43,7 +43,7 @@ function compilePage(loc) {
   
   const rawH1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} (${zip})`;
   const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
-  const intro = loc.intro_paragraph || `When you need fast, reliable plumbing services in ${city}, ${stateName} (${zip}), our team of experienced professionals is here to help 24/7. Whether you are dealing with an emergency leak, a clogged drain, or need a routine water heater installation, we provide top-rated service tailored to local residents and businesses.`;
+  const intro = `Connecting home and business owners in ${city}, ${stateCode} (${zip}) with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
 
   // 2. Service Spotlight & Grid Section (Conditional / Fallback)
   let serviceSpotlightHtml = '';
@@ -791,7 +791,7 @@ function compilePage(loc) {
           <a href="/" class="logo footer-logo">
             <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
           </a>
-          <p>Connecting home and business owners with vetted, highly-rated technicians in real-time. Licensed and insured plumbing solutions nationwide.</p>
+          <p>Disclaimer: Home Plumbing USA is a referral service that connects homeowners with independent local plumbing contractors. All contractors are independent, licensed, and insured local businesses. Home Plumbing USA does not directly perform plumbing services, and it is the responsibility of the homeowner to verify licensing and insurance for any contractor hired.</p>
         </div>
         <div class="footer-col">
           <div class="footer-title">Quick Links</div>
@@ -1113,7 +1113,7 @@ function compileServicePage(sub) {
             <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
           </div>
           <h1 class="hero-title">${h1Formatted}</h1>
-          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">${sub.intro_paragraph}</p>
+          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode} (${zip}) with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
           </div>
@@ -1295,7 +1295,7 @@ function compileServicePage(sub) {
       <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
         <div class="footer-about">
           <h3 style="color: #fff;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
-          <p>Mobile plumbing service covering ${city}, ${stateCode} ${zip} and surrounding areas.</p>
+          <p>Disclaimer: Home Plumbing USA is a referral service that connects homeowners with independent local plumbing contractors. All contractors are independent, licensed, and insured local businesses. Home Plumbing USA does not directly perform plumbing services, and it is the responsibility of the homeowner to verify licensing and insurance for any contractor hired.</p>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Quick Links</h3>

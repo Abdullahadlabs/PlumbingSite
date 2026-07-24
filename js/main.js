@@ -929,18 +929,18 @@ function initMain() {
     if (currentPage === 'state') {
       const stateName = seo.state || 'Alaska';
       title = `Best Plumbing Services in ${stateName} | Home Plumbing USA`;
-      description = `Need professional plumbing services in ${stateName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+      description = `Connecting home and business owners in ${stateName} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
       schemaName = `Home Plumbing USA - ${stateName}`;
-      schemaDesc = `Professional plumbing and emergency repair services in ${stateName}.`;
+      schemaDesc = `Referral matching service for professional plumbing in ${stateName}.`;
       areaServedName = stateName;
     } else if (currentPage === 'city-zip') {
       const cityName = seo.city || 'Your Local Area';
       const stateName = seo.state || '';
       const stateCode = seo.stateCode || '';
       title = `Emergency Plumbers in ${cityName}, ${stateCode} | Home Plumbing USA`;
-      description = `Need professional plumbing services in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+      description = `Connecting home and business owners in ${cityName}, ${stateCode} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
       schemaName = `Home Plumbing USA - ${cityName}`;
-      schemaDesc = `Professional plumbing and emergency repair services in ${cityName}, ${stateName}.`;
+      schemaDesc = `Referral matching service for professional plumbing in ${cityName}, ${stateName}.`;
       areaServedName = cityName;
     } else if (currentPage === 'service-detail') {
       const serviceName = seo.service || 'Plumbing Services';
@@ -950,15 +950,15 @@ function initMain() {
 
       if (stateCode) {
         title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
-        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        description = `Connecting home and business owners in ${cityName}, ${stateCode} with vetted, independent local plumbing experts for ${serviceName} in real-time.`;
         schemaName = `Home Plumbing USA - ${cityName}`;
-        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+        schemaDesc = `Referral matching service for ${serviceName.toLowerCase()} in ${cityName}, ${stateName}.`;
         areaServedName = cityName;
       } else {
         title = `${serviceName} in ${cityName} | Home Plumbing USA`;
-        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        description = `Connecting home and business owners in ${cityName} with vetted, independent local plumbing experts for ${serviceName} in real-time.`;
         schemaName = `Home Plumbing USA - ${cityName}`;
-        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}.`;
+        schemaDesc = `Referral matching service for ${serviceName.toLowerCase()} in ${cityName}.`;
         areaServedName = cityName;
       }
     } else {

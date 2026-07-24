@@ -564,7 +564,7 @@ async function main() {
       title_tag: `Plumber in ${cleanCity}, ${loc.state} ${loc.zip} | 24/7 Plumbing Services`,
       meta_description: `Looking for a reliable plumber in ${cleanCity}, ${loc.state} (${loc.zip})? We offer 24/7 emergency plumbing, drain cleaning, water heater repair & more. Call today!`,
       h1: `Plumbing Services in ${cleanCity}, ${loc.state} (${loc.zip})`,
-      intro_paragraph: `When you need fast, reliable plumbing services in ${cleanCity}, ${stateName} (${loc.zip}), our team of experienced professionals is here to help 24/7. Whether you are dealing with an emergency leak, a clogged drain, or need a routine water heater installation, we provide top-rated service tailored to local residents and businesses.`,
+      intro_paragraph: `Connecting home and business owners in ${cleanCity}, ${loc.state} (${loc.zip}) with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`,
       service_spotlight: `Premium Plumbing handles the full range of residential and commercial plumbing needs in ${cleanCity}, ${loc.zip} — from urgent calls to routine maintenance.`,
       nearby_areas: richNearbyAreas,
       all_areas_served: null,
