@@ -545,7 +545,7 @@ function compilePage(loc) {
       </nav>
 
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Speak to an Expert</a>
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
         <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
 
@@ -1104,7 +1104,7 @@ function compileServicePage(sub) {
         <a href="../../../contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Speak to an Expert</a>
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
         <a href="../../../contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>

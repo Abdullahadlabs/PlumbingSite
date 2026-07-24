@@ -237,9 +237,9 @@ function initMain() {
     }
   }
 
-  // Standardize Header & Hero phone CTA buttons to "📞 Speak to an Expert"
+  // Standardize Header phone CTA buttons to "📞 Call Now"
   document.querySelectorAll('.header-phone, .header-cta a[href^="tel:"]').forEach(el => {
-    el.innerHTML = `<i class="fas fa-phone"></i> Speak to an Expert`;
+    el.innerHTML = `<i class="fas fa-phone"></i> Call Now`;
   });
   document.querySelectorAll('.hero-buttons a[href^="tel:"], .hero-content a[href^="tel:"]').forEach(el => {
     el.innerHTML = `<i class="fas fa-phone"></i> Speak to an Expert`;
