@@ -808,11 +808,18 @@ function compilePage(loc) {
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Nationwide USA</p>
-        <div class="flex justify-center space-x-4 mt-2 text-xs">
+        <!-- Footer Links -->
+        <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
           <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
           <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a>
+          <span style="color: rgba(255,255,255,0.2);">&middot;</span>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Disclaimer</a>
         </div>
+        <!-- Visible One-Liner Disclaimer Text -->
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-align: center;">
+          <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
+        </p>
       </div>
     </div>
   </footer>
@@ -1316,7 +1323,21 @@ function compileServicePage(sub) {
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
         </div>
       </div>
-      <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 30px; padding-top: 20px;"><p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Serving ${stateName} Statewide</p></div>
+      <div class="footer-bottom" style="text-align: center; border-top: 1px solid var(--border-color); margin-top: 30px; padding-top: 20px;">
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Licensed &amp; Insured | Serving ${stateName} Statewide</p>
+        <!-- Footer Links -->
+        <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
+          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
+          <span style="color: rgba(255,255,255,0.2);">&middot;</span>
+          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a>
+          <span style="color: rgba(255,255,255,0.2);">&middot;</span>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Disclaimer</a>
+        </div>
+        <!-- Visible One-Liner Disclaimer Text -->
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-align: center;">
+          <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
+        </p>
+      </div>
     </div>
   </footer>
 
