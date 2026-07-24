@@ -484,7 +484,7 @@ function compilePage(loc) {
     <div class="top-bar">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>24/7 Emergency Plumbers Nationwide - Same Price, Holidays Included!</span>
+        <span>24/7 Emergency Plumbers in ${city}, ${stateCode} - Same Price, Holidays Included!</span>
       </div>
     </div>
     <div class="header-inner">

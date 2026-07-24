@@ -197,6 +197,25 @@ function initMain() {
     });
   }
 
+  // Update top announcement bar dynamically if location parameters exist or fallback
+  const topBarContent = document.querySelector('.top-bar-content') || document.querySelector('.top-bar');
+  if (topBarContent) {
+    const textSpan = topBarContent.querySelector('span:not(.pulse-dot)') || Array.from(topBarContent.querySelectorAll('span')).pop();
+    if (textSpan) {
+      if (currentLoc.city && currentLoc.state) {
+        const stateCode = getStateCode(currentLoc.state);
+        textSpan.textContent = `24/7 Emergency Plumbers in ${currentLoc.city}, ${stateCode} - Same Price, Holidays Included!`;
+      } else if (currentLoc.city) {
+        textSpan.textContent = `24/7 Emergency Plumbers in ${currentLoc.city} - Same Price, Holidays Included!`;
+      } else if (currentLoc.state) {
+        const stateName = currentLoc.state.charAt(0).toUpperCase() + currentLoc.state.slice(1);
+        textSpan.textContent = `24/7 Emergency Plumbers in ${stateName} - Same Price, Holidays Included!`;
+      } else {
+        textSpan.textContent = `24/7 Emergency Plumbing Network - Same Price, Holidays Included!`;
+      }
+    }
+  }
+
   // Update footer brand heading and subheading dynamically if location parameters exist
   const footerBrandHeading = document.querySelector('.footer-about .footer-brand-heading') || document.querySelector('.footer-about .footer-title') || document.querySelector('.footer-about h3') || document.querySelector('.footer-about h4');
   const footerBrandSubheading = document.querySelector('.footer-about .footer-brand-subheading') || document.querySelector('.footer-about p');
