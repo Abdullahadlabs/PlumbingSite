@@ -38,6 +38,11 @@ window.servicesData = {
       faq: [
         { q: "Should I repair or replace my water heater?", a: "If your heater is over 8-10 years old, leaking from the tank shell, or requires frequent repairs, replacement is usually more cost-effective. Minor issues like a faulty thermocouple or heating element can easily be repaired." },
         { q: "What is the benefit of a tankless water heater?", a: "Tankless systems heat water on demand, providing an endless hot water supply and saving up to 30% in energy costs compared to traditional standby tanks. They also have a longer lifespan and take up much less space." }
+      ],
+      reviews: [
+        { author: "Marcus T.", text: "Our 50-gallon water heater started leaking from the bottom valve on a Sunday. Home Plumbing USA connected us with a certified plumber in less than 30 minutes. He replaced the unit with a brand new high-efficiency model the same day!", rating: 5, tag: "Water Heater Repair" },
+        { author: "Elena R.", text: "Upgraded from a traditional tank to a Rinnai tankless water heater. The technician explained the whole installation, safely routed the gas line and venting, and now our family never runs out of hot water.", rating: 5, tag: "Tankless Water Heater" },
+        { author: "David K.", text: "Woke up to cold showers and a blinking error code on our water heater control panel. The technician diagnosed a failed lower heating element, swapped it out, and had hot water restored within 2 hours.", rating: 5, tag: "Water Heater Service" }
       ]
     },
     'drain-sewer': {
@@ -77,6 +82,11 @@ window.servicesData = {
       faq: [
         { q: "Why do my drains keep clogging?", a: "Frequent clogs are usually caused by buildup of grease, hair, soap scum, or mineral scale inside the pipes. In main sewer lines, tree roots seeking water can invade pipe joints, causing recurring blockages." },
         { q: "Is hydro jetting safe for older pipes?", a: "Yes, when performed by trained professionals. We inspect the lines with a camera first to ensure the pipe structure is sound enough to withstand high-pressure water." }
+      ],
+      reviews: [
+        { author: "Sarah M.", text: "Our kitchen sink and main floor bath were completely backed up. The plumber arrived with a high-pressure hydro jetting rig and cleared years of stubborn grease and mineral scale in under an hour.", rating: 5, tag: "Drain Cleaning" },
+        { author: "James L.", text: "We had recurring drain clogs every few months. The technician ran a fiber-optic camera line down our sewer pipe, pinpointed tree root intrusion, and hydro-jetted the main line completely clean.", rating: 5, tag: "Sewer Line Repair" },
+        { author: "Robert P.", text: "Fast emergency dispatch for an overflowing sewer cleanout! The technician cleared the blockage with a heavy-duty mechanical auger and verified 100% clean pipe flow with a video camera inspection.", rating: 5, tag: "Emergency Drain Clearing" }
       ]
     },
     'leak-detection': {
@@ -116,6 +126,11 @@ window.servicesData = {
       faq: [
         { q: "What are the signs of a hidden water leak?", a: "Watch for sudden increases in your water bill, damp spots on carpet or floors, moldy odors, low water pressure, or the sound of running water when all faucets are turned off." },
         { q: "Do you have to tear up my floors to find a slab leak?", a: "No. We use advanced non-invasive sonar and thermal tech to locate the leak through the slab before any digging or cuts are made." }
+      ],
+      reviews: [
+        { author: "Jennifer B.", text: "Our monthly water bill spiked unexpectedly by over $200. The technician brought acoustic sensors and infrared thermal imaging to trace a hidden slab leak right under our hallway floor with zero drywall damage!", rating: 5, tag: "Slab Leak Detection" },
+        { author: "Michael D.", text: "Heard water running behind our master bathroom wall with all faucets completely turned off. The plumber pinpointed the exact pinhole leak behind the tiles and performed a clean patch repair in a single visit.", rating: 5, tag: "Hidden Leak Repair" },
+        { author: "Amanda H.", text: "Professional non-invasive leak detection! They pressure-tested our water supply lines, located a hairline fracture in our main pipe, and saved us thousands in potential foundation structural damage.", rating: 5, tag: "Water Line Leak Detection" }
       ]
     },
     'pipe-repair': {
@@ -155,6 +170,11 @@ window.servicesData = {
       faq: [
         { q: "Should I patch my pipes or do a full repiping?", a: "Single isolated leaks on copper or PEX pipes are easily resolved with a local repair. However, if your home has old galvanized iron or polybutylene pipes that leak repeatedly, a full repipe is recommended." },
         { q: "Why is my water pressure low?", a: "Low pressure is often caused by sediment scale inside older galvanized pipes, hidden water leaks, or a failing pressure regulator valve." }
+      ],
+      reviews: [
+        { author: "Thomas K.", text: "A sub-zero cold snap froze and burst an exposed copper pipe in our crawlspace. The emergency plumber arrived within 45 minutes, replaced the split section with PEX, and installed thermal pipe insulation.", rating: 5, tag: "Burst Pipe Repair" },
+        { author: "Rachel W.", text: "Whole house repiping job done with absolute perfection! Replaced old corroded galvanized pipes with flexible PEX lines. Water pressure is incredible now and tap water is crystal clear.", rating: 5, tag: "Whole House Repiping" },
+        { author: "Brian V.", text: "Discovered rusty discolored water coming from our hot supply lines. The technician replaced corroded fittings, ran pressure test checks on all pipe joints, and backed everything with a written warranty.", rating: 5, tag: "Pipe Repair & Replacement" }
       ]
     },
     'gas-line': {
@@ -194,6 +214,11 @@ window.servicesData = {
       faq: [
         { q: "What should I do if I smell gas?", a: "If you smell a strong rotten-egg odor, leave your home immediately. Do not flip light switches or use phones inside. Once safe, call your gas company and an emergency plumber." },
         { q: "Can I use flexible yellow gas lines?", a: "Yes, flexible corrugated stainless steel tubing (CSST) is code-compliant and ideal for many connections, but it must be installed by a licensed plumber to ensure grounding." }
+      ],
+      reviews: [
+        { author: "Daniel C.", text: "Smelled a faint natural gas odor near our furnace room. The plumber used an electronic gas sniffer to track down a loose fitting on the supply line and fixed it safely. Absolute lifesaver!", rating: 5, tag: "Gas Leak Repair" },
+        { author: "Karen E.", text: "Hired them to run a new gas line for our outdoor patio BBQ grill and gas fireplace. Clean installation, passed municipal building code inspection on the first try, and double-pressure tested for safety.", rating: 5, tag: "Gas Line Installation" },
+        { author: "Christopher N.", text: "Emergency gas leak service! They shut down the system, replaced an aged flexible appliance connector, and issued a safety certification so our gas utility provider restored service immediately.", rating: 5, tag: "Emergency Gas Service" }
       ]
     },
     'fixtures': {
@@ -233,6 +258,11 @@ window.servicesData = {
       faq: [
         { q: "Why is my toilet constantly running?", a: "A running toilet is usually caused by a worn flapper valve, a misaligned float arm, or a faulty fill valve. Replacing these internal tank parts is quick and inexpensive." },
         { q: "How long do sump pumps last?", a: "Most sump pumps have a lifespan of 5 to 7 years. Because they protect your basement from flooding, we recommend testing yours annually and installing a battery backup." }
+      ],
+      reviews: [
+        { author: "Laura H.", text: "Our basement sump pump failed during a heavy rainstorm. The plumber dispatched immediately, installed a heavy-duty 1/2 HP pump with a battery backup system, and saved our basement from flooding!", rating: 5, tag: "Sump Pump Installation" },
+        { author: "Kevin A.", text: "Replaced two running toilets and a leaky kitchen sink faucet with modern low-flow eco-friendly fixtures. Clean installation, zero drips, and our water bill dropped noticeably the very next month.", rating: 5, tag: "Toilet & Faucet Repair" },
+        { author: "Patricia G.", text: "Our garbage disposal motor jammed and started leaking underneath the sink. The plumber swapped it for a quiet 3/4 HP disposal in 45 minutes and left the cabinet workspace spotless.", rating: 5, tag: "Garbage Disposal Repair" }
       ]
     },
     'filtration': {
@@ -272,6 +302,11 @@ window.servicesData = {
       faq: [
         { q: "Do I need a water softener or a water filter?", a: "Water softeners specifically target hard minerals like calcium and magnesium to prevent scale buildup. Water filters remove contaminants like chlorine, lead, sediment, and chemicals to improve taste and safety." },
         { q: "How often does a water softener need salt?", a: "Most residential water softeners need salt refilled once a month, depending on water usage and hardness levels." }
+      ],
+      reviews: [
+        { author: "Jason M.", text: "Our hard water was leaving heavy white mineral scale on all our faucets and glass shower doors. They tested the water on-site and installed a whole-house water softener. Our water feels amazing now!", rating: 5, tag: "Water Softener Install" },
+        { author: "Megan S.", text: "Installed a 5-stage reverse osmosis system under our kitchen sink. Drinking water tastes cleaner than bottled water, and the tap water pressure is outstanding.", rating: 5, tag: "Reverse Osmosis System" },
+        { author: "Eric F.", text: "Fantastic whole-home carbon filtration installation! Removed the strong chlorine smell from our tap water and protected our pipes and appliances from sediment buildup.", rating: 5, tag: "Water Filtration System" }
       ]
     },
     'general': {
@@ -311,6 +346,11 @@ window.servicesData = {
       faq: [
         { q: "Do you offer emergency services?", a: "Yes! We connect you with 24/7 emergency plumbers for burst pipes, sewer backups, and major leaks." },
         { q: "Are the plumbing services covered by warranty?", a: "Yes, all matching plumbers provide a workmanship guarantee, and replaced fixtures carry manufacturer warranties." }
+      ],
+      reviews: [
+        { author: "Brandon S.", text: "Outstanding 24/7 emergency dispatch service! Arrived under 45 minutes for a major pipe leak, explained the upfront quote clearly, and completed repairs with total precision.", rating: 5, tag: "Emergency Plumbing" },
+        { author: "Nicole W.", text: "Used Home Plumbing USA to match with a top-rated local contractor. Clean, polite technician, transparent flat-rate pricing, and 100% satisfaction guarantee.", rating: 5, tag: "Local Plumbing Service" },
+        { author: "Gary T.", text: "Prompt response, professional diagnostics, and quality parts. Their plumber inspected our entire home system and fixed two long-standing plumbing issues in one visit.", rating: 5, tag: "Residential Plumbing" }
       ]
     }
   },

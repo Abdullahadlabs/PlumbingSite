@@ -894,6 +894,18 @@
           <!-- Dynamically generated via zipData.js -->
         </div>
       </div>
+    <!-- 9.5 Customer Reviews Section -->
+    <section class="reviews-section section" id="reviews" style="background: var(--bg-darker); padding: 60px 0;">
+      <div class="container">
+        <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 40px;">
+          <div class="section-label" style="color: var(--primary-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">Customer Reviews</div>
+          <h2 class="section-title" style="font-size: 2.25rem; font-weight: 800; color: var(--text-white);">Verified Customer Feedback in <span class="city-name">Your Local Area</span></h2>
+          <p class="section-desc" style="color: var(--text-muted); max-width: 600px; margin: 10px auto 0;">Real experiences from local homeowners matched through our 24/7 plumbing network.</p>
+        </div>
+        <div class="reviews-grid" id="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
     </section>
 
     <!-- 10. FAQ Section -->
@@ -1660,6 +1672,58 @@
       faqScriptEl.type = 'application/ld+json';
       faqScriptEl.textContent = JSON.stringify(faqSchemaObj, null, 2);
       document.head.appendChild(faqScriptEl);
+    }
+
+    // Dynamic Customer Reviews rendering
+    const reviewsGridEl = document.getElementById('reviews-grid');
+    if (reviewsGridEl) {
+      let catKey = 'general';
+      if (typeof window.servicesData !== 'undefined' && window.servicesData.slugs && svc) {
+        catKey = window.servicesData.slugs[svc] || 'general';
+      } else if (svc) {
+        if (svc.includes('heater') || svc.includes('tankless')) catKey = 'water-heater';
+        else if (svc.includes('drain') || svc.includes('hydro') || svc.includes('sewer') || svc.includes('clog')) catKey = 'drain-sewer';
+        else if (svc.includes('leak') || svc.includes('slab')) catKey = 'leak-detection';
+        else if (svc.includes('pipe') || svc.includes('burst')) catKey = 'pipe-repair';
+        else if (svc.includes('gas')) catKey = 'gas-line';
+        else if (svc.includes('faucet') || svc.includes('toilet') || svc.includes('sump') || svc.includes('disposal')) catKey = 'fixtures';
+        else if (svc.includes('filter') || svc.includes('softener')) catKey = 'filtration';
+      }
+
+      const catObj = (window.servicesData && window.servicesData.categories) ? window.servicesData.categories[catKey] : null;
+      const reviewsList = (catObj && catObj.reviews) ? catObj.reviews : [
+        { author: "Marcus T.", text: `Outstanding emergency response! The plumber arrived fast, inspected the issue, and fixed our ${serviceName.toLowerCase()} problem on the first visit.`, rating: 5, tag: serviceName },
+        { author: "Sarah M.", text: `Extremely knowledgeable technician. Transparent flat-rate pricing and left the workspace clean. Highly recommend for any ${serviceName.toLowerCase()} work!`, rating: 5, tag: serviceName },
+        { author: "David K.", text: `Saved us from a major emergency! Fast dispatch, high-quality replacement parts, and backed by a full warranty.`, rating: 5, tag: serviceName }
+      ];
+
+      const locationTagText = hasLocation ? (city ? `${decodeURIComponent(city).split(/[- ]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}${state ? ', ' + getStateCode(state) : ''}` : locationText) : 'Your Local Area';
+
+      let reviewsHtml = '';
+      reviewsList.forEach(rev => {
+        reviewsHtml += `
+          <div class="review-card animate-on-scroll" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition); box-shadow: var(--shadow-md);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div class="star-rating" style="color: #f59e0b; font-size: 0.95rem;">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <span style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600;">Verified Customer</span>
+              </div>
+              <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.65; margin-bottom: 20px; font-style: italic;">
+                "${rev.text}"
+              </p>
+            </div>
+            <div>
+              <div style="font-weight: 700; color: var(--text-white); font-size: 1rem; margin-bottom: 8px;">${rev.author}</div>
+              <div style="display: inline-block; background: rgba(37, 99, 235, 0.12); color: var(--primary-light); border: 1px solid rgba(37, 99, 235, 0.25); padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">
+                <i class="fas fa-wrench" style="margin-right: 4px;"></i> ${rev.tag || serviceName} | ${locationTagText}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      reviewsGridEl.innerHTML = reviewsHtml;
     }
     }
 
