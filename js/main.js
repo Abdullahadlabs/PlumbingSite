@@ -235,7 +235,27 @@ function initMain() {
       footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
       footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     }
-  }
+  // Update Hero Section Subtitle dynamically (Fix BUG 1: Remove redundant state & double commas)
+  document.querySelectorAll('.hero-text').forEach(heroEl => {
+    if (currentLoc.city && currentLoc.state) {
+      const stateCode = getStateCode(currentLoc.state);
+      const zipStr = currentLoc.zip ? ` (${currentLoc.zip})` : '';
+      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city}, ${stateCode}${zipStr} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+    }
+  });
+
+  // Update Final CTA Section Subtitle dynamically (Fix BUG 2: Ensure space after zip before "and nearby regions")
+  document.querySelectorAll('.final-cta-section p, .cta-section p').forEach(ctaEl => {
+    if (ctaEl.textContent.includes('active in') || ctaEl.textContent.includes('Get connected with')) {
+      if (currentLoc.city && currentLoc.state) {
+        const stateCode = getStateCode(currentLoc.state);
+        const zipStr = currentLoc.zip ? ` ${currentLoc.zip}` : '';
+        const activeService = (typeof serviceName !== 'undefined' && serviceName) ? serviceName : 'plumbing';
+        ctaEl.textContent = `Technicians are active in ${currentLoc.city}, ${stateCode}${zipStr} and nearby regions for ${activeService.toLowerCase()} repairs and installations. Call for immediate dispatch.`;
+      }
+    }
+  });
+
 
   // Standardize Header phone CTA buttons to "📞 Call Now"
   document.querySelectorAll('.header-phone, .header-cta a[href^="tel:"]').forEach(el => {

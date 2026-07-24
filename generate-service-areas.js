@@ -43,7 +43,8 @@ function compilePage(loc) {
   
   const rawH1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} (${zip})`;
   const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
-  const intro = `Connecting home and business owners in ${city}, ${stateCode} (${zip}) with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+  const zipStr = zip ? ` (${zip})` : '';
+  const intro = `Connecting home and business owners in ${city}, ${stateCode}${zipStr} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
 
   // 2. Service Spotlight & Grid Section (Conditional / Fallback)
   let serviceSpotlightHtml = '';
@@ -846,7 +847,7 @@ function compilePage(loc) {
     <section class="final-cta-section">
       <div class="container">
         <h2>Need Professional Plumbing Services?</h2>
-        <p>Get connected with vetted, licensed local plumbers in ${city} immediately. Safe repairs, flat upfront estimates, 24/7 emergency dispatch.</p>
+        <p>Technicians are active in ${city}, ${stateCode}${zip ? ' ' + zip : ''} and nearby regions for plumbing repairs and installations. Call for immediate dispatch.</p>
         <div class="cta-buttons">
           <a href="/contact" class="btn-quote">Request a Quote</a>
           <a href="tel:877-516-8705" class="btn-call">Call Now: 877-516-8705</a>
@@ -1194,7 +1195,7 @@ function compileServicePage(sub) {
             <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
           </div>
           <h1 class="hero-title">${h1Formatted}</h1>
-          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode} (${zip}) with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
+          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode}${zip ? ` (${zip})` : ''} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
           </div>
