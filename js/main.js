@@ -38,9 +38,9 @@ function resolveAssetPath(originalPath) {
     cleanPath = cleanPath.substring(1);           // strip leading /
   }
   
-  // Resolve image paths
-  if (cleanPath.startsWith('public/')) {
-    cleanPath = cleanPath.substring(7);
+  // Ensure image paths route to public/images/
+  if (cleanPath.startsWith('images/')) {
+    cleanPath = 'public/' + cleanPath;
   }
   
   return prefix + cleanPath;
@@ -1136,6 +1136,7 @@ function initMain() {
 
   // Execute dynamic SEO automation
   applyDynamicSEO();
+}
 }
 
 if (document.readyState === 'loading') {

@@ -8,7 +8,7 @@
   <script>
     (function() {
       const isMobile = window.innerWidth <= 600;
-      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-team-mobile.webp' : '/public/images/hero-plumbing-team.webp';
+      const preloadHeroPath = isMobile ? 'public/images/hero-plumbing-team-mobile.webp' : 'public/images/hero-plumbing-team.webp';
       const preloadLink = document.createElement('link');
       preloadLink.rel = 'preload';
       preloadLink.as = 'image';
@@ -129,6 +129,11 @@
     .hero h1 span{background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .hero-text{font-size:1.2rem;color:var(--text-muted);line-height:1.8;margin-bottom:36px;max-width:600px;}
     .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+    .hero-stats{display:flex;flex-wrap:wrap;align-items:center;gap:36px;margin-top:48px;}
+    .hero-stat{text-align:left;flex:1;min-width:120px;}
+    .hero-stat-number{font-size:2.2rem;font-weight:800;color:var(--text-white);line-height:1;margin-bottom:4px;}
+    .hero-stat-number span{color:var(--accent);}
+    .hero-stat-label{font-size:0.85rem;color:var(--text-muted);font-weight:500;}
     .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:2;}
     @media (min-width:992px){.hero-grid{grid-template-columns:1.2fr 0.8fr;gap:64px;}}
     .hero-image-wrapper{position:relative;width:100%;display:flex;justify-content:center;}
@@ -194,7 +199,7 @@
         }
     }
   </style>
-  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="icon" type="image/png" href="public/images/favicon.png">
 </head>
 <body data-prefix="/" data-depth="0">
   <!-- Google Tag Manager (noscript) -->
@@ -212,7 +217,7 @@
     </div>
     <div class="header-inner">
       <a href="/" class="logo">
-        <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+        <img src="public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
       </a>
 
       <nav class="nav" id="mainNav">
@@ -246,20 +251,20 @@
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" data-track="phone" data-location="hero"><i class="fas fa-phone"></i> Speak to an Expert</a>
             <a href="/contact" class="btn btn-outline btn-lg"><i class="fas fa-file-lines"></i> Request a Quote</a>
           </div>
-          <div class="hero-stats" id="achievements">
-            <div class="hero-stat">
+          <div class="hero-stats flex flex-wrap items-center gap-6 sm:gap-10 mt-10" id="achievements">
+            <div class="hero-stat flex-1 min-w-[120px]">
               <div class="hero-stat-number">20<span>+</span></div>
               <div class="hero-stat-label">Years Experience</div>
             </div>
-            <div class="hero-stat">
+            <div class="hero-stat flex-1 min-w-[120px]">
               <div class="hero-stat-number">10K<span>+</span></div>
               <div class="hero-stat-label">Jobs Completed</div>
             </div>
-            <div class="hero-stat">
+            <div class="hero-stat flex-1 min-w-[120px]">
               <div class="hero-stat-number">4.9<span>&#9733;</span></div>
               <div class="hero-stat-label">Customer Rating</div>
             </div>
-            <div class="hero-stat">
+            <div class="hero-stat flex-1 min-w-[120px]">
               <div class="hero-stat-number">24<span>/7</span></div>
               <div class="hero-stat-label">Emergency Service</div>
             </div>
@@ -267,7 +272,7 @@
         </div>
         <div class="hero-image-wrapper">
           <div class="hero-image-container">
-            <img src="/images/hero-plumbing-team.webp" srcset="/images/hero-plumbing-team-mobile.webp 480w, /images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" fetchpriority="high">
+            <img src="public/images/hero-plumbing-team.webp" srcset="public/images/hero-plumbing-team-mobile.webp 480w, public/images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" fetchpriority="high">
             <div class="hero-floating-badge badge-satisfaction">
               <i class="fas fa-shield-halved"></i>
               <div>
@@ -1079,7 +1084,7 @@
         <!-- Column 1 -->
         <div class="footer-about">
           <a href="/" class="logo footer-logo">
-            <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
+            <img src="public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
           </a>
           <h3 class="footer-title footer-brand-heading">Find Top-Rated Local Plumbing Experts Nationwide</h3>
           <p class="footer-brand-subheading">We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
