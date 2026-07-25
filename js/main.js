@@ -33,8 +33,7 @@ function getAssetPrefix() {
   return './';
 }
 
-// Helper function to resolve absolute and relative asset paths
-// to their correct location in the public/images directory.
+// Helper function to resolve absolute asset paths with leading slash /
 function resolveAssetPath(originalPath) {
   if (!originalPath) return '';
   if (originalPath.startsWith('http://') || originalPath.startsWith('https://') || originalPath.startsWith('data:')) {
@@ -55,10 +54,7 @@ function resolveAssetPath(originalPath) {
     }
   }
   
-  const prefix = getAssetPrefix();
-  
-  // Clean prefix and path to avoid duplication
-  let cleanPath = originalPath;
+  let cleanPath = originalPath.trim();
   cleanPath = cleanPath.replace(/^(\.\.\/)+/, ''); // strip leading ../
   cleanPath = cleanPath.replace(/^\.\//, '');       // strip leading ./
   if (cleanPath.startsWith('/')) {
@@ -70,7 +66,7 @@ function resolveAssetPath(originalPath) {
     cleanPath = 'public/' + cleanPath;
   }
   
-  return prefix + cleanPath;
+  return '/' + cleanPath;
 }
 
 // Expose globally for inline scripts
