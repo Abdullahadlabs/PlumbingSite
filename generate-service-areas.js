@@ -471,10 +471,10 @@ function compilePage(loc) {
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="public/images/favicon.png">
+  <link rel="icon" type="image/png" href="../../public/images/favicon.png">
 </head>
 
-<body data-prefix="/" data-depth="0">
+<body data-prefix="../../" data-depth="2">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHGT9PF7"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -490,7 +490,7 @@ function compilePage(loc) {
     </div>
     <div class="header-inner">
       <a href="/" class="logo">
-        <img src="public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+        <img src="../../public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
       </a>
       <nav class="nav" id="mainNav">
         <a href="/" class="nav-link" id="homeMenuLink">Home</a>
@@ -572,7 +572,7 @@ function compilePage(loc) {
           </div>
           <div class="hero-image-wrapper" style="position: relative;">
             <div class="hero-image-container" style="position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-              <img src="public/images/hero-plumbing.webp" srcset="public/images/hero-plumbing-mobile.webp 480w, public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Local Plumbing Services in ${city}" class="hero-image" width="600" height="750" fetchpriority="high" style="width: 100%; height: auto; display: block; filter: brightness(0.95);">
+              <img src="../../public/images/hero-plumbing.webp" srcset="../../public/images/hero-plumbing-mobile.webp 480w, ../../public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Local Plumbing Services in ${city}" class="hero-image" width="600" height="750" fetchpriority="high" style="width: 100%; height: auto; display: block; filter: brightness(0.95);">
               <div class="hero-overlay-badge" style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
                 <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-user-check"></i></div>
                 <div>
@@ -1394,7 +1394,7 @@ function compileServicePage(sub) {
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Contact Info</h3>
-          <a href="tel:877-516-8705" class="footer-call-btn" style="color: #fff; text-decoration: none; display: inline-flex; margin-bottom: 8px;"><i class="fas fa-phone"></i> Call 24/7</a>
+          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-map-marker-alt"></i> Serving ${city}, ${stateCode} ${zip}</span>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
         </div>

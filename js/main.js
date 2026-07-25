@@ -5,18 +5,31 @@
    ================================================ */
 
 // Helper to determine the path prefix relative to the site root,
-// based on the path of js/main.js as loaded in the document.
+// based on data-prefix, script path, or URL pathname depth.
 function getAssetPrefix() {
+  const bodyPrefix = document.body ? document.body.getAttribute('data-prefix') : null;
+  if (bodyPrefix && bodyPrefix !== '/' && bodyPrefix !== './') {
+    return bodyPrefix;
+  }
+  
   const scriptEl = document.querySelector('script[src*="js/main.js"]');
   if (scriptEl) {
     const src = scriptEl.getAttribute('src');
     const parts = src.split('js/main.js');
-    if (parts.length > 0) {
-      let prefix = parts[0];
-      if (!prefix) return './';
-      return prefix;
+    if (parts.length > 0 && parts[0]) {
+      return parts[0];
     }
   }
+
+  const pathParts = window.location.pathname.split('/').filter(p => p.length > 0);
+  if (pathParts.includes('service-areas') || pathParts.includes('city')) {
+    if (pathParts.length >= 3) return '../../';
+    if (pathParts.length === 2) return '../';
+  }
+  if (pathParts.includes('state') || pathParts.includes('services')) {
+    if (pathParts.length >= 2) return '../';
+  }
+  
   return './';
 }
 
@@ -26,6 +39,20 @@ function resolveAssetPath(originalPath) {
   if (!originalPath) return '';
   if (originalPath.startsWith('http://') || originalPath.startsWith('https://') || originalPath.startsWith('data:')) {
     return originalPath;
+  }
+  
+  // Handle srcset format if it contains multiple entries or descriptors
+  if (originalPath.includes(',') || (originalPath.includes(' ') && originalPath.includes('w'))) {
+    const entries = originalPath.split(',');
+    if (entries.length > 1 || (entries[0] && entries[0].trim().split(/\s+/).length > 1)) {
+      return entries.map(entry => {
+        const parts = entry.trim().split(/\s+/);
+        if (parts[0]) {
+          parts[0] = resolveAssetPath(parts[0]);
+        }
+        return parts.join(' ');
+      }).join(', ');
+    }
   }
   
   const prefix = getAssetPrefix();
@@ -69,11 +96,15 @@ function slugify(text) {
 window.slugify = slugify;
 
 function initMain() {
-  // Automatically correct all static image sources on the page
-  document.querySelectorAll('img:not([data-manual-resolve])').forEach(img => {
+  // Automatically correct all static image sources and srcsets on the page
+  document.querySelectorAll('img').forEach(img => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('data:')) {
       img.src = resolveAssetPath(src);
+    }
+    const srcset = img.getAttribute('srcset');
+    if (srcset) {
+      img.setAttribute('srcset', resolveAssetPath(srcset));
     }
   });
 
