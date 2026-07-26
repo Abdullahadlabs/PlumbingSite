@@ -240,6 +240,9 @@ function compilePage(loc) {
   const queryStr = `?city=${encodeURIComponent(city)}&state=${encodeURIComponent(stateCode)}&zip=${encodeURIComponent(zip)}`;
 
   // Full HTML Template
+  const locKeywords = city && stateCode ? `${city}, ${stateCode}` : (city || stateCode || 'Local Area');
+  const keywords = `plumbers in ${locKeywords}, emergency plumbing ${locKeywords}, 24/7 local plumber ${locKeywords}, ${locKeywords} plumbing experts, water heater repair ${locKeywords}, affordable plumber ${locKeywords}`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 
@@ -270,6 +273,7 @@ function compilePage(loc) {
   <meta name="publisher" content="Home Plumbing USA">
   <title>${title}</title>
   <meta name="description" content="${metaDesc}">
+  <meta name="keywords" content="${keywords}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -988,6 +992,9 @@ function compileServicePage(sub) {
 
   const parentUrl = `/service-areas/${sub.zip_folder_name}/`;
 
+  const locKeywords = city && stateCode ? `${city}, ${stateCode}` : (city || stateCode || 'Local Area');
+  const keywords = `plumbers in ${locKeywords}, emergency plumbing ${locKeywords}, 24/7 local plumber ${locKeywords}, ${locKeywords} plumbing experts, water heater repair ${locKeywords}, affordable plumber ${locKeywords}`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -995,6 +1002,7 @@ function compileServicePage(sub) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${metaDesc}">
+  <meta name="keywords" content="${keywords}">
   <link rel="canonical" href="https://homeplumbingusa.com/service-areas/${sub.folder_name}/">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">

@@ -113,6 +113,7 @@
   <title>24/7 Local Plumbers | Emergency Plumbing Services &amp; Repairs</title>
   <meta name="description"
     content="Need trusted plumbing services in your city? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!">
+  <meta name="keywords" content="plumbers in your city, emergency plumbing your city, 24/7 local plumber your city, your city plumbing experts, water heater repair your city, affordable plumber your city">
   <script>
     (function() {
       const path = window.location.pathname;
@@ -261,6 +262,20 @@
           document.head.appendChild(metaDesc);
         }
         metaDesc.setAttribute('content', description);
+
+        let metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (!metaKeywords) {
+          metaKeywords = document.createElement('meta');
+          metaKeywords.setAttribute('name', 'keywords');
+          if (metaDesc && metaDesc.nextSibling) {
+            document.head.insertBefore(metaKeywords, metaDesc.nextSibling);
+          } else {
+            document.head.appendChild(metaKeywords);
+          }
+        }
+        const locForKeywords = (typeof locationLabel !== 'undefined' && locationLabel) ? locationLabel : ((typeof displayState !== 'undefined' && displayState) ? displayState : (stateName || 'your area'));
+        const keywordsText = `plumbers in ${locForKeywords}, emergency plumbing ${locForKeywords}, 24/7 local plumber ${locForKeywords}, ${locForKeywords} plumbing experts, water heater repair ${locForKeywords}, affordable plumber ${locForKeywords}`;
+        metaKeywords.setAttribute('content', keywordsText);
 
         const currentPath = (window.location.pathname + window.location.search).replace(/^\//, '');
         const pageUrl = `https://homeplumbingusa.com/${currentPath}`;
