@@ -109,8 +109,8 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Home Plumbing USA">
   <meta name="publisher" content="Home Plumbing USA">
-  <title>Home Plumbing USA | State Plumbing Services & Emergency Dispatch</title>
-  <meta name="description" content="Connecting homeowners and businesses with licensed, background-checked local plumbers. 45-min average response, 24/7 emergency dispatch.">
+  <title>24/7 Plumbers in Your State | Emergency Plumbing Services</title>
+  <meta name="description" content="Need trusted plumbing services in your state? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!">
   <script>
     (function() {
       const path = window.location.pathname;
@@ -213,22 +213,40 @@
       let areaServedName = '';
 
       if (currentPage === 'state') {
-        title = `Best Plumbing Services in ${stateName} | Home Plumbing USA`;
-        description = `Need professional plumbing services in ${stateName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
-        schemaName = `Home Plumbing USA - ${stateName}`;
-        schemaDesc = `Professional plumbing and emergency repair services in ${stateName}.`;
-        areaServedName = stateName;
+        const displayState = stateName || 'your state';
+        title = `24/7 Plumbers in ${displayState} | Emergency Plumbing Services`;
+        if (title.length > 60) {
+          title = `24/7 Plumbers in ${displayState} | Emergency Plumbing`;
+        }
+        description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
+        if (description.length < 150) {
+          description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        }
+        schemaName = `Home Plumbing USA - ${stateName || 'State'}`;
+        schemaDesc = `Professional plumbing and emergency repair services in ${stateName || 'State'}.`;
+        areaServedName = stateName || 'State';
       } else if (currentPage === 'city-zip') {
-        title = `Emergency Plumbers in ${cityName}, ${stateCode} | Home Plumbing USA`;
-        description = `Need professional plumbing services in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        const locationLabel = stateCode ? `${cityName}, ${stateCode}` : cityName;
+        title = `24/7 Plumbers in ${locationLabel} | Emergency Plumbing Services`;
+        if (title.length > 60) {
+          title = `24/7 Plumbers in ${locationLabel} | Emergency Plumbing`;
+        }
+        description = `Need trusted plumbing services in ${locationLabel}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
+        if (description.length < 150) {
+          description = `Need trusted plumbing services in ${locationLabel}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        }
         schemaName = `Home Plumbing USA - ${cityName}`;
         schemaDesc = `Professional plumbing and emergency repair services in ${cityName}, ${stateName}.`;
         areaServedName = cityName;
       } else if (currentPage === 'service-detail') {
-        title = `${serviceName} in ${cityName}, ${stateCode} | Home Plumbing USA`;
-        description = `Need professional ${serviceName} in ${cityName}? Certified, insured, and available 24/7. Call us today for a free quote!`;
+        const locationLabel = stateCode ? `${cityName}, ${stateCode}` : cityName;
+        title = `${serviceName} in ${locationLabel} | Home Plumbing USA`;
+        description = `Need ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        if (description.length < 150) {
+          description = `Looking for ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        }
         schemaName = `Home Plumbing USA - ${cityName}`;
-        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${cityName}, ${stateName}.`;
+        schemaDesc = `Professional ${serviceName.toLowerCase()} and emergency repair services in ${locationLabel}.`;
         areaServedName = cityName;
       }
 
