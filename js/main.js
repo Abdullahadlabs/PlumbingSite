@@ -262,13 +262,15 @@ function initMain() {
       footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
       footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     }
-  // Update Hero Section Subtitle dynamically (Fix BUG 1: Remove redundant state & double commas)
+  // Update Hero Section Subtitle dynamically
   document.querySelectorAll('.hero-text').forEach(heroEl => {
     if (currentLoc.city && currentLoc.state) {
       const stateCode = getStateCode(currentLoc.state);
       heroEl.textContent = `Connecting home and business owners in ${currentLoc.city}, ${stateCode} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
     } else if (currentLoc.city) {
       heroEl.textContent = `Connecting home and business owners in ${currentLoc.city} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+    } else if (heroEl.textContent) {
+      heroEl.textContent = heroEl.textContent.replace(/\s*\(\d{5}\)/g, ' & Surrounding Areas').replace(/\s*\b\d{5}\b/g, ' & Surrounding Areas');
     }
   });
 
