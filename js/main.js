@@ -262,24 +262,24 @@ function initMain() {
       footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
       footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     }
-  // Update Hero Section Subtitle dynamically to always render & Surrounding Areas instead of ZIP code
+  // Update Hero Section Subtitle dynamically (Option A: Completely ignore zip parameter in hero sub-text)
   document.querySelectorAll('.hero-text').forEach(heroEl => {
-    if (currentLoc.city && currentLoc.state) {
-      const stateCode = getStateCode(currentLoc.state);
-      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city}, ${stateCode} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
-    } else if (currentLoc.city) {
-      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
-    } else if (currentLoc.state) {
-      const capState = currentLoc.state.charAt(0).toUpperCase() + currentLoc.state.slice(1);
-      heroEl.textContent = `Connecting home and business owners in ${capState} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+    let city = currentLoc.city;
+    let state = currentLoc.state;
+
+    // If city is not explicitly passed, attempt lookup from zipCodeData or default to Anchorage, AK
+    if (!city && currentLoc.zip) {
+      if (typeof zipCodeData !== 'undefined' && zipCodeData[currentLoc.zip] && zipCodeData[currentLoc.zip][0]) {
+        city = zipCodeData[currentLoc.zip][0].split(',')[0].trim();
+      }
+      if (!city) city = 'Anchorage';
+      if (!state) state = 'AK';
     }
-    if (heroEl.textContent) {
-      heroEl.textContent = heroEl.textContent
-        .replace(/\s*\(\d{5}\)/gi, '')
-        .replace(/\s*\b\d{5}\b/gi, '')
-        .replace(/& Surrounding Areas & Surrounding Areas/gi, '& Surrounding Areas')
-        .replace(/\s+/g, ' ');
-    }
+
+    const displayCity = city || 'Anchorage';
+    const displayState = state ? getStateCode(state) : 'AK';
+
+    heroEl.textContent = `Connecting home and business owners in ${displayCity}, ${displayState} & Surrounding Areas with vetted, independent local plumbing experts in real-time.`;
   });
 
   // Update Final CTA Section Subtitle dynamically (Fix BUG 2: Ensure space after zip before "and nearby regions")
