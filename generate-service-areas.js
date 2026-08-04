@@ -1202,7 +1202,7 @@ function compileServicePage(sub) {
             <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
           </div>
           <h1 class="hero-title">${h1Formatted}</h1>
-          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode}${zip ? ` (${zip})` : ''} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
+          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode} &amp; Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
           </div>
