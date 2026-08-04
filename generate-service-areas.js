@@ -43,8 +43,7 @@ function compilePage(loc) {
   
   const rawH1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} (${zip})`;
   const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
-  const zipStr = zip ? ` (${zip})` : '';
-  const intro = `Connecting home and business owners in ${city}, ${stateCode}${zipStr} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+  const intro = `Connecting home and business owners in ${city}, ${stateCode} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
 
   // 2. Service Spotlight & Grid Section (Conditional / Fallback)
   let serviceSpotlightHtml = '';

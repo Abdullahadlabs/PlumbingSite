@@ -266,8 +266,9 @@ function initMain() {
   document.querySelectorAll('.hero-text').forEach(heroEl => {
     if (currentLoc.city && currentLoc.state) {
       const stateCode = getStateCode(currentLoc.state);
-      const zipStr = currentLoc.zip ? ` (${currentLoc.zip})` : '';
-      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city}, ${stateCode}${zipStr} with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city}, ${stateCode} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
+    } else if (currentLoc.city) {
+      heroEl.textContent = `Connecting home and business owners in ${currentLoc.city} & Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.`;
     }
   });
 
