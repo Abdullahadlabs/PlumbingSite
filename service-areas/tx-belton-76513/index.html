@@ -14,6 +14,20 @@
       canonicalLink.setAttribute('href', "https://homeplumbingusa.com/service-areas/tx-belton-76513/");
     })();
   </script>
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
+  <script>
+    (function() {
+      const isMobile = window.innerWidth <= 600;
+      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-mobile.webp' : '/public/images/hero-plumbing.webp';
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      preloadLink.href = preloadHeroPath;
+      preloadLink.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(preloadLink);
+    })();
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -37,7 +51,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
-  <script src="https://cdn.tailwindcss.com" defer></script>
+  <!-- Tailwind Play CDN: loaded lazily to eliminate TBT -->
+  <script>
+    (function() {
+      function loadTailwind() {
+        if (window.tailwindLoaded) return;
+        window.tailwindLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() {
+          if (window.tailwind) {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    navy: '#0a1628',
+                    'navy-mid': '#111d33',
+                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
+                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
+                    green: '#2563eb',
+                    red: '#e63946'
+                  }
+                }
+              }
+            };
+          }
+        };
+        document.head.appendChild(s);
+      }
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(loadTailwind, { timeout: 5000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
+      }
+      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      triggerEvents.forEach(function(e) {
+        window.addEventListener(e, loadTailwind, { passive: true, once: true });
+      });
+    })();
+  </script>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .hero-section {
@@ -240,16 +292,16 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- Header -->
-  <header class="header site-header" id="header">
-    <div class="top-bar">
+  <header class="header site-header" id="header" style="min-height: 120px;">
+    <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
         <span>24/7 Emergency Plumbers in Belton, TX - Same Price, Holidays Included!</span>
       </div>
     </div>
-    <div class="header-inner">
-      <a href="/" class="logo">
-        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
       </a>
       <nav class="nav" id="mainNav">
         <a href="/" class="nav-link" id="homeMenuLink">Home</a>
@@ -329,9 +381,9 @@
               <a href="/contact" class="btn btn-outline btn-lg" style="text-decoration: none; color: #fff; border-color: rgba(255,255,255,0.4);"><i class="fas fa-paper-plane"></i> Request Online Quote</a>
             </div>
           </div>
-          <div class="hero-image-wrapper" style="position: relative;">
-            <div class="hero-image-container" style="position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-              <img src="/public/images/hero-plumbing.webp" srcset="/public/images/hero-plumbing-mobile.webp 480w, /public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Local Plumbing Services in Belton" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high" style="width: 100%; height: auto; display: block; filter: brightness(0.95);">
+          <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
+            <div class="hero-image-container" style="position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; min-height: 350px; display: block; background: #0f1e3a; contain: layout style; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+              <img src="/public/images/hero-plumbing.webp" srcset="/public/images/hero-plumbing-mobile.webp 480w, /public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Local Plumbing Services in Belton" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; filter: brightness(0.95);">
               <div class="hero-overlay-badge" style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
                 <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-user-check"></i></div>
                 <div>

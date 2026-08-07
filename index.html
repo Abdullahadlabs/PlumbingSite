@@ -6,10 +6,12 @@
   <title>24/7 Vetted Plumbers Nationwide | Home Plumbing USA</title>
   <meta name="description" content="Connect with vetted, background-checked local plumbers across the USA. 24/7 emergency dispatch, same-day repairs, and upfront pricing. Call 877-516-8705 today!">
   <meta name="keywords" content="24/7 emergency plumber, nationwide plumbing referral, local plumbers near me, vetted plumbing experts, water heater repair, drain cleaning, affordable plumbing services, residential plumbing">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-team-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-team.webp" fetchpriority="high" media="(min-width: 601px)">
   <script>
     (function() {
       const isMobile = window.innerWidth <= 600;
-      const preloadHeroPath = isMobile ? 'public/images/hero-plumbing-team-mobile.webp' : 'public/images/hero-plumbing-team.webp';
+      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-team-mobile.webp' : '/public/images/hero-plumbing-team.webp';
       const preloadLink = document.createElement('link');
       preloadLink.rel = 'preload';
       preloadLink.as = 'image';
@@ -83,6 +85,10 @@
       } else {
         window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
       }
+      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      triggerEvents.forEach(function(e) {
+        window.addEventListener(e, loadTailwind, { passive: true, once: true });
+      });
     })();
   </script>
   <!-- Google Fonts Outfit & Inter -->
@@ -230,16 +236,16 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- ==================== HEADER ==================== -->
-  <header class="header" id="header">
-    <div class="top-bar">
+  <header class="header" id="header" style="min-height: 120px;">
+    <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
         <span>24/7 Emergency Plumbing Network - Same Price, Holidays Included!</span>
       </div>
     </div>
-    <div class="header-inner">
-      <a href="/" class="logo">
-        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
       </a>
 
       <nav class="nav" id="mainNav">
@@ -292,9 +298,9 @@
             </div>
           </div>
         </div>
-        <div class="hero-image-wrapper">
-          <div class="hero-image-container">
-            <img src="/public/images/hero-plumbing-team.webp" srcset="/public/images/hero-plumbing-team-mobile.webp 480w, /public/images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high">
+        <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
+          <div class="hero-image-container" style="position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; min-height: 350px; display: block; background: #0f1e3a; contain: layout style;">
+            <img src="/public/images/hero-plumbing-team.webp" srcset="/public/images/hero-plumbing-team-mobile.webp 480w, /public/images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;">
             <div class="hero-floating-badge badge-satisfaction">
               <i class="fas fa-shield-halved"></i>
               <div>

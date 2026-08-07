@@ -37,25 +37,30 @@
     })();
   </script>
   <!-- End Google Tag Manager -->
-  <!-- Tailwind Play CDN -->
-  <script src="https://cdn.tailwindcss.com" defer></script>
+  <!-- Tailwind Play CDN: loaded lazily to eliminate TBT -->
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: '#0a1628', // Remapped to Lone Star Dark Navy
-            'navy-mid': '#111d33', // Remapped to Lone Star Mid Navy
-            blue: {
-              DEFAULT: '#2563eb', // Remapped to Confident Royal Blue
-              light: '#3b82f6' // Remapped to Light blue
-            },
-            orange: {
-              DEFAULT: '#f59e0b', // Remapped to Golden orange
-              dark: '#d97706' // Remapped to Golden orange hover
-            },
-            green: '#2563eb', // Remapped to Success/Active Blue
-            red: '#e63946' // Remapped to locator alert red
+    (function() {
+      function loadTailwind() {
+        if (window.tailwindLoaded) return;
+        window.tailwindLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() {
+          if (window.tailwind) {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    navy: '#0a1628',
+                    'navy-mid': '#111d33',
+                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
+                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
+                    green: '#2563eb',
+                    red: '#e63946'
+                  }
+                }
+              }
+            };
           }
         }
       }
@@ -78,16 +83,16 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <!-- ==================== HEADER ==================== -->
-  <header class="header" id="header">
-    <div class="top-bar">
+  <header class="header" id="header" style="min-height: 120px;">
+    <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
         <span>24/7 Emergency Plumbing Network - Same Price, Holidays Included!</span>
       </div>
     </div>
-    <div class="header-inner">
-      <a href="/" class="logo">
-        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
       </a>
 
       <nav class="nav" id="mainNav">

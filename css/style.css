@@ -289,6 +289,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 120px;
   z-index: 1000;
   background: rgba(10, 22, 40, 0.85);
   backdrop-filter: blur(20px);
@@ -315,6 +316,7 @@ img {
   justify-content: space-between;
   padding: 0 20px;
   height: 80px;
+  min-height: 80px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -327,6 +329,9 @@ img {
   font-weight: 800;
   color: var(--text-white);
   z-index: 1001;
+  min-height: 52px;
+  width: 247px;
+  max-width: 100%;
   transition: var(--transition);
 }
 
@@ -336,11 +341,11 @@ img {
 
 .logo-img {
   height: 52px;
-  /* Explicit width reserves space before SVG loads — prevents CLS */
   width: 247px;
+  aspect-ratio: 247 / 52;
+  min-height: 52px;
   display: block;
   transition: var(--transition);
-  /* Object-fit ensures it scales correctly if container changes */
   object-fit: contain;
   object-position: left center;
 }
