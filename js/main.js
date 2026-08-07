@@ -264,51 +264,46 @@ function initMain() {
       footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
       footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     }
-  // Update Hero Section Subtitle dynamically (Option A: Completely ignore zip parameter in hero sub-text)
-  document.querySelectorAll('.hero-text').forEach(heroEl => {
-    let city = currentLoc.city;
-    let state = currentLoc.state;
+  // Update Hero Section Subtitle dynamically only when location parameters are present in URL
+  if (currentLoc.city || currentLoc.state || currentLoc.zip) {
+    document.querySelectorAll('.hero-text').forEach(heroEl => {
+      let city = currentLoc.city;
+      let state = currentLoc.state;
 
-    // If city is not explicitly passed, attempt lookup from zipCodeData or default to Anchorage, AK
-    if (!city && currentLoc.zip) {
-      if (typeof zipCodeData !== 'undefined' && zipCodeData[currentLoc.zip] && zipCodeData[currentLoc.zip][0]) {
-        city = zipCodeData[currentLoc.zip][0].split(',')[0].trim();
+      if (!city && currentLoc.zip) {
+        if (typeof zipCodeData !== 'undefined' && zipCodeData[currentLoc.zip] && zipCodeData[currentLoc.zip][0]) {
+          city = zipCodeData[currentLoc.zip][0].split(',')[0].trim();
+        }
+        if (!city) city = 'Anchorage';
+        if (!state) state = 'AK';
       }
-      if (!city) city = 'Anchorage';
-      if (!state) state = 'AK';
-    }
 
-    const displayCity = city || 'Anchorage';
-    const displayState = state ? getStateCode(state) : 'AK';
+      const displayCity = city || 'Anchorage';
+      const displayState = state ? getStateCode(state) : 'AK';
+      const newText = `Connecting home and business owners in ${displayCity}, ${displayState} & Surrounding Areas with vetted, independent local plumbing experts in real-time.`;
+      if (heroEl.textContent !== newText) {
+        heroEl.textContent = newText;
+      }
+    });
+  }
 
-    heroEl.textContent = `Connecting home and business owners in ${displayCity}, ${displayState} & Surrounding Areas with vetted, independent local plumbing experts in real-time.`;
-  });
-
-  // Update Final CTA Section Subtitle dynamically (Fix BUG 2: Ensure space after zip before "and nearby regions")
-  document.querySelectorAll('.final-cta-section p, .cta-section p').forEach(ctaEl => {
-    if (ctaEl.textContent.includes('active in') || ctaEl.textContent.includes('Get connected with')) {
-      if (currentLoc.city && currentLoc.state) {
+  // Update Final CTA Section Subtitle dynamically only when custom location exists
+  if (currentLoc.city && currentLoc.state) {
+    document.querySelectorAll('.final-cta-section p, .cta-section p').forEach(ctaEl => {
+      if (ctaEl.textContent.includes('active in') || ctaEl.textContent.includes('Get connected with')) {
         const stateCode = getStateCode(currentLoc.state);
         const zipStr = currentLoc.zip ? ` ${currentLoc.zip}` : '';
         const activeService = (typeof serviceName !== 'undefined' && serviceName) ? serviceName : 'plumbing';
         ctaEl.textContent = `Technicians are active in ${currentLoc.city}, ${stateCode}${zipStr} and nearby regions for ${activeService.toLowerCase()} repairs and installations. Call for immediate dispatch.`;
       }
-    }
-  });
+    });
+  }
 
-
-  // Standardize Header phone CTA buttons to "📞 Call Now"
-  document.querySelectorAll('.header-phone, .header-cta a[href^="tel:"]').forEach(el => {
-    el.innerHTML = `<i class="fas fa-phone"></i> Call Now`;
-  });
-  document.querySelectorAll('.hero-buttons a[href^="tel:"], .hero-content a[href^="tel:"]').forEach(el => {
-    el.innerHTML = `<i class="fas fa-phone"></i> Speak to an Expert`;
-  });
-
-  // Standardize Footer call CTA buttons to "📞 Call 24/7"
+  // Standardize Footer call CTA button classes without forcing innerHTML re-renders
   document.querySelectorAll('.footer-col a[href^="tel:"], .footer-about a[href^="tel:"], .footer-dispatch-btn').forEach(el => {
-    el.classList.add('footer-call-btn');
-    el.innerHTML = `<i class="fas fa-phone"></i> Call 24/7`;
+    if (!el.classList.contains('footer-call-btn')) {
+      el.classList.add('footer-call-btn');
+    }
   });
 
   const getNormalizedPage = (path) => {
