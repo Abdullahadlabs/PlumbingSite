@@ -92,15 +92,17 @@ function slugify(text) {
 window.slugify = slugify;
 
 function initMain() {
-  // Automatically correct all static image sources and srcsets on the page
+  // Automatically correct static image sources and srcsets only when needed
   document.querySelectorAll('img').forEach(img => {
     const src = img.getAttribute('src');
-    if (src && !src.startsWith('data:')) {
-      img.src = resolveAssetPath(src);
+    if (src && !src.startsWith('data:') && !src.startsWith('/public/') && !src.startsWith('/images/')) {
+      const resolved = resolveAssetPath(src);
+      if (resolved !== src) img.src = resolved;
     }
     const srcset = img.getAttribute('srcset');
-    if (srcset) {
-      img.setAttribute('srcset', resolveAssetPath(srcset));
+    if (srcset && !srcset.includes('/public/') && !srcset.includes('/images/')) {
+      const resolvedSet = resolveAssetPath(srcset);
+      if (resolvedSet !== srcset) img.setAttribute('srcset', resolvedSet);
     }
   });
 

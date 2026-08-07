@@ -6,25 +6,21 @@
   <title>24/7 Vetted Plumbers Nationwide | Home Plumbing USA</title>
   <meta name="description" content="Connect with vetted, background-checked local plumbers across the USA. 24/7 emergency dispatch, same-day repairs, and upfront pricing. Call 877-516-8705 today!">
   <meta name="keywords" content="24/7 emergency plumber, nationwide plumbing referral, local plumbers near me, vetted plumbing experts, water heater repair, drain cleaning, affordable plumbing services, residential plumbing">
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-team-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-team.webp" fetchpriority="high" media="(min-width: 601px)">
-  <script>
-    (function() {
-      const isMobile = window.innerWidth <= 600;
-      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-team-mobile.webp' : '/public/images/hero-plumbing-team.webp';
-      const preloadLink = document.createElement('link');
-      preloadLink.rel = 'preload';
-      preloadLink.as = 'image';
-      preloadLink.href = preloadHeroPath;
-      preloadLink.setAttribute('fetchpriority', 'high');
-      document.head.appendChild(preloadLink);
-    })();
-  </script>
+  <!-- Performance Preconnect Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <!-- LCP Image Preload Hints (Static, high-priority, zero JS delay) -->
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-team-mobile.webp" fetchpriority="high" media="(max-width: 600px)" type="image/webp">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-team.webp" fetchpriority="high" media="(min-width: 601px)" type="image/webp">
+
   <meta name="google-site-verification" content="qh-X9fjhWBAv1oLQd3N9iIIB6S8pjz0PcEDxk4UIt08" />
   <meta name="robots" content="index, follow">
   <meta name="author" content="Home Plumbing USA">
   <link rel="canonical" href="https://homeplumbingusa.com/">
-    <!-- Google Tag Manager (Delayed for Performance) -->
+
+  <!-- Google Tag Manager (Non-blocking, deferred execution) -->
   <script>
     (function() {
       function loadGTM() {
@@ -37,70 +33,34 @@
         })(window,document,'script','dataLayer','GTM-NHGT9PF7');
       }
       function scheduleGTM() {
-        setTimeout(loadGTM, 3500);
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadGTM, { timeout: 4500 });
+        } else {
+          setTimeout(loadGTM, 4500);
+        }
       }
       if (document.readyState === 'complete') {
         scheduleGTM();
       } else {
-        window.addEventListener('load', scheduleGTM);
+        window.addEventListener('load', scheduleGTM, { passive: true });
       }
-      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      const triggerEvents = ['scroll', 'touchstart', 'click'];
       triggerEvents.forEach(function(e) {
         window.addEventListener(e, loadGTM, { passive: true, once: true });
       });
     })();
   </script>
   <!-- End Google Tag Manager -->
-  <!-- Tailwind Play CDN: loaded lazily after page is interactive to eliminate TBT -->
-  <script>
-    (function() {
-      function loadTailwind() {
-        if (window.tailwindLoaded) return;
-        window.tailwindLoaded = true;
-        var s = document.createElement('script');
-        s.src = 'https://cdn.tailwindcss.com';
-        s.onload = function() {
-          if (window.tailwind) {
-            tailwind.config = {
-              theme: {
-                extend: {
-                  colors: {
-                    navy: '#0a1628',
-                    'navy-mid': '#111d33',
-                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
-                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
-                    green: '#2563eb',
-                    red: '#e63946'
-                  }
-                }
-              }
-            };
-          }
-        };
-        document.head.appendChild(s);
-      }
-      // Use requestIdleCallback on mobile for maximum TBT reduction
-      if (typeof requestIdleCallback !== 'undefined') {
-        requestIdleCallback(loadTailwind, { timeout: 5000 });
-      } else {
-        window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
-      }
-      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
-      triggerEvents.forEach(function(e) {
-        window.addEventListener(e, loadTailwind, { passive: true, once: true });
-      });
-    })();
-  </script>
-  <!-- Google Fonts Outfit & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <!-- Stylesheets -->
+
+  <!-- Google Fonts Outfit & Inter (Optimized weights subsetting & display=swap) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
+
   <style>
     :root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#3b82f6;--accent:#f59e0b;--accent-dark:#d97706;--accent-light:#fbbf24;--bg-dark:#0a1628;--bg-darker:#060f1d;--bg-card:#111d33;--bg-card-hover:#162442;--bg-surface:#0d1a2d;--text-white:#ffffff;--text-light:#e2e8f0;--text-muted:#94a3b8;--text-dark:#1e293b;--border-color:rgba(255,255,255,0.08);--border-light:rgba(255,255,255,0.12);--gradient-primary:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);--gradient-accent:linear-gradient(135deg, #f59e0b 0%, #d97706 100%);--gradient-hero:linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1a2d 100%);--shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 4px 16px rgba(0,0,0,0.4);--shadow-lg:0 8px 32px rgba(0,0,0,0.5);--shadow-glow:0 0 20px rgba(37,99,235,0.3);--shadow-accent-glow:0 0 20px rgba(245, 158, 11, 0.3);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--transition-slow:all 0.5s cubic-bezier(0.4,0,0.2,1);--radius-sm:6px;--radius-md:12px;--radius-lg:20px;--radius-full:50%;}
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -130,21 +90,21 @@
     .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px),radial-gradient(ellipse at 20% 80%,rgba(37,99,235,0.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,0.08) 0%,transparent 60%);background-size:40px 40px,40px 40px,auto,auto;pointer-events:none;}
     .hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:200px;background:linear-gradient(to top,var(--bg-dark),transparent);pointer-events:none;}
     .hero-content{position:relative;z-index:2;max-width:750px;}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:30px;font-size:0.85rem;font-weight:600;color:var(--primary-light);margin-bottom:24px;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:30px;font-size:0.85rem;font-weight:600;color:var(--primary-light);margin-bottom:24px;opacity:1 !important;transform:none !important;}
     .hero-badge i{color:var(--accent);}
-    .hero h1{font-size:3.5rem;font-weight:900;line-height:1.15;color:var(--text-white);margin-bottom:24px;}
+    .hero h1{font-size:3.5rem;font-weight:900;line-height:1.15;color:var(--text-white);margin-bottom:24px;opacity:1 !important;transform:none !important;}
     .hero h1 span{background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .hero-text{font-size:1.2rem;color:var(--text-muted);line-height:1.8;margin-bottom:36px;max-width:600px;}
-    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
-    .hero-stats{display:flex;flex-wrap:wrap;align-items:center;gap:36px;margin-top:48px;}
+    .hero-text{font-size:1.2rem;color:var(--text-muted);line-height:1.8;margin-bottom:36px;max-width:600px;opacity:1 !important;transform:none !important;}
+    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;opacity:1 !important;transform:none !important;}
+    .hero-stats{display:flex;flex-wrap:wrap;align-items:center;gap:36px;margin-top:48px;opacity:1 !important;transform:none !important;}
     .hero-stat{text-align:left;flex:1;min-width:120px;}
     .hero-stat-number{font-size:2.2rem;font-weight:800;color:var(--text-white);line-height:1;margin-bottom:4px;}
     .hero-stat-number span{color:var(--accent);}
     .hero-stat-label{font-size:0.85rem;color:var(--text-muted);font-weight:500;}
     .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:2;}
     @media (min-width:992px){.hero-grid{grid-template-columns:1.2fr 0.8fr;gap:64px;}}
-    .hero-image-wrapper{position:relative;width:100%;display:flex;justify-content:center;}
-    .hero-image-container{position:relative;width:100%;max-width:420px;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:var(--transition);aspect-ratio:4 / 5;background:linear-gradient(135deg,#0f1e3a 0%,#162442 100%);contain:layout;}
+    .hero-image-wrapper{position:relative;width:100%;display:flex;justify-content:center;opacity:1 !important;transform:none !important;}
+    .hero-image-container{position:relative;width:100%;max-width:420px;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:var(--transition);aspect-ratio:4 / 5;background:linear-gradient(135deg,#0f1e3a 0%,#162442 100%);contain:layout style;}
     .hero-image-container::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:calc(var(--radius-lg) + 2px);z-index:-1;opacity:0.3;transition:var(--transition);}
     .hero-image-container:hover::before{opacity:0.6;filter:blur(2px);}
     .hero-image{width:100%;height:100%;aspect-ratio:4 / 5;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);transition:var(--transition-slow);min-height:300px;}
@@ -159,19 +119,36 @@
     .badge-emergency{top:40px;right:-30px;animation-delay:2s;}
     .badge-emergency i{background:var(--gradient-accent);color:var(--text-dark);}
     @keyframes floatBadge{0%{transform:translateY(0);}50%{transform:translateY(-8px);}100%{transform:translateY(0);}}
-    /* ===== MOBILE: Stable hero + kill animations to fix CLS/TBT ===== */
+
+    /* Inline micro utilities replacement for Tailwind */
+    .flex{display:flex;}
+    .flex-wrap{flex-wrap:wrap;}
+    .items-center{align-items:center;}
+    .justify-center{justify-content:center;}
+    .gap-6{gap:1.5rem;}
+    .sm\:gap-10{gap:2.5rem;}
+    .mt-10{margin-top:2.5rem;}
+    .mt-2{margin-top:0.5rem;}
+    .flex-1{flex:1 1 0%;}
+    .min-w-\[120px\]{min-width:120px;}
+    .space-x-4 > * + *{margin-left:1rem;}
+    .text-xs{font-size:0.75rem;line-height:1rem;}
+    .text-white\/20{color:rgba(255,255,255,0.2);}
+    .hover\:text-white:hover{color:#fff;}
+    .transition-colors{transition:color 0.15s ease-in-out;}
+
+    /* ===== MOBILE: Stable hero + kill animations for zero CLS & TBT ===== */
     @media(max-width:768px){
       .hero{min-height:85vh !important;}
       .hero-badge,.hero h1,.hero-text,.hero-buttons,.hero-stats,.hero-image-wrapper{animation:none !important;opacity:1 !important;transform:none !important;}
       .animate-on-scroll{opacity:1 !important;transform:none !important;transition:none !important;}
-      /* Disable floating badge animation: the continuous floatBadge loop is the TBT/CLS culprit */
       .hero-floating-badge{animation:none !important;transform:translate3d(0,0,0) !important;will-change:auto !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(17,29,51,0.95);min-width:160px;}
       .badge-satisfaction{bottom:16px !important;left:8px !important;}
       .badge-emergency{top:16px !important;right:8px !important;}
       *{will-change:auto !important;}
     }
   </style>
-  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -300,7 +277,11 @@
         </div>
         <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
           <div class="hero-image-container" style="position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; min-height: 350px; display: block; background: #0f1e3a; contain: layout style;">
-            <img src="/public/images/hero-plumbing-team.webp" srcset="/public/images/hero-plumbing-team-mobile.webp 480w, /public/images/hero-plumbing-team.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Vetted Professional Plumbing Team" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;">
+            <picture style="width: 100%; height: 100%; display: block;">
+              <source media="(max-width: 600px)" srcset="/public/images/hero-plumbing-team-mobile.webp" type="image/webp">
+              <source media="(min-width: 601px)" srcset="/public/images/hero-plumbing-team.webp" type="image/webp">
+              <img src="/public/images/hero-plumbing-team.webp" alt="Vetted Professional Plumbing Team" class="hero-image" width="400" height="500" loading="eager" fetchpriority="high" decoding="async" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;">
+            </picture>
             <div class="hero-floating-badge badge-satisfaction">
               <i class="fas fa-shield-halved"></i>
               <div>
