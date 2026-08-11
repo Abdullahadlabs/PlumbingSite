@@ -3066,44 +3066,55 @@ a.footer-call-btn:hover {
 }
 
 /* ==================== ANCHORAGE HERO OPTIMIZATION ==================== */
-.hero-anchorage {
+.hero-anchorage,
+.hero-section.hero-anchorage {
   position: relative !important;
   min-height: 60vh !important;
   display: flex !important;
   align-items: center !important;
   padding: 140px 0 80px !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/public/images/clogged-drain-repair-service-anchorage.webp') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
+  background: linear-gradient(rgba(10, 20, 40, 0.8), rgba(10, 20, 40, 0.9)), url('/public/images/clogged-drain-repair-service-anchorage.webp') center/cover no-repeat !important;
   overflow: hidden !important;
 }
 
 .hero-anchorage .hero-grid,
 .hero-grid-anchorage {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
   max-width: 850px !important;
+  margin: 0 auto !important;
   position: relative !important;
   z-index: 2 !important;
 }
 
 .hero-anchorage .hero-content {
   max-width: 800px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.hero-anchorage .hero-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 16px !important;
 }
 
 @media (max-width: 992px) {
-  .hero-anchorage {
+  .hero-anchorage,
+  .hero-section.hero-anchorage {
     min-height: 50vh !important;
     padding: 100px 0 60px !important;
   }
 }
 
 @media (max-width: 576px) {
-  .hero-anchorage {
+  .hero-anchorage,
+  .hero-section.hero-anchorage {
     padding: 80px 0 50px !important;
   }
 }
+
 
 
 
