@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dataFilePath = path.join(__dirname, 'database', 'seo-pages.json');
+const servicePagesPath = path.join(__dirname, 'database', 'service-area-pages.json');
 const serviceAreasOutputDir = path.join(__dirname, 'service-areas');
 
 // Helper to capitalize words (e.g., "fort-lauderdale" -> "Fort Lauderdale")
@@ -1312,7 +1313,25 @@ function compileServicePage(sub) {
     </div>
   </header>
 
-  <section class="hero hero-sub">
+${isAnchorage ? `  <section class="hero hero-sub hero-anchorage" style="background: linear-gradient(rgba(10, 20, 40, 0.8), rgba(10, 20, 40, 0.9)), url('/public/images/clogged-drain-repair-service-anchorage.webp') center/cover no-repeat !important;">
+    <div class="container">
+      <div class="hero-grid hero-grid-anchorage" style="display: flex; justify-content: center; width: 100%;">
+        <div class="hero-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <div class="breadcrumbs" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px; display: flex; justify-content: center; gap: 6px;">
+            <a href="../../../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a><span> / </span>
+            <a href="../../../areas.html" style="color: var(--text-muted); text-decoration: none;">Service Areas</a><span> / </span>
+            <a href="${parentUrl}" style="color: var(--text-muted); text-decoration: none;">${city}, ${stateCode} ${zip}</a><span> / </span>
+            <span class="current" style="color: var(--text-white);">${sub.service_name}</span>
+          </div>
+          <h1 class="hero-title">${h1Formatted}</h1>
+          <p class="hero-text" style="color: rgba(255, 255, 255, 0.9); font-size: 1.15rem; line-height: 1.6; max-width: 700px; margin: 10px auto 0;">Connecting home and business owners in ${city}, ${stateCode} &amp; Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
+          <div class="hero-buttons" style="margin-top: 20px; display: flex; justify-content: center;">
+            <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>` : `  <section class="hero hero-sub">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-content">
@@ -1342,7 +1361,7 @@ function compileServicePage(sub) {
         </div>
       </div>
     </div>
-  </section>
+  </section>`}
 
   <!-- Trust Section -->
   <section class="trust-section" id="trust" style="position: relative; z-index: 10;">

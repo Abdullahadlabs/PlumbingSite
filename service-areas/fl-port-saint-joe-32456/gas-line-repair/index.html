@@ -7,8 +7,61 @@
   <meta name="description" content="Home Plumbing USA provides gas line repair in Port Saint Joe, FL 32456. Licensed, insured, and available for same-day service. Call 877-516-8705.">
   <meta name="keywords" content="plumbers in Port Saint Joe, FL, emergency plumbing Port Saint Joe, FL, 24/7 local plumber Port Saint Joe, FL, Port Saint Joe, FL plumbing experts, water heater repair Port Saint Joe, FL, affordable plumber Port Saint Joe, FL">
   <link rel="canonical" href="https://homeplumbingusa.com/service-areas/fl-port-saint-joe-32456/gas-line-repair/">
-  <link rel="stylesheet" href="../../../css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
+  <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
+  <script>
+    (function() {
+      const isMobile = window.innerWidth <= 600;
+      const preloadHeroPath = isMobile ? '/public/images/hero-plumbing-mobile.webp' : '/public/images/hero-plumbing.webp';
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      preloadLink.href = preloadHeroPath;
+      preloadLink.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(preloadLink);
+    })();
+  </script>
+  <!-- Tailwind Play CDN: loaded lazily to eliminate TBT -->
+  <script>
+    (function() {
+      function loadTailwind() {
+        if (window.tailwindLoaded) return;
+        window.tailwindLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() {
+          if (window.tailwind) {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    navy: '#0a1628',
+                    'navy-mid': '#111d33',
+                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
+                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
+                    green: '#2563eb',
+                    red: '#e63946'
+                  }
+                }
+              }
+            };
+          }
+        };
+        document.head.appendChild(s);
+      }
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(loadTailwind, { timeout: 5000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
+      }
+      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      triggerEvents.forEach(function(e) {
+        window.addEventListener(e, loadTailwind, { passive: true, once: true });
+      });
+    })();
+  </script>
   <style>
     .detail-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; margin-top: 40px; }
     .detail-main { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 40px; }
@@ -35,6 +88,30 @@
       background: var(--gradient-hero);
       padding: 140px 0 80px;
       overflow: hidden;
+    }
+    .hero-title, .hero-content h1, .hero-sub h1 {
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      font-size: 3.25rem !important;
+      font-weight: 900 !important;
+      line-height: 1.18 !important;
+      color: #ffffff !important;
+      margin-top: 12px !important;
+      margin-bottom: 24px !important;
+      letter-spacing: -0.025em !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .hero-title span.highlight, .hero-content h1 span.highlight, .hero-sub h1 span.highlight {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #f59e0b 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      display: inline-block;
+    }
+    @media (max-width: 992px) {
+      .hero-title, .hero-content h1, .hero-sub h1 { font-size: 2.5rem !important; }
+    }
+    @media (max-width: 576px) {
+      .hero-title, .hero-content h1, .hero-sub h1 { font-size: 2rem !important; line-height: 1.25 !important; }
     }
     .hero-sub::before {
       content: '';
@@ -155,7 +232,7 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NHGT9PF7');</script>
   <!-- End Google Tag Manager -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="icon" type="image/png" href="/public/images/favicon.png">
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -163,10 +240,10 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="../../../index.html" class="logo">
-        <img src="/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+  <header class="header" id="header" style="min-height: 80px;">
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="../../../index.html" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
       </a>
       <nav class="nav" id="mainNav">
         <a href="../../../index.html" class="nav-link">Home</a>
@@ -177,7 +254,7 @@
         <a href="../../../contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
         <a href="../../../contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
@@ -194,15 +271,15 @@
             <a href="/service-areas/fl-port-saint-joe-32456/" style="color: var(--text-muted); text-decoration: none;">Port Saint Joe, FL 32456</a><span> / </span>
             <span class="current" style="color: var(--text-white);">Gas Line Repair</span>
           </div>
-          <h1>Gas Line Repair in Port Saint Joe, FL 32456</h1>
-          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Home Plumbing USA provides licensed gas line repair throughout Port Saint Joe, FL & Surrounding Areas, with a mobile team dispatched directly to your location.</p>
+          <h1 class="hero-title">Gas Line Repair in <span class="highlight">Port Saint Joe, FL 32456</span></h1>
+          <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in Port Saint Joe, FL &amp; Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
             <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
           </div>
         </div>
-        <div class="hero-image-wrapper" style="position: relative;">
-          <div class="hero-image-container" style="position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-            <img src="/images/hero-plumbing.webp" alt="Local Gas Line Repair in Port Saint Joe" class="hero-image" width="600" height="750" style="width: 100%; height: auto; display: block; filter: brightness(0.95);">
+        <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
+          <div class="hero-image-container" style="position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; min-height: 350px; display: block; background: #0f1e3a; contain: layout style; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+            <img src="/public/images/hero-plumbing.webp" alt="Local Gas Line Repair in Port Saint Joe" class="hero-image" width="600" height="750" loading="eager" fetchpriority="high" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; filter: brightness(0.95);">
             <div class="hero-overlay-badge" style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
               <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-screwdriver-wrench"></i></div>
               <div>
@@ -217,66 +294,50 @@
   </section>
 
   <!-- Trust Section -->
-  <section class="trust-section" id="trust" style="background: #0b0f19; border-bottom: 1px solid var(--border-color); position: relative; z-index: 10;">
-    <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <!-- Left Column: Image Container -->
-      <div class="lg:col-span-5 animate-on-scroll">
-        <div class="rounded-2xl shadow-2xl overflow-hidden border border-slate-800" style="position: relative; aspect-ratio: 4/5;">
-          <img src="/images/hero-plumbing.webp" alt="Professional Plumbers in Port Saint Joe" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85);">
-          <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-            <div style="background: var(--primary); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-certificate"></i></div>
-            <div>
-              <div style="color: #fff; font-weight: 700; font-size: 0.95rem;">Vetted &amp; Certified</div>
-              <div style="color: var(--text-muted); font-size: 0.78rem; font-weight: 500;">Uniform Plumbing Code Compliant</div>
-            </div>
+  <section class="trust-section" id="trust" style="position: relative; z-index: 10;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Card 1: Certified Plumbers -->
+        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold text-base leading-snug">Certified Plumbers</h3>
+            <p class="text-slate-400 text-sm mt-1 leading-relaxed">Vetted technicians who know Florida building codes.</p>
           </div>
         </div>
-      </div>
 
-      <!-- Right Column: Text & 2x2 Grid -->
-      <div class="lg:col-span-7 animate-on-scroll">
-        <!-- Header Block -->
-        <div class="mb-8">
-          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">Engineered For Trust, Built For Reliability in Port Saint Joe, FL</h2>
-          <p class="text-slate-400 text-base mb-8">We deliver premium, code-compliant plumbing solutions backed by certified local technicians and transparent guarantees.</p>
+        <!-- Card 2: 24/7 Rapid Response -->
+        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold text-base leading-snug">24/7 Rapid Response</h3>
+            <p class="text-slate-400 text-sm mt-1 leading-relaxed">Average arrival under 45 minutes for urgent repairs.</p>
+          </div>
         </div>
 
-        <!-- 2x2 Glass Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Card 1: Certified Plumbers -->
-          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-            <div class="flex items-center space-x-4 mb-3">
-              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-user-shield"></i></div>
-              <span class="text-lg font-semibold text-white">Certified Plumbers</span>
-            </div>
-            <p class="text-sm text-slate-400 leading-relaxed">Our locally dispatched technicians are meticulously vetted and understand Florida building codes.</p>
+        <!-- Card 3: Upfront Estimates -->
+        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+            <i class="fas fa-file-invoice-dollar"></i>
           </div>
-
-          <!-- Card 2: 24/7 Rapid Response -->
-          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-            <div class="flex items-center space-x-4 mb-3">
-              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-truck-fast"></i></div>
-              <span class="text-lg font-semibold text-white">24/7 Rapid Response</span>
-            </div>
-            <p class="text-sm text-slate-400 leading-relaxed">Active dispatch networks ensuring an average arrival time of under 45 minutes for urgent repairs.</p>
+          <div>
+            <h3 class="text-white font-semibold text-base leading-snug">Upfront Estimates</h3>
+            <p class="text-slate-400 text-sm mt-1 leading-relaxed">Flat-rate quotes presented on-site, no surprises.</p>
           </div>
+        </div>
 
-          <!-- Card 3: Upfront Estimates -->
-          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-            <div class="flex items-center space-x-4 mb-3">
-              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-file-invoice-dollar"></i></div>
-              <span class="text-lg font-semibold text-white">Upfront Estimates</span>
-            </div>
-            <p class="text-sm text-slate-400 leading-relaxed">No phone guesstimates or surprises. Bounded flat-rate quotes presented transparently on-site before we work.</p>
+        <!-- Card 4: Guaranteed Craftsmanship -->
+        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-xl p-5 flex items-center gap-4 shadow-xl hover:border-blue-500/50 transition-all duration-300">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 text-xl">
+            <i class="fas fa-award"></i>
           </div>
-
-          <!-- Card 4: Guaranteed Craftsmanship -->
-          <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 rounded-xl hover:border-blue-500/50 transition-all duration-300">
-            <div class="flex items-center space-x-4 mb-3">
-              <div class="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg"><i class="fas fa-award"></i></div>
-              <span class="text-lg font-semibold text-white">Guaranteed Craftsmanship</span>
-            </div>
-            <p class="text-sm text-slate-400 leading-relaxed">Every single diagnostic, pipe repair, and install is backed by parts and labor warranties.</p>
+          <div>
+            <h3 class="text-white font-semibold text-base leading-snug">Guaranteed Craftsmanship</h3>
+            <p class="text-slate-400 text-sm mt-1 leading-relaxed">Every repair backed by parts and labor warranties.</p>
           </div>
         </div>
       </div>
@@ -296,33 +357,38 @@
           <h2>Our Process</h2>
           <div class="workflow-list">
             
-      <div class="workflow-step">
-        <div class="step-num">1</div>
-        <div><h4>Schedule Dispatch</h4><p>Contact our Port Saint Joe dispatch team to schedule a certified technician for your gas line repair needs.</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">01</div>
+        <h3 class="process-title">Schedule Dispatch</h3>
+        <p>Contact our Port Saint Joe dispatch team to schedule a certified technician for your gas line repair needs.</p>
       </div>
     
 
-      <div class="workflow-step">
-        <div class="step-num">2</div>
-        <div><h4>On-Site Assessment</h4><p>Our local FL plumber performs a physical inspection of your plumbing systems in Port Saint Joe.</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">02</div>
+        <h3 class="process-title">On-Site Assessment</h3>
+        <p>Our local FL plumber performs a physical inspection of your plumbing systems in Port Saint Joe.</p>
       </div>
     
 
-      <div class="workflow-step">
-        <div class="step-num">3</div>
-        <div><h4>Upfront Diagnostic Quote</h4><p>You receive a flat-rate written quote for the gas line repair work before any physical repairs begin.</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">03</div>
+        <h3 class="process-title">Upfront Diagnostic Quote</h3>
+        <p>You receive a flat-rate written quote for the gas line repair work before any physical repairs begin.</p>
       </div>
     
 
-      <div class="workflow-step">
-        <div class="step-num">4</div>
-        <div><h4>Precision Execution</h4><p>We complete the plumbing repairs or installations using high-grade materials and professional tools.</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">04</div>
+        <h3 class="process-title">Precision Execution</h3>
+        <p>We complete the plumbing repairs or installations using high-grade materials and professional tools.</p>
       </div>
     
 
-      <div class="workflow-step">
-        <div class="step-num">5</div>
-        <div><h4>Diagnostic Verification & Flow-Check QA</h4><p>We conduct hydrostatic pressure testing and code compliance verification to guarantee a leak-free system in Port Saint Joe.</p></div>
+      <div class="process-card animate-on-scroll">
+        <div class="process-number">05</div>
+        <h3 class="process-title">Diagnostic Verification & Flow-Check QA</h3>
+        <p>We conduct hydrostatic pressure testing and code compliance verification to guarantee a leak-free system in Port Saint Joe.</p>
       </div>
     
           </div>
@@ -539,93 +605,168 @@
       </div>
       <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
         
-      <div class="faq-item">
-        <div class="faq-question"><h3>Is 24/7 emergency gas line repair available in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in Port Saint Joe immediately to resolve urgent leaks, backups, or system failures.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Is 24/7 emergency gas line repair available in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in Port Saint Joe immediately to resolve urgent leaks, backups, or system failures.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>How quickly can a plumber arrive at my property in Port Saint Joe 32456?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>On average, emergency plumbers in our network can arrive at your address in Port Saint Joe (32456) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">How quickly can a plumber arrive at my property in Port Saint Joe 32456?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">On average, emergency plumbers in our network can arrive at your address in Port Saint Joe (32456) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Are the technicians licensed and insured in FL?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your gas line repair will be handled safely, professionally, and in complete compliance with FL building codes.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Are the technicians licensed and insured in FL?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your gas line repair will be handled safely, professionally, and in complete compliance with FL building codes.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Do you charge by the hour or provide flat-rate pricing?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your Port Saint Joe property and present your options, ensuring there are no surprise charges or hidden fees.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Do you charge by the hour or provide flat-rate pricing?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your Port Saint Joe property and present your options, ensuring there are no surprise charges or hidden fees.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Does Port Saint Joe have hard water, and does it affect my plumbing?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Yes, many parts of FL have high concentrations of calcium and magnesium minerals, resulting in hard water. Over time, this leads to scale scaling in your water lines, clogging faucets, and shortening the lifespan of your water heater and appliances.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Does Port Saint Joe have hard water, and does it affect my plumbing?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes, many parts of FL have high concentrations of calcium and magnesium minerals, resulting in hard water. Over time, this leads to scale scaling in your water lines, clogging faucets, and shortening the lifespan of your water heater and appliances.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>How can I protect my water heater and fixtures from hard water damage in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Installing a whole-house water softener is the best defense against hard water scale in Port Saint Joe. It neutralizes hard minerals before they enter your plumbing system, extending the life of your water heater, preserving water pressure, and preventing faucet spots.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">How can I protect my water heater and fixtures from hard water damage in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Installing a whole-house water softener is the best defense against hard water scale in Port Saint Joe. It neutralizes hard minerals before they enter your plumbing system, extending the life of your water heater, preserving water pressure, and preventing faucet spots.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Is there a warranty or guarantee on the gas line repair work?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Yes! All gas line repair repairs are backed by a workmanship guarantee from the matching plumbing provider. Replaced parts, fixtures, and appliances are also covered by their respective manufacturer warranties.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Is there a warranty or guarantee on the gas line repair work?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes! All gas line repair repairs are backed by a workmanship guarantee from the matching plumbing provider. Replaced parts, fixtures, and appliances are also covered by their respective manufacturer warranties.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>What should I do immediately if I find a water leak?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Locate your main water shutoff valve (usually found near the water meter or street connection) and turn it completely clockwise. This cuts off the supply and stops active water damage at your Port Saint Joe home while you call us for emergency dispatch.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">What should I do immediately if I find a water leak?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Locate your main water shutoff valve (usually found near the water meter or street connection) and turn it completely clockwise. This cuts off the supply and stops active water damage at your Port Saint Joe home while you call us for emergency dispatch.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Is high-pressure hydro-jetting safe for older pipes in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Yes. Our plumbers conduct a fiber-optic sewer camera inspection first to check the pipe structure. If the sewer line is structurally sound, hydro-jetting is the safest, most effective way to clear grease, sludge, and tree roots.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Is high-pressure hydro-jetting safe for older pipes in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Our plumbers conduct a fiber-optic sewer camera inspection first to check the pipe structure. If the sewer line is structurally sound, hydro-jetting is the safest, most effective way to clear grease, sludge, and tree roots.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>How do you ensure plumbing installations comply with FL building codes?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Our network plumbers are fully versed in local building codes and the FL Plumbing Code. We ensure correct slope, venting, and material selection for all installations in Port Saint Joe, passing any municipal inspections.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">How do you ensure plumbing installations comply with FL building codes?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Our network plumbers are fully versed in local building codes and the FL Plumbing Code. We ensure correct slope, venting, and material selection for all installations in Port Saint Joe, passing any municipal inspections.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>Do you offer commercial gas line repair services in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Yes, we match businesses in Port Saint Joe with commercial plumbing specialists. We handle retail, restaurant, office, and multi-family plumbing systems, prioritizing minimal downtime and code-compliant installations.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">Do you offer commercial gas line repair services in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes, we match businesses in Port Saint Joe with commercial plumbing specialists. We handle retail, restaurant, office, and multi-family plumbing systems, prioritizing minimal downtime and code-compliant installations.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>How often should I have my water heater serviced in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>We recommend professional water heater service at least once a year in Port Saint Joe (32456). Servicing includes flushing the tank to remove sediment buildup, testing the relief valve, and checking the anode rod to prevent tank rust.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">How often should I have my water heater serviced in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We recommend professional water heater service at least once a year in Port Saint Joe (32456). Servicing includes flushing the tank to remove sediment buildup, testing the relief valve, and checking the anode rod to prevent tank rust.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>What tools do technicians use to find hidden leaks in Port Saint Joe?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Technicians in Port Saint Joe utilize state-of-the-art non-invasive tools such as electronic ground microphones, tracer gas sniffers, and thermal imaging cameras. This allows us to locate hidden pipe leaks under concrete slabs or inside walls without tearing up your property.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">What tools do technicians use to find hidden leaks in Port Saint Joe?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Technicians in Port Saint Joe utilize state-of-the-art non-invasive tools such as electronic ground microphones, tracer gas sniffers, and thermal imaging cameras. This allows us to locate hidden pipe leaks under concrete slabs or inside walls without tearing up your property.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>How can I prevent water damage from plumbing failures?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>Installing smart water leak detectors near water heaters, washing machines, and under sinks is highly recommended. These systems alert you on your phone and can even trigger automatic shutoff valves if a leak is detected in your Port Saint Joe home.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">How can I prevent water damage from plumbing failures?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Installing smart water leak detectors near water heaters, washing machines, and under sinks is highly recommended. These systems alert you on your phone and can even trigger automatic shutoff valves if a leak is detected in your Port Saint Joe home.</div>
+        </div>
       </div>
     
 
-      <div class="faq-item">
-        <div class="faq-question"><h3>What should I avoid putting down my garbage disposal?</h3><span class="faq-icon"><i class="fas fa-plus"></i></span></div>
-        <div class="faq-answer"><p>To prevent clogs and disposal motor burnout in Port Saint Joe, never put coffee grounds, eggshells, potato peels, grease, oils, or fibrous vegetables down the drain. Always run cold water while operating the disposal to help flush particles.</p></div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">
+          <h3 class="faq-title">What should I avoid putting down my garbage disposal?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">To prevent clogs and disposal motor burnout in Port Saint Joe, never put coffee grounds, eggshells, potato peels, grease, oils, or fibrous vegetables down the drain. Always run cold water while operating the disposal to help flush particles.</div>
+        </div>
       </div>
     
       </div>
@@ -648,18 +789,18 @@
   <footer class="footer" style="background: var(--bg-footer); padding: 40px 0; color: var(--text-muted);">
     <div class="container">
       <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
-                <div class="footer-about">
+        <div class="footer-about">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;"><i class="fas fa-house-chimney" style="color: var(--primary-light);"></i> Home Plumbing USA</h3>
-          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 8px;">Find Top-Rated Local Plumbing Experts in Port Saint Joe, FL</h4>
-          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">We connect homeowners in Port Saint Joe with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
+          <h4 class="footer-title footer-brand-heading" style="color: #fff; font-size: 1rem; margin-bottom: 8px;">Find Top-Rated Local Plumbing Experts in Port Saint Joe, FL</h4>
+          <p class="footer-brand-subheading" style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">We connect homeowners in Port Saint Joe, FL with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Quick Links</h3>
-          <a href="../../../index.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Home</a>
-          <a href="../../../about.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">About Us</a>
-          <a href="../../../services.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Services</a>
-          <a href="../../../areas.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Areas We Serve</a>
-          <a href="../../../contact.html" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Contact</a>
+          <a href="/" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Home</a>
+          <a href="/services" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Services</a>
+          <a href="/#states" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Service Areas</a>
+          <a href="/about" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">About Us</a>
+          <a href="/contact" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;">Contact Us</a>
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">This ZIP</h3>
@@ -667,7 +808,7 @@
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Contact Info</h3>
-          <a href="tel:877-516-8705" style="color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px;"><i class="fas fa-phone"></i> 877-516-8705</a>
+          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-map-marker-alt"></i> Serving Port Saint Joe, FL 32456</span>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
         </div>
@@ -676,20 +817,20 @@
         <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
         <!-- Footer Links -->
         <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
-          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
+          <a href="/privacy-policy" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Privacy Policy</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a>
+          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Terms &amp; Conditions</a>
           <span style="color: rgba(255,255,255,0.2);">&middot;</span>
-          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none;">Disclaimer</a>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;">Disclaimer</a>
         </div>
         <!-- Visible One-Liner Disclaimer Text -->
-        <p style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-align: center;">
+        <p class="footer-legal-disclaimer" style="color: #6b7280; font-size: 11.5px; margin-top: 8px; text-align: center;">
           <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
         </p>
       </div>
     </div>
   </footer>
 
-  <script src="../../../js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
