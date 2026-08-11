@@ -3077,6 +3077,12 @@ a.footer-call-btn:hover {
   overflow: hidden !important;
 }
 
+.hero-anchorage::before,
+.hero-section.hero-anchorage::before {
+  display: none !important;
+  background: none !important;
+}
+
 .hero-anchorage .hero-grid,
 .hero-grid-anchorage {
   display: flex !important;
