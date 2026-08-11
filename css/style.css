@@ -3065,4 +3065,45 @@ a.footer-call-btn:hover {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
 }
 
+/* ==================== ANCHORAGE HERO OPTIMIZATION ==================== */
+.hero-anchorage {
+  position: relative !important;
+  min-height: 60vh !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 140px 0 80px !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/public/images/clogged-drain-repair-service-anchorage.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  overflow: hidden !important;
+}
+
+.hero-anchorage .hero-grid,
+.hero-grid-anchorage {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  max-width: 850px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.hero-anchorage .hero-content {
+  max-width: 800px !important;
+}
+
+@media (max-width: 992px) {
+  .hero-anchorage {
+    min-height: 50vh !important;
+    padding: 100px 0 60px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-anchorage {
+    padding: 80px 0 50px !important;
+  }
+}
+
+
 

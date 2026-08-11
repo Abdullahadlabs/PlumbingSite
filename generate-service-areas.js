@@ -25,6 +25,7 @@ function slugify(text) {
 }
 
 function compilePage(loc) {
+  const isAnchorage = (loc.folder_name && loc.folder_name.includes('anchorage')) || (loc.city && loc.city.toLowerCase().includes('anchorage'));
   const city = loc.city || 'Local Area';
   const stateCode = (loc.state || 'FL').toUpperCase();
   const zip = loc.zip || '';
@@ -258,7 +259,7 @@ function compilePage(loc) {
       canonicalLink.setAttribute('href', "${canonicalUrl}");
     })();
   </script>
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
+${isAnchorage ? `<link rel="preload" as="image" href="/public/images/clogged-drain-repair-service-anchorage.webp" fetchpriority="high">` : `<link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
   <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
   <script>
     (function() {
@@ -271,7 +272,7 @@ function compilePage(loc) {
       preloadLink.setAttribute('fetchpriority', 'high');
       document.head.appendChild(preloadLink);
     })();
-  </script>
+  </script>`}
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -612,7 +613,22 @@ function compilePage(loc) {
   </header>
 
   <main>
-    <!-- Hero Section -->
+${isAnchorage ? `    <!-- Hero Section -->
+    <section class="hero-section hero-anchorage" id="hero">
+      <div class="container">
+        <div class="hero-grid hero-grid-anchorage">
+          <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-star"></i> Serving Local Neighborhoods</div>
+            <h1 class="hero-title">${h1Formatted}</h1>
+            <p class="hero-text">${intro}</p>
+            <div class="hero-buttons" style="margin-top: 30px; display: flex; gap: 16px; flex-wrap: wrap;">
+              <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
+              <a href="/contact" class="btn btn-outline btn-lg" style="text-decoration: none; color: #fff; border-color: rgba(255,255,255,0.4);"><i class="fas fa-paper-plane"></i> Request Online Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>` : `    <!-- Hero Section -->
     <section class="hero-section" id="hero">
       <div class="container">
         <div class="hero-grid">
@@ -639,7 +655,7 @@ function compilePage(loc) {
           </div>
         </div>
       </div>
-    </section>
+    </section>`}
 
     <!-- Trust Section -->
     <section class="trust-section" id="trust" style="position: relative; z-index: 10;">
@@ -969,6 +985,7 @@ function compilePage(loc) {
 }
 
 function compileServicePage(sub) {
+  const isAnchorage = (sub.folder_name && sub.folder_name.includes('anchorage')) || (sub.zip_folder_name && sub.zip_folder_name.includes('anchorage')) || (sub.city && sub.city.toLowerCase().includes('anchorage'));
   const city = sub.city || 'Local Area';
   const stateCode = (sub.state || 'FL').toUpperCase();
   const zip = sub.zip || '';
