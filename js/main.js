@@ -190,19 +190,39 @@ function initMain() {
         console.error('Error saving user_active_location:', e);
       }
     } else {
-      // Priority 2: Check localStorage user_active_location
-      try {
-        const cached = localStorage.getItem('user_active_location');
-        if (cached) {
-          const locObj = JSON.parse(cached);
-          if (locObj) {
-            city = locObj.city || '';
-            state = locObj.state || '';
-            zip = locObj.zip || '';
+      // Check if we are on global main pages (e.g. /, /index.html, /about, /services, /projects, /contact)
+      const pathname = window.location.pathname.toLowerCase();
+      const isGlobalPage = (
+        pathname === '/' ||
+        pathname.endsWith('/index.html') ||
+        pathname.endsWith('/about.html') ||
+        pathname.endsWith('/about') ||
+        pathname.endsWith('/services.html') ||
+        pathname.endsWith('/services') ||
+        pathname.endsWith('/projects.html') ||
+        pathname.endsWith('/projects') ||
+        pathname.endsWith('/contact.html') ||
+        pathname.endsWith('/contact') ||
+        pathname.endsWith('/privacy-policy.html') ||
+        pathname.endsWith('/terms-and-conditions.html') ||
+        pathname.endsWith('/disclaimer.html')
+      );
+
+      // Only check cached localStorage if we are NOT on a global static page
+      if (!isGlobalPage) {
+        try {
+          const cached = localStorage.getItem('user_active_location');
+          if (cached) {
+            const locObj = JSON.parse(cached);
+            if (locObj) {
+              city = locObj.city || '';
+              state = locObj.state || '';
+              zip = locObj.zip || '';
+            }
           }
+        } catch (e) {
+          console.error('Error reading user_active_location:', e);
         }
-      } catch (e) {
-        console.error('Error reading user_active_location:', e);
       }
     }
 
@@ -240,7 +260,7 @@ function initMain() {
         const stateName = currentLoc.state.charAt(0).toUpperCase() + currentLoc.state.slice(1);
         textSpan.textContent = `24/7 Emergency Plumbers in ${stateName} - Same Price, Holidays Included!`;
       } else {
-        textSpan.textContent = `24/7 Emergency Plumbing Network - Same Price, Holidays Included!`;
+        textSpan.textContent = `24/7 Emergency Plumbers - Same Price, Holidays Included!`;
       }
     }
   }
@@ -264,6 +284,8 @@ function initMain() {
       footerBrandHeading.textContent = `Find Top-Rated Local Plumbing Experts Nationwide`;
       footerBrandSubheading.textContent = `We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast & reliable service.`;
     }
+  }
+
   // Update Hero Section Subtitle dynamically only when location parameters are present in URL
   if (currentLoc.city || currentLoc.state || currentLoc.zip) {
     document.querySelectorAll('.hero-text').forEach(heroEl => {
@@ -274,15 +296,16 @@ function initMain() {
         if (typeof zipCodeData !== 'undefined' && zipCodeData[currentLoc.zip] && zipCodeData[currentLoc.zip][0]) {
           city = zipCodeData[currentLoc.zip][0].split(',')[0].trim();
         }
-        if (!city) city = 'Anchorage';
-        if (!state) state = 'AK';
       }
 
-      const displayCity = city || 'Anchorage';
-      const displayState = state ? getStateCode(state) : 'AK';
-      const newText = `Connecting home and business owners in ${displayCity}, ${displayState} & Surrounding Areas with vetted, independent local plumbing experts in real-time.`;
-      if (heroEl.textContent !== newText) {
-        heroEl.textContent = newText;
+      if (city) {
+        const displayCity = city;
+        const displayState = state ? getStateCode(state) : '';
+        const stateStr = displayState ? `, ${displayState}` : '';
+        const newText = `Connecting home and business owners in ${displayCity}${stateStr} & Surrounding Areas with vetted, independent local plumbing experts in real-time.`;
+        if (heroEl.textContent !== newText) {
+          heroEl.textContent = newText;
+        }
       }
     });
   }

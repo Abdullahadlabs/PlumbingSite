@@ -1325,7 +1325,7 @@ function compileServicePage(sub) {
           <h1 class="hero-title">${h1Formatted}</h1>
           <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode} &amp; Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
-            <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+            <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone-alt"></i> Call Now — Avg. 15-Min Response</a>
           </div>
         </div>
         <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
@@ -1425,7 +1425,7 @@ function compileServicePage(sub) {
           <div class="sidebar-widget cta-widget">
             <h3>Need ${sub.service_name} in ${city}?</h3>
             <p>Call now for same-day service in ${zip} and the surrounding area.</p>
-            <a href="tel:877-516-8705" class="btn btn-lg" style="background:#fff; color: var(--primary); width: 100%; justify-content: center; text-decoration: none; font-weight: 600;"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+            <a href="tel:877-516-8705" class="btn btn-lg" style="background:#fff; color: var(--primary); width: 100%; justify-content: center; text-decoration: none; font-weight: 600;"><i class="fas fa-phone-alt"></i> Call Now</a>
           </div>
         </div>
       </div>
