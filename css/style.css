@@ -3085,19 +3085,20 @@ a.footer-call-btn:hover {
 
 .hero-anchorage .hero-grid,
 .hero-grid-anchorage {
-  display: flex !important;
-  justify-content: center !important;
-  width: 100% !important;
-  max-width: 850px !important;
-  margin: 0 auto !important;
-  position: relative !important;
-  z-index: 2 !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-anchorage .hero-content {
-  max-width: 800px !important;
-  margin: 0 auto !important;
-  text-align: center !important;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
 }
 
 .hero-anchorage .hero-buttons {
