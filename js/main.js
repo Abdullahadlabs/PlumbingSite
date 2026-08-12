@@ -1204,7 +1204,6 @@ function initMain() {
   // Execute dynamic SEO automation
   applyDynamicSEO();
 }
-}
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initMain);

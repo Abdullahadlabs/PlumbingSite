@@ -381,41 +381,117 @@
   </noscript>
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* Specific styling for the restructured elements */
+    /* Specific mobile-optimized styling */
     .hero-section {
       position: relative;
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 0 80px;
-      background: linear-gradient(rgba(10, 20, 40, 0.8), rgba(10, 20, 40, 0.9)), url('/public/images/clogged-drain-repair-service-anchorage.webp') center/cover no-repeat !important;
+      padding: 130px 0 80px;
+      background: linear-gradient(135deg, #0a1628 0%, #111d33 100%) !important;
       overflow: hidden;
     }
     .hero-section::before {
       display: none !important;
       background: none !important;
     }
-    .hero-section .hero-grid {
-      display: flex !important;
-      justify-content: center !important;
+    .hero-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 54px !important;
+      align-items: center !important;
       width: 100% !important;
-      max-width: 850px !important;
+      max-width: 1280px !important;
       margin: 0 auto !important;
-      position: relative;
-      z-index: 2;
     }
-    .hero-section .hero-content {
-      max-width: 800px !important;
-      margin: 0 auto !important;
-      text-align: center !important;
+    .hero-content {
+      text-align: left !important;
+      max-width: 100% !important;
     }
-    .hero-section .hero-buttons {
-      display: flex !important;
-      justify-content: center !important;
-      gap: 16px !important;
+    .hero-form-card {
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Mobile Responsive Breakpoints */
+    @media (max-width: 992px) {
+      .hero-section {
+        padding: 140px 0 50px !important;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+      }
+      .hero-content {
+        text-align: center !important;
+      }
+      .hero-content h1 {
+        font-size: 2.2rem !important;
+      }
+      .hero-content .hero-badge {
+        margin: 0 auto 16px auto !important;
+      }
+      .hero-content .hero-text {
+        margin: 0 auto 24px auto !important;
+      }
+      .hero-stats-grid {
+        margin: 0 auto !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-section {
+        padding: 140px 12px 40px !important;
+      }
+      .hero-content h1 {
+        font-size: 1.7rem !important;
+        line-height: 1.25 !important;
+      }
+      .hero-form-card {
+        padding: 22px 16px !important;
+        border-radius: 16px !important;
+      }
+      .hero-stats-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+      .hero-stat-number {
+        font-size: 1.3rem !important;
+      }
+      .hero-stat-label {
+        font-size: 0.72rem !important;
+      }
+      .container {
+        padding: 0 16px !important;
+      }
+    }
+    .vetting-reviews-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .seasonal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
     }
     @media (max-width: 992px) {
-      .hero-section .hero-grid {
+      .vetting-reviews-grid,
+      .seasonal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+    }
+    .trust-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 992px) {
+      .trust-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 576px) {
+      .trust-grid-4 {
         grid-template-columns: 1fr;
       }
     }
@@ -765,7 +841,7 @@
             </div>
             
             <h1 style="font-size: 2.9rem; font-weight: 900; line-height: 1.2; color: #ffffff; margin-bottom: 20px; font-family: 'Outfit', sans-serif;">
-              <span id="hero-title-prefix">Drain Cleaning Service</span> in <span class="city-name">Your Local Area</span>
+              Premium <span id="hero-title-prefix">Clogged Drain Repair Services</span> in <span class="city-name">Anchorage</span><span class="state-code-wrap">, <span class="state-code">AK</span></span>
             </h1>
             
             <p class="hero-text" style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; max-width: 540px;">
@@ -885,7 +961,7 @@
     <!-- 4. Section 3: Vetting & Dispatch Reviews (2 Column) -->
     <section class="section" id="vetting-reviews" style="background: #0d192d; padding: 80px 0;">
       <div class="container">
-        <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start;">
+        <div class="vetting-reviews-grid">
           
           <!-- Left Column: How We Vet Our Pros -->
           <div>
@@ -961,7 +1037,7 @@
           <p class="section-desc" style="color: #94a3b8; max-width: 650px; margin: 12px auto 0;">Sub-zero winter temperatures and climate variations create specific pipe risks that require specialized local plumbing solutions.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div class="seasonal-grid">
           <!-- Winter Pain Points Card -->
           <div style="background: #111d33; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 32px;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
@@ -1264,7 +1340,7 @@
       document.querySelectorAll('.state-code').forEach(el => el.textContent = stateCode);
       const heroPrefix = document.getElementById('hero-title-prefix');
       if (heroPrefix) {
-        heroPrefix.textContent = serviceName.toLowerCase().includes('service') ? serviceName : `${serviceName} Service`;
+        heroPrefix.textContent = serviceName.toLowerCase().includes('service') ? serviceName : `${serviceName} Services`;
       }
       document.querySelectorAll('.dynamic-service').forEach(el => el.textContent = serviceName);
       document.querySelectorAll('.zip-code').forEach(el => {
@@ -1283,7 +1359,7 @@
       document.querySelectorAll('.state-code').forEach(el => el.textContent = '');
       const heroPrefix = document.getElementById('hero-title-prefix');
       if (heroPrefix) {
-        heroPrefix.textContent = serviceName.toLowerCase().includes('service') ? serviceName : `${serviceName} Service`;
+        heroPrefix.textContent = serviceName.toLowerCase().includes('service') ? serviceName : `${serviceName} Services`;
       }
       document.querySelectorAll('.dynamic-service').forEach(el => el.textContent = serviceName);
       document.querySelectorAll('.zip-code').forEach(el => {
