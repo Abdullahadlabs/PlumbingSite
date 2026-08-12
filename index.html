@@ -1,26 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>24/7 Vetted Plumbers Nationwide | Home Plumbing USA</title>
-  <meta name="description" content="Connect with vetted, background-checked local plumbers across the USA. 24/7 emergency dispatch, same-day repairs, and upfront pricing. Call 877-516-8705 today!">
-  <meta name="keywords" content="24/7 emergency plumber, nationwide plumbing referral, local plumbers near me, vetted plumbing experts, water heater repair, drain cleaning, affordable plumbing services, residential plumbing">
-  <!-- Performance Preconnect Hints -->
+  <title>24/7 Emergency Plumbing Dispatch Anchorage AK | Vetted Local Pros</title>
+  <meta name="description" content="Anchorage's 24/7 emergency plumbing dispatch service. Get matched with vetted, licensed, and insured local plumbers in under 15 minutes. Call (907) 516-8705.">
+  <meta name="keywords" content="Anchorage plumber, emergency plumbing dispatch Anchorage, burst pipe repair 907, 24/7 plumber Anchorage AK, South Anchorage plumbing, Eagle River plumber, Midtown Anchorage plumbing">
+  <link rel="canonical" href="https://homeplumbingusa.com/">
+  
+  <!-- Preconnect Hints for Google Fonts & FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
-  <!-- LCP Image Preload Hints (Static, high-priority, zero JS delay) -->
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-team-mobile.webp" fetchpriority="high" media="(max-width: 600px)" type="image/webp">
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-team.webp" fetchpriority="high" media="(min-width: 601px)" type="image/webp">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            heading: ['Outfit', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#060f1d',
+              900: '#0a1628',
+              850: '#0d1a2d',
+              800: '#111d33',
+              700: '#162442',
+              600: '#1e3a8a',
+            },
+            accent: {
+              DEFAULT: '#f59e0b',
+              dark: '#d97706',
+              light: '#fbbf24',
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'ping-slow': 'ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
 
-  <meta name="google-site-verification" content="qh-X9fjhWBAv1oLQd3N9iIIB6S8pjz0PcEDxk4UIt08" />
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Home Plumbing USA">
-  <link rel="canonical" href="https://homeplumbingusa.com/">
+  <style>
+    /* Zero-CLS Smooth Scroll & Custom Scrollbar */
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #060f1d; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    
+    .glass-card {
+      background: rgba(17, 29, 51, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .glass-nav {
+      background: rgba(10, 22, 40, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-  <!-- Google Tag Manager (Non-blocking, deferred execution) -->
+    .radar-sweep {
+      background: conic-gradient(from 0deg at 50% 50%, rgba(37, 99, 235, 0.3) 0deg, rgba(37, 99, 235, 0) 60deg, transparent 360deg);
+      animation: sweep 6s linear infinite;
+    }
+    
+    @keyframes sweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Google Tag Manager (Non-blocking deferred load) -->
   <script>
     (function() {
       function loadGTM() {
@@ -32,1136 +96,825 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-NHGT9PF7');
       }
-      function scheduleGTM() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadGTM, { timeout: 4500 });
-        } else {
-          setTimeout(loadGTM, 4500);
-        }
-      }
-      if (document.readyState === 'complete') {
-        scheduleGTM();
-      } else {
-        window.addEventListener('load', scheduleGTM, { passive: true });
-      }
       const triggerEvents = ['scroll', 'touchstart', 'click'];
       triggerEvents.forEach(function(e) {
         window.addEventListener(e, loadGTM, { passive: true, once: true });
       });
+      setTimeout(loadGTM, 4500);
     })();
   </script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Google Fonts Outfit & Inter (Optimized weights subsetting & display=swap) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  </noscript>
-
-  <style>
-    :root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#3b82f6;--accent:#f59e0b;--accent-dark:#d97706;--accent-light:#fbbf24;--bg-dark:#0a1628;--bg-darker:#060f1d;--bg-card:#111d33;--bg-card-hover:#162442;--bg-surface:#0d1a2d;--text-white:#ffffff;--text-light:#e2e8f0;--text-muted:#94a3b8;--text-dark:#1e293b;--border-color:rgba(255,255,255,0.08);--border-light:rgba(255,255,255,0.12);--gradient-primary:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);--gradient-accent:linear-gradient(135deg, #f59e0b 0%, #d97706 100%);--gradient-hero:linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1a2d 100%);--shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 4px 16px rgba(0,0,0,0.4);--shadow-lg:0 8px 32px rgba(0,0,0,0.5);--shadow-glow:0 0 20px rgba(37,99,235,0.3);--shadow-accent-glow:0 0 20px rgba(245, 158, 11, 0.3);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--transition-slow:all 0.5s cubic-bezier(0.4,0,0.2,1);--radius-sm:6px;--radius-md:12px;--radius-lg:20px;--radius-full:50%;}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;font-size:16px;}
-    main{display:block;width:100%;padding-top:120px;}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background-color:var(--bg-dark);color:var(--text-light);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-    h1,h2,h3,h4,h5,h6{font-family:'Outfit','Inter',-apple-system,sans-serif;font-weight:700;color:var(--text-white);}
-    a{text-decoration:none;color:inherit;transition:var(--transition);}
-    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px;}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);text-decoration:none;white-space:nowrap;}
-    .btn-primary{background:var(--gradient-primary);color:var(--text-white);box-shadow:var(--shadow-glow);}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(37, 99, 235, 0.5);}
-    .btn-accent{background:var(--gradient-accent);color:var(--text-white);box-shadow:var(--shadow-accent-glow);}
-    .btn-accent:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(245, 158, 11, 0.5);}
-    .btn-outline{background:transparent;color:var(--text-white);border:2px solid var(--border-light);}
-    .btn-outline:hover{background:rgba(255,255,255,0.05);border-color:var(--primary);color:var(--primary-light);}
-    .btn-lg{padding:18px 40px;font-size:1.1rem;}
-    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(10,22,40,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color);transition:all 0.3s ease;}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:80px;max-width:1400px;margin:0 auto;}
-    .logo{display:flex;align-items:center;gap:12px;font-size:1.4rem;font-weight:800;color:var(--text-white);transition:var(--transition);}
-    .logo-img{height:52px;width:247px;display:block;object-fit:contain;object-position:left center;}
-    .logo-text-wrapper{display:flex;flex-direction:column;justify-content:center;}
-    .logo-text{font-size:1.4rem;font-weight:800;line-height:1.1;color:var(--text-white);}
-    .logo-text span{background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;}
-    .logo-slogan{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#5A6B85;margin-top:2px;line-height:1;}
-    .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:40px;padding-bottom:120px;background:var(--gradient-hero);overflow:hidden;}
-    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px),radial-gradient(ellipse at 20% 80%,rgba(37,99,235,0.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,0.08) 0%,transparent 60%);background-size:40px 40px,40px 40px,auto,auto;pointer-events:none;}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:200px;background:linear-gradient(to top,var(--bg-dark),transparent);pointer-events:none;}
-    .hero-content{position:relative;z-index:2;max-width:750px;}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:30px;font-size:0.85rem;font-weight:600;color:var(--primary-light);margin-bottom:24px;opacity:1 !important;transform:none !important;}
-    .hero-badge i{color:var(--accent);}
-    .hero h1{font-size:3.5rem;font-weight:900;line-height:1.15;color:var(--text-white);margin-bottom:24px;opacity:1 !important;transform:none !important;}
-    .hero h1 span{background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .hero-text{font-size:1.2rem;color:var(--text-muted);line-height:1.8;margin-bottom:36px;max-width:600px;opacity:1 !important;transform:none !important;}
-    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;opacity:1 !important;transform:none !important;}
-    .hero-stats{display:flex;flex-wrap:wrap;align-items:center;gap:36px;margin-top:48px;opacity:1 !important;transform:none !important;}
-    .hero-stat{text-align:left;flex:1;min-width:120px;}
-    .hero-stat-number{font-size:2.2rem;font-weight:800;color:var(--text-white);line-height:1;margin-bottom:4px;}
-    .hero-stat-number span{color:var(--accent);}
-    .hero-stat-label{font-size:0.85rem;color:var(--text-muted);font-weight:500;}
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:2;}
-    @media (min-width:992px){.hero-grid{grid-template-columns:1.2fr 0.8fr;gap:64px;}}
-    .hero-image-wrapper{position:relative;width:100%;display:flex;justify-content:center;opacity:1 !important;transform:none !important;}
-    .hero-image-container{position:relative;width:100%;max-width:420px;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:var(--transition);aspect-ratio:4 / 5;background:linear-gradient(135deg,#0f1e3a 0%,#162442 100%);contain:layout style;}
-    .hero-image-container::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:calc(var(--radius-lg) + 2px);z-index:-1;opacity:0.3;transition:var(--transition);}
-    .hero-image-container:hover::before{opacity:0.6;filter:blur(2px);}
-    .hero-image{width:100%;height:100%;aspect-ratio:4 / 5;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);transition:var(--transition-slow);min-height:300px;}
-    .hero-image-container:hover .hero-image{transform:translateY(-4px) scale(1.02);}
-    .hero-floating-badge{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(17,29,51,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);z-index:10;transition:var(--transition);animation:floatBadge 4s ease-in-out infinite;}
-    .hero-floating-badge:hover{transform:translateY(-3px) scale(1.05);background:rgba(22,36,66,0.95);border-color:var(--primary-light);}
-    .hero-floating-badge i{font-size:1.2rem;width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--text-white);}
-    .hero-floating-badge h4,.hero-floating-badge .badge-title{font-size:0.88rem;font-weight:700;color:var(--text-white);margin-bottom:2px;}
-    .hero-floating-badge p{font-size:0.75rem;color:var(--text-muted);margin:0;white-space:nowrap;}
-    .badge-satisfaction{bottom:40px;left:-30px;animation-delay:0s;}
-    .badge-satisfaction i{background:var(--gradient-primary);}
-    .badge-emergency{top:40px;right:-30px;animation-delay:2s;}
-    .badge-emergency i{background:var(--gradient-accent);color:var(--text-dark);}
-    @keyframes floatBadge{0%{transform:translateY(0);}50%{transform:translateY(-8px);}100%{transform:translateY(0);}}
-
-    /* Inline micro utilities replacement for Tailwind */
-    .flex{display:flex;}
-    .flex-wrap{flex-wrap:wrap;}
-    .items-center{align-items:center;}
-    .justify-center{justify-content:center;}
-    .gap-6{gap:1.5rem;}
-    .sm\:gap-10{gap:2.5rem;}
-    .mt-10{margin-top:2.5rem;}
-    .mt-2{margin-top:0.5rem;}
-    .flex-1{flex:1 1 0%;}
-    .min-w-\[120px\]{min-width:120px;}
-    .space-x-4 > * + *{margin-left:1rem;}
-    .text-xs{font-size:0.75rem;line-height:1rem;}
-    .text-white\/20{color:rgba(255,255,255,0.2);}
-    .hover\:text-white:hover{color:#fff;}
-    .transition-colors{transition:color 0.15s ease-in-out;}
-
-    /* ===== MOBILE: Stable hero + kill animations for zero CLS & TBT ===== */
-    @media(max-width:768px){
-      .hero{min-height:85vh !important;}
-      .hero-badge,.hero h1,.hero-text,.hero-buttons,.hero-stats,.hero-image-wrapper{animation:none !important;opacity:1 !important;transform:none !important;}
-      .animate-on-scroll{opacity:1 !important;transform:none !important;transition:none !important;}
-      .hero-floating-badge{animation:none !important;transform:translate3d(0,0,0) !important;will-change:auto !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(17,29,51,0.95);min-width:160px;}
-      .badge-satisfaction{bottom:16px !important;left:8px !important;}
-      .badge-emergency{top:16px !important;right:8px !important;}
-      *{will-change:auto !important;}
-    }
-  </style>
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Home Plumbing USA",
-    "url": "https://homeplumbingusa.com/",
-    "logo": "https://homeplumbingusa.com/logo.png",
-    "description": "Nationwide plumbing matching directory connecting homeowners with vetted and insured local plumbing technicians.",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "25820"
-    }
-  }
-  </script>
-  <style>
-    .footer-call-btn,
-    .footer-col a.footer-call-btn,
-    a.footer-call-btn {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 10px !important;
-        padding: 12px 26px !important;
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        font-size: 1rem !important;
-        border-radius: 8px !important;
-        text-decoration: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4) !important;
-        margin-top: 12px !important;
-        white-space: nowrap !important;
-        border: none !important;
-    }
-
-    /* Strict global hide for desktop */
-    .mobile-sticky-bar {
-        display: none !important;
-    }
-    
-    /* Display ONLY on mobile and tablets */
-    @media screen and (max-width: 1024px) {
-        .mobile-sticky-bar {
-            display: flex !important;
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 60px !important;
-            z-index: 999999 !important;
-        }
-    }
-  </style>
-  <link rel="icon" type="image/png" href="/public/images/favicon.png">
-  <meta name="p:domain_verify" content="df6b549b3cc8e4c5ce9871dc7e60d08c"/>
 </head>
-<body data-prefix="/" data-depth="0">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHGT9PF7"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
-  <!-- ==================== HEADER ==================== -->
-  <header class="header" id="header" style="min-height: 120px;">
-    <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
-      <div class="top-bar-content">
-        <span class="pulse-dot"></span>
-        <span>24/7 Emergency Plumbing Network - Same Price, Holidays Included!</span>
-      </div>
-    </div>
-    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="/" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
-        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
+<body class="bg-navy-950 text-slate-200 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- ================================================================= -->
+  <!-- SECTION 1: CORE DATA OBJECT (JavaScript)                          -->
+  <!-- ================================================================= -->
+  <script>
+    const cityData = {
+      city: "Anchorage",
+      state: "AK",
+      area_code: "907",
+      phone: "(907) 516-8705",
+      phone_raw: "9075168705",
+      neighborhoods: ["South Anchorage", "Eagle River", "Muldoon", "Midtown"],
+      seasonal_pain_points: {
+        winter: [
+          { name: "Frozen Pipes", code: "P-101", status: "High Risk (-15°F Freeze Alert)", detail: "Rapid ice expansion inside uninsulated lines leading to sudden pipe splitting." },
+          { name: "Burst Pipe Emergencies", code: "P-102", status: "24/7 Priority Dispatch", detail: "Immediate main water shutoff response & high-volume line extraction." },
+          { name: "No Heat + Water Damage", code: "P-103", status: "Critical Response", detail: "Hydronic boiler leak containment and freeze-thaw valve replacement." }
+        ],
+        summer: [
+          { name: "Clogged Drains & Main Lines", code: "P-201", status: "Active Dispatch", detail: "Heavy root intrusion clearing & high-pressure hydro-jetting." },
+          { name: "Water Heater Failure", code: "P-202", status: "Same-Day Matching", detail: "Emergency replacement or element repair for tankless & standard tanks." },
+          { name: "Sump Pump Failures", code: "P-203", status: "Rain & Melt Alert", detail: "Submersible pump replacement to prevent subterranean crawlspace flooding." }
+        ]
+      }
+    };
+  </script>
+
+  <!-- TOP HEADER / NAV BAR -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-1">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-headset text-lg"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-extrabold text-xl text-white tracking-tight leading-none">
+            Home Plumbing <span class="text-amber-400">USA</span>
+          </span>
+          <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase mt-1">24/7 Dispatch Network</span>
+        </div>
       </a>
 
-      <nav class="nav" id="mainNav">
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#states" class="nav-link">States</a>
-        <a href="#workflow" class="nav-link">Workflow</a>
-        <a href="#why-us" class="nav-link">Why Us</a>
-        <a href="#achievements" class="nav-link">Achievements</a>
-      </nav>
-
-  <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone" data-track="phone" data-location="nav"><svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" style="display:inline-block;vertical-align:-0.125em;"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg> Call Now</a>
-        <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
+      <!-- Dispatch Network Live Status Indicator -->
+      <div class="hidden md:flex items-center gap-3 bg-navy-800/80 px-4 py-2 rounded-full border border-slate-700/50">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-semibold text-slate-300">
+          Anchorage Network Status: <span class="text-emerald-400 font-bold">Pros On-Call (<span data-bind="area_code">907</span>)</span>
+        </span>
       </div>
 
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+      <!-- Header Direct Call Button -->
+      <a href="tel:9075168705" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold px-4 sm:px-6 py-2.5 rounded-lg shadow-md shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+        <i class="fa-solid fa-phone text-slate-950 animate-bounce"></i>
+        <span class="hidden xs:inline">Call Dispatch:</span>
+        <span class="font-extrabold" data-bind="phone">(907) 516-8705</span>
+      </a>
+
     </div>
   </header>
-  <main>
-  <!-- ==================== HERO SECTION ==================== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content" style="contain: layout style;">
-          <div class="hero-badge"><svg width="14" height="14" viewBox="0 0 576 512" fill="#f59e0b" style="display:inline-block;vertical-align:-0.125em;"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.5 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 327 113.3 470c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.1-67.4 128.1 67.4c10.8 5.7 23.9 4.7 33.8-2.3s14.9-19.3 12.9-31.3L438.2 327l104.3-101.1c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L380.9 150.3 316.9 18z"/></svg> Trusted Plumbing Experts Nationwide</div>
-          <h1 style="min-height: 1.15em; contain: layout style;">Professional <span>Plumbing Services</span> Nationwide</h1>
-          <p class="hero-text" style="min-height: 3.6em; contain: layout style;">Connecting home and business owners nationwide with vetted, independent local plumbing experts in real-time.</p>
-          <div class="hero-buttons">
-            <a href="tel:877-516-8705" class="btn btn-accent btn-lg" data-track="phone" data-location="hero"><svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" style="display:inline-block;vertical-align:-0.125em;"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg> Speak to an Expert</a>
-            <a href="/contact" class="btn btn-outline btn-lg"><svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor" style="display:inline-block;vertical-align:-0.125em;"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H208c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg> Request a Quote</a>
-          </div>
-          <div class="hero-stats flex flex-wrap items-center gap-6 sm:gap-10 mt-10" id="achievements">
-            <div class="hero-stat flex-1 min-w-[120px]">
-              <div class="hero-stat-number">20<span>+</span></div>
-              <div class="hero-stat-label">Years Experience</div>
-            </div>
-            <div class="hero-stat flex-1 min-w-[120px]">
-              <div class="hero-stat-number">10K<span>+</span></div>
-              <div class="hero-stat-label">Jobs Completed</div>
-            </div>
-            <div class="hero-stat flex-1 min-w-[120px]">
-              <div class="hero-stat-number">4.9<span>&#9733;</span></div>
-              <div class="hero-stat-label">Customer Rating</div>
-            </div>
-            <div class="hero-stat flex-1 min-w-[120px]">
-              <div class="hero-stat-number">24<span>/7</span></div>
-              <div class="hero-stat-label">Emergency Service</div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
-          <div class="hero-image-container" style="position: relative; width: 100%; max-width: 420px; aspect-ratio: 4 / 5; min-height: 350px; display: block; background: #0f1e3a; contain: layout style;">
-            <picture style="width: 100%; height: 100%; display: block;">
-              <source media="(max-width: 600px)" srcset="/public/images/hero-plumbing-team-mobile.webp" type="image/webp">
-              <source media="(min-width: 601px)" srcset="/public/images/hero-plumbing-team.webp" type="image/webp">
-              <img src="/public/images/hero-plumbing-team.webp" alt="Vetted Professional Plumbing Team" class="hero-image" width="400" height="500" loading="eager" fetchpriority="high" decoding="async" style="width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;">
-            </picture>
-            <div class="hero-floating-badge badge-satisfaction">
-              <div class="badge-icon-wrap" style="width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--gradient-primary);color:#fff;">
-                <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.3 29.6 41.5 53.3c11.9 87.7-12.7 181-71.4 260.1C371 469.1 306.7 504.6 256 512V0z"/></svg>
-              </div>
-              <div>
-                <div class="badge-title">100% Satisfaction</div>
-                <p>Guaranteed Quality</p>
-              </div>
-            </div>
-            <div class="hero-floating-badge badge-emergency">
-              <div class="badge-icon-wrap" style="width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--gradient-accent);color:#1e293b;">
-                <svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M0 256L32 256h128l-32 224 256-288H224l32-192L0 256z"/></svg>
-              </div>
-              <div>
-                <div class="badge-title">24/7 Emergency</div>
-                <p>Fast Dispatch</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==================== TRUST SECTION ==================== -->
-  <section class="trust-section">
-    <div class="container">
-      <div class="trust-grid">
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-award"></i></div>
-          <p class="trust-title">20+ Years Experience</p>
-          <p>Proven track record of excellence in plumbing</p>
-        </div>
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-id-badge"></i></div>
-          <p class="trust-title">Licensed &amp; Insured</p>
-          <p>Fully licensed, bonded, and insured plumbers</p>
-        </div>
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
-          <p class="trust-title">Safety Standards</p>
-          <p>Strict adherence to all plumbing safety codes</p>
-        </div>
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-medal"></i></div>
-          <p class="trust-title">Quality Work</p>
-          <p>Premium materials and expert craftsmanship</p>
-        </div>
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-thumbs-up"></i></div>
-          <p class="trust-title">100% Satisfaction</p>
-          <p>Your satisfaction is always guaranteed</p>
-        </div>
-        <div class="trust-card animate-on-scroll">
-          <div class="trust-icon"><i class="fas fa-truck-fast"></i></div>
-          <p class="trust-title">24/7 Emergency</p>
-          <p>Round-the-clock emergency plumbing service</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== INTERACTIVE MAP COVERAGE ==================== -->
-  <section class="section" id="coverage-map">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">Interactive Locator Map</div>
-        <h2 class="section-title">Select Your <span>State</span></h2>
-        <p class="section-desc">Tap or hover over your state on our live interactive map below to connect with active local dispatch boards in your region.</p>
-      </div>
+  <main class="pt-20">
+    <!-- ================================================================= -->
+    <!-- SECTION 2: HERO SECTION (Above the Fold)                          -->
+    <!-- ================================================================= -->
+    <section id="hero-section" class="relative min-h-[calc(100vh-5rem)] flex items-center py-12 lg:py-16 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 overflow-hidden">
       
-      <div class="animate-on-scroll" style="max-width: 900px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-lg);">
-        <div class="text-center mb-6">
-          <span class="text-xs text-white/50 uppercase tracking-widest block font-heading">Currently Selected Region:</span>
-          <span id="active-state-name" class="text-2xl font-extrabold text-white/80 font-heading block mt-1 tracking-tight">Tap to Select</span>
-        </div>
+      <!-- Background Visual Grid Overlay -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
+      <div class="absolute top-1/4 left-10 w-96 h-96 bg-blue-600/10 rounded-full filter blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl pointer-events-none"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
+        <!-- Two-zone split for desktop (~55% copy on left, 45% form/trust card on right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- LEFT ZONE (~55% / 7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Dispatch Emergency Live Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs sm:text-sm font-semibold shadow-inner">
+              <i class="fa-solid fa-tower-broadcast text-amber-400 animate-pulse"></i>
+              <span>24/7 Emergency Dispatch Active in <strong class="text-white" data-bind="city">Anchorage</strong>, <strong class="text-white" data-bind="state">AK</strong></span>
+            </div>
+
+            <!-- Dynamic H1 -->
+            <h1 class="font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl text-white leading-tight tracking-tight">
+              Burst Pipe or Clogged Drain in <span class="bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300 bg-clip-text text-transparent" data-bind="city">Anchorage</span>? Get Matched With a Vetted Local Plumber in Minutes.
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-normal max-w-2xl">
+              We're Anchorage's 24/7 emergency plumbing dispatch service. Every pro in our network is licensed, insured, and background-checked — with a typical callback in under 15 minutes.
+            </p>
+
+            <!-- Trust Badges Grid (Placed directly under H1/Subhead) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-navy-800/60 border border-slate-800 text-slate-200">
+                <i class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0"></i>
+                <span class="text-xs sm:text-sm font-medium">✅ Licensed & Insured Pros Only</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-navy-800/60 border border-slate-800 text-slate-200">
+                <i class="fa-solid fa-stopwatch text-amber-400 text-lg shrink-0"></i>
+                <span class="text-xs sm:text-sm font-medium">⏱ Avg. Response Time: &lt;15 Min in Anchorage</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-navy-800/60 border border-slate-800 text-slate-200">
+                <i class="fa-solid fa-moon text-blue-400 text-lg shrink-0"></i>
+                <span class="text-xs sm:text-sm font-medium">🌙 24/7 Dispatch — Nights, Weekends, Holidays</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-navy-800/60 border border-slate-800 text-slate-200">
+                <i class="fa-solid fa-user-shield text-indigo-400 text-lg shrink-0"></i>
+                <span class="text-xs sm:text-sm font-medium">🛡 Every Pro Background-Checked</span>
+              </div>
+            </div>
+
+            <!-- Primary Hero Call CTA Button -->
+            <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a id="hero-primary-cta" href="tel:9075168705" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold text-lg sm:text-xl px-8 py-4 rounded-xl shadow-xl shadow-amber-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center">
+                <i class="fa-solid fa-phone-volume text-xl animate-pulse"></i>
+                <span>📞 Call Now — Avg. 15-Min Response</span>
+              </a>
+            </div>
+
+            <!-- Tier 1 Micro-Disclosure (Legible text near primary CTA) -->
+            <div class="p-3.5 rounded-lg bg-navy-900/90 border border-slate-800/80 text-[11px] sm:text-xs text-slate-400 leading-normal">
+              <p>
+                <strong class="text-slate-300">Home Plumbing USA</strong> is a plumbing referral service and does not perform plumbing work directly. All work is performed by independently owned, licensed and insured local contractors.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT ZONE (~45% / 5 cols - Dispatch Coordination Card & 3-Field Match Form) -->
+          <div class="lg:col-span-5">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-blue-500/20">
+              
+              <!-- Subtle Header Banner -->
+              <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-blue-500 via-amber-400 to-blue-600"></div>
+
+              <!-- Dispatch Coordination Visual Header (NOT stock plumber photo) -->
+              <div class="mb-6 p-4 rounded-xl bg-navy-900/90 border border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="relative w-10 h-10 rounded-full bg-blue-900/60 border border-blue-500/40 flex items-center justify-center text-blue-400 overflow-hidden">
+                    <div class="absolute inset-0 radar-sweep opacity-75"></div>
+                    <i class="fa-solid fa-satellite-dish relative z-10 text-amber-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">Anchorage Radar Dispatch</h3>
+                    <p class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                      Matching Pros in Area Code 907
+                    </p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] uppercase tracking-widest text-slate-500 block">Avg Callback</span>
+                  <span class="text-sm font-extrabold text-amber-400">11.4 Mins</span>
+                </div>
+              </div>
+
+              <!-- Secondary CTA Title -->
+              <div class="mb-5">
+                <h3 class="font-heading font-extrabold text-xl text-white flex items-center justify-between">
+                  <span>Get Matched Online</span>
+                  <span class="text-xs font-semibold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-400/20">30-Sec Process</span>
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Submit your plumbing emergency details for immediate network callback.</p>
+              </div>
+
+              <!-- 3-Field Form (ZIP/address, Issue dropdown, Phone number) -->
+              <form id="match-form" class="space-y-4" onsubmit="handleMatchSubmit(event)">
+                
+                <!-- Field 1: ZIP / Address -->
+                <div>
+                  <label for="user-location" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                    1. Anchorage ZIP Code or Neighborhood
+                  </label>
+                  <div class="relative">
+                    <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+                    <input type="text" id="user-location" name="location" required placeholder="e.g. 99501 or South Anchorage" class="w-full bg-navy-950 border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-all">
+                  </div>
+                </div>
+
+                <!-- Field 2: Issue Dropdown -->
+                <div>
+                  <label for="issue-type" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                    2. Plumbing Issue Type
+                  </label>
+                  <div class="relative">
+                    <i class="fa-solid fa-triangle-exclamation absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+                    <select id="issue-type" name="issue" required class="w-full bg-navy-950 border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled selected>Select Emergency Issue...</option>
+                      <option value="frozen_burst_pipe">❄️ Frozen or Burst Pipe (Active Leak)</option>
+                      <option value="clogged_drain">🚿 Clogged Drain / Main Sewer Line</option>
+                      <option value="water_heater">🔥 Water Heater Breakdown / No Hot Water</option>
+                      <option value="no_heat_water">🥶 No Heat + Hydronic Leak</option>
+                      <option value="sump_pump">🌧 Sump Pump Overflow</option>
+                      <option value="other">🛠 Other Plumbing Emergency</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3.5 top-3.5 text-slate-500 text-xs pointer-events-none"></i>
+                  </div>
+                </div>
+
+                <!-- Field 3: Phone Number -->
+                <div>
+                  <label for="user-phone" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+                    3. Your Phone Number (For Immediate Callback)
+                  </label>
+                  <div class="relative">
+                    <i class="fa-solid fa-phone-flip absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+                    <input type="tel" id="user-phone" name="phone" required placeholder="(907) 555-0199" class="w-full bg-navy-950 border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-all">
+                  </div>
+                </div>
+
+                <!-- Form Submit Button [Get Matched Online →] -->
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-base py-3.5 px-6 rounded-lg shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 group mt-2">
+                  <span>Get Matched Online</span>
+                  <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <p class="text-[10px] text-center text-slate-500 mt-2">
+                  🔒 Confidential request. By submitting, you agree to receive a callback from a matched Anchorage contractor.
+                </p>
+
+              </form>
+
+              <!-- Confirmation Overlay (hidden by default) -->
+              <div id="form-success-state" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center text-2xl mx-auto">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="font-heading font-extrabold text-xl text-white">Dispatch Match Initiated!</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                  Our dispatch system is routing your request to the nearest available, vetted pro in Anchorage. Expect a callback shortly.
+                </p>
+                <div class="pt-2">
+                  <a href="tel:9075168705" class="inline-flex items-center gap-2 bg-amber-500 text-slate-950 text-xs font-bold px-4 py-2 rounded-lg">
+                    Need instant answer? Call (907) 516-8705
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================================================================= -->
+    <!-- SECTION 3: HOW IT WORKS (3 Steps Section)                         -->
+    <!-- ================================================================= -->
+    <section class="py-16 sm:py-24 bg-navy-900 relative border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-  <svg class="usa-map-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593" aria-label="Interactive map of the United States. Click a state to route to its local dispatch page.">
-    <g class="outlines">
-      <path id="AK" d="M161.1,453.7 l-0.3,85.4 1.6,1 3.1,0.2 1.5,-1.1 h2.6 l0.2,2.9 7,6.8 0.5,2.6 3.4,-1.9 0.6,-0.2 0.3,-3.1 1.5,-1.6 1.1,-0.2 1.9,-1.5 3.1,2.1 0.6,2.9 1.9,1.1 1.1,2.4 3.9,1.8 3.4,6 2.7,3.9 2.3,2.7 1.5,3.7 5,1.8 5.2,2.1 1,4.4 0.5,3.1 -1,3.4 -1.8,2.3 -1.6,-0.8 -1.5,-3.1 -2.7,-1.5 -1.8,-1.1 -0.8,0.8 1.5,2.7 0.2,3.7 -1.1,0.5 -1.9,-1.9 -2.1,-1.3 0.5,1.6 1.3,1.8 -0.8,0.8 c0,0 -0.8,-0.3 -1.3,-1 -0.5,-0.6 -2.1,-3.4 -2.1,-3.4 l-1,-2.3 c0,0 -0.3,1.3 -1,1 -0.6,-0.3 -1.3,-1.5 -1.3,-1.5 l1.8,-1.9 -1.5,-1.5 v-5 h-0.8 l-0.8,3.4 -1.1,0.5 -1,-3.7 -0.6,-3.7 -0.8,-0.5 0.3,5.7 v1.1 l-1.5,-1.3 -3.6,-6 -2.1,-0.5 -0.6,-3.7 -1.6,-2.9 -1.6,-1.1 v-2.3 l2.1,-1.3 -0.5,-0.3 -2.6,0.6 -3.4,-2.4 -2.6,-2.9 -4.8,-2.6 -4,-2.6 1.3,-3.2 v-1.6 l-1.8,1.6 -2.9,1.1 -3.7,-1.1 -5.7,-2.4 h-5.5 l-0.6,0.5 -6.5,-3.9 -2.1,-0.3 -2.7,-5.8 -3.6,0.3 -3.6,1.5 0.5,4.5 1.1,-2.9 1,0.3 -1.5,4.4 3.2,-2.7 0.6,1.6 -3.9,4.4 -1.3,-0.3 -0.5,-1.9 -1.3,-0.8 -1.3,1.1 -2.7,-1.8 -3.1,2.1 -1.8,2.1 -3.4,2.1 -4.7,-0.2 -0.5,-2.1 3.7,-0.6 v-1.3 l-2.3,-0.6 1,-2.4 2.3,-3.9 v-1.8 l0.2,-0.8 4.4,-2.3 1,1.3 h2.7 l-1.3,-2.6 -3.7,-0.3 -5,2.7 -2.4,3.4 -1.8,2.6 -1.1,2.3 -4.2,1.5 -3.1,2.6 -0.3,1.6 2.3,1 0.8,2.1 -2.7,3.2 -6.5,4.2 -7.8,4.2 -2.1,1.1 -5.3,1.1 -5.3,2.3 1.8,1.3 -1.5,1.5 -0.5,1.1 -2.7,-1 -3.2,0.2 -0.8,2.3 h-1 l0.3,-2.4 -3.6,1.3 -2.9,1 -3.4,-1.3 -2.9,1.9 h-3.2 l-2.1,1.3 -1.6,0.8 -2.1,-0.3 -2.6,-1.1 -2.3,0.6 -1,1 -1.6,-1.1 v-1.9 l3.1,-1.3 6.3,0.6 4.4,-1.6 2.1,-2.1 2.9,-0.6 1.8,-0.8 2.7,0.2 1.6,1.3 1,-0.3 2.3,-2.7 3.1,-1 3.4,-0.6 1.3,-0.3 0.6,0.5 h0.8 l1.3,-3.7 4,-1.5 1.9,-3.7 2.3,-4.5 1.6,-1.5 0.3,-2.6 -1.6,1.3 -3.4,0.6 -0.6,-2.4 -1.3,-0.3 -1,1 -0.2,2.9 -1.5,-0.2 -1.5,-5.8 -1.3,1.3 -1.1,-0.5 -0.3,-1.9 -4,0.2 -2.1,1.1 -2.6,-0.3 1.5,-1.5 0.5,-2.6 -0.6,-1.9 1.5,-1 1.3,-0.2 -0.6,-1.8 v-4.4 l-1,-1 -0.8,1.5 h-6.1 l-1.5,-1.3 -0.6,-3.9 -2.1,-3.6 v-1 l2.1,-0.8 0.2,-2.1 1.1,-1.1 -0.8,-0.5 -1.3,0.5 -1.1,-2.7 1,-5 4.5,-3.2 2.6,-1.6 1.9,-3.7 2.7,-1.3 2.6,1.1 0.3,2.4 2.4,-0.3 3.2,-2.4 1.6,0.6 1,0.6 h1.6 l2.3,-1.3 0.8,-4.4 c0,0 0.3,-2.9 1,-3.4 0.6,-0.5 1,-1 1,-1 l-1.1,-1.9 -2.6,0.8 -3.2,0.8 -1.9,-0.5 -3.6,-1.8 -5,-0.2 -3.6,-3.7 0.5,-3.9 0.6,-2.4 -2.1,-1.8 -1.9,-3.7 0.5,-0.8 6.8,-0.5 h2.1 l1,1 h0.6 l-0.2,-1.6 3.9,-0.6 2.6,0.3 1.5,1.1 -1.5,2.1 -0.5,1.5 2.7,1.6 5,1.8 1.8,-1 -2.3,-4.4 -1,-3.2 1,-0.8 -3.4,-1.9 -0.5,-1.1 0.5,-1.6 -0.8,-3.9 -2.9,-4.7 -2.4,-4.2 2.9,-1.9 h3.2 l1.8,0.6 4.2,-0.2 3.7,-3.6 1.1,-3.1 3.7,-2.4 1.6,1 2.7,-0.6 3.7,-2.1 1.1,-0.2 1,0.8 4.5,-0.2 2.7,-3.1 h1.1 l3.6,2.4 1.9,2.1 -0.5,1.1 0.6,1.1 1.6,-1.6 3.9,0.3 0.3,3.7 1.9,1.5 7.1,0.6 6.3,4.2 1.5,-1 5.2,2.6 2.1,-0.6 1.9,-0.8 4.8,1.9z m-115.1,28.9 2.1,5.3 -0.2,1 -2.9,-0.3 -1.8,-4 -1.8,-1.5 h-2.4 l-0.2,-2.6 1.8,-2.4 1.1,2.4 1.5,1.5z m-2.6,33.5 3.7,0.8 3.7,1 0.8,1 -1.6,3.7 -3.1,-0.2 -3.4,-3.6z m-20.7,-14.1 1.1,2.6 1.1,1.6 -1.1,0.8 -2.1,-3.1 v-1.9z m-13.7,73.1 3.4,-2.3 3.4,-1 2.6,0.3 0.5,1.6 1.9,0.5 1.9,-1.9 -0.3,-1.6 2.7,-0.6 2.9,2.6 -1.1,1.8 -4.4,1.1 -2.7,-0.5 -3.7,-1.1 -4.4,1.5 -1.6,0.3z m48.9,-4.5 1.6,1.9 2.1,-1.6 -1.5,-1.3z m2.9,3 1.1,-2.3 2.1,0.3 -0.8,1.9 h-2.4z m23.6,-1.9 1.5,1.8 1,-1.1 -0.8,-1.9z m8.8,-12.5 1.1,5.8 2.9,0.8 5,-2.9 4.4,-2.6 -1.6,-2.4 0.5,-2.4 -2.1,1.3 -2.9,-0.8 1.6,-1.1 1.9,0.8 3.9,-1.8 0.5,-1.5 -2.4,-0.8 0.8,-1.9 -2.7,1.9 -4.7,3.6 -4.8,2.9z m42.3,-19.8 2.4,-1.5 -1,-1.8 -1.8,1z" aria-label="Alaska" role="button" tabindex="0" data-slug="alaska"></path>
-    <path id="HI" d="M233.1,519.3 l1.9,-3.6 2.3,-0.3 0.3,0.8 -2.1,3.1z m10.2,-3.7 6.1,2.6 2.1,-0.3 1.6,-3.9 -0.6,-3.4 -4.2,-0.5 -4,1.8z m30.7,10 3.7,5.5 2.4,-0.3 1.1,-0.5 1.5,1.3 3.7,-0.2 1,-1.5 -2.9,-1.8 -1.9,-3.7 -2.1,-3.6 -5.8,2.9z m20.2,8.9 1.3,-1.9 4.7,1 0.6,-0.5 6.1,0.6 -0.3,1.3 -2.6,1.5 -4.4,-0.3z m5.3,5.2 1.9,3.9 3.1,-1.1 0.3,-1.6 -1.6,-2.1 -3.7,-0.3z m7,-1.2 2.3,-2.9 4.7,2.4 4.4,1.1 4.4,2.7 v1.9 l-3.6,1.8 -4.8,1 -2.4,-1.5z m16.6,15.6 1.6,-1.3 3.4,1.6 7.6,3.6 3.4,2.1 1.6,2.4 1.9,4.4 4,2.6 -0.3,1.3 -3.9,3.2 -4.2,1.5 -1.5,-0.6 -3.1,1.8 -2.4,3.2 -2.3,2.9 -1.8,-0.2 -3.6,-2.6 -0.3,-4.5 0.6,-2.4 -1.6,-5.7 -2.1,-1.8 -0.2,-2.6 2.3,-1 2.1,-3.1 0.5,-1 -1.6,-1.8z" aria-label="Hawaii" role="button" tabindex="0" data-slug="hawaii"></path>
-    <path id="AL" d="M628.5,466.4 l0.6,0.2 1.3,-2.7 1.5,-4.4 2.3,0.6 3.1,6 v1 l-2.7,1.9 2.7,0.3 5.2,-2.5 -0.3,-7.6 -2.5,-1.8 -2,-2 0.4,-4 10.5,-1.5 25.7,-2.9 6.7,-0.6 5.6,0.1 -0.5,-2.2 -1.5,-0.8 -0.9,-1.1 1,-2.6 -0.4,-5.2 -1.6,-4.5 0.8,-5.1 1.7,-4.8 -0.2,-1.7 -1.8,-0.7 -0.5,-3.6 -2.7,-3.4 -2,-6.5 -1.4,-6.7 -1.8,-5 -3.8,-16 -3.5,-7.9 -0.8,-5.6 0.1,-2.2 -9,0.8 -23.4,2.2 -12.2,0.8 -0.2,6.4 0.2,16.7 -0.7,31 -0.3,14.1 2.8,18.8 1.6,14.7z" aria-label="Alabama" role="button" tabindex="0" data-slug="alabama"></path>
-    <path id="AR" d="M587.3,346.1 l-6.4,-0.7 0.9,-3.1 3.1,-2.6 0.6,-2.3 -1.8,-2.9 -31.9,1.2 -23.3,0.7 -23.6,0.3 1.5,6.9 0.1,8.5 1.4,10.9 0.3,38.2 2.1,1.6 3,-1.2 2.9,1.2 0.4,10.1 25.2,-0.2 26.8,-0.8 0.9,-1.9 -0.3,-3.8 -1.7,-3.1 1.5,-1.4 -1.4,-2.2 0.7,-2.4 1.1,-5.9 2.7,-2.3 -0.8,-2.2 4,-5.6 2.5,-1.1 -0.1,-1.7 -0.5,-1.7 2.9,-5.8 2.5,-1.1 0.2,-3.3 2.1,-1.4 0.9,-4.1 -1.4,-4 4.2,-2.4 0.3,-2.1 1.2,-4.2 0.9,-3.1z" aria-label="Arkansas" role="button" tabindex="0" data-slug="arkansas"></path>
-    <path id="AZ" d="M135.1,389.7 l-0.3,1.5 0.5,1 18.9,10.7 12.1,7.6 14.7,8.6 16.8,10 12.3,2.4 25.4,2.7 6,-39.6 7,-53.1 4.4,-31 -24.6,-3.6 -60.7,-11 -0.2,1.1 -2.6,16.5 -2.1,3.8 -2.8,-0.2 -1.2,-2.6 -2.6,-0.4 -1.2,-1.1 -1.1,0.1 -2.1,1.7 -0.3,6.8 -0.3,1.5 -0.5,12.5 -1.5,2.4 -0.4,3.3 2.8,5 1.1,5.5 0.7,1.1 1.1,0.9 -0.4,2.4 -1.7,1.2 -3.4,1.6 -1.6,1.8 -1.6,3.6 -0.5,4.9 -3,2.9 -1.9,0.9 -0.1,5.8 -0.6,1.6 0.5,0.8 3.9,0.4 -0.9,3 -1.7,2.4 -3.7,0.4z" aria-label="Arizona" role="button" tabindex="0" data-slug="arizona"></path>
-    <path id="CA" d="M122.7,385.9 l-19.7,-2.7 -10,-1.5 -0.5,-1.8 v-9.4 l-0.3,-3.2 -2.6,-4.2 -0.8,-2.3 -3.9,-4.2 -2.9,-4.7 -2.7,-0.2 -3.2,-0.8 -0.3,-1 1.5,-0.6 -0.6,-3.2 -1.5,-2.1 -4.8,-0.8 -3.9,-2.1 -1.1,-2.3 -2.6,-4.8 -2.9,-3.1 h-2.9 l-3.9,-2.1 -4.5,-1.8 -4.2,-0.5 -2.4,-2.7 0.5,-1.9 1.8,-7.1 0.8,-1.9 v-2.4 l-1.6,-1 -0.5,-2.9 -1.5,-2.6 -3.4,-5.8 -1.3,-3.1 -1.5,-4.7 -1.6,-5.3 -3.2,-4.4 -0.5,-2.9 0.8,-3.9 h1.1 l2.1,-1.6 1.1,-3.6 -1,-2.7 -2.7,-0.5 -1.9,-2.6 -2.1,-3.7 -0.2,-8.2 0.6,-1.9 0.6,-2.3 0.5,-2.4 -5.7,-6.3 v-2.1 l0.3,-0.5 0.3,-3.2 -1.3,-4 -2.3,-4.8 -2.7,-4.5 -1.8,-3.9 1,-3.7 0.6,-5.8 1.8,-3.1 0.3,-6.5 -1.1,-3.6 -1.6,-4.2 -2.7,-4.2 0.8,-3.2 1.5,-4.2 1.8,-0.8 0.3,-1.1 3.1,-2.6 5.2,-11.8 0.2,-7.4 1.69,-4.9 38.69,11.8 25.6,6.6 -8,31.3 -8.67,33.1 12.63,19.2 42.16,62.3 17.1,26.1 -0.4,3.1 2.8,5.2 1.1,5.4 1,1.5 0.7,0.6 -0.2,1.4 -1.4,1 -3.4,1.6 -1.9,2.1 -1.7,3.9 -0.5,4.7 -2.6,2.5 -2.3,1.1 -0.1,6.2 -0.6,1.9 1,1.7 3,0.3 -0.4,1.6 -1.4,2 -3.9,0.6z m-73.9,-48.9 1.3,1.5 -0.2,1.3 -3.2,-0.1 -0.6,-1.2 -0.6,-1.5z m1.9,0 1.2,-0.6 3.6,2.1 3.1,1.2 -0.9,0.6 -4.5,-0.2 -1.6,-1.6z m20.7,19.8 1.8,2.3 0.8,1 1.5,0.6 0.6,-1.5 -1,-1.8 -2.7,-2 -1.1,0.2 v1.2z m-1.4,8.7 1.8,3.2 1.2,1.9 -1.5,0.2 -1.3,-1.2 c0,0 -0.7,-1.5 -0.7,-1.9 0,-0.4 0,-2.2 0,-2.2z" aria-label="California" role="button" tabindex="0" data-slug="california"></path>
-    <path id="CO" d="M380.2,235.5 l-36,-3.5 -79.1,-8.6 -2.2,22.1 -7,50.4 -1.9,13.7 34,3.9 37.5,4.4 34.7,3 14.3,0.6z" aria-label="Colorado" role="button" tabindex="0" data-slug="colorado"></path>
-    <path id="CT" d="M852,190.9 l3.6,-3.2 1.9,-2.1 0.8,0.6 2.7,-1.5 5.2,-1.1 7,-3.5 -0.6,-4.2 -0.8,-4.4 -1.6,-6 -4.3,1.1 -21.8,4.7 0.6,3.1 1.5,7.3 v8.3 l-0.9,2.1 1.7,2.2z" aria-label="Connecticut" role="button" tabindex="0" data-slug="connecticut"></path>
-    <path id="DE" d="M834.4,247.2 l-1,0.5 -3.6,-2.4 -1.8,-4.7 -1.9,-3.6 -2.3,-1 -2.1,-3.6 0.5,-2 0.5,-2.3 0.1,-1.1 -0.6,0.1 -1.7,1 -2,1.7 -0.2,0.3 1.4,4.1 2.3,5.6 3.7,16.1 5,-0.3 6,-1.1z" aria-label="Delaware" role="button" tabindex="0" data-slug="delaware"></path>
-    <path id="FL" d="M750.2,445.2 l-5.2,-0.7 -0.7,0.8 1.5,4.4 -0.4,5.2 -4.1,-1 -0.2,-2.8 h-4.1 l-5.3,0.7 -32.4,1.9 -8.2,-0.3 -1.7,-1.7 -2.5,-4.2 h-5.9 l-6.6,0.5 -35.4,4.2 -0.3,2.8 1.6,1.6 2.9,2 0.3,8.4 3.3,-0.6 6,-2.1 6,-0.5 4.4,-0.6 7.6,1.8 8.1,3.9 1.6,1.5 2.9,1.1 1.6,1.9 0.3,2.7 3.2,-1.3 h3.9 l3.6,-1.9 3.7,-3.6 3.1,0.2 0.5,-1.1 -0.8,-1 0.2,-1.9 4,-0.8 h2.6 l2.9,1.5 4.2,1.5 2.4,3.7 2.7,1 1.1,3.4 3.4,1.6 1.6,2.6 1.9,0.6 5.2,1.3 1.3,3.1 3,3.7 v9.5 l-1.5,4.7 0.3,2.7 1.3,4.8 1.8,4 0.8,-0.5 1.5,-4.5 -2.6,-1 -0.3,-0.6 1.6,-0.6 4.5,1 0.2,1.6 -3.2,5.5 -2.1,2.4 3.6,3.7 2.6,3.1 2.9,5.3 2.9,3.9 2.1,5 1.8,0.3 1.6,-2.1 1.8,1.1 2.6,4 0.6,3.6 3.1,4.4 0.8,-1.3 3.9,0.3 3.6,2.3 3.4,5.2 0.8,3.4 0.3,2.9 1.1,1 1.3,0.5 2.4,-1 1.5,-1.6 3.9,-0.2 3.1,-1.5 2.7,-3.2 -0.5,-1.9 -0.3,-2.4 0.6,-1.9 -0.3,-1.9 2.4,-1.3 0.3,-3.4 -0.6,-1.8 -0.5,-12 -1.3,-7.6 -4.5,-8.2 -3.6,-5.8 -2.6,-5.3 -2.9,-2.9 -2.9,-7.4 0.7,-1.4 1.1,-1.3 -1.6,-2.9 -4,-3.7 -4.8,-5.5 -3.7,-6.3 -5.3,-9.4 -3.7,-9.7 -2.3,-7.3z m17.7,132.7 2.4,-0.6 1.3,-0.2 1.5,-2.3 2.3,-1.6 1.3,0.5 1.7,0.3 0.4,1.1 -3.5,1.2 -4.2,1.5 -2.3,1.2z m13.5,-5 1.2,1.1 2.7,-2.1 5.3,-4.2 3.7,-3.9 2.5,-6.6 1,-1.7 0.2,-3.4 -0.7,0.5 -1,2.8 -1.5,4.6 -3.2,5.3 -4.4,4.2 -3.4,1.9z" aria-label="Florida" role="button" tabindex="0" data-slug="florida"></path>
-    <path id="GA" d="M750.2,444.2 l-5.6,-0.7 -1.4,1.6 1.6,4.7 -0.3,3.9 -2.2,-0.6 -0.2,-3 h-5.2 l-5.3,0.7 -32.3,1.9 -7.7,-0.3 -1.4,-1.2 -2.5,-4.3 -0.8,-3.3 -1.6,-0.9 -0.5,-0.5 0.9,-2.2 -0.4,-5.5 -1.6,-4.5 0.8,-4.9 1.7,-4.8 -0.2,-2.5 -1.9,-0.7 -0.4,-3.2 -2.8,-3.5 -1.9,-6.2 -1.5,-7 -1.7,-4.8 -3.8,-16 -3.5,-8 -0.8,-5.3 0.1,-2.3 3.3,-0.3 13.6,-1.6 18.6,-2 6.3,-1.1 0.5,1.4 -2.2,0.9 -0.9,2.2 0.4,2 1.4,1.6 4.3,2.7 3.2,-0.1 3.2,4.7 0.6,1.6 2.3,2.8 0.5,1.7 4.7,1.8 3,2.2 2.3,3 2.3,1.3 2,1.8 1.4,2.7 2.1,1.9 4.1,1.8 2.7,6 1.7,5.1 2.8,0.7 2.1,1.9 2,5.7 2.9,1.6 1.7,-0.8 0.4,1.2 -3.3,6.2 0.5,2.6 -1.5,4.2 -2.3,10 0.8,6.3z" aria-label="Georgia" role="button" tabindex="0" data-slug="georgia"></path>
-    <path id="IA" d="M556.8,183.6 l2.1,2.1 0.3,0.7 -2,3 0.3,4 2.6,4.1 3.1,1.6 2.4,0.3 0.9,1.8 0.2,2.4 2.5,1 0.9,1.1 0.5,1.6 3.8,3.3 0.6,1.9 -0.7,3 -1.7,3.7 -0.6,2.4 -2.1,1.6 -1.6,0.5 -5.7,1.5 -1.6,4.8 0.8,1.8 1.7,1.5 -0.2,3.5 -1.9,1.4 -0.7,1.8 v2.4 l-1.4,0.4 -1.7,1.4 -0.5,1.7 0.4,1.7 -1.3,1 -2.3,-2.7 -1.4,-2.8 -8.3,0.8 -10,0.6 -49.2,1.2 -1.6,-4.3 -0.4,-6.7 -1.4,-4.2 -0.7,-5.2 -2.2,-3.7 -1,-4.6 -2.7,-7.8 -1.1,-5.6 -1.4,-1.9 -1.3,-2.9 1.7,-3.8 1.2,-6.1 -2.7,-2.2 -0.3,-2.4 0.7,-2.4 1.8,-0.3 61.1,-0.6 21.2,-0.7z" aria-label="Iowa" role="button" tabindex="0" data-slug="iowa"></path>
-    <path id="ID" d="M175.3,27.63 l-4.8,17.41 -4.5,20.86 -3.4,16.22 -0.4,9.67 1.2,4.44 3.5,2.66 -0.2,3.91 -3.9,4.4 -4.5,6.6 -0.9,2.9 -1.2,1.1 -1.8,0.8 -4.3,5.3 -0.4,3.1 -0.4,1.1 0.6,1 2.6,-0.1 1.1,2.3 -2.4,5.8 -1.2,4.2 -8.8,35.3 20.7,4.5 39.5,7.9 34.8,6.1 4.9,-29.2 3.8,-24.1 -2.7,-2.4 -0.4,-2.6 -0.8,-1.1 -2.1,1 -0.7,2.6 -3.2,0.5 -3.9,-1.6 -3.8,0.1 -2.5,0.7 -3.4,-1.5 -2.4,0.2 -2.4,2 -2,-1.1 -0.7,-4 0.7,-2.9 -2.5,-2.9 -3.3,-2.6 -2.7,-13.1 -0.1,-4.7 -0.3,-0.1 -0.2,0.4 -5.1,3.5 -1.7,-0.2 -2.9,-3.4 -0.2,-3.1 7,-17.13 -0.4,-1.94 -3.4,-1.15 -0.6,-1.18 -2.6,-3.46 -4.6,-10.23 -3.2,-1.53 -2,-4.95 1.3,-4.63 -3.2,-7.58 4.4,-21.52z" aria-label="Idaho" role="button" tabindex="0" data-slug="idaho"></path>
-    <path id="IL" d="M618.7,214.3 l-0.8,-2.6 -1.3,-3.7 -1.6,-1.8 -1.5,-2.6 -0.4,-5.5 -15.9,1.8 -17.4,1 h-12.3 l0.2,2.1 2.2,0.9 1.1,1.4 0.4,1.4 3.9,3.4 0.7,2.4 -0.7,3.3 -1.7,3.7 -0.8,2.7 -2.4,1.9 -1.9,0.6 -5.2,1.3 -1.3,4.1 0.6,1.1 1.9,1.8 -0.2,4.3 -2.1,1.6 -0.5,1.3 v2.8 l-1.8,0.6 -1.4,1.2 -0.4,1.2 0.4,2 -1.6,1.3 -0.9,2.8 0.3,3.9 2.3,7 7,7.6 5.7,3.7 v4.4 l0.7,1.2 6.6,0.6 2.7,1.4 -0.7,3.5 -2.2,6.2 -0.8,3 2,3.7 6.4,5.3 4.8,0.8 2.2,5.1 2,3.4 -0.9,2.8 1.5,3.8 1.7,2.1 1.6,-0.3 1,-2.2 2.4,-1.7 2.8,-1 6.1,2.5 0.5,-0.2 v-1.1 l-1.2,-2.7 0.4,-2.8 2.4,-1.6 3.4,-1.2 -0.5,-1.3 -0.8,-2 1.2,-1.3 1,-2.7 v-4 l0.4,-4.9 2.5,-3 1.8,-3.8 2.5,-4 -0.5,-5.3 -1.8,-3.2 -0.3,-3.3 0.8,-5.3 -0.7,-7.2 -1.1,-15.8 -1.4,-15.3 -0.9,-11.7z" aria-label="Illinois" role="button" tabindex="0" data-slug="illinois"></path>
-    <path id="IN" d="M622.9,216.1 l1.5,1 1.1,-0.3 2.1,-1.9 2.5,-1.8 14.3,-1.1 18.4,-1.8 1.6,15.5 4.9,42.6 -0.6,2.9 1.3,1.6 0.2,1.3 -2.3,1.6 -3.6,1.7 -3.2,0.4 -0.5,4.8 -4.7,3.6 -2.9,4 0.2,2.4 -0.5,1.4 h-3.5 l-1.4,-1.7 -5.2,3 0.2,3.1 -0.9,0.2 -0.5,-0.9 -2.4,-1.7 -3.6,1.5 -1.4,2.9 -1.2,-0.6 -1.6,-1.8 -4.4,0.5 -5.7,1 -2.5,1.3 v-2.6 l0.4,-4.7 2.3,-2.9 1.8,-3.9 2.7,-4.2 -0.5,-5.8 -1.8,-3.1 -0.3,-3.2 0.8,-5.3 -0.7,-7.1 -0.9,-12.6 -2.5,-30.1z" aria-label="Indiana" role="button" tabindex="0" data-slug="indiana"></path>
-    <path id="KS" d="M485.9,259.5 l-43.8,-0.6 -40.6,-1.2 -21.7,-0.9 -4.3,64.8 24.3,1 44.7,2.1 46.3,0.6 12.6,-0.3 0.7,-35 -1.2,-11.1 -2.5,-2 -2.4,-3 -2.3,-3.6 0.6,-3 1.7,-1.4 v-2.1 l-0.8,-0.7 -2.6,-0.2 -3.5,-3.4z" aria-label="Kansas" role="button" tabindex="0" data-slug="kansas"></path>
-    <path id="KY" d="M607.2,331.8 l12.6,-0.7 0.1,-4.1 h4.3 l30.4,-3.2 45.1,-4.3 5.6,-3.6 3.9,-2.1 0.1,-1.9 6,-7.8 4.1,-3.6 2.1,-2.4 -3.3,-2 -2.5,-2.7 -3,-3.8 -0.5,-2.2 -2.6,-1.4 -0.9,-1.9 -0.2,-6.1 -2.6,-2 -1.9,-1.1 -0.5,-2.3 -1.3,0.2 -2,1.2 -2.5,2.7 -1.9,-1.7 -2.5,-0.5 -2.4,1.4 h-2.3 l-1.8,-2 -5.6,-0.1 -1.8,-4.5 -2.9,-1.5 -2.1,0.8 -4.2,0.2 -0.5,2.1 1.2,1.5 0.3,2.1 -2.8,2 -3.8,1.8 -2.6,0.4 -0.5,4.5 -4.9,3.6 -2.6,3.7 0.2,2.2 -0.9,2.3 -4.5,-0.1 -1.3,-1.3 -3.9,2.2 0.2,3.3 -2.4,0.6 -0.8,-1.4 -1.7,-1.2 -2.7,1.1 -1.8,3.5 -2.2,-1 -1.4,-1.6 -3.7,0.4 -5.6,1 -2.8,1.3 -1.2,3.4 -1,1 1.5,3.7 -4.2,1.4 -1.9,1.4 -0.4,2.2 1.2,2.4 v2.2 l-1.6,0.4 -6.1,-2.5 -2.3,0.9 -2,1.4 -0.8,1.8 1.7,2.4 -0.9,1.8 -0.1,3.3 -2.4,1.3 -2.1,1.7z" aria-label="Kentucky" role="button" tabindex="0" data-slug="kentucky"></path>
-    <path id="LA" d="M526.9,485.9 l8.1,-0.3 10.3,3.6 6.5,1.1 3.7,-1.5 3.2,1.1 3.2,1 0.8,-2.1 -3.2,-1.1 -2.6,0.5 -2.7,-1.6 0.8,-1.5 3.1,-1 1.8,1.5 1.8,-1 3.2,0.6 1.5,2.4 0.3,2.3 4.5,0.3 1.8,1.8 -0.8,1.6 -1.3,0.8 1.6,1.6 8.4,3.6 3.6,-1.3 1,-2.4 2.6,-0.6 1.8,-1.5 1.3,1 0.8,2.9 -2.3,0.8 0.6,0.6 3.4,-1.3 2.3,-3.4 0.8,-0.5 -2.1,-0.3 0.8,-1.6 -0.2,-1.5 2.1,-0.5 1.1,-1.3 0.6,0.8 0.6,3.1 4.2,0.6 4,1.9 1,1.5 h2.9 l1.1,1 2.3,-3.1 v-1.5 h-1.3 l-3.4,-2.7 -5.8,-0.8 -3.2,-2.3 1.1,-2.7 2.3,0.3 0.2,-0.6 -1.8,-1 v-0.5 h3.2 l1.8,-3.1 -1.3,-1.9 -0.3,-2.7 -1.5,0.2 -1.9,2.1 -0.6,2.6 -3.1,-0.6 -1,-1.8 1.8,-1.9 1.9,-1.7 -2.2,-6.5 -3.4,-3.4 1,-7.3 -0.2,-0.5 -1.3,0.2 -33.1,1.4 -0.8,-2.4 0.8,-8.5 8.6,-14.8 -0.9,-2.6 1.4,-0.4 0.4,-2 -2.2,-2 0.1,-1.9 -2,-4.5 -0.4,-5.1 0.1,-0.7 -26.4,0.8 -25.2,0.1 0.4,9.7 0.7,9.5 0.5,3.7 2.6,4.5 0.9,4.4 4.3,6 0.3,3.1 0.6,0.8 -0.7,8.3 -2.8,4.6 1.2,2.4 -0.5,2.6 -0.8,7.3 -1.3,3 0.2,3.7z" aria-label="Louisiana" role="button" tabindex="0" data-slug="louisiana"></path>
-    <path id="MA" d="M887.5,172.5 l-0.5,-2.3 0.8,-1.5 2.9,-1.5 0.8,3.1 -0.5,1.8 -2.4,1.5 v1 l1.9,-1.5 3.9,-4.5 3.9,-1.9 4.2,-1.5 -0.3,-2.4 -1,-2.9 -1.9,-2.4 -1.8,-0.8 -2.1,0.2 -0.5,0.5 1,1.3 1.5,-0.8 2.1,1.6 0.8,2.7 -1.8,1.8 -2.3,1 -3.6,-0.5 -3.9,-6 -2.3,-2.6 h-1.8 l-1.1,0.8 -1.9,-2.6 0.3,-1.5 2.4,-5.2 -2.9,-4.4 -3.7,1.8 -1.8,2.9 -18.3,4.7 -13.8,2.5 -0.6,10.6 0.7,4.9 22,-4.8 11.2,-2.8 2,1.6 3.4,4.3 2.9,4.7z m12.5,1.4 2.2,-0.7 0.5,-1.7 1,0.1 1,2.3 -1.3,0.5 -3.9,0.1z m-9.4,0.8 2.3,-2.6 h1.6 l1.8,1.5 -2.4,1 -2.2,1z" aria-label="Massachusetts" role="button" tabindex="0" data-slug="massachusetts"></path>
-    <path id="MD" d="M834.8,264.1 l1.7,-3.8 0.5,-4.8 -6.3,1.1 -5.8,0.3 -3.8,-16.8 -2.3,-5.5 -1.5,-4.6 -22.2,4.3 -37.6,7.6 2,10.4 4.8,-4.9 2.5,-0.7 1.4,-1.5 1.8,-2.7 1.6,0.7 2.6,-0.2 2.6,-2.1 2,-1.5 2.1,-0.6 1.5,1.1 2.7,1.4 1.9,1.8 1.3,1.4 4.8,1.6 -0.6,2.9 5.8,2.1 2.1,-2.6 3.7,2.5 -2.1,3.3 -0.7,3.3 -1.8,2.6 v2.1 l0.3,0.8 2,1.3 3.4,1.1 4.3,-0.1 3.1,1 2.1,0.3 1,-2.1 -1.5,-2.1 v-1.8 l-2.4,-2.1 -2.1,-5.5 1.3,-5.3 -0.2,-2.1 -1.3,-1.3 c0,0 1.5,-1.6 1.5,-2.3 0,-0.6 0.5,-2.1 0.5,-2.1 l1.9,-1.3 1.9,-1.6 0.5,1 -1.5,1.6 -1.3,3.7 0.3,1.1 1.8,0.3 0.5,5.5 -2.1,1 0.3,3.6 0.5,-0.2 1.1,-1.9 1.6,1.8 -1.6,1.3 -0.3,3.4 2.6,3.4 3.9,0.5 1.6,-0.8 3.2,4.2 1,0.4z m-14.5,0.2 1.1,2.5 0.2,1.8 1.1,1.9 c0,0 0.9,-0.9 0.9,-1.2 0,-0.3 -0.7,-3.1 -0.7,-3.1 l-0.7,-2.3z" aria-label="Maryland" role="button" tabindex="0" data-slug="maryland"></path>
-    <path id="ME" d="M865.8,91.9 l1.5,0.4 v-2.6 l0.8,-5.5 2.6,-4.7 1.5,-4 -1.9,-2.4 v-6 l0.8,-1 0.8,-2.7 -0.2,-1.5 -0.2,-4.8 1.8,-4.8 2.9,-8.9 2.1,-4.2 h1.3 l1.3,0.2 v1.1 l1.3,2.3 2.7,0.6 0.8,-0.8 v-1 l4,-2.9 1.8,-1.8 1.5,0.2 6,2.4 1.9,1 9.1,29.9 h6 l0.8,1.9 0.2,4.8 2.9,2.3 h0.8 l0.2,-0.5 -0.5,-1.1 2.8,-0.5 1.9,2.1 2.3,3.7 v1.9 l-2.1,4.7 -1.9,0.6 -3.4,3.1 -4.8,5.5 c0,0 -0.6,0 -1.3,0 -0.6,0 -1,-2.1 -1,-2.1 l-1.8,0.2 -1,1.5 -2.4,1.5 -1,1.5 1.6,1.5 -0.5,0.6 -0.5,2.7 -1.9,-0.2 v-1.6 l-0.3,-1.3 -1.5,0.3 -1.8,-3.2 -2.1,1.3 1.3,1.5 0.3,1.1 -0.8,1.3 0.3,3.1 0.2,1.6 -1.6,2.6 -2.9,0.5 -0.3,2.9 -5.3,3.1 -1.3,0.5 -1.6,-1.5 -3.1,3.6 1,3.2 -1.5,1.3 -0.2,4.4 -1.1,6.3 -2.2,-0.9 -0.5,-3.1 -4,-1.1 -0.2,-2.5 -11.7,-37.43z m36.5,15.6 1.5,-1.5 1.4,1.1 0.6,2.4 -1.7,0.9z m6.7,-5.9 1.8,1.9 c0,0 1.3,0.1 1.3,-0.2 0,-0.3 0.2,-2 0.2,-2 l0.9,-0.8 -0.8,-1.8 -2,0.7z" aria-label="Maine" role="button" tabindex="0" data-slug="maine"></path>
-    <path id="MI" d="M644.5,211 l19.1,-1.9 0.2,1.1 9.9,-1.5 12,-1.7 0.1,-0.6 0.2,-1.5 2.1,-3.7 2,-1.7 -0.2,-5.1 1.6,-1.6 1.1,-0.3 0.2,-3.6 1.5,-3 1.1,0.6 0.2,0.6 0.8,0.2 1.9,-1 -0.4,-9.1 -3.2,-8.2 -2.3,-9.1 -2.4,-3.2 -2.6,-1.8 -1.6,1.1 -3.9,1.8 -1.9,5 -2.7,3.7 -1.1,0.6 -1.5,-0.6 c0,0 -2.6,-1.5 -2.4,-2.1 0.2,-0.6 0.5,-5 0.5,-5 l3.4,-1.3 0.8,-3.4 0.6,-2.6 2.4,-1.6 -0.3,-10 -1.6,-2.3 -1.3,-0.8 -0.8,-2.1 0.8,-0.8 1.6,0.3 0.2,-1.6 -2.6,-2.2 -1.3,-2.6 h-2.6 l-4.5,-1.5 -5.5,-3.4 h-2.7 l-0.6,0.6 -1,-0.5 -3.1,-2.3 -2.9,1.8 -2.9,2.3 0.3,3.6 1,0.3 2.1,0.5 0.5,0.8 -2.6,0.8 -2.6,0.3 -1.5,1.8 -0.3,2.1 0.3,1.6 0.3,5.5 -3.6,2.1 -0.6,-0.2 v-4.2 l1.3,-2.4 0.6,-2.4 -0.8,-0.8 -1.9,0.8 -1,4.2 -2.7,1.1 -1.8,1.9 -0.2,1 0.6,0.8 -0.6,2.6 -2.3,0.5 v1.1 l0.8,2.4 -1.1,6.1 -1.6,4 0.6,4.7 0.5,1.1 -0.8,2.4 -0.3,0.8 -0.3,2.7 3.6,6 2.9,6.5 1.5,4.8 -0.8,4.7 -1,6 -2.4,5.2 -0.3,2.7 -3.2,3.1z m-33.3,-72.4 -1.3,-1.1 -1.8,-10.4 -3.7,-1.3 -1.7,-2.3 -12.6,-2.8 -2.8,-1.1 -8.1,-2.2 -7.8,-1 -3.9,-5.3 0.7,-0.5 2.7,-0.8 3.6,-2.3 v-1 l0.6,-0.6 6,-1 2.4,-1.9 4.4,-2.1 0.2,-1.3 1.9,-2.9 1.8,-0.8 1.3,-1.8 2.3,-2.3 4.4,-2.4 4.7,-0.5 1.1,1.1 -0.3,1 -3.7,1 -1.5,3.1 -2.3,0.8 -0.5,2.4 -2.4,3.2 -0.3,2.6 0.8,0.5 1,-1.1 3.6,-2.9 1.3,1.3 h2.3 l3.2,1 1.5,1.1 1.5,3.1 2.7,2.7 3.9,-0.2 1.5,-1 1.6,1.3 1.6,0.5 1.3,-0.8 h1.1 l1.6,-1 4,-3.6 3.4,-1.1 6.6,-0.3 4.5,-1.9 2.6,-1.3 1.5,0.2 v5.7 l0.5,0.3 2.9,0.8 1.9,-0.5 6.1,-1.6 1.1,-1.1 1.5,0.5 v7 l3.2,3.1 1.3,0.6 1.3,1 -1.3,0.3 -0.8,-0.3 -3.7,-0.5 -2.1,0.6 -2.3,-0.2 -3.2,1.5 h-1.8 l-5.8,-1.3 -5.2,0.2 -1.9,2.6 -7,0.6 -2.4,0.8 -1.1,3.1 -1.3,1.1 -0.5,-0.2 -1.5,-1.6 -4.5,2.4 h-0.6 l-1.1,-1.6 -0.8,0.2 -1.9,4.4 -1,4 -3.2,6.9z m-29.6,-56.5 1.8,-2.1 2.2,-0.8 5.4,-3.9 2.3,-0.6 0.5,0.5 -5.1,5.1 -3.3,1.9 -2.1,0.9z m86.2,32.1 0.6,2.5 3.2,0.2 1.3,-1.2 c0,0 -0.1,-1.5 -0.4,-1.6 -0.3,-0.2 -1.6,-1.9 -1.6,-1.9 l-2.2,0.2 -1.6,0.2 -0.3,1.1z" aria-label="Michigan" role="button" tabindex="0" data-slug="michigan"></path>
-    <path id="MN" d="M464.6,66.79 l-0.6,3.91 v10.27 l1.6,5.03 1.9,3.32 0.5,9.93 1.8,13.45 1.8,7.3 0.4,6.4 v5.3 l-1.6,1.8 -1.8,1.3 v1.5 l0.9,1.7 4.1,3.5 0.7,3.2 v35.9 l60.3,-0.6 21.2,-0.7 -0.5,-6 -1.8,-2.1 -7.2,-4.6 -3.6,-5.3 -3.4,-0.9 -2,-2.8 h-3.2 l-3.5,-3.8 -0.5,-7 0.1,-3.9 1.5,-3 -0.7,-2.7 -2.8,-3.1 2.2,-6.1 5.4,-4 1.2,-1.4 -0.2,-8 0.2,-3 2.6,-3 3.8,-2.9 1.3,-0.2 4.5,-5 1.8,-0.8 2.3,-3.9 2.4,-3.6 3.1,-2.6 4.8,-2 9.2,-4.1 3.9,-1.8 0.6,-2.3 -4.4,0.4 -0.7,1.1 h-0.6 l-1.8,-3.1 -8.9,0.3 -1,0.8 h-1 l-0.5,-1.3 -0.8,-1.8 -2.6,0.5 -3.2,3.2 -1.6,0.8 h-3.1 l-2.6,-1 v-2.1 l-1.3,-0.2 -0.5,0.5 -2.6,-1.3 -0.5,-2.9 -1.5,0.5 -0.5,1 -2.4,-0.5 -5.3,-2.4 -3.9,-2.6 h-2.9 l-1.3,-1 -2.3,0.6 -1.1,1.1 -0.3,1.3 h-4.8 v-2.1 l-6.3,-0.3 -0.3,-1.5 h-4.8 l-1.6,-1.6 -1.5,-6.1 -0.8,-5.5 -1.9,-0.8 -2.3,-0.5 -0.6,0.2 -0.3,8.2 -30.1,-0.03z" aria-label="Minnesota" role="button" tabindex="0" data-slug="minnesota"></path>
-    <path id="MO" d="M593.1,338.7 l0.5,-5.9 4.2,-3.4 1.9,-1 v-2.9 l0.7,-1.6 -1.1,-1.6 -2.4,0.3 -2.1,-2.5 -1.7,-4.5 0.9,-2.6 -2,-3.2 -1.8,-4.6 -4.6,-0.7 -6.8,-5.6 -2.2,-4.2 0.8,-3.3 2.2,-6 0.6,-3 -1.9,-1 -6.9,-0.6 -1.1,-1.9 v-4.1 l-5.3,-3.5 -7.2,-7.8 -2.3,-7.3 -0.5,-4.2 0.7,-2.4 -2.6,-3.1 -1.2,-2.4 -7.7,0.8 -10,0.6 -48.8,1.2 1.3,2.6 -0.1,2.2 2.3,3.6 3,3.9 3.1,3 2.6,0.2 1.4,1.1 v2.9 l-1.8,1.6 -0.5,2.3 2.1,3.2 2.4,3 2.6,2.1 1.3,11.6 -0.8,40 0.5,5.7 23.7,-0.2 23.3,-0.7 32.5,-1.3 2.2,3.7 -0.8,3.1 -3.1,2.5 -0.5,1.8 5.2,0.5 4.1,-1.1z" aria-label="Missouri" role="button" tabindex="0" data-slug="missouri"></path>
-    <path id="MS" d="M604.3,472.5 l2.6,-4.2 1.8,0.8 6.8,-1.9 2.1,0.3 1.5,0.8 h5.2 l0.4,-1.6 -1.7,-14.8 -2.8,-19 1,-45.1 -0.2,-16.7 0.2,-6.3 -4.8,0.3 -19.6,1.6 -13,0.4 -0.2,3.2 -2.8,1.3 -2.6,5.1 0.5,1.6 0.1,2.4 -2.9,1.1 -3.5,5.1 0.8,2.3 -3,2.5 -1,5.7 -0.6,1.9 1.6,2.5 -1.5,1.4 1.5,2.8 0.3,4.2 -1.2,2.5 -0.2,0.9 0.4,5 2,4.5 -0.1,1.7 2.3,2 -0.7,3.1 -0.9,0.3 0.6,1.9 -8.6,15 -0.8,8.2 0.5,1.5 24.2,-0.7 8.2,-0.7 1.9,-0.3 0.6,1.4 -1,7.1 3.3,3.3 2.2,6.4z" aria-label="Mississippi" role="button" tabindex="0" data-slug="mississippi"></path>
-    <path id="MT" d="M361.1,70.77 l-5.3,57.13 -1.3,15.2 -59.1,-6.6 -49,-7.1 -1.4,11.2 -1.9,-1.7 -0.4,-2.5 -1.3,-1.9 -3.3,1.5 -0.7,2.5 -2.3,0.3 -3.8,-1.6 -4.1,0.1 -2.4,0.7 -3.2,-1.5 -3,0.2 -2.1,1.9 -0.9,-0.6 -0.7,-3.4 0.7,-3.2 -2.7,-3.2 -3.3,-2.5 -2.5,-12.6 -0.1,-5.3 -1.6,-0.8 -0.6,1 -4.5,3.2 -1.2,-0.1 -2.3,-2.8 -0.2,-2.8 7,-17.15 -0.6,-2.67 -3.5,-1.12 -0.4,-0.91 -2.7,-3.5 -4.6,-10.41 -3.2,-1.58 -1.8,-4.26 1.3,-4.63 -3.2,-7.57 4.4,-21.29 32.7,6.89 18.4,3.4 32.3,5.3 29.3,4 29.2,3.5 30.8,3.07z" aria-label="Montana" role="button" tabindex="0" data-slug="montana"></path>
-    <path id="NC" d="M786.7,357.7 l-12.7,-7.7 -3.1,-0.8 -16.6,2.1 -1.6,-3 -2.8,-2.2 -16.7,0.5 -7.4,0.9 -9.2,4.5 -6.8,2.7 -6.5,1.2 -13.4,1.4 0.1,-4.1 1.7,-1.3 2.7,-0.7 0.7,-3.8 3.9,-2.5 3.9,-1.5 4.5,-3.7 4.4,-2.3 0.7,-3.2 4.1,-3.8 0.7,1 2.5,0.2 2.4,-3.6 1.7,-0.4 2.6,0.3 1.8,-4 2.5,-2.4 0.5,-1.8 0.1,-3.5 4.4,0.1 38.5,-5.6 57.5,-12.3 2,4.8 3.6,6.5 2.4,2.4 0.6,2.3 -2.4,0.2 0.8,0.6 -0.3,4.2 -2.6,1.3 -0.6,2.1 -1.3,2.9 -3.7,1.6 -2.4,-0.3 -1.5,-0.2 -1.6,-1.3 0.3,1.3 v1 h1.9 l0.8,1.3 -1.9,6.3 h4.2 l0.6,1.6 2.3,-2.3 1.3,-0.5 -1.9,3.6 -3.1,4.8 h-1.3 l-1.1,-0.5 -2.7,0.6 -5.2,2.4 -6.5,5.3 -3.4,4.7 -1.9,6.5 -0.5,2.4 -4.7,0.5 -5.1,1.5z m49.3,-26.2 2.6,-2.5 3.2,-2.6 1.5,-0.6 0.2,-2 -0.6,-6.1 -1.5,-2.3 -0.6,-1.9 0.7,-0.2 2.7,5.5 0.4,4.4 -0.2,3.4 -3.4,1.5 -2.8,2.4 -1.1,1.2z" aria-label="North Carolina" role="button" tabindex="0" data-slug="north-carolina"></path>
-    <path id="ND" d="M471,126.4 l-0.4,-6.2 -1.8,-7.3 -1.8,-13.61 -0.5,-9.7 -1.9,-3.18 -1.6,-5.32 v-10.41 l0.6,-3.85 -1.8,-5.54 -28.6,-0.59 -18.6,-0.6 -26.5,-1.3 -25.2,-2.16 -0.9,14.42 -4.7,50.94 56.8,3.9 56.9,1.7z" aria-label="North Dakota" role="button" tabindex="0" data-slug="north-dakota"></path>
-    <path id="NE" d="M470.3,204.3 l-1,-2.3 -0.5,-1.6 -2.9,-1.6 -4.8,-1.5 -2.2,-1.2 -2.6,0.1 -3.7,0.4 -4.2,1.2 -6,-4.1 -2.2,-2 -10.7,0.6 -41.5,-2.4 -35.6,-2.2 -4.3,43.7 33.1,3.3 -1.4,21.1 21.7,1 40.6,1.2 43.8,0.6 h4.5 l-2.2,-3 -2.6,-3.9 0.1,-2.3 -1.4,-2.7 -1.9,-5.2 -0.4,-6.7 -1.4,-4.1 -0.5,-5 -2.3,-3.7 -1,-4.7 -2.8,-7.9 -1,-5.3z" aria-label="Nebraska" role="button" tabindex="0" data-slug="nebraska"></path>
-    <path id="NH" d="M881.7,141.3 l1.1,-3.2 -2.7,-1.2 -0.5,-3.1 -4.1,-1.1 -0.3,-3 -11.7,-37.48 -0.7,0.08 -0.6,1.6 -0.6,-0.5 -1,-1 -1.5,1.9 -0.2,2.29 0.5,8.41 1.9,2.8 v4.3 l-3.9,4.8 -2.4,0.9 v0.7 l1.1,1.9 v8.6 l-0.8,9.2 -0.2,4.7 1,1.4 -0.2,4.7 -0.5,1.5 1,1.1 5.1,-1.2 13.8,-3.5 1.7,-2.9 4,-1.9z" aria-label="New Hampshire" role="button" tabindex="0" data-slug="new-hampshire"></path>
-    <path id="NJ" d="M823.7,228.3 l0.1,-1.5 2.7,-1.3 1.7,-2.8 1.7,-2.4 3.3,-3.2 v-1.2 l-6.1,-4.1 -1,-2.7 -2.7,-0.3 -0.1,-0.9 -0.7,-2.2 2.2,-1.1 0.2,-2.9 -1.3,-1.3 0.2,-1.2 1.9,-3.1 v-3.1 l2.5,-3.1 5.6,2.5 6.4,1.9 2.5,1.2 0.1,1.8 -0.5,2.7 0.4,4.5 -2.1,1.9 -1.1,1 0.5,0.5 2.7,-0.3 1.1,-0.8 1.6,3.4 0.2,9.4 0.6,1.1 -1.1,5.5 -3.1,6.5 -2.7,4 -0.8,4.8 -2.1,2.4 h-0.8 l-0.3,-2.7 0.8,-1 -0.2,-1.5 -4,-0.6 -4.8,-2.3 -3.2,-2.9 -1,-2z" aria-label="New Jersey" role="button" tabindex="0" data-slug="new-jersey"></path>
-    <path id="NM" d="M270.2,429.4 l-16.7,-2.6 -1.2,9.6 -15.8,-2 6,-39.7 7,-53.2 4.4,-30.9 34,3.9 37.4,4.4 32,2.8 -0.3,10.8 -1.4,-0.1 -7.4,97.7 -28.4,-1.8 -38.1,-3.7 0.7,6.3z" aria-label="New Mexico" role="button" tabindex="0" data-slug="new-mexico"></path>
-    <path id="NV" d="M123.1,173.6 l38.7,8.5 26,5.2 -10.6,53.1 -5.4,29.8 -3.3,15.5 -2.1,11.1 -2.6,16.4 -1.7,3.1 -1.6,-0.1 -1.2,-2.6 -2.8,-0.5 -1.3,-1.1 -1.8,0.1 -0.9,0.8 -1.8,1.3 -0.3,7.3 -0.3,1.5 -0.5,12.4 -1.1,1.8 -16.7,-25.5 -42.1,-62.1 -12.43,-19 8.55,-32.6 8.01,-31.3z" aria-label="Nevada" role="button" tabindex="0" data-slug="nevada"></path>
-    <path id="NY" d="M843.4,200 l0.5,-2.7 -0.2,-2.4 -3,-1.5 -6.5,-2 -6,-2.6 -0.6,-0.4 -2.7,-0.3 -2,-1.5 -2.1,-5.9 -3.3,-0.5 -2.4,-2.4 -38.4,8.1 -31.6,6 -0.5,-6.5 1.6,-1.2 1.3,-1.1 1,-1.6 1.8,-1.1 1.9,-1.8 0.5,-1.6 2.1,-2.7 1.1,-1 -0.2,-1 -1.3,-3.1 -1.8,-0.2 -1.9,-6.1 2.9,-1.8 4.4,-1.5 4,-1.3 3.2,-0.5 6.3,-0.2 1.9,1.3 1.6,0.2 2.1,-1.3 2.6,-1.1 5.2,-0.5 2.1,-1.8 1.8,-3.2 1.6,-1.9 h2.1 l1.9,-1.1 0.2,-2.3 -1.5,-2.1 -0.3,-1.5 1.1,-2.1 v-1.5 h-1.8 l-1.8,-0.8 -0.8,-1.1 -0.2,-2.6 5.8,-5.5 0.6,-0.8 1.5,-2.9 2.9,-4.5 2.7,-3.7 2.1,-2.4 2.4,-1.8 3.1,-1.2 5.5,-1.3 3.2,0.2 4.5,-1.5 7.4,-2.2 0.7,4.9 2.4,6.5 0.8,5 -1,4.2 2.6,4.5 0.8,2 -0.9,3.2 3.7,1.7 2.7,10.2 v5.8 l-0.6,10.9 0.8,5.4 0.7,3.6 1.5,7.3 v8.1 l-1.1,2.3 2.1,2.7 0.5,0.9 -1.9,1.8 0.3,1.3 1.3,-0.3 1.5,-1.3 2.3,-2.6 1.1,-0.6 1.6,0.6 2.3,0.2 7.9,-3.9 2.9,-2.7 1.3,-1.5 4.2,1.6 -3.4,3.6 -3.9,2.9 -7.1,5.3 -2.6,1 -5.8,1.9 -4,1.1 -1,-0.4z" aria-label="New York" role="button" tabindex="0" data-slug="new-york"></path>
-    <path id="OH" d="M663.8,211.2 l1.7,15.5 4.8,41.1 3.9,-0.2 2.3,-0.8 3.6,1.8 1.7,4.2 5.4,0.1 1.8,2 h1.7 l2.4,-1.4 3.1,0.5 1.5,1.3 1.8,-2 2.3,-1.4 2.4,-0.4 0.6,2.7 1.6,1 2.6,2 0.8,0.2 2,-0.1 1.2,-0.6 v-2.1 l1.7,-1.5 0.1,-4.8 1.1,-4.2 1.9,-1.3 1,0.7 1,1.1 0.7,0.2 0.4,-0.4 -0.9,-2.7 v-2.2 l1.1,-1.4 2.5,-3.6 1.3,-1.5 2.2,0.5 2.1,-1.5 3,-3.3 2.2,-3.7 0.2,-5.4 0.5,-5 v-4.6 l-1.2,-3.2 1.2,-1.8 1.3,-1.2 -0.6,-2.8 -4.3,-25.6 -6.2,3.7 -3.9,2.3 -3.4,3.7 -4,3.9 -3.2,0.8 -2.9,0.5 -5.5,2.6 -2.1,0.2 -3.4,-3.1 -5.2,0.6 -2.6,-1.5 -2.2,-1.3z" aria-label="Ohio" role="button" tabindex="0" data-slug="ohio"></path>
-    <path id="OK" d="M411.9,334.9 l-1.8,24.3 -0.9,18 0.2,1.6 4,3.6 1.7,0.9 h0.9 l0.9,-2.1 1.5,1.9 1.6,0.1 0.3,-0.2 0.2,-1.1 2.8,1.4 -0.4,3.5 3.8,0.5 2.5,1 4.2,0.6 2.3,1.6 2.5,-1.7 3.5,0.7 2.2,3.1 1.2,0.1 v2.3 l2.1,0.7 2.5,-2.1 1.8,0.6 2.7,0.1 0.7,2.3 4.4,1.8 1.7,-0.3 1.9,-4.2 h1.3 l1.1,2.1 4.2,0.8 3.4,1.3 3,0.8 1.6,-0.7 0.7,-2.7 h4.5 l1.9,0.9 2.7,-1.9 h1.4 l0.6,1.4 h3.6 l2,-1.8 2.3,0.6 1.7,2.2 3,1.7 3.4,0.9 1.9,1.2 -0.3,-37.6 -1.4,-10.9 -0.1,-8.6 -1.5,-6.6 -0.6,-6.8 0.1,-4.3 -12.6,0.3 -46.3,-0.5 -44.7,-2.1 -41.5,-1.8 -0.4,10.7z" aria-label="Oklahoma" role="button" tabindex="0" data-slug="oklahoma"></path>
-    <path id="OR" d="M67.44,158.9 l28.24,7.2 27.52,6.5 17,3.7 8.8,-35.1 1.2,-4.4 2.4,-5.5 -0.7,-1.3 -2.5,0.1 -1.3,-1.8 0.6,-1.5 0.4,-3.3 4.7,-5.7 1.9,-0.9 0.9,-0.8 0.7,-2.7 0.8,-1.1 3.9,-5.7 3.7,-4 0.2,-3.26 -3.4,-2.49 -1.2,-4.55 -13.1,-3.83 -15.3,-3.47 -14.8,0.37 -1.1,-1.31 -5.1,1.84 -4.5,-0.48 -2.4,-1.58 -1.3,0.54 -4.68,-0.29 -1.96,-1.43 -4.84,-1.77 -1.1,-0.07 -4.45,-1.27 -1.76,1.52 -6.26,-0.24 -5.31,-3.85 0.21,-9.28 -2.05,-3.5 -4.1,-0.6 -0.7,-2.5 -2.4,-0.5 -5.8,2.1 -2.3,6.5 -3.2,10 -3.2,6.5 -5,14.1 -6.5,13.6 -8.1,12.6 -1.9,2.9 -0.8,8.6 -1.3,6 2.71,3.5z" aria-label="Oregon" role="button" tabindex="0" data-slug="oregon"></path>
-    <path id="PA" d="M736.6,192.2 l1.3,-0.5 5.7,-5.5 0.7,6.9 33.5,-6.5 36.9,-7.8 2.3,2.3 3.1,0.4 2,5.6 2.4,1.9 2.8,0.4 0.1,0.1 -2.6,3.2 v3.1 l-1.9,3.1 -0.2,1.9 1.3,1.3 -0.2,1.9 -2.4,1.1 1,3.4 0.2,1.1 2.8,0.3 0.9,2.5 5.9,3.9 v0.4 l-3.1,3 -1.5,2.2 -1.7,2.8 -2.7,1.2 -1.4,0.3 -2.1,1.3 -1.6,1.4 -22.4,4.3 -38.7,7.8 -11.3,1.4 -3.9,0.7 -5.1,-22.4 -4.3,-25.9z" aria-label="Pennsylvania" role="button" tabindex="0" data-slug="pennsylvania"></path>
-    <path id="RI" d="M873.6,175.7 l-0.8,-4.4 -1.6,-6 5.7,-1.5 1.5,1.3 3.4,4.3 2.8,4.4 -2.8,1.4 -1.3,-0.2 -1.1,1.8 -2.4,1.9 -2.8,1.1z" aria-label="Rhode Island" role="button" tabindex="0" data-slug="rhode-island"></path>
-    <path id="SC" d="M759,413.6 l-2.1,-1 -1.9,-5.6 -2.5,-2.3 -2.5,-0.5 -1.5,-4.6 -3,-6.5 -4.2,-1.8 -1.9,-1.8 -1.2,-2.6 -2.4,-2 -2.3,-1.3 -2.2,-2.9 -3.2,-2.4 -4.4,-1.7 -0.4,-1.4 -2.3,-2.8 -0.5,-1.5 -3.8,-5.4 -3.4,0.1 -3.9,-2.5 -1.2,-1.2 -0.2,-1.4 0.6,-1.6 2.7,-1.3 -0.8,-2 6.4,-2.7 9.2,-4.5 7.1,-0.9 16.4,-0.5 2.3,1.9 1.8,3.5 4.6,-0.8 12.6,-1.5 2.7,0.8 12.5,7.4 10.1,8.3 -5.3,5.4 -2.6,6.1 -0.5,6.3 -1.6,0.8 -1.1,2.7 -2.4,0.6 -2.1,3.6 -2.7,2.7 -2.3,3.4 -1.6,0.8 -3.6,3.4 -2.9,0.2 1,3.2 -5,5.3 -2.3,1.6z" aria-label="South Carolina" role="button" tabindex="0" data-slug="south-carolina"></path>
-    <path id="SD" d="M471,181.1 l-0.9,3.2 0.4,3 2.6,2 -1.2,5.4 -1.8,4.1 1.5,3.3 0.7,1.1 -1.3,0.1 -0.7,-1.6 -0.6,-2 -3.3,-1.8 -4.8,-1.5 -2.5,-1.3 -2.9,0.1 -3.9,0.4 -3.8,1.2 -5.3,-3.8 -2.7,-2.4 -10.9,0.8 -41.5,-2.4 -35.6,-2.2 1.5,-24.8 2.8,-34 0.4,-5 56.9,3.9 56.9,1.7 v2.7 l-1.3,1.5 -2,1.5 -0.1,2.2 1.1,2.2 4.1,3.4 0.5,2.7 v35.9z" aria-label="South Dakota" role="button" tabindex="0" data-slug="south-dakota"></path>
-    <path id="TN" d="M670.8,359.6 l-13.1,1.2 -23.3,2.2 -37.6,2.7 -11.8,0.4 0.9,-0.6 0.9,-4.5 -1.2,-3.6 3.9,-2.3 0.4,-2.5 1.2,-4.3 3,-9.5 0.5,-5.6 0.3,-0.2 12.3,-0.2 13.6,-0.8 0.1,-3.9 3.5,-0.1 30.4,-3.3 54,-5.2 10.3,-1.5 7.6,-0.2 2.4,-1.9 1.3,0.3 -0.1,3.3 -0.4,1.6 -2.4,2.2 -1.6,3.6 -2,-0.4 -2.4,0.9 -2.2,3.3 -1.4,-0.2 -0.8,-1.2 -1.1,0.4 -4.3,4 -0.8,3.1 -4.2,2.2 -4.3,3.6 -3.8,1.5 -4.4,2.8 -0.6,3.6 -2.5,0.5 -2,1.7 -0.2,4.8z" aria-label="Tennessee" role="button" tabindex="0" data-slug="tennessee"></path>
-    <path id="TX" d="M282.8,425.6 l37,3.6 29.3,1.9 7.4,-97.7 54.4,2.4 -1.7,23.3 -1,18 0.2,2 4.4,4.1 2,1.1 h1.8 l0.5,-1.2 0.7,0.9 2.4,0.2 1.1,-0.6 v-0.2 l1,0.5 -0.4,3.7 4.5,0.7 2.4,0.9 4.2,0.7 2.6,1.8 2.8,-1.9 2.7,0.6 2.2,3.1 0.8,0.1 v2.1 l3.3,1.1 2.5,-2.1 1.5,0.5 2.1,0.1 0.6,2.1 5.2,2 2.3,-0.5 1.9,-4 h0.1 l1.1,1.9 4.6,0.9 3.4,1.3 3.2,1 2.4,-1.2 0.7,-2.3 h3.6 l2.1,1 3,-2 h0.4 l0.5,1.4 h4.7 l1.9,-1.8 1.3,0.4 1.7,2.1 3.3,1.9 3.4,1 2.5,1.4 2.7,2 3.1,-1.2 2.1,0.8 0.7,20 0.7,9.5 0.6,4.1 2.6,4.4 0.9,4.5 4.2,5.9 0.3,3.1 0.6,0.8 -0.7,7.7 -2.9,4.8 1.3,2.6 -0.5,2.4 -0.8,7.2 -1.3,3 0.3,4.2 -5.6,1.6 -9.9,4.5 -1,1.9 -2.6,1.9 -2.1,1.5 -1.3,0.8 -5.7,5.3 -2.7,2.1 -5.3,3.2 -5.7,2.4 -6.3,3.4 -1.8,1.5 -5.8,3.6 -3.4,0.6 -3.9,5.5 -4,0.3 -1,1.9 2.3,1.9 -1.5,5.5 -1.3,4.5 -1.1,3.9 -0.8,4.5 0.8,2.4 1.8,7 1,6.1 1.8,2.7 -1,1.5 -3.1,1.9 -5.7,-3.9 -5.5,-1.1 -1.3,0.5 -3.2,-0.6 -4.2,-3.1 -5.2,-1.1 -7.6,-3.4 -2.1,-3.9 -1.3,-6.5 -3.2,-1.9 -0.6,-2.3 0.6,-0.6 0.3,-3.4 -1.3,-0.6 -0.6,-1 1.3,-4.4 -1.6,-2.3 -3.2,-1.3 -3.4,-4.4 -3.6,-6.6 -4.2,-2.6 0.2,-1.9 -5.3,-12.3 -0.8,-4.2 -1.8,-1.9 -0.2,-1.5 -6,-5.3 -2.6,-3.1 v-1.1 l-2.6,-2.1 -6.8,-1.1 -7.4,-0.6 -3.1,-2.3 -4.5,1.8 -3.6,1.5 -2.3,3.2 -1,3.7 -4.4,6.1 -2.4,2.4 -2.6,-1 -1.8,-1.1 -1.9,-0.6 -3.9,-2.3 v-0.6 l-1.8,-1.9 -5.2,-2.1 -7.4,-7.8 -2.3,-4.7 v-8.1 l-3.2,-6.5 -0.5,-2.7 -1.6,-1 -1.1,-2.1 -5,-2.1 -1.3,-1.6 -7.1,-7.9 -1.3,-3.2 -4.7,-2.3 -1.5,-4.4 -2.6,-2.9 -1.7,-0.5z m174.4,141.7 -0.6,-7.1 -2.7,-7.2 -0.6,-7 1.5,-8.2 3.3,-6.9 3.5,-5.4 3.2,-3.6 0.6,0.2 -4.8,6.6 -4.4,6.5 -2,6.6 -0.3,5.2 0.9,6.1 2.6,7.2 0.5,5.2 0.2,1.5z" aria-label="Texas" role="button" tabindex="0" data-slug="texas"></path>
-    <path id="UT" d="M228.4,305.9 l24.6,3.6 1.9,-13.7 7,-50.5 2.3,-22 -32.2,-3.5 2.2,-13.1 1.8,-10.6 -34.7,-6.1 -12.5,-2.5 -10.6,52.9 -5.4,30 -3.3,15.4 -1.7,9.2z" aria-label="Utah" role="button" tabindex="0" data-slug="utah"></path>
-    <path id="VA" d="M834.7,265.2 l-0.2,2.8 -2.9,3.8 -0.4,4.6 0.5,3.4 -1.8,5 -2.2,1.9 -1.5,-4.6 0.4,-5.4 1.6,-4.2 0.7,-3.3 -0.1,-1.7z m-60.3,44.6 -38.6,5.6 -4.8,-0.1 -2.2,-0.3 -2.5,1.9 -7.3,0.1 -10.3,1.6 -6.7,0.6 4.1,-2.6 4.1,-2.3 v-2.1 l5.7,-7.3 4.1,-3.7 2.2,-2.5 3.6,4.3 3.8,0.9 2.7,-1 2,-1.5 2.4,1.2 4.6,-1.3 1.7,-4.4 2.4,0.7 3.2,-2.3 1.6,0.4 2.8,-3.2 0.2,-2.7 -0.8,-1.2 4.8,-10.5 1.8,-5.2 0.5,-4.7 0.7,-0.2 1.1,1.7 1.5,1.2 3.9,-0.2 1.7,-8.1 3,-0.6 0.8,-2.6 2.8,-2.2 1.1,-2.1 1.8,-4.3 0.1,-4.6 3.6,1.4 6.6,3.1 0.3,-5.2 3.4,1.2 -0.6,2.9 8.6,3.1 1.4,1.8 -0.8,3.3 -1.3,1.3 -0.5,1.7 0.5,2.4 2,1.3 3.9,1.4 2.9,1 4.9,0.9 2.2,2.1 3.2,0.4 0.9,1.2 -0.4,4.7 1.4,1.1 -0.5,1.9 1.2,0.8 -0.2,1.4 -2.7,-0.1 0.1,1.6 2.3,1.5 0.1,1.4 1.8,1.8 0.5,2.5 -2.6,1.4 1.6,1.5 5.8,-1.7 3.7,6.2z" aria-label="Virginia" role="button" tabindex="0" data-slug="virginia"></path>
-    <path id="VT" d="M832.7,111.3 l2.4,6.5 0.8,5.3 -1,3.9 2.5,4.4 0.9,2.3 -0.7,2.6 3.3,1.5 2.9,10.8 v5.3 l11.5,-2.1 -1,-1.1 0.6,-1.9 0.2,-4.3 -1,-1.4 0.2,-4.7 0.8,-9.3 v-8.5 l-1.1,-1.8 v-1.6 l2.8,-1.1 3.5,-4.4 v-3.6 l-1.9,-2.7 -0.3,-5.79 -26.1,6.79z" aria-label="Vermont" role="button" tabindex="0" data-slug="vermont"></path>
-    <path id="WA" d="M74.5,67.7 l-2.3,-4.3 -4.1,-0.7 -0.4,-2.4 -2.5,-0.6 -2.9,-0.5 -1.8,1 -2.3,-2.9 0.3,-2.9 2.7,-0.3 1.6,-4 -2.6,-1.1 0.2,-3.7 4.4,-0.6 -2.7,-2.7 -1.5,-7.1 0.6,-2.9 v-7.9 l-1.8,-3.2 2.3,-9.4 2.1,0.5 2.4,2.9 2.7,2.6 3.2,1.9 4.5,2.1 3.1,0.6 2.9,1.5 3.4,1 2.3,-0.2 v-2.4 l1.3,-1.1 2.1,-1.3 0.3,1.1 0.3,1.8 -2.3,0.5 -0.3,2.1 1.8,1.5 1.1,2.4 0.6,1.9 1.5,-0.2 0.2,-1.3 -1,-1.3 -0.5,-3.2 0.8,-1.8 -0.6,-1.5 v-2.6 l1.8,-3.6 -1.1,-2.6 -2.4,-4.8 0.3,-0.8 1.4,-0.8 4.4,1.5 9.7,2.7 8.6,1.9 20,5.7 23,5.7 15,3.49 -4.8,17.56 -4.5,20.83 -3.4,16.25 -0.4,9.18 v0 l-12.9,-3.72 -15.3,-3.47 -14.5,0.32 -1.1,-1.53 -5.7,2.09 -3.9,-0.42 -2.6,-1.79 -1.7,0.65 -4.15,-0.25 -1.72,-1.32 -5.16,-1.82 -1.18,-0.16 -4.8,-1.39 -1.92,1.65 -5.65,-0.25 -4.61,-3.35z m9.6,-55.4 2,-0.2 0.5,1.4 1.5,-1.6 h2.3 l0.8,1.5 -1.5,1.7 0.6,0.8 -0.7,2 -1.4,0.4 c0,0 -0.9,0.1 -0.9,-0.2 0,-0.3 1.5,-2.6 1.5,-2.6 l-1.7,-0.6 -0.3,1.5 -0.7,0.6 -1.5,-2.3z" aria-label="Washington" role="button" tabindex="0" data-slug="washington"></path>
-    <path id="WI" d="M541.4,109.9 l2.9,0.5 2.9,-0.6 7.4,-3.2 2.9,-1.9 2.1,-0.8 1.9,1.5 -1.1,1.1 -1.9,3.1 -0.6,1.9 1,0.6 1.8,-1 1.1,-0.2 2.7,0.8 0.6,1.1 1.1,0.2 0.6,-1.1 4,5.3 8.2,1.2 8.2,2.2 2.6,1.1 12.3,2.6 1.6,2.3 3.6,1.2 1.7,10.2 1.6,1.4 1.5,0.9 -1.1,2.3 -1.8,1.6 -2.1,4.7 -1.3,2.4 0.2,1.8 1.5,0.3 1.1,-1.9 1.5,-0.8 0.8,-2.3 1.9,-1.8 2.7,-4 4.2,-6.3 0.8,-0.5 0.3,1 -0.2,2.3 -2.9,6.8 -2.7,5.7 -0.5,3.2 -0.6,2.6 0.8,1.3 -0.2,2.7 -1.9,2.4 -0.5,1.8 0.6,3.6 0.6,3.4 -1.5,2.6 -0.8,2.9 -1,3.1 1.1,2.4 0.6,6.1 1.6,4.5 -0.2,3 -15.9,1.8 -17.5,1 h-12.7 l-0.7,-1.5 -2.9,-0.4 -2.6,-1.3 -2.3,-3.7 -0.3,-3.6 2,-2.9 -0.5,-1.4 -2.1,-2.2 -0.8,-3.3 -0.6,-6.8 -2.1,-2.5 -7,-4.5 -3.8,-5.4 -3.4,-1 -2.2,-2.8 h-3.2 l-2.9,-3.3 -0.5,-6.5 0.1,-3.8 1.5,-3.1 -0.8,-3.2 -2.5,-2.8 1.8,-5.4 5.2,-3.8 1.6,-1.9 -0.2,-8.1 0.2,-2.8 2.4,-2.8z" aria-label="Wisconsin" role="button" tabindex="0" data-slug="wisconsin"></path>
-    <path id="WV" d="M758.9,254.3 l5.8,-6 2.6,-0.8 1.6,-1.5 1.5,-2.2 1.1,0.3 3.1,-0.2 4.6,-3.6 1.5,-0.5 1.3,1 2.6,1.2 3,3 -0.4,4.3 -5.4,-2.6 -4.8,-1.8 -0.1,5.9 -2.6,5.7 -2.9,2.4 -0.8,2.3 -3,0.5 -1.7,8.1 -2.8,0.2 -1.1,-1 -1.2,-2 -2.2,0.5 -0.5,5.1 -1.8,5.1 -5,11 0.9,1.4 -0.1,2 -2.2,2.5 -1.6,-0.4 -3.1,2.3 -2.8,-0.8 -1.8,4.9 -3.8,1 -2.5,-1.3 -2.5,1.9 -2.3,0.7 -3.2,-0.8 -3.8,-4.5 -3.5,-2.2 -2.5,-2.5 -2.9,-3.7 -0.5,-2.3 -2.8,-1.7 -0.6,-1.3 -0.2,-5.6 0.3,0.1 2.4,-0.2 1.8,-1 v-2.2 l1.7,-1.5 0.1,-5.2 0.9,-3.6 1.1,-0.7 0.4,0.3 1,1.1 1.7,0.5 1.1,-1.3 -1,-3.1 v-1.6 l3.1,-4.6 1.2,-1.3 2,0.5 2.6,-1.8 3.1,-3.4 2.4,-4.1 0.2,-5.6 0.5,-4.8 v-4.9 l-1.1,-3 0.9,-1.3 0.8,-0.7 4.3,19.3 4.3,-0.8 11.2,-1.3z" aria-label="West Virginia" role="button" tabindex="0" data-slug="west-virginia"></path>
-    <path id="WY" d="M353,161.9 l-1.5,25.4 -4.4,44 -2.7,-0.3 -83.3,-9.1 -27.9,-3 2,-12 6.9,-41 3.8,-24.2 1.3,-11.2 48.2,7 59.1,6.5z" aria-label="Wyoming" role="button" tabindex="0" data-slug="wyoming"></path>
-    <g class="DC state">
-      <path id="DC-path" d="M801.8,253.8 l-1.1-1.6 -1-0.8 1.1-1.6 2.2,1.5z" fill="#D1D5DB" stroke="#ffffff" stroke-width="1"></path>
-      <circle id="DC" cx="801.3" cy="251.8" r="7" fill="#D1D5DB" stroke="#ffffff" stroke-width="1.5" aria-label="District of Columbia" role="button" tabindex="0" data-slug="district-of-columbia"></circle>
-    </g>
-    <g class="PR state">
-      <rect id="PR" x="880" y="520" width="35" height="22" rx="4" fill="#D1D5DB" stroke="#ffffff" stroke-width="1.5" aria-label="Puerto Rico" role="button" tabindex="0" data-slug="puerto-rico"></rect>
-      <text x="897.5" y="534" font-size="10" font-family="Inter, sans-serif" font-weight="bold" fill="#111827" text-anchor="middle" pointer-events="none">PR</text>
-    </g>
-  </g>
-  </svg>
-      </div>
-    </div>
-  </section>
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+            Rapid 3-Step Match Process
+          </div>
+          <h2 class="font-heading font-black text-2xl sm:text-4xl text-white">
+            How Anchorage Emergency Plumbing Dispatch Works
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            No long intake forms or waiting on hold. We connect you directly with available, vetted plumbers across Anchorage.
+          </p>
+        </div>
 
-<!-- ==================== AREAS WE SERVE ==================== -->
-  <section class="section" id="states">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">State Directory</div>
-        <h2 class="section-title">All Serviced <span>States</span></h2>
-        <p class="section-desc">Search or click below to locate vetted, licensed crews dispatched throughout all 52 states and territories.</p>
+        <!-- 3-Column Desktop / Stacked Mobile Layout using Numbered Step Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          
+          <!-- Connecting line graphic for desktop -->
+          <div class="hidden md:block absolute top-1/2 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-blue-500/20 via-amber-400/40 to-blue-500/20 -translate-y-12 z-0"></div>
+
+          <!-- STEP 1 -->
+          <div class="glass-card rounded-xl p-8 relative z-10 space-y-4 hover:border-blue-500/40 transition-all hover:-translate-y-1 group">
+            <div class="flex items-center justify-between">
+              <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/40 text-blue-400 flex items-center justify-center text-2xl font-black group-hover:bg-blue-600 group-hover:text-white transition-all">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <span class="text-4xl font-heading font-black text-slate-800 group-hover:text-blue-500/30 transition-colors">01</span>
+            </div>
+            <h3 class="font-heading font-bold text-xl text-white">1. Tell Us What's Wrong</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Call our 24/7 hotline at <strong class="text-amber-400 font-semibold" data-bind="phone">(907) 516-8705</strong> or fill out our 30-second online form. Just your issue and Anchorage ZIP code — no long intake forms.
+            </p>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="glass-card rounded-xl p-8 relative z-10 space-y-4 hover:border-amber-500/40 transition-all hover:-translate-y-1 group">
+            <div class="flex items-center justify-between">
+              <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center text-2xl font-black group-hover:bg-amber-500 group-hover:text-slate-950 transition-all">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <span class="text-4xl font-heading font-black text-slate-800 group-hover:text-amber-500/30 transition-colors">02</span>
+            </div>
+            <h3 class="font-heading font-bold text-xl text-white">2. We Match You Instantly</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Our dispatch system finds the nearest available, vetted pro in Anchorage.
+            </p>
+            <div class="p-3 rounded-lg bg-navy-950 border border-amber-500/20 text-xs text-amber-300/90 leading-normal">
+              💡 <strong>Network Advantage:</strong> Because we work with a network of vetted pros — not one single crew — you're never stuck waiting on a single company's availability.
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="glass-card rounded-xl p-8 relative z-10 space-y-4 hover:border-emerald-500/40 transition-all hover:-translate-y-1 group">
+            <div class="flex items-center justify-between">
+              <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-2xl font-black group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all">
+                <i class="fa-solid fa-truck-fast"></i>
+              </div>
+              <span class="text-4xl font-heading font-black text-slate-800 group-hover:text-emerald-500/30 transition-colors">03</span>
+            </div>
+            <h3 class="font-heading font-bold text-xl text-white">3. Your Pro Is On the Way</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              You get a direct callback and a pro dispatched, typically within 15–30 minutes across the Anchorage metro area.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================================================================= -->
+    <!-- SECTION 4: TRUST & AUTHORITY (Network-Specific Signals)          -->
+    <!-- ================================================================= -->
+    <section class="py-16 sm:py-24 bg-navy-950 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="mt-8 max-w-md mx-auto" style="position: relative;">
-          <input type="text" id="state-search" placeholder="Type your state (e.g. Texas)..." style="width: 100%; padding: 14px 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-white); font-family: inherit; font-size: 0.95rem; text-align: center; outline: none; transition: var(--transition);" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Network Vetting Checklist Column (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <div class="space-y-3">
+              <span class="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                Network Quality Assurance
+              </span>
+              <h2 class="font-heading font-black text-3xl sm:text-4xl text-white">
+                How We Vet Our Pros
+              </h2>
+              <!-- Framing line -->
+              <p class="text-lg font-medium text-amber-400 italic">
+                "We only refer pros who meet our standards — vetting them is the whole job."
+              </p>
+            </div>
+
+            <!-- Vetting Checklist Items -->
+            <div class="space-y-4 pt-2">
+              
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-navy-900 border border-slate-800">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-sm font-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">1. Active License & Bonding Verification</h4>
+                  <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Every contractor must maintain active Alaska state plumbing licenses and appropriate trade bonding before joining the dispatch network.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-navy-900 border border-slate-800">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-sm font-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">2. Confirmed Active Liability Insurance</h4>
+                  <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Minimum $1,000,000 commercial general liability insurance verified annually for property protection.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-navy-900 border border-slate-800">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-sm font-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">3. Comprehensive Background Check</h4>
+                  <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Strict criminal and business background screens completed for all primary technicians dispatched to residential homes.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-navy-900 border border-slate-800">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-sm font-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">4. Minimum Experience Threshold</h4>
+                  <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Requirement of at least 5+ years of verified field experience handling complex residential and commercial plumbing emergencies.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4 p-4 rounded-xl bg-navy-900 border border-slate-800">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-sm font-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white text-base">5. Ongoing Customer-Rating Minimum</h4>
+                  <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Pros must maintain a high performance and customer feedback score to remain active on the network roster.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Dispatch Experience Reviews Column with Neighborhood Attribution (5 cols) -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="glass-card-accent rounded-2xl p-6 sm:p-8 space-y-6">
+              
+              <div class="border-b border-slate-700/80 pb-4">
+                <h3 class="font-heading font-extrabold text-xl text-white">Anchorage Dispatch Reviews</h3>
+                <p class="text-xs text-slate-400 mt-1">Real experiences from homeowners matched through our dispatch network.</p>
+              </div>
+
+              <!-- Dispatch Experience Review 1 -->
+              <div class="space-y-3 p-4 rounded-xl bg-navy-950/80 border border-slate-800">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-amber-400">⚡ Dispatch Callback: 12 Mins</span>
+                  <span class="text-slate-400 font-semibold">K. M., Midtown Anchorage</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
+                  "Pipe burst in our basement during the sub-zero snap. Called the dispatch line and had a vetted tech at our house in Midtown within 25 minutes. Saved us thousands in potential water damage!"
+                </p>
+                <div class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                  <i class="fa-solid fa-shield-check"></i> Verified Dispatch Match
+                </div>
+              </div>
+
+              <!-- Dispatch Experience Review 2 -->
+              <div class="space-y-3 p-4 rounded-xl bg-navy-950/80 border border-slate-800">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-amber-400">⚡ Dispatch Callback: 9 Mins</span>
+                  <span class="text-slate-400 font-semibold">R. T., Eagle River</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
+                  "Our regular plumber wasn't answering on Sunday evening. Home Plumbing USA matched us with an available licensed emergency plumber in Eagle River immediately."
+                </p>
+                <div class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                  <i class="fa-solid fa-shield-check"></i> Verified Dispatch Match
+                </div>
+              </div>
+
+              <!-- Dispatch Experience Review 3 -->
+              <div class="space-y-3 p-4 rounded-xl bg-navy-950/80 border border-slate-800">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-amber-400">⚡ Dispatch Callback: 14 Mins</span>
+                  <span class="text-slate-400 font-semibold">S. L., South Anchorage</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed">
+                  "Fast callback and straightforward process. The dispatcher located a contractor in South Anchorage who could handle a water heater failure late at night."
+                </p>
+                <div class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                  <i class="fa-solid fa-shield-check"></i> Verified Dispatch Match
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
+
       </div>
-      <div class="areas-grid" id="state-grid-container">
+    </section>
+
+
+    <!-- ================================================================= -->
+    <!-- SECTION 5: DYNAMIC LOCALIZATION & COVERAGE AREA                  -->
+    <!-- ================================================================= -->
+    <section class="py-16 sm:py-24 bg-navy-900 relative border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
-      <a href="/state/alabama" id="state-AL" data-name="Alabama" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Alabama</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/alaska" id="state-AK" data-name="Alaska" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Alaska</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/arizona" id="state-AZ" data-name="Arizona" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Arizona</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/arkansas" id="state-AR" data-name="Arkansas" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Arkansas</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/california" id="state-CA" data-name="California" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">California</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/colorado" id="state-CO" data-name="Colorado" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Colorado</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/connecticut" id="state-CT" data-name="Connecticut" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Connecticut</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/delaware" id="state-DE" data-name="Delaware" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Delaware</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/district-of-columbia" id="state-DC" data-name="District of Columbia" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">District of Columbia</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/florida" id="state-FL" data-name="Florida" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Florida</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/georgia" id="state-GA" data-name="Georgia" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Georgia</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/hawaii" id="state-HI" data-name="Hawaii" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Hawaii</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/idaho" id="state-ID" data-name="Idaho" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Idaho</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/illinois" id="state-IL" data-name="Illinois" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Illinois</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/indiana" id="state-IN" data-name="Indiana" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Indiana</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/iowa" id="state-IA" data-name="Iowa" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Iowa</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/kansas" id="state-KS" data-name="Kansas" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Kansas</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/kentucky" id="state-KY" data-name="Kentucky" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Kentucky</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/louisiana" id="state-LA" data-name="Louisiana" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Louisiana</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/maine" id="state-ME" data-name="Maine" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Maine</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/maryland" id="state-MD" data-name="Maryland" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Maryland</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/massachusetts" id="state-MA" data-name="Massachusetts" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Massachusetts</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/michigan" id="state-MI" data-name="Michigan" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Michigan</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/minnesota" id="state-MN" data-name="Minnesota" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Minnesota</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/mississippi" id="state-MS" data-name="Mississippi" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Mississippi</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/missouri" id="state-MO" data-name="Missouri" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Missouri</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/montana" id="state-MT" data-name="Montana" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Montana</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/nebraska" id="state-NE" data-name="Nebraska" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Nebraska</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/nevada" id="state-NV" data-name="Nevada" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Nevada</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/new-hampshire" id="state-NH" data-name="New Hampshire" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">New Hampshire</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/new-jersey" id="state-NJ" data-name="New Jersey" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">New Jersey</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/new-mexico" id="state-NM" data-name="New Mexico" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">New Mexico</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/new-york" id="state-NY" data-name="New York" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">New York</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/north-carolina" id="state-NC" data-name="North Carolina" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">North Carolina</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/north-dakota" id="state-ND" data-name="North Dakota" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">North Dakota</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/ohio" id="state-OH" data-name="Ohio" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Ohio</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/oklahoma" id="state-OK" data-name="Oklahoma" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Oklahoma</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/oregon" id="state-OR" data-name="Oregon" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Oregon</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/pennsylvania" id="state-PA" data-name="Pennsylvania" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Pennsylvania</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/puerto-rico" id="state-PR" data-name="Puerto Rico" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Puerto Rico</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/rhode-island" id="state-RI" data-name="Rhode Island" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Rhode Island</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/south-carolina" id="state-SC" data-name="South Carolina" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">South Carolina</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/south-dakota" id="state-SD" data-name="South Dakota" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">South Dakota</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/tennessee" id="state-TN" data-name="Tennessee" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Tennessee</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/texas" id="state-TX" data-name="Texas" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Texas</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/utah" id="state-UT" data-name="Utah" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Utah</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/vermont" id="state-VT" data-name="Vermont" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Vermont</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/virginia" id="state-VA" data-name="Virginia" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Virginia</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/washington" id="state-WA" data-name="Washington" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Washington</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/west-virginia" id="state-WV" data-name="West Virginia" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">West Virginia</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/wisconsin" id="state-WI" data-name="Wisconsin" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Wisconsin</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
-      <a href="/state/wyoming" id="state-WY" data-name="Wyoming" class="area-card state-card animate-on-scroll">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="area-title">Wyoming</span>
-        <div class="area-zip" style="color: var(--primary-light); font-weight: bold; font-size: 0.8rem; margin-top: 6px;">✓ ACTIVE DISPATCH</div>
-      </a>
+        <!-- Seasonal Pain Points Section (Winter vs Summer) -->
+        <div class="space-y-8">
+          <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+              Anchorage Climate Response
+            </span>
+            <h2 class="font-heading font-black text-2xl sm:text-4xl text-white">
+              Seasonal Plumbing Pain Points in Anchorage, AK
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base">
+              Our network pros are equipped specifically for Alaska's distinct seasonal plumbing challenges.
+            </p>
+          </div>
+
+          <!-- Dynamic Grid Container for Seasonal Points -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Winter Pain Points Card -->
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 border-l-4 border-l-sky-400">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-snowflake"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-heading font-bold text-xl text-white">Winter Pain Points</h3>
+                    <span class="text-xs text-sky-300 font-medium">Sub-Zero Freeze Response</span>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-full">Primary Focus</span>
+              </div>
+
+              <div class="space-y-4" id="winter-pain-points-list">
+                <!-- Populated via script or standard SSR markup -->
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">❄️ Frozen Pipes</h4>
+                    <span class="text-[10px] text-amber-400 font-semibold">P-101</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Rapid ice expansion inside uninsulated lines leading to sudden pipe splitting during Anchorage freezes.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">💥 Burst Pipe Emergencies</h4>
+                    <span class="text-[10px] text-red-400 font-semibold">P-102</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Immediate 24/7 main line shutoff coordination & high-volume water containment.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">🥶 No Heat + Water Damage</h4>
+                    <span class="text-[10px] text-amber-400 font-semibold">P-103</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Priority boiler & hydronic heating line dispatch when extreme cold threatens pipe freeze-ups.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summer Pain Points Card -->
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 border-l-4 border-l-amber-500">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-sun"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-heading font-bold text-xl text-white">Summer Pain Points</h3>
+                    <span class="text-xs text-amber-300 font-medium">High Load & Maintenance</span>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full">Seasonal Shift</span>
+              </div>
+
+              <div class="space-y-4" id="summer-pain-points-list">
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">🚿 Clogged Drains & Sewer Lines</h4>
+                    <span class="text-[10px] text-blue-400 font-semibold">P-201</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Heavy root intrusion clearing & high-pressure hydro-jetting during summer thaw months.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">🔥 Water Heater Failure</h4>
+                    <span class="text-[10px] text-amber-400 font-semibold">P-202</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Emergency replacement or element repair for tankless & standard hot water tanks.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-navy-950/80 border border-slate-800/80 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white text-sm">🌧 Sump Pump Issues</h4>
+                    <span class="text-[10px] text-indigo-400 font-semibold">P-203</span>
+                  </div>
+                  <p class="text-xs text-slate-400">Submersible pump replacement & battery backup testing for spring snowmelt runoff.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Coverage Area List Section -->
+        <div class="glass-card rounded-2xl p-8 space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Metro Dispatch Radius</span>
+              <h3 class="font-heading font-extrabold text-2xl text-white mt-1">
+                Anchorage Neighborhood Coverage Area
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-400">Vetted plumbing pros on-call across key Anchorage sectors with area code 907.</p>
+            </div>
+            <a href="tel:9075168705" class="inline-flex items-center gap-2 bg-navy-900 border border-slate-700 hover:border-amber-400 text-amber-400 font-bold text-xs px-4 py-2.5 rounded-lg transition-all">
+              <i class="fa-solid fa-map-location-dot"></i>
+              Check My ZIP Code: (907) 516-8705
+            </a>
+          </div>
+
+          <!-- Neighborhood Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="neighborhood-grid">
+            
+            <div class="p-5 rounded-xl bg-navy-950 border border-slate-800 space-y-2 hover:border-blue-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-white text-base">South Anchorage</h4>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <p class="text-xs text-slate-400">Serving Huffman, Dimond, & Oceanview sectors.</p>
+              <div class="text-[10px] text-emerald-400 font-semibold">🟢 Active Dispatch</div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-navy-950 border border-slate-800 space-y-2 hover:border-blue-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-white text-base">Eagle River</h4>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <p class="text-xs text-slate-400">Serving Chugiak & Eagle River valley corridors.</p>
+              <div class="text-[10px] text-emerald-400 font-semibold">🟢 Active Dispatch</div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-navy-950 border border-slate-800 space-y-2 hover:border-blue-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-white text-base">Muldoon</h4>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <p class="text-xs text-slate-400">Serving East Anchorage & Joint Base Elmendorf area.</p>
+              <div class="text-[10px] text-emerald-400 font-semibold">🟢 Active Dispatch</div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-navy-950 border border-slate-800 space-y-2 hover:border-blue-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-white text-base">Midtown</h4>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <p class="text-xs text-slate-400">Serving Midtown commercial & residential districts.</p>
+              <div class="text-[10px] text-emerald-400 font-semibold">🟢 Active Dispatch</div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
 
-
-  <!-- ==================== OUR PROCESS ==================== -->
-  <section class="section" id="workflow">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">How We Work</div>
-        <h2 class="section-title">Our <span>Process</span></h2>
-        <p class="section-desc">We follow a streamlined, transparent process to ensure every plumbing job is completed efficiently, safely, and to the highest standards.</p>
-      </div>
-      <div class="process-grid">
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">01</div>
-          <p class="process-title">Initial Consultation</p>
-          <p>Contact us to discuss your plumbing needs. We listen carefully to understand your issue, answer questions, and provide expert guidance on the best solution.</p>
-        </div>
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">02</div>
-          <p class="process-title">On-Site Inspection</p>
-          <p>Our licensed plumber arrives on time to conduct a thorough evaluation of the problem, inspecting pipes, fixtures, and systems to determine the root cause.</p>
-        </div>
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">03</div>
-          <p class="process-title">Upfront Estimate</p>
-          <p>Before any work begins, you receive a clear, detailed estimate with no hidden fees. We explain the scope of work, materials needed, and timeline.</p>
-        </div>
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">04</div>
-          <p class="process-title">Professional Repair</p>
-          <p>Our skilled plumbers execute the work with precision, using quality materials and following all building codes and safety standards for a lasting repair.</p>
-        </div>
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">05</div>
-          <p class="process-title">Quality Inspection</p>
-          <p>Every job undergoes a thorough quality check. We test all repairs, verify proper water flow, check for leaks, and ensure everything meets our high standards.</p>
-        </div>
-        <div class="process-card animate-on-scroll">
-          <div class="process-number">06</div>
-          <p class="process-title">Final Walkthrough</p>
-          <p>We walk you through the completed work, explain what was done, provide maintenance tips, and ensure your complete satisfaction before the job is closed.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SERVICES SECTION ==================== -->
-  <section class="section" id="services" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">What We Offer</div>
-        <h2 class="section-title">Our Professional <span>Plumbing Services</span></h2>
-        <p class="section-desc">From routine repairs to complex installations, we provide a complete range of residential and commercial plumbing services across the nation.</p>
-      </div>
+  <!-- ================================================================= -->
+  <!-- SECTION 6: FOOTER & LEGAL ALIGNMENT (Tier 2)                      -->
+  <!-- ================================================================= -->
+  <footer class="bg-navy-950 border-t border-slate-800 text-slate-400 text-xs py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       
-      <!-- Input search filter & Categories Tabs -->
-      <div class="max-w-4xl mx-auto space-y-6 mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="flex flex-wrap gap-2">
-          <button data-filter="all" class="service-tab-btn btn btn-outline btn-sm bg-blue text-white" style="padding: 10px 20px; border-radius: 30px;">All Services</button>
-          <button data-filter="drain" class="service-tab-btn btn btn-outline btn-sm" style="padding: 10px 20px; border-radius: 30px;">Drain & Sewer</button>
-          <button data-filter="water-heater" class="service-tab-btn btn btn-outline btn-sm" style="padding: 10px 20px; border-radius: 30px;">Water Heaters</button>
-          <button data-filter="leak" class="service-tab-btn btn btn-outline btn-sm" style="padding: 10px 20px; border-radius: 30px;">Leaks & Pipes</button>
-          <button data-filter="fixtures" class="service-tab-btn btn btn-outline btn-sm" style="padding: 10px 20px; border-radius: 30px;">Specialty & Fixtures</button>
-        </div>
-        <div style="position: relative; width: 100%; max-width: 320px;">
-          <input type="text" id="service-search" placeholder="Search capabilities..." style="width: 100%; padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 30px; color: var(--text-white); font-family: inherit; font-size: 0.88rem; outline: none; transition: var(--transition);" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
-        </div>
-      </div>
-
-      <div class="services-grid" id="service-grid-container">
-
-        <div data-category="emergency" data-name="24 Hour Emergency Plumbing" data-description="Round-the-clock emergency plumbing repair for burst pipes, major leaks, sewer backups, and other urgent plumbing issues near you." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-bolt"></i></div>
-          <h3>24 Hour Emergency Plumbing</h3>
-          <p>Round-the-clock emergency plumbing repair for burst pipes, major leaks, sewer backups, and other urgent plumbing issues near you.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="emergency" data-name="Same Day Plumbing Repair" data-description="Fast, same-day plumbing repairs for common issues like dripping faucets, running toilets, and minor leaks. Quick turnaround, quality results." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-clock"></i></div>
-          <h3>Same Day Plumbing Repair</h3>
-          <p>Fast, same-day plumbing repairs for common issues like dripping faucets, running toilets, and minor leaks. Quick turnaround, quality results.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="water-heater" data-name="Water Heater Repair" data-description="Expert diagnosis and repair for all types of water heaters including tank, tankless, electric, and gas models. Restore your hot water fast." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-temperature-high"></i></div>
-          <h3>Water Heater Repair</h3>
-          <p>Expert diagnosis and repair for all types of water heaters including tank, tankless, electric, and gas models. Restore your hot water fast.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="water-heater" data-name="Water Heater Installation" data-description="Professional installation of new water heaters with proper sizing, code compliance, and manufacturer warranty support." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-fire"></i></div>
-          <h3>Water Heater Installation</h3>
-          <p>Professional installation of new water heaters with proper sizing, code compliance, and manufacturer warranty support.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="water-heater" data-name="Tankless Water Heater Installation" data-description="Upgrade to energy-efficient tankless water heaters. Enjoy endless hot water, lower energy bills, and space savings with expert installation." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-fire-flame-simple"></i></div>
-          <h3>Tankless Water Heater Installation</h3>
-          <p>Upgrade to energy-efficient tankless water heaters. Enjoy endless hot water, lower energy bills, and space savings with expert installation.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="drain" data-name="Drain Cleaning Service" data-description="Thorough drain cleaning to remove buildup, grease, and debris. We restore full flow to kitchen, bathroom, and floor drains throughout your home." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-broom"></i></div>
-          <h3>Drain Cleaning Service</h3>
-          <p>Thorough drain cleaning to remove buildup, grease, and debris. We restore full flow to kitchen, bathroom, and floor drains throughout your home.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="drain" data-name="Clogged Drain Repair" data-description="Stubborn clogs cleared fast with professional tools and techniques. We tackle tough blockages in sinks, tubs, showers, and main sewer lines." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-plug-circle-xmark"></i></div>
-          <h3>Clogged Drain Repair</h3>
-          <p>Stubborn clogs cleared fast with professional tools and techniques. We tackle tough blockages in sinks, tubs, showers, and main sewer lines.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="drain" data-name="Hydro Jetting Service" data-description="High-pressure water jetting to blast through the toughest clogs and clean pipe interiors. The most effective solution for severe drain blockages." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-water"></i></div>
-          <h3>Hydro Jetting Service</h3>
-          <p>High-pressure water jetting to blast through the toughest clogs and clean pipe interiors. The most effective solution for severe drain blockages.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="drain" data-name="Sewer Line Repair" data-description="Professional sewer line repair using traditional and trenchless methods. We fix cracks, bellied pipes, root intrusion, and collapsed sewer lines." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-screwdriver-wrench"></i></div>
-          <h3>Sewer Line Repair</h3>
-          <p>Professional sewer line repair using traditional and trenchless methods. We fix cracks, bellied pipes, root intrusion, and collapsed sewer lines.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="drain" data-name="Sewer Line Replacement" data-description="Complete sewer line replacement when repairs aren't enough. We use modern trenchless technology to minimize disruption to your property." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-arrows-rotate"></i></div>
-          <h3>Sewer Line Replacement</h3>
-          <p>Complete sewer line replacement when repairs aren't enough. We use modern trenchless technology to minimize disruption to your property.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="leak" data-name="Leak Detection Service" data-description="Advanced leak detection using electronic equipment and thermal imaging to locate hidden leaks without unnecessary demolition of your property." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-magnifying-glass"></i></div>
-          <h3>Leak Detection Service</h3>
-          <p>Advanced leak detection using electronic equipment and thermal imaging to locate hidden leaks without unnecessary demolition of your property.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="leak" data-name="Slab Leak Repair" data-description="Expert slab leak detection and repair for foundations. We use specialized equipment to locate and fix leaks beneath your concrete slab." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-layer-group"></i></div>
-          <h3>Slab Leak Repair</h3>
-          <p>Expert slab leak detection and repair for foundations. We use specialized equipment to locate and fix leaks beneath your concrete slab.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="leak" data-name="Pipe Leak Repair" data-description="Fast, reliable pipe leak repair for copper, PVC, PEX, and galvanized pipes. We stop leaks quickly to prevent water damage and mold growth." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-droplet"></i></div>
-          <h3>Pipe Leak Repair</h3>
-          <p>Fast, reliable pipe leak repair for copper, PVC, PEX, and galvanized pipes. We stop leaks quickly to prevent water damage and mold growth.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="leak" data-name="Burst Pipe Repair" data-description="Emergency burst pipe repair to stop flooding and water damage. Our team responds fast to isolate the break and make permanent repairs." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-burst"></i></div>
-          <h3>Burst Pipe Repair</h3>
-          <p>Emergency burst pipe repair to stop flooding and water damage. Our team responds fast to isolate the break and make permanent repairs.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="leak" data-name="Whole House Repiping" data-description="Complete home repiping services to replace old, corroded, or failing pipes with modern materials for improved water quality and pressure." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-house-chimney"></i></div>
-          <h3>Whole House Repiping</h3>
-          <p>Complete home repiping services to replace old, corroded, or failing pipes with modern materials for improved water quality and pressure.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div data-category="fixtures" data-name="Toilet Repair &amp; Installation" data-description="Complete toilet services from fixing running toilets and clogs to installing new high-efficiency models. Expert service for all brands." class="service-card animate-on-scroll">
-          <div class="service-icon"><i class="fas fa-toilet"></i></div>
-          <h3>Toilet Repair &amp; Installation</h3>
-          <p>Complete toilet services from fixing running toilets and clogs to installing new high-efficiency models. Expert service for all brands.</p>
-          <a href="#states" class="btn btn-outline btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== WHY CHOOSE US ==================== -->
-  <section class="section" id="why-us">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">Why Choose Us</div>
-        <h2 class="section-title">Why Homeowners <span>Trust Home Plumbing USA</span></h2>
-        <p class="section-desc">We combine decades of experience with honest pricing, fast response times, and a genuine commitment to solving your plumbing problems right the first time.</p>
-      </div>
-      <div class="why-grid">
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-calendar-check"></i></div>
-          <div>
-            <p class="why-title">20+ Years of Experience</p>
-            <p>With over two decades in the plumbing industry, our team has the expertise to handle everything from simple repairs to complex installations. We've seen it all and know how to fix it right.</p>
-          </div>
-        </div>
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-users-gear"></i></div>
-          <div>
-            <p class="why-title">Professional Licensed Team</p>
-            <p>Every plumber on our team is fully licensed, background-checked, and continuously trained on the latest plumbing technologies and building codes to ensure top-quality service.</p>
-          </div>
-        </div>
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-star"></i></div>
-          <div>
-            <p class="why-title">Quality Guaranteed</p>
-            <p>We stand behind our work with a satisfaction guarantee. We use premium materials, follow manufacturer specifications, and ensure every repair is built to last.</p>
-          </div>
-        </div>
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-bolt"></i></div>
-          <div>
-            <p class="why-title">Fast Response Time</p>
-            <p>Plumbing emergencies don't wait, and neither do we. Our team is available 24/7 with rapid response times to minimize damage and disruption.</p>
-          </div>
-        </div>
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-hand-holding-dollar"></i></div>
-          <div>
-            <p class="why-title">Upfront Honest Pricing</p>
-            <p>No surprise bills. We provide detailed, upfront estimates before starting any work. You know exactly what you're paying for, with no hidden fees or unexpected charges.</p>
-          </div>
-        </div>
-        <div class="why-card animate-on-scroll">
-          <div class="why-icon"><i class="fas fa-headset"></i></div>
-          <div>
-            <p class="why-title">Customer-Focused Service</p>
-            <p>We treat every home like our own. From the first call to final cleanup, we focus on clear communication, respect for your property, and complete customer satisfaction.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TESTIMONIALS ==================== -->
-  <section class="section" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">Testimonials</div>
-        <h2 class="section-title">What Our <span>Customers Say</span></h2>
-        <p class="section-desc">Don't just take our word for it. Hear from homeowners and businesses who trust Home Plumbing USA for their plumbing needs.</p>
-      </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"Home Plumbing USA saved us during a late-night pipe burst. They arrived within 45 minutes and had the repair done before midnight. Incredible service and very fair pricing. Highly recommend!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MR</div>
-            <div>
-              <div class="testimonial-name">Michael R.</div>
-              <div class="testimonial-location">Houston, TX</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"Had them install a new tankless water heater. The team was professional, explained everything clearly, and left the work area spotless. Our energy bills have dropped noticeably since the upgrade."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SJ</div>
-            <div>
-              <div class="testimonial-name">Sarah J.</div>
-              <div class="testimonial-location">Los Angeles, CA</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"We use Home Plumbing USA for our restaurant's commercial plumbing needs. They're always responsive, work around our business hours, and their preventive maintenance has saved us from costly shutdowns."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">DL</div>
-            <div>
-              <div class="testimonial-name">David L.</div>
-              <div class="testimonial-location">Chicago, IL</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FAQ SECTION ==================== -->
-  <section class="section" id="faq" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header animate-on-scroll">
-        <div class="section-label">FAQ</div>
-        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
-        <p class="section-desc">Find answers to common plumbing questions from homeowners and businesses.</p>
-      </div>
-      <div class="faq-container">
+      <!-- Top Footer Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">What areas do you serve?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              We cover all 50 states plus Washington D.C. and Puerto Rico. Our network matches you with dispatched local crews in your specific city and zip code in real-time.
+        <!-- Col 1: Brand Info -->
+        <div class="space-y-3 md:col-span-1">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm">
+              <i class="fa-solid fa-headset"></i>
             </div>
+            <span class="font-heading font-extrabold text-lg text-white">Home Plumbing <span class="text-amber-400">USA</span></span>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-xs">
+            Anchorage's 24/7 plumbing dispatch network. Matching homeowners with vetted, licensed, and background-checked plumbing contractors.
+          </p>
+          <div class="text-xs font-semibold text-slate-300">
+            📞 Hotline: <a href="tel:9075168705" class="text-amber-400 font-bold hover:underline" data-bind="phone">(907) 516-8705</a>
           </div>
         </div>
 
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">Do you offer 24/7 emergency plumbing services?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes, Home Plumbing USA provides 24-hour emergency plumbing services, 7 days a week, including holidays. We understand that plumbing emergencies like burst pipes, sewer backups, and major leaks can happen at any time. Call us at 877-516-8705 for immediate emergency assistance.
-            </div>
+        <!-- Col 2: Neighborhood Service Areas -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Anchorage Metro Areas</h4>
+          <ul class="space-y-1 text-slate-400">
+            <li>📍 South Anchorage, AK</li>
+            <li>📍 Eagle River, AK</li>
+            <li>📍 Muldoon (East Anchorage)</li>
+            <li>📍 Midtown Anchorage, AK</li>
+            <li>📍 Anchorage Metro (Area Code 907)</li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Operating Hours & Network Standard -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Operating Hours</h4>
+          <p class="text-slate-300 font-medium">🌙 24 Hours a Day, 7 Days a Week, 365 Days a Year</p>
+          <p class="text-slate-400 text-[11px]">Including Holidays & Weekend Emergencies across Anchorage.</p>
+          <div class="pt-2">
+            <span class="inline-block bg-slate-900 border border-slate-800 px-3 py-1.5 rounded text-[11px] text-emerald-400 font-mono">
+              Network Avg Callback: &lt;15 Mins
+            </span>
           </div>
         </div>
 
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">How much do plumbing repairs typically cost?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Plumbing repair costs vary depending on the type and complexity of the issue. dispatches are flat-rate, and dispatches always present complete diagnostic pricing estimates on-site before initiating any repair.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">Are your plumbers licensed and insured?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Absolutely. All dispatch matching providers in our network are fully verified for active local licensing, bonded, and carry general liability and workers' compensation coverage to protect both themselves and your property.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">How quickly can you respond to a plumbing emergency?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              For emergency dispatches, crews typically arrive at your home or business within 30 to 60 minutes.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">Do you provide free estimates for plumbing work?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes, technicians run on-site inspections and provide clear, upfront diagnostic pricing guides.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item animate-on-scroll">
-          <div class="faq-question">
-            <h3 class="faq-title">Do you provide free estimates for plumbing work?</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes, technicians run on-site inspections and provide clear, upfront diagnostic pricing guides.
-            </div>
-          </div>
+        <!-- Col 4: Quick Links -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Legal & Information</h4>
+          <ul class="space-y-1.5">
+            <li><a href="terms-and-conditions.html" class="hover:text-amber-400 transition-colors">Terms & Conditions</a></li>
+            <li><a href="privacy-policy.html" class="hover:text-amber-400 transition-colors">Privacy Policy</a></li>
+            <li><a href="disclaimer.html" class="hover:text-amber-400 transition-colors">Legal Disclaimer</a></li>
+            <li><a href="contact.html" class="hover:text-amber-400 transition-colors">Contact Support</a></li>
+          </ul>
         </div>
 
       </div>
-    </div>
-  </section>
-    </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Column 1 -->
-        <div class="footer-about">
-          <a href="/" class="logo footer-logo">
-            <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
-          </a>
-          <h3 class="footer-title footer-brand-heading">Find Top-Rated Local Plumbing Experts Nationwide</h3>
-          <p class="footer-brand-subheading">We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
-        </div>
-        <!-- Column 2 -->
-        <div class="footer-col">
-          <div class="footer-title">Quick Links</div>
-          <a href="/">Home</a>
-          <a href="/services">Services</a>
-          <a href="/#states">Service Areas</a>
-          <a href="/about">About Us</a>
-          <a href="/contact">Contact Us</a>
-        </div>
-        <!-- Column 3 -->
-        <div class="footer-col">
-          <div class="footer-title">Top Services</div>
-          <a href="/#states">Emergency Plumbing</a>
-          <a href="/#states">Water Heater Repair</a>
-          <a href="/#states">Drain Cleaning</a>
-          <a href="/#states">Leak Detection</a>
-          <a href="/#states">Sewer Line Repair</a>
-          <a href="/#states">Gas Line Repair</a>
-        </div>
-        <!-- Column 4 -->
-        <div class="footer-col">
-          <div class="footer-title">Need Help Now?</div>
-          <p>Speak directly with an active dispatch supervisor 24/7.</p>
-          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
-        </div>
-      </div>
+      <!-- FULL TIER 2 LEGAL BLOCK -->
+      <div class="p-6 rounded-xl bg-navy-900/80 border border-slate-800/80 space-y-4 text-[11px] leading-relaxed text-slate-400">
+        
+        <h5 class="font-bold text-slate-200 uppercase tracking-wider text-xs flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced text-amber-400"></i>
+          Tier 2 Legal Disclosure & Referral Network Notice
+        </h5>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
-        <!-- Footer Links -->
-        <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
-          <a href="/privacy-policy" class="hover:text-white transition-colors" style="font-size: 12px;">Privacy Policy</a>
-          <span class="text-white/20">&middot;</span>
-          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="font-size: 12px;">Terms &amp; Conditions</a>
-          <span class="text-white/20">&middot;</span>
-          <a href="/disclaimer" class="hover:text-white transition-colors" style="font-size: 12px;">Disclaimer</a>
-        </div>
-        <!-- Visible One-Liner Disclaimer Text -->
-        <p class="footer-legal-disclaimer" style="color: #6b7280; font-size: 11.5px; margin-top: 8px; text-align: center;">
-          <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
+        <!-- Expanded Tier 1 Disclosure -->
+        <p>
+          <strong>Referral & Dispatch Network Disclosure:</strong> Home Plumbing USA is a free plumbing referral and dispatch network service designed to assist homeowners in connecting with local plumbing specialists. Home Plumbing USA does not directly provide plumbing services or employ plumbing contractors. All contractors in our network are independent, licensed, and insured local professionals. When you call <a href="tel:9075168705" class="text-slate-200 underline font-semibold">(907) 516-8705</a> or submit an online request, you will be connected with an available third-party plumbing contractor servicing the Anchorage, AK area.
+        </p>
+
+        <p>
+          <strong>Contractor Vetting & Responsibility:</strong> While Home Plumbing USA verifies state licensure, active insurance minimums, and initial background checks for participating contractors, Home Plumbing USA does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the contractor performing services holds the appropriate permits and certifications required for specific plumbing tasks.
+        </p>
+
+        <!-- Data-Usage Disclosure -->
+        <p>
+          <strong>Data Usage & Consent Notice:</strong> By submitting your phone number, address, or calling our referral network, you explicitly consent to receive calls, voice messages, or SMS notifications from matched local plumbing professionals regarding your service request. Message and data rates may apply. Consent is not a condition of purchasing any service.
         </p>
       </div>
+
+      <!-- Bottom Copyright & Credit Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-900 text-[11px] text-slate-500">
+        <div>
+          &copy; 2026 Home Plumbing USA. All rights reserved. Anchorage, AK (Area Code 907).
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="terms-and-conditions.html" class="hover:underline">Terms</a>
+          <span>•</span>
+          <a href="privacy-policy.html" class="hover:underline">Privacy</a>
+          <span>•</span>
+          <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
+        </div>
+      </div>
+
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js" defer></script>
-  <script src="/js/main.js" defer></script>
 
-  <!-- Mobile Sticky Action Bar -->
-  <div class="mobile-sticky-bar">
-    <a href="tel:877-516-8705" class="sticky-btn call-btn" data-track="phone" data-location="sticky-bar">
-      <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" style="display:inline-block;vertical-align:-0.125em;"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg> Call Now
-    </a>
-    <a href="/contact" class="sticky-btn quote-btn">
-      <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" style="display:inline-block;vertical-align:-0.125em;"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 4-27.1-.8l-138.7-83.2-70.1 63c-6.7 6-15.8 8.6-24.8 6.9s-16.4-7.8-19.7-16.4l-38-98.8-94.6-31.5c-9.8-3.3-16.7-11.7-17.7-22s4.2-20.1 13.2-25.2l448-256c9.6-5.5 21.6-4.6 30.2 1.4z"/></svg> Get a Quote
-    </a>
+
+  <!-- ================================================================= -->
+  <!-- MOBILE STICKY CALL CTA BAR (CRITICAL BLUEPRINT REQUIREMENT)       -->
+  <!-- ================================================================= -->
+  <div id="mobile-sticky-cta" class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-navy-950/95 border-t border-amber-500/40 backdrop-blur-lg shadow-2xl transition-transform duration-300 translate-y-full">
+    <div class="flex items-center gap-3">
+      <a href="tel:9075168705" class="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 active:from-amber-400 text-slate-950 font-black text-base py-3 px-4 rounded-xl shadow-lg shadow-amber-500/30 text-center">
+        <i class="fa-solid fa-phone-volume animate-bounce"></i>
+        <span>📞 Call Now — (907) 516-8705</span>
+      </a>
+    </div>
+    <div class="text-[10px] text-center text-slate-400 mt-1.5 font-medium">
+      ⏱ Avg 15-Min Response in Anchorage
+    </div>
   </div>
+
+
+  <!-- JavaScript Dynamic Binding & Scroll Observer Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // 1. Dynamic Data Binding from cityData JSON object
+      if (typeof cityData !== "undefined") {
+        document.querySelectorAll('[data-bind="city"]').forEach(el => el.textContent = cityData.city);
+        document.querySelectorAll('[data-bind="state"]').forEach(el => el.textContent = cityData.state);
+        document.querySelectorAll('[data-bind="area_code"]').forEach(el => el.textContent = cityData.area_code);
+        document.querySelectorAll('[data-bind="phone"]').forEach(el => el.textContent = cityData.phone);
+      }
+
+      // 2. Mobile Sticky Bar Observer (Appears when user scrolls past hero primary CTA)
+      const heroCta = document.getElementById("hero-primary-cta");
+      const stickyBar = document.getElementById("mobile-sticky-cta");
+
+      if (heroCta && stickyBar) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              stickyBar.classList.remove("translate-y-full");
+            } else {
+              stickyBar.classList.add("translate-y-full");
+            }
+          });
+        }, { threshold: 0.1 });
+
+        observer.observe(heroCta);
+      }
+    });
+
+    // 3. Form Match Handler
+    function handleMatchSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById("match-form");
+      const successState = document.getElementById("form-success-state");
+      
+      if (form && successState) {
+        form.classList.add("hidden");
+        successState.classList.remove("hidden");
+      }
+    }
+  </script>
+
 </body>
 </html>
-
-
-
-
