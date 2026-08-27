@@ -58,13 +58,34 @@ RewriteRule ^images/(.*)$ public/images/$1 [L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
 
-# 2. Route for States (e.g., /state/alaska -> state.html?state=alaska)
+# 2. Route for States (e.g., /state/alaska)
+# A. Serve static pre-rendered state page if available (state/<slug>/index.html)
+RewriteCond %{DOCUMENT_ROOT}/state/$1/index.html -f
+RewriteRule ^state/([^/]+)/?$ state/$1/index.html [L]
+
+# B. Serve static html file if available (state/<slug>.html)
+RewriteCond %{DOCUMENT_ROOT}/state/$1.html -f
+RewriteRule ^state/([^/]+)/?$ state/$1.html [L]
+
+# C. Route to dynamic PHP renderer if available
+RewriteCond %{DOCUMENT_ROOT}/state.php -f
+RewriteRule ^state/([^/]+)/?$ state.php?state=$1 [L,QSA]
+
+# D. Fallback to state.html
 RewriteRule ^state/([^/]+)/?$ state.html?state=$1 [L,QSA]
 
 # 3. Route for Services (e.g., /services/drain-cleaning -> service-detail.html?service=drain-cleaning)
 RewriteRule ^services/([^/]+)/?$ service-detail.html?service=$1 [L,QSA]
 
-# 4. Route for City/Zip (e.g., /city/alaska/anchorage/99501 -> city-zip.html?state=$1&city=$2&zip=$3)
+# 4. Hyper-Local Static Routes (e.g., /alaska/anchorage-99507/drain-cleaning/)
+RewriteCond %{DOCUMENT_ROOT}/$1/$2/$3/index.html -f
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.html [L]
+
+# 5. Hyper-Local City-ZIP Hub Routes (e.g., /alaska/anchorage-99507/)
+RewriteCond %{DOCUMENT_ROOT}/$1/$2/index.html -f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.html [L]
+
+# 6. Legacy Route for City/Zip (e.g., /city/alaska/anchorage/99501 -> city-zip.html?state=$1&city=$2&zip=$3)
 RewriteRule ^city/([^/]+)/([^/]+)/([^/]+)/?$ city-zip.html?state=$1&city=$2&zip=$3 [L,QSA]
 
 # 5. Fallback to check if actual file exists without extension

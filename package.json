@@ -4,7 +4,9 @@
   "description": "Programmatic SEO pipeline for Home Plumbing USA",
   "main": "generate-service-areas.js",
   "scripts": {
-    "generate:seo": "node scripts/generate-state-seo.js"
+    "build:states": "node scripts/generate-state-pages.js",
+    "generate:seo": "node scripts/generate-state-seo.js",
+    "generate:sitemaps": "node generate-sitemaps.js"
   },
   "dependencies": {},
   "devDependencies": {}

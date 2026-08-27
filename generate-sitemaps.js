@@ -21,7 +21,6 @@ function slugify(text) {
 
 const DOMAIN = 'https://homeplumbingusa.com';
 
-// Dictionary mapping all US states (plus DC & PR) to slugified names to prevent scaling bugs.
 const STATE_MAP = {
   'al': 'alabama', 'ak': 'alaska', 'az': 'arizona', 'ar': 'arkansas', 'ca': 'california',
   'co': 'colorado', 'ct': 'connecticut', 'de': 'delaware', 'dc': 'district-of-columbia',
@@ -37,75 +36,59 @@ const STATE_MAP = {
   'wi': 'wisconsin', 'wy': 'wyoming'
 };
 
+const STATE_SLUGS = ['alaska', 'texas', 'florida'];
+
 function main() {
-  const serviceAreasPath = path.join(__dirname, 'service-areas');
-  if (!fs.existsSync(serviceAreasPath)) {
-    console.error("service-areas directory not found!");
-    return;
-  }
-
-  // 1. Read all city folders
-  const items = fs.readdirSync(serviceAreasPath, { withFileTypes: true });
-  
-  // Group city folders by state code
-  const stateFoldersMap = {};
-  items.forEach(item => {
-    if (item.isDirectory()) {
-      const folderName = item.name;
-      const parts = folderName.split('-');
-      if (parts.length >= 3) {
-        const stateCode = parts[0].toLowerCase();
-        if (!stateFoldersMap[stateCode]) {
-          stateFoldersMap[stateCode] = [];
-        }
-        stateFoldersMap[stateCode].push(folderName);
-      }
-    }
-  });
-
-  const lastModDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+  const lastModDate = new Date().toISOString().split('T')[0];
   const generatedSitemaps = [];
 
-  // 2. Generate state-specific sitemaps (combining state, city, and service URLs)
-  Object.keys(stateFoldersMap).sort().forEach(stateCode => {
-    const stateName = STATE_MAP[stateCode] || stateCode;
-    const folders = stateFoldersMap[stateCode];
-    folders.sort();
+  STATE_SLUGS.forEach(stateSlug => {
+    const stateDir = path.join(__dirname, stateSlug);
+    if (!fs.existsSync(stateDir)) return;
+
+    let stateCode = 'us';
+    for (const [code, slug] of Object.entries(STATE_MAP)) {
+      if (slug === stateSlug) {
+        stateCode = code;
+        break;
+      }
+    }
+
+    console.log(`Generating sitemap for ${stateSlug} (${stateCode})...`);
 
     const urls = [];
 
-    // A. Add State main page URL
+    // State main page
     urls.push({
-      loc: `${DOMAIN}/state/${slugify(stateName)}`,
+      loc: `${DOMAIN}/state/${stateSlug}`,
       changefreq: 'weekly',
-      priority: '0.8'
+      priority: '0.9'
     });
 
-    // B. Add City pages and their Service subpages
-    folders.forEach(folder => {
-      const cleanFolder = slugify(folder);
-      
-      // City URL
-      urls.push({
-        loc: `${DOMAIN}/service-areas/${cleanFolder}/`,
-        changefreq: 'weekly',
-        priority: '0.6'
-      });
+    const cityFolders = fs.readdirSync(stateDir, { withFileTypes: true });
+    cityFolders.forEach(cf => {
+      if (cf.isDirectory()) {
+        const cityZipSlug = cf.name;
+        // Hub URL
+        urls.push({
+          loc: `${DOMAIN}/${stateSlug}/${cityZipSlug}/`,
+          changefreq: 'weekly',
+          priority: '0.7'
+        });
 
-      // Scan subdirectories for service subpages
-      const folderPath = path.join(serviceAreasPath, folder);
-      const subItems = fs.readdirSync(folderPath, { withFileTypes: true });
-      
-      subItems.forEach(subItem => {
-        if (subItem.isDirectory()) {
-          const serviceSlug = slugify(subItem.name);
-          urls.push({
-            loc: `${DOMAIN}/service-areas/${cleanFolder}/${serviceSlug}/`,
-            changefreq: 'weekly',
-            priority: '0.8'
-          });
-        }
-      });
+        // Service subpages
+        const cityZipPath = path.join(stateDir, cityZipSlug);
+        const subItems = fs.readdirSync(cityZipPath, { withFileTypes: true });
+        subItems.forEach(si => {
+          if (si.isDirectory()) {
+            urls.push({
+              loc: `${DOMAIN}/${stateSlug}/${cityZipSlug}/${si.name}/`,
+              changefreq: 'weekly',
+              priority: '0.8'
+            });
+          }
+        });
+      }
     });
 
     // Write XML file for state
@@ -125,7 +108,7 @@ ${urls.map(url => `  <url>
     generatedSitemaps.push(sitemapFilename);
   });
 
-  // 3. Generate sitemap-pages.xml (Static Pages)
+  // Root static pages
   const rootUrls = [
     `${DOMAIN}/`,
     `${DOMAIN}/about`,
@@ -150,7 +133,7 @@ ${rootUrls.map(url => `  <url>
   console.log(`Generated sitemap-pages.xml successfully! (URLs: ${rootUrls.length})`);
   generatedSitemaps.push('sitemap-pages.xml');
 
-  // 4. Generate sitemap.xml (Sitemap Index)
+  // Master Sitemap Index
   const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${generatedSitemaps.map(filename => `  <sitemap>
@@ -161,24 +144,6 @@ ${generatedSitemaps.map(filename => `  <sitemap>
 
   fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapIndexXml, 'utf8');
   console.log(`Generated sitemap.xml index successfully! (Sitemaps: ${generatedSitemaps.length})`);
-
-  // 5. Cleanup deprecated sitemaps if they exist in the root
-  const deprecatedFiles = [
-    'sitemap-cities.xml',
-    'sitemap-services.xml',
-    'sitemap-states.xml'
-  ];
-  deprecatedFiles.forEach(file => {
-    const filePath = path.join(__dirname, file);
-    if (fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath);
-        console.log(`Cleaned up deprecated sitemap file: ${file}`);
-      } catch (err) {
-        console.error(`Failed to delete deprecated file ${file}:`, err.message);
-      }
-    }
-  });
 }
 
 main();
