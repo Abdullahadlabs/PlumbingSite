@@ -47,7 +47,7 @@ function getServiceCopy(serviceSlug, cityName, stateCode, stateName, zip) {
   if (serviceSlug === 'drain-cleaning') {
     if (isTX) {
       return {
-        h1: `Drain Cleaning & Hydro-Jetting Services in ${cityName}, ${stateCode} (${zip})`,
+        h1: `Drain Cleaning Services in ${cityName}, ${stateCode} (${zip})`,
         problemTitle: `Stubborn Clogs & Hard Water Scale in ${cityName}`,
         problem: `Heavy limestone and mineral concentration in ${cityName}'s municipal water supply binds with household grease and soap scum, creating stubborn calcified scale inside residential drain pipes. In ${cityName} (${zip}), our certified drain cleaning specialists utilize industrial motorized snake augers and high-velocity hydro-jetting to strip pipe walls spotless without corrosive chemicals.`,
         techniqueTitle: `High-Velocity Hydro-Jetting & Video Camera Diagnostics`,
@@ -55,7 +55,7 @@ function getServiceCopy(serviceSlug, cityName, stateCode, stateName, zip) {
       };
     } else if (isFL) {
       return {
-        h1: `Drain Cleaning & Hydro-Jetting in ${cityName}, ${stateCode} (${zip})`,
+        h1: `Drain Cleaning Services in ${cityName}, ${stateCode} (${zip})`,
         problemTitle: `Coastal Soil Drainage & Kitchen Grease Blockages in ${cityName}`,
         problem: `High groundwater tables and sandy sub-soils across ${cityName} (${zip}) place continuous stress on residential drainage systems. Kitchen grease, organic sludge, and aggressive tree roots frequently obstruct main sewer exits, leading to slow-draining showers, gurgling toilets, and unsanitary wastewater backups during heavy Florida rains.`,
         techniqueTitle: `Professional Rooter & Jetting Solutions in ${cityName}`,
@@ -63,7 +63,7 @@ function getServiceCopy(serviceSlug, cityName, stateCode, stateName, zip) {
       };
     } else {
       return {
-        h1: `Drain Cleaning & Hydro-Jetting Services in ${cityName}, ${stateCode} (${zip})`,
+        h1: `Drain Cleaning Services in ${cityName}, ${stateCode} (${zip})`,
         problemTitle: `Sub-Zero Freeze Clogs & Drain Blockages in ${cityName}`,
         problem: `In ${cityName} (${zip}), sub-zero winter temperatures cause wastewater fats and food solids to solidify rapidly as they travel through cold foundation lines. Our licensed ${cityName} technicians provide heavy-duty motorized rooter service, thermal defrosting, and hydro-jetting to blast through hardened obstructions and restore drainage capacity.`,
         techniqueTitle: `Precision Jetting & Camera Inspection Protocols`,

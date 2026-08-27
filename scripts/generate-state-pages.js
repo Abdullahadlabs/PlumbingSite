@@ -57,7 +57,8 @@ const STATES = [
   { code: 'WA', name: 'Washington', slug: 'washington' },
   { code: 'WV', name: 'West Virginia', slug: 'west-virginia' },
   { code: 'WI', name: 'Wisconsin', slug: 'wisconsin' },
-  { code: 'WY', name: 'Wyoming', slug: 'wyoming' }
+  { code: 'WY', name: 'Wyoming', slug: 'wyoming' },
+  { code: 'PR', name: 'Puerto Rico', slug: 'puerto-rico' }
 ];
 
 function slugify(text) {
@@ -96,7 +97,7 @@ function buildAllStateCitiesIndex() {
               const citySlug = match[1];
               const zip = match[2];
               const cityName = citySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-              const key = cityName.toLowerCase().trim();
+              const key = `${citySlug}-${zip}`;
               citiesMap.set(key, {
                 city: cityName,
                 zip: zip,
@@ -123,14 +124,15 @@ function buildAllStateCitiesIndex() {
               stateIndex.set(st, new Map());
             }
             const citiesMap = stateIndex.get(st);
-            const key = item.city.toLowerCase().trim();
+            const stSlug = stateSlugMap[st] || slugify(item.state);
+            const cSlug = slugify(item.city);
+            const zip = item.zip || '';
+            const key = `${cSlug}-${zip}`;
             if (!citiesMap.has(key)) {
-              const stSlug = stateSlugMap[st] || slugify(item.state);
-              const cSlug = slugify(item.city);
               citiesMap.set(key, {
                 city: item.city,
-                zip: item.zip || '',
-                url: `/${stSlug}/${cSlug}-${item.zip || ''}/`
+                zip: zip,
+                url: `/${stSlug}/${cSlug}-${zip}/`
               });
             }
           }
@@ -189,7 +191,7 @@ function generateStateHtml(templateHtml, state, stateCitiesIndex) {
   const stateName = state.name;
   const stateSlug = state.slug;
   const stateCode = state.code;
-  const canonicalUrl = `${DOMAIN}/state/${stateSlug}`;
+  const canonicalUrl = `${DOMAIN}/state/${stateSlug}/`;
 
   // Unique Title Tag (strictly optimized <= 60 characters)
   let titleTag = `24/7 Plumbers in ${stateName} | Emergency Plumbing Services`;

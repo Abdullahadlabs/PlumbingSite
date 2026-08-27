@@ -684,7 +684,7 @@ function initMain() {
         e.currentTarget.classList.add('active-state');
 
         // Route to state with clean absolute path
-        window.location.href = `/state/${stateSlug}`;
+        window.location.href = `/state/${stateSlug}/`;
       });
 
       path.addEventListener('keydown', (e) => {
