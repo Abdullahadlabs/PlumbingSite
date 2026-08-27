@@ -73,12 +73,49 @@ function slugify(text) {
 function buildAllStateCitiesIndex() {
   const stateIndex = new Map();
 
-  // 1. Try loading from database/seo-pages.json if available
+  // 1. Index physical static state directories first (alaska, texas, florida)
+  const physicalStates = [
+    { code: 'AK', slug: 'alaska' },
+    { code: 'TX', slug: 'texas' },
+    { code: 'FL', slug: 'florida' }
+  ];
+  physicalStates.forEach(stObj => {
+    const stDir = path.join(__dirname, '..', stObj.slug);
+    if (fs.existsSync(stDir)) {
+      try {
+        const folders = fs.readdirSync(stDir, { withFileTypes: true });
+        if (!stateIndex.has(stObj.code)) {
+          stateIndex.set(stObj.code, new Map());
+        }
+        const citiesMap = stateIndex.get(stObj.code);
+        folders.forEach(dir => {
+          if (dir.isDirectory()) {
+            const name = dir.name;
+            const match = name.match(/^(.*?)-(\d{5})$/);
+            if (match) {
+              const citySlug = match[1];
+              const zip = match[2];
+              const cityName = citySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+              const key = cityName.toLowerCase().trim();
+              citiesMap.set(key, {
+                city: cityName,
+                zip: zip,
+                url: `/${stObj.slug}/${name}/`
+              });
+            }
+          }
+        });
+      } catch (e) {}
+    }
+  });
+
+  // 2. Try loading from database/seo-pages.json if available
   if (fs.existsSync(seoPagesPath)) {
     try {
       console.log('Loading database/seo-pages.json for city index...');
       const seoData = JSON.parse(fs.readFileSync(seoPagesPath, 'utf8'));
       if (Array.isArray(seoData)) {
+        const stateSlugMap = { 'AK': 'alaska', 'TX': 'texas', 'FL': 'florida' };
         seoData.forEach(item => {
           if (item.state && item.city) {
             const st = item.state.toUpperCase();
@@ -88,10 +125,12 @@ function buildAllStateCitiesIndex() {
             const citiesMap = stateIndex.get(st);
             const key = item.city.toLowerCase().trim();
             if (!citiesMap.has(key)) {
+              const stSlug = stateSlugMap[st] || slugify(item.state);
+              const cSlug = slugify(item.city);
               citiesMap.set(key, {
                 city: item.city,
                 zip: item.zip || '',
-                url: item.url_path || `/city/${slugify(item.state)}/${slugify(item.city)}/${item.zip || ''}`
+                url: `/${stSlug}/${cSlug}-${item.zip || ''}/`
               });
             }
           }
@@ -100,38 +139,6 @@ function buildAllStateCitiesIndex() {
     } catch (e) {
       console.warn(`Could not parse seo-pages.json: ${e.message}`);
     }
-  }
-
-  // 2. Also check if service-areas directory has folders
-  const serviceAreasDir = path.join(__dirname, '..', 'service-areas');
-  if (fs.existsSync(serviceAreasDir)) {
-    try {
-      const folders = fs.readdirSync(serviceAreasDir, { withFileTypes: true });
-      folders.forEach(dir => {
-        if (dir.isDirectory()) {
-          const name = dir.name;
-          const parts = name.split('-');
-          if (parts.length >= 3 && parts[0]) {
-            const st = parts[0].toUpperCase();
-            if (!stateIndex.has(st)) {
-              stateIndex.set(st, new Map());
-            }
-            const citiesMap = stateIndex.get(st);
-            const zip = parts[parts.length - 1];
-            const cityParts = parts.slice(1, -1);
-            const cityName = cityParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            const key = cityName.toLowerCase().trim();
-            if (!citiesMap.has(key) && cityName) {
-              citiesMap.set(key, {
-                city: cityName,
-                zip: zip,
-                url: `/service-areas/${name}/`
-              });
-            }
-          }
-        }
-      });
-    } catch (e) {}
   }
 
   return stateIndex;

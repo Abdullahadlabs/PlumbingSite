@@ -81,8 +81,7 @@
 
       const hasRawSpace = window.location.href.includes(' ') || window.location.href.includes('%20') || window.location.href.includes('%25');
       if (needsRedirect || paramsChanged || hasRawSpace) {
-        const newSearch = params.toString() ? '?' + params.toString() : '';
-        const cleanUrl = window.location.origin + cleanPath + newSearch;
+        const cleanUrl = window.location.origin + cleanPath;
         window.location.replace(cleanUrl);
         return;
       }
@@ -93,8 +92,9 @@
         canonicalLink.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalLink);
       }
-      const newSearch = params.toString() ? '?' + params.toString() : '';
-      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}${newSearch}`);
+      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}`);
+    })();
+  </script>
   <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
   <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
   <script>
@@ -1045,8 +1045,11 @@
 
             let cardsHtml = '';
             fetchedData.forEach(item => {
+              const stateSlug = slugify(item.state || stateLower);
+              const citySlug = slugify(item.city);
+              const urlPath = `/${stateSlug}/${citySlug}-${item.zip}/`;
               cardsHtml += `
-                <a href="${item.url_path}" class="area-card">
+                <a href="${urlPath}" class="area-card">
                   <i class="fas fa-map-marker-alt"></i>
                   <span class="area-title">${item.city}</span>
                   <div class="area-zip">${item.zip}</div>
@@ -1082,7 +1085,7 @@
               let cardsHtml = '';
               sortedCities.forEach(cityObj => {
                 cardsHtml += `
-                  <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card">
+                  <a href="/${slugify(stateLower)}/${slugify(cityObj.name)}-${cityObj.zip}/" class="area-card">
                     <i class="fas fa-map-marker-alt"></i>
                     <span class="area-title">${cityObj.name}</span>
                     <div class="area-zip">${cityObj.zip}</div>

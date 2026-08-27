@@ -120,42 +120,166 @@ function initMain() {
     return map[s] || stateName.toUpperCase();
   }
 
-  // Helper to extract location parameters from query string or pathname
+  // Helper to map state name or code to clean state slug
+  function getStateSlug(stateNameOrCode) {
+    if (!stateNameOrCode) return '';
+    const s = slugify(stateNameOrCode);
+    const map = {
+      'ak': 'alaska', 'alaska': 'alaska',
+      'tx': 'texas', 'texas': 'texas',
+      'fl': 'florida', 'florida': 'florida'
+    };
+    return map[s] || s;
+  }
+  window.getStateSlug = getStateSlug;
+
+  // Helper to map any service alias to canonical physical static service slug
+  function getCanonicalServiceSlug(serviceSlug) {
+    if (!serviceSlug) return 'drain-cleaning';
+    const clean = slugify(serviceSlug);
+    const map = {
+      'drain-cleaning': 'drain-cleaning',
+      'clogged-drain-repair': 'drain-cleaning',
+      'drain-cleaning-service': 'drain-cleaning',
+      'hydro-jetting': 'drain-cleaning',
+      'hydro-jetting-service': 'drain-cleaning',
+      'drain-repair': 'drain-cleaning',
+      'rooter-services': 'drain-cleaning',
+      'drainage-system-installation': 'drain-cleaning',
+      'sewer-cleaning': 'drain-cleaning',
+
+      'burst-pipe-repair': 'burst-pipe-repair',
+      'pipe-repair': 'burst-pipe-repair',
+      'pipe-leak-repair': 'burst-pipe-repair',
+      'whole-house-repiping': 'burst-pipe-repair',
+      'pipe-relining': 'burst-pipe-repair',
+      'pipe-replacement': 'burst-pipe-repair',
+      'pipe-insulation': 'burst-pipe-repair',
+      'plumbing-pipe-corrosion-prevention': 'burst-pipe-repair',
+      'plumbing-system-re-piping': 'burst-pipe-repair',
+
+      'water-heater-repair': 'water-heater-repair',
+      'water-heater-installation': 'water-heater-repair',
+      'tankless-water-heater-installation': 'water-heater-repair',
+      'tankless-water-heater-repair': 'water-heater-repair',
+
+      'sewer-line-repair': 'sewer-line-repair',
+      'sewer-line-replacement': 'sewer-line-repair',
+      'drain-line-replacement': 'sewer-line-repair',
+      'septic-system-installation': 'sewer-line-repair',
+      'septic-tank-repair': 'sewer-line-repair',
+
+      'emergency-plumbing': 'emergency-plumbing',
+      '24-hour-emergency-plumbing': 'emergency-plumbing',
+      'same-day-plumbing-repair': 'emergency-plumbing',
+
+      'leak-detection': 'leak-detection',
+      'slab-leak-repair': 'leak-detection',
+      'plumbing-leak-detection': 'leak-detection',
+
+      'gas-line-repair': 'gas-line-repair',
+      'gas-line-installation': 'gas-line-repair',
+      'gas-leak-detection': 'gas-line-repair',
+
+      'water-line-repair': 'water-line-repair',
+      'water-line-installation': 'water-line-repair',
+      'water-line-trenching': 'water-line-repair'
+    };
+    return map[clean] || clean;
+  }
+  window.getCanonicalServiceSlug = getCanonicalServiceSlug;
+
+  // Immediate Client-Side Redirection: kill any legacy query strings and route strictly to physical static structure
+  (function enforceStaticRouting() {
+    const search = window.location.search;
+    if (!search) return;
+    const params = new URLSearchParams(search);
+    if (params.has('city') || params.has('zip') || params.has('state')) {
+      const qCity = params.get('city');
+      const qState = params.get('state');
+      const qZip = params.get('zip') ? params.get('zip').replace(/[^0-9]/g, '') : '';
+      const qService = params.get('service');
+
+      const stateSlug = getStateSlug(qState || 'alaska');
+      const citySlug = slugify(qCity || '');
+
+      let serviceSlug = '';
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      if (pathParts[0] === 'services' && pathParts[1]) {
+        serviceSlug = getCanonicalServiceSlug(pathParts[1]);
+      } else if (qService) {
+        serviceSlug = getCanonicalServiceSlug(qService);
+      }
+
+      if (stateSlug && citySlug && qZip) {
+        let cleanStaticPath = `/${stateSlug}/${citySlug}-${qZip}/`;
+        if (serviceSlug) {
+          cleanStaticPath += `${serviceSlug}/`;
+        }
+        window.location.replace(cleanStaticPath);
+        return;
+      } else if (stateSlug) {
+        window.location.replace(`/state/${stateSlug}`);
+        return;
+      }
+    }
+  })();
+
+  // Helper to extract location parameters from physical pathname or stored location
   function getCurrentLocationParams() {
-    const params = new URLSearchParams(window.location.search);
-    let city = params.get('city');
-    let zip = params.get('zip');
-    let state = params.get('state');
+    let city = '';
+    let zip = '';
+    let state = '';
+    let service = '';
 
-    // Parse path parts if we are on a clean city URL (/city/state/city/zip)
-    const pathParts = window.location.pathname.split('/');
-    const cityIdx = pathParts.indexOf('city');
-    if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {
-      if (!state) state = pathParts[cityIdx + 1];
-      if (!city) city = pathParts[cityIdx + 2];
-      if (!zip) zip = pathParts[cityIdx + 3];
+    const pathParts = window.location.pathname.split('/').filter(p => p.length > 0);
+
+    // 1. Parse physical static hub/service: /{state}/{city}-{zip}/ or /{state}/{city}-{zip}/{service}/
+    const knownStates = ['alaska', 'texas', 'florida'];
+    if (pathParts.length >= 2 && knownStates.includes(pathParts[0].toLowerCase())) {
+      state = pathParts[0].toLowerCase();
+      const cityZipPart = pathParts[1];
+      const match = cityZipPart.match(/^(.*?)-(\d{5})$/);
+      if (match) {
+        city = match[1].replace(/-/g, ' ');
+        zip = match[2];
+        if (pathParts.length >= 3) {
+          service = getCanonicalServiceSlug(pathParts[2]);
+        }
+      }
     }
 
-    const stateIdx = pathParts.indexOf('state');
-    if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
-      if (!state) state = pathParts[stateIdx + 1];
+    // 2. Parse /state/{state}
+    if (!state) {
+      const stateIdx = pathParts.indexOf('state');
+      if (stateIdx !== -1 && stateIdx + 1 < pathParts.length) {
+        state = getStateSlug(pathParts[stateIdx + 1]);
+      }
     }
 
-    const serviceAreasIdx = pathParts.indexOf('service-areas');
-    if (serviceAreasIdx !== -1 && serviceAreasIdx + 1 < pathParts.length) {
-      const folder = pathParts[serviceAreasIdx + 1];
-      if (folder) {
-        const parts = folder.split('-');
-        if (parts.length >= 3) {
-          const stateCode = parts[0].toLowerCase();
-          const stateMap = {
-            'ak': 'alaska',
-            'tx': 'texas',
-            'fl': 'florida'
-          };
-          if (!state) state = stateMap[stateCode] || stateCode;
-          if (!zip) zip = parts[parts.length - 1];
-          if (!city) city = parts.slice(1, -1).join(' ');
+    // 3. Parse legacy /city/{state}/{city}/{zip}
+    if (!city || !state) {
+      const cityIdx = pathParts.indexOf('city');
+      if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {
+        if (!state) state = getStateSlug(pathParts[cityIdx + 1]);
+        if (!city) city = pathParts[cityIdx + 2].replace(/-/g, ' ');
+        if (!zip) zip = pathParts[cityIdx + 3];
+      }
+    }
+
+    // 4. Parse legacy /service-areas/{state}-{city}-{zip}
+    if (!city || !state) {
+      const serviceAreasIdx = pathParts.indexOf('service-areas');
+      if (serviceAreasIdx !== -1 && serviceAreasIdx + 1 < pathParts.length) {
+        const folder = pathParts[serviceAreasIdx + 1];
+        if (folder) {
+          const parts = folder.split('-');
+          if (parts.length >= 3) {
+            const stateCode = parts[0].toLowerCase();
+            state = getStateSlug(stateCode);
+            zip = parts[parts.length - 1];
+            city = parts.slice(1, -1).join(' ');
+          }
         }
       }
     }
@@ -179,10 +303,10 @@ function initMain() {
             .join(' ');
         }
         const displayZip = zip ? decodeURIComponent(zip) : '';
-        
+
         // Save user active location immediately to localStorage
         localStorage.setItem('user_active_location', JSON.stringify({ city: capCity, state: capState, zip: displayZip }));
-        
+
         city = capCity;
         state = capState;
         zip = displayZip;
@@ -226,22 +350,33 @@ function initMain() {
       }
     }
 
-    return { city: city || '', zip: zip || '', state: state || '' };
+    return { city: city || '', zip: zip || '', state: state || '', service: service || '' };
   }
 
-  // Dynamically rewrite all service links on the page on load
+  // Dynamically rewrite all service links to clean physical static paths (NO query parameters)
   const currentLoc = getCurrentLocationParams();
-  if (currentLoc.city || currentLoc.state) {
+  if (currentLoc.city && currentLoc.state && currentLoc.zip) {
+    const stateSlug = getStateSlug(currentLoc.state);
+    const citySlug = slugify(currentLoc.city);
+    const zipCode = currentLoc.zip;
+
     document.querySelectorAll('a').forEach(anchor => {
       const href = anchor.getAttribute('href');
-      if (href && (href.startsWith('/services/') || href.includes('service-detail')) && !href.includes('?')) {
-        try {
-          const url = new URL(anchor.href, window.location.origin);
-          if (currentLoc.city) url.searchParams.set('city', currentLoc.city);
-          if (currentLoc.state) url.searchParams.set('state', getStateCode(currentLoc.state));
-          if (currentLoc.zip) url.searchParams.set('zip', currentLoc.zip);
-          anchor.href = url.pathname + url.search;
-        } catch (e) {}
+      if (href && (href.startsWith('/services/') || href.includes('service-detail') || href.startsWith('/city/'))) {
+        let rawService = '';
+        if (href.startsWith('/services/')) {
+          rawService = href.replace('/services/', '').split(/[?#]/)[0].replace(/\/+$/, '');
+        } else if (href.includes('service-detail')) {
+          const u = new URL(anchor.href, window.location.origin);
+          rawService = u.searchParams.get('service') || '';
+        }
+        
+        if (rawService) {
+          const canonicalService = getCanonicalServiceSlug(rawService);
+          anchor.href = `/${stateSlug}/${citySlug}-${zipCode}/${canonicalService}/`;
+        } else if (href.startsWith('/city/')) {
+          anchor.href = `/${stateSlug}/${citySlug}-${zipCode}/`;
+        }
       }
     });
   }
@@ -330,7 +465,12 @@ function initMain() {
   });
 
   const getNormalizedPage = (path) => {
-    const parts = path.split('/');
+    const parts = path.split('/').filter(Boolean);
+    const knownStates = ['alaska', 'texas', 'florida'];
+    if (parts.length >= 1 && knownStates.includes(parts[0].toLowerCase())) {
+      if (parts.length >= 3) return 'service-detail';
+      if (parts.length >= 2) return 'city-zip';
+    }
     if (parts.includes('city')) {
       return 'city-zip';
     }
@@ -340,7 +480,8 @@ function initMain() {
     if (parts.includes('services') && parts.indexOf('services') + 1 < parts.length && parts[parts.indexOf('services') + 1] !== '') {
       return 'service-detail';
     }
-    let page = parts.pop().split('#')[0].split('?')[0];
+    let page = parts.pop() || '';
+    page = page.split('#')[0].split('?')[0];
     if (page.endsWith('.html')) {
       page = page.substring(0, page.length - 5);
     }
@@ -356,8 +497,10 @@ function initMain() {
   const homeMenuEl = document.getElementById('homeMenuLink');
   if (homeMenuEl) {
     const loc = getCurrentLocationParams();
-    if (loc.city && loc.state) {
-      homeMenuEl.href = `/city/${slugify(loc.state)}/${slugify(loc.city)}/${loc.zip || ''}`;
+    if (loc.city && loc.state && loc.zip) {
+      homeMenuEl.href = `/${getStateSlug(loc.state)}/${slugify(loc.city)}-${loc.zip}/`;
+    } else if (loc.state) {
+      homeMenuEl.href = `/state/${getStateSlug(loc.state)}`;
     } else {
       homeMenuEl.href = '/';
     }
@@ -922,13 +1065,13 @@ function initMain() {
   }
 
   // ==================== BROWSER HISTORY RESTRICTIONS ====================
-  // From state.html: intercept city-zip clicks and use location.replace()
+  // From state.html: intercept hub clicks and use location.replace()
   if (currentPage === 'state') {
     document.addEventListener('click', function (e) {
       const anchor = e.target.closest('a');
       if (anchor) {
         const href = anchor.getAttribute('href');
-        if (href && href.includes('/city/')) {
+        if (href && (href.includes('/city/') || /^\/(alaska|texas|florida)\/[a-z0-9-]+-/.test(href))) {
           e.preventDefault();
           window.location.replace(anchor.href);
         }
@@ -937,25 +1080,27 @@ function initMain() {
   }
 
   // ==================== DYNAMIC PARAMETER PRESERVATION ====================
-  // Intercept links to service-detail and append location query parameters if present
+  // Intercept links to services and route strictly to physical static paths without query parameters
   document.addEventListener('click', function (e) {
     const anchor = e.target.closest('a');
     if (anchor && !anchor.classList.contains('dropdown-toggle')) {
       const href = anchor.getAttribute('href');
       if (href && href !== '/services' && href !== '/services/' && (href.includes('service-detail') || href.includes('/services/'))) {
         const loc = getCurrentLocationParams();
-        if (loc.city || loc.zip || loc.state) {
+        if (loc.city && loc.state && loc.zip) {
           e.preventDefault();
-          // Strip any existing .html extension in the targeted url
-          let targetHref = anchor.href;
-          if (targetHref.includes('.html')) {
-            targetHref = targetHref.replace('.html', '');
+          let rawService = '';
+          if (href.includes('/services/')) {
+            const parts = href.split('/services/')[1];
+            if (parts) rawService = parts.split(/[?#]/)[0].replace(/\/+$/, '');
+          } else if (href.includes('service-detail')) {
+            const u = new URL(anchor.href, window.location.origin);
+            rawService = u.searchParams.get('service') || '';
           }
-          const targetUrl = new URL(targetHref, window.location.origin);
-          if (loc.city) targetUrl.searchParams.set('city', loc.city);
-          if (loc.zip) targetUrl.searchParams.set('zip', loc.zip.replace(/[^0-9]/g, ''));
-          if (loc.state) targetUrl.searchParams.set('state', getStateCode(loc.state));
-          window.location.href = targetUrl.toString();
+          const canonicalService = getCanonicalServiceSlug(rawService);
+          const stateSlug = getStateSlug(loc.state);
+          const citySlug = slugify(loc.city);
+          window.location.href = `/${stateSlug}/${citySlug}-${loc.zip}/${canonicalService}/`;
         }
       }
     }

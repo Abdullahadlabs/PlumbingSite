@@ -89,10 +89,33 @@
         }
       }
 
+      // If query parameters exist, redirect to physical static folder structure
+      if (params.has('city') || params.has('zip') || params.has('state')) {
+        const qCity = params.get('city') ? slugify(params.get('city')) : '';
+        const qState = params.get('state') ? slugify(params.get('state')) : 'alaska';
+        const qZip = params.get('zip') ? params.get('zip').replace(/[^0-9]/g, '') : '';
+        const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
+        const stateSlug = stateMap[qState] || qState;
+        
+        let serviceSlug = 'drain-cleaning';
+        if (servicesIdx !== -1 && servicesIdx + 1 < parts.length) {
+          serviceSlug = slugify(parts[servicesIdx + 1]);
+        } else if (params.has('service')) {
+          serviceSlug = slugify(params.get('service'));
+        }
+
+        if (stateSlug && qCity && qZip) {
+          window.location.replace(`/${stateSlug}/${qCity}-${qZip}/${serviceSlug}/`);
+          return;
+        } else if (stateSlug) {
+          window.location.replace(`/state/${stateSlug}`);
+          return;
+        }
+      }
+
       const hasRawSpace = window.location.href.includes(' ') || window.location.href.includes('%20') || window.location.href.includes('%25');
-      if (needsRedirect || paramsChanged || hasRawSpace) {
-        const newSearch = params.toString() ? '?' + params.toString() : '';
-        const cleanUrl = window.location.origin + cleanPath + newSearch;
+      if (needsRedirect || hasRawSpace) {
+        const cleanUrl = window.location.origin + cleanPath;
         window.location.replace(cleanUrl);
         return;
       }
@@ -103,8 +126,7 @@
         canonicalLink.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalLink);
       }
-      const newSearch = params.toString() ? '?' + params.toString() : '';
-      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}${newSearch}`);
+      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}`);
     })();
   </script>
   <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">

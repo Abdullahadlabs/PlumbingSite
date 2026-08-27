@@ -1,9 +1,9 @@
 RewriteEngine On
 RewriteBase /
 
-# --- Server-Side 301 Redirect Rules for Clean Canonical URLs ---
+# --- Server-Side 301 Redirect Rules for Clean Canonical Static URLs ---
 
-# A. Redirect city URLs containing spaces, %20, %25 or percent signs in the path
+# A. Redirect URLs containing spaces, %20, %25 or percent signs in the path
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%25252520|%252520|%2520|%20|%2525|%25|%)(.*)\sHTTP [NC]
 RewriteRule ^ /%1-%2 [R=301,L,NE]
 
@@ -28,37 +28,193 @@ RewriteCond %{REQUEST_URI} ^/state/florida$ [NC]
 RewriteCond %{REQUEST_URI} !^/state/florida$
 RewriteRule ^ /state/florida [R=301,L]
 
-# E. Redirect uppercase state names in city routes (e.g., /city/Alaska/... -> /city/alaska/...)
-RewriteCond %{REQUEST_URI} ^/city/alaska/ [NC]
-RewriteCond %{REQUEST_URI} !^/city/alaska/
-RewriteRule ^city/([^/]+)(.*)$ /city/alaska$2 [R=301,L]
+# --- 1. Query-Parameter Disabling: Redirect Query URLs to Physical Static Folders ---
 
-RewriteCond %{REQUEST_URI} ^/city/texas/ [NC]
-RewriteCond %{REQUEST_URI} !^/city/texas/
-RewriteRule ^city/([^/]+)(.*)$ /city/texas$2 [R=301,L]
+# 1A. Alaska: /services/{service}?city={city}&state=ak&zip={zip} -> /alaska/{city}-{zip}/{canonical-service}/
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:clogged-drain-repair|drain-cleaning|hydro-jetting|drain-repair|rooter-services)/?$ /alaska/%1-%2/drain-cleaning/? [R=301,L,NE]
 
-RewriteCond %{REQUEST_URI} ^/city/florida/ [NC]
-RewriteCond %{REQUEST_URI} !^/city/florida/
-RewriteRule ^city/([^/]+)(.*)$ /city/florida$2 [R=301,L]
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:burst-pipe-repair|pipe-repair|pipe-leak-repair|whole-house-repiping)/?$ /alaska/%1-%2/burst-pipe-repair/? [R=301,L,NE]
 
-# F. Remove trailing slashes for state/city routes (e.g., /state/alaska/ -> /state/alaska)
-RewriteCond %{REQUEST_URI} ^/state/[^/]+/+$ [NC]
-RewriteRule ^(state/[^/]+)/+$ /$1 [R=301,L]
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-heater-repair|water-heater-installation|tankless-water-heater-installation|tankless-water-heater-repair)/?$ /alaska/%1-%2/water-heater-repair/? [R=301,L,NE]
 
-RewriteCond %{REQUEST_URI} ^/city/[^/]+/[^/]+/[^/]+/+$ [NC]
-RewriteRule ^(city/[^/]+/[^/]+/[^/]+)/+$ /$1 [R=301,L]
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:sewer-line-repair|sewer-line-replacement|drain-line-replacement|septic-tank-repair)/?$ /alaska/%1-%2/sewer-line-repair/? [R=301,L,NE]
 
-# --- End Redirect Rules ---
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:emergency-plumbing|24-hour-emergency-plumbing|same-day-plumbing-repair)/?$ /alaska/%1-%2/emergency-plumbing/? [R=301,L,NE]
 
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:leak-detection|slab-leak-repair|plumbing-leak-detection)/?$ /alaska/%1-%2/leak-detection/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:gas-line-repair|gas-line-installation|gas-leak-detection)/?$ /alaska/%1-%2/gas-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-line-repair|water-line-installation|water-line-trenching)/?$ /alaska/%1-%2/water-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/([^/]+)/?$ /alaska/%1-%2/$1/? [R=301,L,NE]
+
+# 1B. Texas: /services/{service}?city={city}&state=tx&zip={zip} -> /texas/{city}-{zip}/{canonical-service}/
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:clogged-drain-repair|drain-cleaning|hydro-jetting|drain-repair|rooter-services)/?$ /texas/%1-%2/drain-cleaning/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:burst-pipe-repair|pipe-repair|pipe-leak-repair|whole-house-repiping)/?$ /texas/%1-%2/burst-pipe-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-heater-repair|water-heater-installation|tankless-water-heater-installation|tankless-water-heater-repair)/?$ /texas/%1-%2/water-heater-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:sewer-line-repair|sewer-line-replacement|drain-line-replacement|septic-tank-repair)/?$ /texas/%1-%2/sewer-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:emergency-plumbing|24-hour-emergency-plumbing|same-day-plumbing-repair)/?$ /texas/%1-%2/emergency-plumbing/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:leak-detection|slab-leak-repair|plumbing-leak-detection)/?$ /texas/%1-%2/leak-detection/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:gas-line-repair|gas-line-installation|gas-leak-detection)/?$ /texas/%1-%2/gas-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-line-repair|water-line-installation|water-line-trenching)/?$ /texas/%1-%2/water-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/([^/]+)/?$ /texas/%1-%2/$1/? [R=301,L,NE]
+
+# 1C. Florida: /services/{service}?city={city}&state=fl&zip={zip} -> /florida/{city}-{zip}/{canonical-service}/
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:clogged-drain-repair|drain-cleaning|hydro-jetting|drain-repair|rooter-services)/?$ /florida/%1-%2/drain-cleaning/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:burst-pipe-repair|pipe-repair|pipe-leak-repair|whole-house-repiping)/?$ /florida/%1-%2/burst-pipe-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-heater-repair|water-heater-installation|tankless-water-heater-installation|tankless-water-heater-repair)/?$ /florida/%1-%2/water-heater-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:sewer-line-repair|sewer-line-replacement|drain-line-replacement|septic-tank-repair)/?$ /florida/%1-%2/sewer-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:emergency-plumbing|24-hour-emergency-plumbing|same-day-plumbing-repair)/?$ /florida/%1-%2/emergency-plumbing/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:leak-detection|slab-leak-repair|plumbing-leak-detection)/?$ /florida/%1-%2/leak-detection/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:gas-line-repair|gas-line-installation|gas-leak-detection)/?$ /florida/%1-%2/gas-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/(?:water-line-repair|water-line-installation|water-line-trenching)/?$ /florida/%1-%2/water-line-repair/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^services/([^/]+)/?$ /florida/%1-%2/$1/? [R=301,L,NE]
+
+# 1D. City-ZIP Hub queries: /city-zip.html?state=...&city=...&zip=... -> /{state}/{city}-{zip}/
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:ak|alaska) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^(?:city-zip|city-zip\.html)?$ /alaska/%1-%2/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:tx|texas) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^(?:city-zip|city-zip\.html)?$ /texas/%1-%2/? [R=301,L,NE]
+
+RewriteCond %{QUERY_STRING} (?:^|&)city=([^&]+) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)state=(?:fl|florida) [NC]
+RewriteCond %{QUERY_STRING} (?:^|&)zip=([^&]+) [NC]
+RewriteRule ^(?:city-zip|city-zip\.html)?$ /florida/%1-%2/? [R=301,L,NE]
+
+# 1E. Legacy Route: /city/{state}/{city}/{zip} -> /{state}/{city}-{zip}/
+RewriteRule ^city/(?:ak|alaska)/([^/]+)/([^/]+)/?$ /alaska/$1-$2/ [R=301,L,NE]
+RewriteRule ^city/(?:tx|texas)/([^/]+)/([^/]+)/?$ /texas/$1-$2/ [R=301,L,NE]
+RewriteRule ^city/(?:fl|florida)/([^/]+)/([^/]+)/?$ /florida/$1-$2/ [R=301,L,NE]
+
+# 1F. Legacy Route: /service-areas/{ak|tx|fl}-{city}-{zip} -> /{state}/{city}-{zip}/
+RewriteRule ^service-areas/ak-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /alaska/$1-$2/ [R=301,L,NE]
+RewriteRule ^service-areas/tx-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /texas/$1-$2/ [R=301,L,NE]
+RewriteRule ^service-areas/fl-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /florida/$1-$2/ [R=301,L,NE]
+
+# --- 2. Static Asset and Core Routing ---
 
 # Rewrite /images/* requests to public/images/*
 RewriteRule ^images/(.*)$ public/images/$1 [L]
 
-# 1. Remove .html extension globally
+# Remove .html extension globally
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
 
-# 2. Route for States (e.g., /state/alaska)
+# --- 3. Hyper-Local Physical Static Routes (Direct Serving) ---
+
+# 3A. Hyper-Local Static Service Pages (e.g., /alaska/anchorage-99507/drain-cleaning/)
+RewriteCond %{DOCUMENT_ROOT}/$1/$2/$3/index.html -f
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.html [L]
+
+# 3B. Hyper-Local City-ZIP Hub Pages (e.g., /alaska/anchorage-99507/)
+RewriteCond %{DOCUMENT_ROOT}/$1/$2/index.html -f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.html [L]
+
+# --- 4. State Routes ---
+
 # A. Serve static pre-rendered state page if available (state/<slug>/index.html)
 RewriteCond %{DOCUMENT_ROOT}/state/$1/index.html -f
 RewriteRule ^state/([^/]+)/?$ state/$1/index.html [L]
@@ -67,28 +223,23 @@ RewriteRule ^state/([^/]+)/?$ state/$1/index.html [L]
 RewriteCond %{DOCUMENT_ROOT}/state/$1.html -f
 RewriteRule ^state/([^/]+)/?$ state/$1.html [L]
 
-# C. Route to dynamic PHP renderer if available
-RewriteCond %{DOCUMENT_ROOT}/state.php -f
-RewriteRule ^state/([^/]+)/?$ state.php?state=$1 [L,QSA]
+# C. Route to state.html
+RewriteRule ^state/([^/]+)/?$ state.html [L]
 
-# D. Fallback to state.html
-RewriteRule ^state/([^/]+)/?$ state.html?state=$1 [L,QSA]
+# --- 5. Clean Service Routes ---
 
-# 3. Route for Services (e.g., /services/drain-cleaning -> service-detail.html?service=drain-cleaning)
-RewriteRule ^services/([^/]+)/?$ service-detail.html?service=$1 [L,QSA]
+# A. Serve static pre-rendered service page if available (services/<slug>/index.html)
+RewriteCond %{DOCUMENT_ROOT}/services/$1/index.html -f
+RewriteRule ^services/([^/]+)/?$ services/$1/index.html [L]
 
-# 4. Hyper-Local Static Routes (e.g., /alaska/anchorage-99507/drain-cleaning/)
-RewriteCond %{DOCUMENT_ROOT}/$1/$2/$3/index.html -f
-RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.html [L]
+# B. Serve static html file if available (services/<slug>.html)
+RewriteCond %{DOCUMENT_ROOT}/services/$1.html -f
+RewriteRule ^services/([^/]+)/?$ services/$1.html [L]
 
-# 5. Hyper-Local City-ZIP Hub Routes (e.g., /alaska/anchorage-99507/)
-RewriteCond %{DOCUMENT_ROOT}/$1/$2/index.html -f
-RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.html [L]
+# C. Route to service-detail.html
+RewriteRule ^services/([^/]+)/?$ service-detail.html [L]
 
-# 6. Legacy Route for City/Zip (e.g., /city/alaska/anchorage/99501 -> city-zip.html?state=$1&city=$2&zip=$3)
-RewriteRule ^city/([^/]+)/([^/]+)/([^/]+)/?$ city-zip.html?state=$1&city=$2&zip=$3 [L,QSA]
-
-# 5. Fallback to check if actual file exists without extension
+# --- 6. Fallback to check if actual file exists without extension ---
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
@@ -117,4 +268,3 @@ RewriteRule ^(.*)$ $1.html [L]
     Header set Cache-Control "max-age=31536000, public, immutable"
   </FilesMatch>
 </IfModule>
-

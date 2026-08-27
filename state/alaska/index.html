@@ -81,8 +81,7 @@
 
       const hasRawSpace = window.location.href.includes(' ') || window.location.href.includes('%20') || window.location.href.includes('%25');
       if (needsRedirect || paramsChanged || hasRawSpace) {
-        const newSearch = params.toString() ? '?' + params.toString() : '';
-        const cleanUrl = window.location.origin + cleanPath + newSearch;
+        const cleanUrl = window.location.origin + cleanPath;
         window.location.replace(cleanUrl);
         return;
       }
@@ -93,8 +92,9 @@
         canonicalLink.setAttribute('rel', 'canonical');
         document.head.appendChild(canonicalLink);
       }
-      const newSearch = params.toString() ? '?' + params.toString() : '';
-      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}${newSearch}`);
+      canonicalLink.setAttribute('href', `https://homeplumbingusa.com${cleanPath}`);
+    })();
+  </script>
   <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
   <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
   <script>
@@ -785,1735 +785,1339 @@
           <p class="section-desc">We dispatch plumbers to communities throughout the state. Select your city below to view available service options and technicians.</p>
         </div>
         <div class="areas-grid" id="areas-grid">
-          <a href="/service-areas/ak-adak-99546" class="area-card">
+          <a href="/alaska/adak-99546/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Adak</span>
             <div class="area-zip">99546</div>
           </a>
 
-          <a href="/service-areas/ak-akiachak-99551" class="area-card">
+          <a href="/alaska/akiachak-99551/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Akiachak</span>
             <div class="area-zip">99551</div>
           </a>
 
-          <a href="/service-areas/ak-akiak-99552" class="area-card">
+          <a href="/alaska/akiak-99552/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Akiak</span>
             <div class="area-zip">99552</div>
           </a>
 
-          <a href="/service-areas/ak-akutan-99553" class="area-card">
+          <a href="/alaska/akutan-99553/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Akutan</span>
             <div class="area-zip">99553</div>
           </a>
 
-          <a href="/service-areas/ak-alakanuk-99554" class="area-card">
+          <a href="/alaska/alakanuk-99554/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Alakanuk</span>
             <div class="area-zip">99554</div>
           </a>
 
-          <a href="/service-areas/ak-aleknagik-99555" class="area-card">
+          <a href="/alaska/aleknagik-99555/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Aleknagik</span>
             <div class="area-zip">99555</div>
           </a>
 
-          <a href="/service-areas/ak-allakaket-99720" class="area-card">
+          <a href="/alaska/allakaket-99720/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Allakaket</span>
             <div class="area-zip">99720</div>
           </a>
 
-          <a href="/service-areas/ak-ambler-99786" class="area-card">
+          <a href="/alaska/ambler-99786/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ambler</span>
             <div class="area-zip">99786</div>
           </a>
 
-          <a href="/service-areas/ak-anaktuvuk-pass-99721" class="area-card">
+          <a href="/alaska/anaktuvuk-pass-99721/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Anaktuvuk Pass</span>
             <div class="area-zip">99721</div>
           </a>
 
-          <a href="/service-areas/ak-anaktuvukpass-99721/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Anaktuvukpass</span>
-            <div class="area-zip">99721</div>
-          </a>
-
-          <a href="/service-areas/ak-anchor-point-99556" class="area-card">
+          <a href="/alaska/anchor-point-99556/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Anchor Point</span>
             <div class="area-zip">99556</div>
           </a>
 
-          <a href="/service-areas/ak-anchorage-99501" class="area-card">
+          <a href="/alaska/anchorage-99695/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Anchorage</span>
-            <div class="area-zip">99501</div>
+            <div class="area-zip">99695</div>
           </a>
 
-          <a href="/service-areas/ak-anchorpoint-99556/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Anchorpoint</span>
-            <div class="area-zip">99556</div>
-          </a>
-
-          <a href="/service-areas/ak-anderson-99744" class="area-card">
+          <a href="/alaska/anderson-99744/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Anderson</span>
             <div class="area-zip">99744</div>
           </a>
 
-          <a href="/service-areas/ak-angoon-99820" class="area-card">
+          <a href="/alaska/angoon-99820/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Angoon</span>
             <div class="area-zip">99820</div>
           </a>
 
-          <a href="/service-areas/ak-aniak-99557" class="area-card">
+          <a href="/alaska/aniak-99557/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Aniak</span>
             <div class="area-zip">99557</div>
           </a>
 
-          <a href="/service-areas/ak-anvik-99558" class="area-card">
+          <a href="/alaska/anvik-99558/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Anvik</span>
             <div class="area-zip">99558</div>
           </a>
 
-          <a href="/service-areas/ak-arctic-village-99722" class="area-card">
+          <a href="/alaska/arctic-village-99722/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Arctic Village</span>
             <div class="area-zip">99722</div>
           </a>
 
-          <a href="/service-areas/ak-arcticvillage-99722/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Arcticvillage</span>
-            <div class="area-zip">99722</div>
-          </a>
-
-          <a href="/service-areas/ak-atka-99547" class="area-card">
+          <a href="/alaska/atka-99547/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Atka</span>
             <div class="area-zip">99547</div>
           </a>
 
-          <a href="/service-areas/ak-atqasuk-99791" class="area-card">
+          <a href="/alaska/atqasuk-99791/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Atqasuk</span>
             <div class="area-zip">99791</div>
           </a>
 
-          <a href="/service-areas/ak-barrow-99723" class="area-card">
+          <a href="/alaska/barrow-99723/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Barrow</span>
             <div class="area-zip">99723</div>
           </a>
 
-          <a href="/service-areas/ak-beaver-99724" class="area-card">
+          <a href="/alaska/beaver-99724/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Beaver</span>
             <div class="area-zip">99724</div>
           </a>
 
-          <a href="/service-areas/ak-bethel-99559" class="area-card">
+          <a href="/alaska/bethel-99559/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Bethel</span>
             <div class="area-zip">99559</div>
           </a>
 
-          <a href="/service-areas/ak-bettles-field-99726" class="area-card">
+          <a href="/alaska/bettles-field-99726/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Bettles Field</span>
             <div class="area-zip">99726</div>
           </a>
 
-          <a href="/service-areas/ak-bettlesfield-99726/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Bettlesfield</span>
-            <div class="area-zip">99726</div>
-          </a>
-
-          <a href="/service-areas/ak-big-lake-99652" class="area-card">
+          <a href="/alaska/big-lake-99652/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Big Lake</span>
             <div class="area-zip">99652</div>
           </a>
 
-          <a href="/service-areas/ak-biglake-99652/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Biglake</span>
-            <div class="area-zip">99652</div>
-          </a>
-
-          <a href="/service-areas/ak-brevig-mission-99785" class="area-card">
+          <a href="/alaska/brevig-mission-99785/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Brevig Mission</span>
             <div class="area-zip">99785</div>
           </a>
 
-          <a href="/service-areas/ak-brevigmission-99785/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Brevigmission</span>
-            <div class="area-zip">99785</div>
-          </a>
-
-          <a href="/service-areas/ak-buckland-99727" class="area-card">
+          <a href="/alaska/buckland-99727/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Buckland</span>
             <div class="area-zip">99727</div>
           </a>
 
-          <a href="/service-areas/ak-cantwell-99729" class="area-card">
+          <a href="/alaska/cantwell-99729/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Cantwell</span>
             <div class="area-zip">99729</div>
           </a>
 
-          <a href="/service-areas/ak-central-99730" class="area-card">
+          <a href="/alaska/central-99730/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Central</span>
             <div class="area-zip">99730</div>
           </a>
 
-          <a href="/service-areas/ak-chalkyitsik-99788" class="area-card">
+          <a href="/alaska/chalkyitsik-99788/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chalkyitsik</span>
             <div class="area-zip">99788</div>
           </a>
 
-          <a href="/service-areas/ak-chefornak-99561" class="area-card">
+          <a href="/alaska/chefornak-99561/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chefornak</span>
             <div class="area-zip">99561</div>
           </a>
 
-          <a href="/service-areas/ak-chevak-99563" class="area-card">
+          <a href="/alaska/chevak-99563/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chevak</span>
             <div class="area-zip">99563</div>
           </a>
 
-          <a href="/service-areas/ak-chicken-99732" class="area-card">
+          <a href="/alaska/chicken-99732/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chicken</span>
             <div class="area-zip">99732</div>
           </a>
 
-          <a href="/service-areas/ak-chignik-99564" class="area-card">
+          <a href="/alaska/chignik-99564/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chignik</span>
             <div class="area-zip">99564</div>
           </a>
 
-          <a href="/service-areas/ak-chignik-lagoon-99565" class="area-card">
+          <a href="/alaska/chignik-lagoon-99565/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chignik Lagoon</span>
             <div class="area-zip">99565</div>
           </a>
 
-          <a href="/service-areas/ak-chignik-lake-99548" class="area-card">
+          <a href="/alaska/chignik-lake-99548/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chignik Lake</span>
             <div class="area-zip">99548</div>
           </a>
 
-          <a href="/service-areas/ak-chigniklagoon-99565/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Chigniklagoon</span>
-            <div class="area-zip">99565</div>
-          </a>
-
-          <a href="/service-areas/ak-chigniklake-99548/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Chigniklake</span>
-            <div class="area-zip">99548</div>
-          </a>
-
-          <a href="/service-areas/ak-chitina-99566" class="area-card">
+          <a href="/alaska/chitina-99566/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chitina</span>
             <div class="area-zip">99566</div>
           </a>
 
-          <a href="/service-areas/ak-chugiak-99567" class="area-card">
+          <a href="/alaska/chugiak-99567/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Chugiak</span>
             <div class="area-zip">99567</div>
           </a>
 
-          <a href="/service-areas/ak-circle-99733" class="area-card">
+          <a href="/alaska/circle-99733/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Circle</span>
             <div class="area-zip">99733</div>
           </a>
 
-          <a href="/service-areas/ak-clam-gulch-99568" class="area-card">
+          <a href="/alaska/clam-gulch-99568/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Clam Gulch</span>
             <div class="area-zip">99568</div>
           </a>
 
-          <a href="/service-areas/ak-clamgulch-99568/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Clamgulch</span>
-            <div class="area-zip">99568</div>
-          </a>
-
-          <a href="/service-areas/ak-clarks-point-99569" class="area-card">
+          <a href="/alaska/clarks-point-99569/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Clarks Point</span>
             <div class="area-zip">99569</div>
           </a>
 
-          <a href="/service-areas/ak-clarkspoint-99569/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Clarkspoint</span>
-            <div class="area-zip">99569</div>
-          </a>
-
-          <a href="/service-areas/ak-clear-99704" class="area-card">
+          <a href="/alaska/clear-99704/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Clear</span>
             <div class="area-zip">99704</div>
           </a>
 
-          <a href="/service-areas/ak-coffman-cove-99918" class="area-card">
+          <a href="/alaska/coffman-cove-99918/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Coffman Cove</span>
             <div class="area-zip">99918</div>
           </a>
 
-          <a href="/service-areas/ak-coffmancove-99918/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Coffmancove</span>
-            <div class="area-zip">99918</div>
-          </a>
-
-          <a href="/service-areas/ak-cold-bay-99571" class="area-card">
+          <a href="/alaska/cold-bay-99571/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Cold Bay</span>
             <div class="area-zip">99571</div>
           </a>
 
-          <a href="/service-areas/ak-coldbay-99571/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Coldbay</span>
-            <div class="area-zip">99571</div>
-          </a>
-
-          <a href="/service-areas/ak-cooper-landing-99572" class="area-card">
+          <a href="/alaska/cooper-landing-99572/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Cooper Landing</span>
             <div class="area-zip">99572</div>
           </a>
 
-          <a href="/service-areas/ak-cooperlanding-99572/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Cooperlanding</span>
-            <div class="area-zip">99572</div>
-          </a>
-
-          <a href="/service-areas/ak-copper-center-99573" class="area-card">
+          <a href="/alaska/copper-center-99573/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Copper Center</span>
             <div class="area-zip">99573</div>
           </a>
 
-          <a href="/service-areas/ak-coppercenter-99573/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Coppercenter</span>
-            <div class="area-zip">99573</div>
-          </a>
-
-          <a href="/service-areas/ak-cordova-99574" class="area-card">
+          <a href="/alaska/cordova-99574/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Cordova</span>
             <div class="area-zip">99574</div>
           </a>
 
-          <a href="/service-areas/ak-craig-99921" class="area-card">
+          <a href="/alaska/craig-99921/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Craig</span>
             <div class="area-zip">99921</div>
           </a>
 
-          <a href="/service-areas/ak-crooked-creek-99575" class="area-card">
+          <a href="/alaska/crooked-creek-99575/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Crooked Creek</span>
             <div class="area-zip">99575</div>
           </a>
 
-          <a href="/service-areas/ak-crookedcreek-99575/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Crookedcreek</span>
-            <div class="area-zip">99575</div>
-          </a>
-
-          <a href="/service-areas/ak-deering-99736" class="area-card">
+          <a href="/alaska/deering-99736/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Deering</span>
             <div class="area-zip">99736</div>
           </a>
 
-          <a href="/service-areas/ak-delta-junction-99737" class="area-card">
+          <a href="/alaska/delta-junction-99737/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Delta Junction</span>
             <div class="area-zip">99737</div>
           </a>
 
-          <a href="/service-areas/ak-deltajunction-99737/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Deltajunction</span>
-            <div class="area-zip">99737</div>
-          </a>
-
-          <a href="/service-areas/ak-denali-national-park-99755" class="area-card">
+          <a href="/alaska/denali-national-park-99755/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Denali National Park</span>
             <div class="area-zip">99755</div>
           </a>
 
-          <a href="/service-areas/ak-denalinationalpark-99755/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Denalinationalpark</span>
-            <div class="area-zip">99755</div>
-          </a>
-
-          <a href="/service-areas/ak-dillingham-99576" class="area-card">
+          <a href="/alaska/dillingham-99576/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Dillingham</span>
             <div class="area-zip">99576</div>
           </a>
 
-          <a href="/service-areas/ak-douglas-99824" class="area-card">
+          <a href="/alaska/douglas-99824/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Douglas</span>
             <div class="area-zip">99824</div>
           </a>
 
-          <a href="/service-areas/ak-dutch-harbor-99692" class="area-card">
+          <a href="/alaska/dutch-harbor-99692/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Dutch Harbor</span>
             <div class="area-zip">99692</div>
           </a>
 
-          <a href="/service-areas/ak-dutchharbor-99692/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Dutchharbor</span>
-            <div class="area-zip">99692</div>
-          </a>
-
-          <a href="/service-areas/ak-eagle-99738" class="area-card">
+          <a href="/alaska/eagle-99738/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Eagle</span>
             <div class="area-zip">99738</div>
           </a>
 
-          <a href="/service-areas/ak-eagle-river-99577" class="area-card">
+          <a href="/alaska/eagle-river-99577/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Eagle River</span>
             <div class="area-zip">99577</div>
           </a>
 
-          <a href="/service-areas/ak-eagleriver-99577/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Eagleriver</span>
-            <div class="area-zip">99577</div>
-          </a>
-
-          <a href="/service-areas/ak-eek-99578" class="area-card">
+          <a href="/alaska/eek-99578/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Eek</span>
             <div class="area-zip">99578</div>
           </a>
 
-          <a href="/service-areas/ak-egegik-99579" class="area-card">
+          <a href="/alaska/egegik-99579/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Egegik</span>
             <div class="area-zip">99579</div>
           </a>
 
-          <a href="/service-areas/ak-eielson-afb-99702" class="area-card">
+          <a href="/alaska/eielson-afb-99702/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Eielson Afb</span>
             <div class="area-zip">99702</div>
           </a>
 
-          <a href="/service-areas/ak-eielsonafb-99702/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Eielsonafb</span>
-            <div class="area-zip">99702</div>
-          </a>
-
-          <a href="/service-areas/ak-ekwok-99580" class="area-card">
+          <a href="/alaska/ekwok-99580/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ekwok</span>
             <div class="area-zip">99580</div>
           </a>
 
-          <a href="/service-areas/ak-elfin-cove-99825" class="area-card">
+          <a href="/alaska/elfin-cove-99825/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Elfin Cove</span>
             <div class="area-zip">99825</div>
           </a>
 
-          <a href="/service-areas/ak-elfincove-99825/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Elfincove</span>
-            <div class="area-zip">99825</div>
-          </a>
-
-          <a href="/service-areas/ak-elim-99739" class="area-card">
+          <a href="/alaska/elim-99739/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Elim</span>
             <div class="area-zip">99739</div>
           </a>
 
-          <a href="/service-areas/ak-emmonak-99581" class="area-card">
+          <a href="/alaska/emmonak-99581/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Emmonak</span>
             <div class="area-zip">99581</div>
           </a>
 
-          <a href="/service-areas/ak-ester-99725" class="area-card">
+          <a href="/alaska/ester-99725/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ester</span>
             <div class="area-zip">99725</div>
           </a>
 
-          <a href="/service-areas/ak-fairbanks-99701" class="area-card">
+          <a href="/alaska/fairbanks-99790/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Fairbanks</span>
-            <div class="area-zip">99701</div>
+            <div class="area-zip">99790</div>
           </a>
 
-          <a href="/service-areas/ak-false-pass-99583" class="area-card">
+          <a href="/alaska/false-pass-99583/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">False Pass</span>
             <div class="area-zip">99583</div>
           </a>
 
-          <a href="/service-areas/ak-falsepass-99583/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Falsepass</span>
-            <div class="area-zip">99583</div>
-          </a>
-
-          <a href="/service-areas/ak-fort-wainwright-99703" class="area-card">
+          <a href="/alaska/fort-wainwright-99703/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Fort Wainwright</span>
             <div class="area-zip">99703</div>
           </a>
 
-          <a href="/service-areas/ak-fort-yukon-99740" class="area-card">
+          <a href="/alaska/fort-yukon-99740/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Fort Yukon</span>
             <div class="area-zip">99740</div>
           </a>
 
-          <a href="/service-areas/ak-fortwainwright-99703/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Fortwainwright</span>
-            <div class="area-zip">99703</div>
-          </a>
-
-          <a href="/service-areas/ak-fortyukon-99740/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Fortyukon</span>
-            <div class="area-zip">99740</div>
-          </a>
-
-          <a href="/service-areas/ak-gakona-99586" class="area-card">
+          <a href="/alaska/gakona-99586/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Gakona</span>
             <div class="area-zip">99586</div>
           </a>
 
-          <a href="/service-areas/ak-galena-99741" class="area-card">
+          <a href="/alaska/galena-99741/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Galena</span>
             <div class="area-zip">99741</div>
           </a>
 
-          <a href="/service-areas/ak-gambell-99742" class="area-card">
+          <a href="/alaska/gambell-99742/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Gambell</span>
             <div class="area-zip">99742</div>
           </a>
 
-          <a href="/service-areas/ak-girdwood-99587" class="area-card">
+          <a href="/alaska/girdwood-99587/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Girdwood</span>
             <div class="area-zip">99587</div>
           </a>
 
-          <a href="/service-areas/ak-glennallen-99588" class="area-card">
+          <a href="/alaska/glennallen-99588/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Glennallen</span>
             <div class="area-zip">99588</div>
           </a>
 
-          <a href="/service-areas/ak-goodnews-bay-99589" class="area-card">
+          <a href="/alaska/goodnews-bay-99589/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Goodnews Bay</span>
             <div class="area-zip">99589</div>
           </a>
 
-          <a href="/service-areas/ak-goodnewsbay-99589/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Goodnewsbay</span>
-            <div class="area-zip">99589</div>
-          </a>
-
-          <a href="/service-areas/ak-grayling-99590" class="area-card">
+          <a href="/alaska/grayling-99590/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Grayling</span>
             <div class="area-zip">99590</div>
           </a>
 
-          <a href="/service-areas/ak-gustavus-99826" class="area-card">
+          <a href="/alaska/gustavus-99826/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Gustavus</span>
             <div class="area-zip">99826</div>
           </a>
 
-          <a href="/service-areas/ak-haines-99827" class="area-card">
+          <a href="/alaska/haines-99827/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Haines</span>
             <div class="area-zip">99827</div>
           </a>
 
-          <a href="/service-areas/ak-healy-99743" class="area-card">
+          <a href="/alaska/healy-99743/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Healy</span>
             <div class="area-zip">99743</div>
           </a>
 
-          <a href="/service-areas/ak-holy-cross-99602" class="area-card">
+          <a href="/alaska/holy-cross-99602/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Holy Cross</span>
             <div class="area-zip">99602</div>
           </a>
 
-          <a href="/service-areas/ak-holycross-99602/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Holycross</span>
-            <div class="area-zip">99602</div>
-          </a>
-
-          <a href="/service-areas/ak-homer-99603" class="area-card">
+          <a href="/alaska/homer-99603/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Homer</span>
             <div class="area-zip">99603</div>
           </a>
 
-          <a href="/service-areas/ak-hoonah-99829" class="area-card">
+          <a href="/alaska/hoonah-99829/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hoonah</span>
             <div class="area-zip">99829</div>
           </a>
 
-          <a href="/service-areas/ak-hooper-bay-99604" class="area-card">
+          <a href="/alaska/hooper-bay-99604/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hooper Bay</span>
             <div class="area-zip">99604</div>
           </a>
 
-          <a href="/service-areas/ak-hooperbay-99604/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Hooperbay</span>
-            <div class="area-zip">99604</div>
-          </a>
-
-          <a href="/service-areas/ak-hope-99605" class="area-card">
+          <a href="/alaska/hope-99605/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hope</span>
             <div class="area-zip">99605</div>
           </a>
 
-          <a href="/service-areas/ak-houston-99694" class="area-card">
+          <a href="/alaska/houston-99694/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Houston</span>
             <div class="area-zip">99694</div>
           </a>
 
-          <a href="/service-areas/ak-hughes-99745" class="area-card">
+          <a href="/alaska/hughes-99745/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hughes</span>
             <div class="area-zip">99745</div>
           </a>
 
-          <a href="/service-areas/ak-huslia-99746" class="area-card">
+          <a href="/alaska/huslia-99746/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Huslia</span>
             <div class="area-zip">99746</div>
           </a>
 
-          <a href="/service-areas/ak-hydaburg-99922" class="area-card">
+          <a href="/alaska/hydaburg-99922/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hydaburg</span>
             <div class="area-zip">99922</div>
           </a>
 
-          <a href="/service-areas/ak-hyder-99923" class="area-card">
+          <a href="/alaska/hyder-99923/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Hyder</span>
             <div class="area-zip">99923</div>
           </a>
 
-          <a href="/service-areas/ak-iliamna-99606" class="area-card">
+          <a href="/alaska/iliamna-99606/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Iliamna</span>
             <div class="area-zip">99606</div>
           </a>
 
-          <a href="/service-areas/ak-indian-99540" class="area-card">
+          <a href="/alaska/indian-99540/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Indian</span>
             <div class="area-zip">99540</div>
           </a>
 
-          <a href="/service-areas/ak-jber-99505" class="area-card">
+          <a href="/alaska/jber-99506/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Jber</span>
-            <div class="area-zip">99505</div>
+            <div class="area-zip">99506</div>
           </a>
 
-          <a href="/service-areas/ak-juneau-99801" class="area-card">
+          <a href="/alaska/juneau-99850/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Juneau</span>
-            <div class="area-zip">99801</div>
+            <div class="area-zip">99850</div>
           </a>
 
-          <a href="/service-areas/ak-kake-99830" class="area-card">
+          <a href="/alaska/kake-99830/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kake</span>
             <div class="area-zip">99830</div>
           </a>
 
-          <a href="/service-areas/ak-kaktovik-99747" class="area-card">
+          <a href="/alaska/kaktovik-99747/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kaktovik</span>
             <div class="area-zip">99747</div>
           </a>
 
-          <a href="/service-areas/ak-kalskag-99607" class="area-card">
+          <a href="/alaska/kalskag-99607/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kalskag</span>
             <div class="area-zip">99607</div>
           </a>
 
-          <a href="/service-areas/ak-kaltag-99748" class="area-card">
+          <a href="/alaska/kaltag-99748/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kaltag</span>
             <div class="area-zip">99748</div>
           </a>
 
-          <a href="/service-areas/ak-karluk-99608" class="area-card">
+          <a href="/alaska/karluk-99608/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Karluk</span>
             <div class="area-zip">99608</div>
           </a>
 
-          <a href="/service-areas/ak-kasigluk-99609" class="area-card">
+          <a href="/alaska/kasigluk-99609/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kasigluk</span>
             <div class="area-zip">99609</div>
           </a>
 
-          <a href="/service-areas/ak-kasilof-99610" class="area-card">
+          <a href="/alaska/kasilof-99610/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kasilof</span>
             <div class="area-zip">99610</div>
           </a>
 
-          <a href="/service-areas/ak-kenai-99611" class="area-card">
+          <a href="/alaska/kenai-99611/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kenai</span>
             <div class="area-zip">99611</div>
           </a>
 
-          <a href="/service-areas/ak-ketchikan-99901" class="area-card">
+          <a href="/alaska/ketchikan-99901/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ketchikan</span>
             <div class="area-zip">99901</div>
           </a>
 
-          <a href="/service-areas/ak-kiana-99749" class="area-card">
+          <a href="/alaska/kiana-99749/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kiana</span>
             <div class="area-zip">99749</div>
           </a>
 
-          <a href="/service-areas/ak-king-cove-99612" class="area-card">
+          <a href="/alaska/king-cove-99612/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">King Cove</span>
             <div class="area-zip">99612</div>
           </a>
 
-          <a href="/service-areas/ak-king-salmon-99613" class="area-card">
+          <a href="/alaska/king-salmon-99613/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">King Salmon</span>
             <div class="area-zip">99613</div>
           </a>
 
-          <a href="/service-areas/ak-kingcove-99612/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Kingcove</span>
-            <div class="area-zip">99612</div>
-          </a>
-
-          <a href="/service-areas/ak-kingsalmon-99613/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Kingsalmon</span>
-            <div class="area-zip">99613</div>
-          </a>
-
-          <a href="/service-areas/ak-kipnuk-99614" class="area-card">
+          <a href="/alaska/kipnuk-99614/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kipnuk</span>
             <div class="area-zip">99614</div>
           </a>
 
-          <a href="/service-areas/ak-kivalina-99750" class="area-card">
+          <a href="/alaska/kivalina-99750/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kivalina</span>
             <div class="area-zip">99750</div>
           </a>
 
-          <a href="/service-areas/ak-klawock-99925" class="area-card">
+          <a href="/alaska/klawock-99925/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Klawock</span>
             <div class="area-zip">99925</div>
           </a>
 
-          <a href="/service-areas/ak-kobuk-99751" class="area-card">
+          <a href="/alaska/kobuk-99751/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kobuk</span>
             <div class="area-zip">99751</div>
           </a>
 
-          <a href="/service-areas/ak-kodiak-99615" class="area-card">
+          <a href="/alaska/kodiak-99615/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kodiak</span>
             <div class="area-zip">99615</div>
           </a>
 
-          <a href="/service-areas/ak-kotlik-99620" class="area-card">
+          <a href="/alaska/kotlik-99620/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kotlik</span>
             <div class="area-zip">99620</div>
           </a>
 
-          <a href="/service-areas/ak-kotzebue-99752" class="area-card">
+          <a href="/alaska/kotzebue-99752/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kotzebue</span>
             <div class="area-zip">99752</div>
           </a>
 
-          <a href="/service-areas/ak-koyuk-99753" class="area-card">
+          <a href="/alaska/koyuk-99753/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Koyuk</span>
             <div class="area-zip">99753</div>
           </a>
 
-          <a href="/service-areas/ak-koyukuk-99754" class="area-card">
+          <a href="/alaska/koyukuk-99754/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Koyukuk</span>
             <div class="area-zip">99754</div>
           </a>
 
-          <a href="/service-areas/ak-kwethluk-99621" class="area-card">
+          <a href="/alaska/kwethluk-99621/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kwethluk</span>
             <div class="area-zip">99621</div>
           </a>
 
-          <a href="/service-areas/ak-kwigillingok-99622" class="area-card">
+          <a href="/alaska/kwigillingok-99622/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Kwigillingok</span>
             <div class="area-zip">99622</div>
           </a>
 
-          <a href="/service-areas/ak-lake-minchumina-99757" class="area-card">
+          <a href="/alaska/lake-minchumina-99757/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Lake Minchumina</span>
             <div class="area-zip">99757</div>
           </a>
 
-          <a href="/service-areas/ak-lakeminchumina-99757/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Lakeminchumina</span>
-            <div class="area-zip">99757</div>
-          </a>
-
-          <a href="/service-areas/ak-larsen-bay-99624" class="area-card">
+          <a href="/alaska/larsen-bay-99624/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Larsen Bay</span>
             <div class="area-zip">99624</div>
           </a>
 
-          <a href="/service-areas/ak-larsenbay-99624/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Larsenbay</span>
-            <div class="area-zip">99624</div>
-          </a>
-
-          <a href="/service-areas/ak-levelock-99625" class="area-card">
+          <a href="/alaska/levelock-99625/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Levelock</span>
             <div class="area-zip">99625</div>
           </a>
 
-          <a href="/service-areas/ak-lower-kalskag-99626" class="area-card">
+          <a href="/alaska/lower-kalskag-99626/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Lower Kalskag</span>
             <div class="area-zip">99626</div>
           </a>
 
-          <a href="/service-areas/ak-lowerkalskag-99626/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Lowerkalskag</span>
-            <div class="area-zip">99626</div>
-          </a>
-
-          <a href="/service-areas/ak-manley-hot-springs-99756" class="area-card">
+          <a href="/alaska/manley-hot-springs-99756/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Manley Hot Springs</span>
             <div class="area-zip">99756</div>
           </a>
 
-          <a href="/service-areas/ak-manleyhotsprings-99756/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Manleyhotsprings</span>
-            <div class="area-zip">99756</div>
-          </a>
-
-          <a href="/service-areas/ak-manokotak-99628" class="area-card">
+          <a href="/alaska/manokotak-99628/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Manokotak</span>
             <div class="area-zip">99628</div>
           </a>
 
-          <a href="/service-areas/ak-marshall-99585" class="area-card">
+          <a href="/alaska/marshall-99585/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Marshall</span>
             <div class="area-zip">99585</div>
           </a>
 
-          <a href="/service-areas/ak-mcgrath-99627" class="area-card">
+          <a href="/alaska/mcgrath-99627/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Mcgrath</span>
             <div class="area-zip">99627</div>
           </a>
 
-          <a href="/service-areas/ak-mekoryuk-99630" class="area-card">
+          <a href="/alaska/mekoryuk-99630/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Mekoryuk</span>
             <div class="area-zip">99630</div>
           </a>
 
-          <a href="/service-areas/ak-metlakatla-99926" class="area-card">
+          <a href="/alaska/metlakatla-99926/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Metlakatla</span>
             <div class="area-zip">99926</div>
           </a>
 
-          <a href="/service-areas/ak-meyers-chuck-99903" class="area-card">
+          <a href="/alaska/meyers-chuck-99903/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Meyers Chuck</span>
             <div class="area-zip">99903</div>
           </a>
 
-          <a href="/service-areas/ak-meyerschuck-99903/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Meyerschuck</span>
-            <div class="area-zip">99903</div>
-          </a>
-
-          <a href="/service-areas/ak-minto-99758" class="area-card">
+          <a href="/alaska/minto-99758/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Minto</span>
             <div class="area-zip">99758</div>
           </a>
 
-          <a href="/service-areas/ak-moose-pass-99631" class="area-card">
+          <a href="/alaska/moose-pass-99631/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Moose Pass</span>
             <div class="area-zip">99631</div>
           </a>
 
-          <a href="/service-areas/ak-moosepass-99631/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Moosepass</span>
-            <div class="area-zip">99631</div>
-          </a>
-
-          <a href="/service-areas/ak-mountain-village-99632" class="area-card">
+          <a href="/alaska/mountain-village-99632/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Mountain Village</span>
             <div class="area-zip">99632</div>
           </a>
 
-          <a href="/service-areas/ak-mountainvillage-99632/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Mountainvillage</span>
-            <div class="area-zip">99632</div>
-          </a>
-
-          <a href="/service-areas/ak-naknek-99633" class="area-card">
+          <a href="/alaska/naknek-99633/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Naknek</span>
             <div class="area-zip">99633</div>
           </a>
 
-          <a href="/service-areas/ak-napakiak-99634" class="area-card">
+          <a href="/alaska/napakiak-99634/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Napakiak</span>
             <div class="area-zip">99634</div>
           </a>
 
-          <a href="/service-areas/ak-nenana-99760" class="area-card">
+          <a href="/alaska/nenana-99760/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nenana</span>
             <div class="area-zip">99760</div>
           </a>
 
-          <a href="/service-areas/ak-new-stuyahok-99636" class="area-card">
+          <a href="/alaska/new-stuyahok-99636/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">New Stuyahok</span>
             <div class="area-zip">99636</div>
           </a>
 
-          <a href="/service-areas/ak-newstuyahok-99636/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Newstuyahok</span>
-            <div class="area-zip">99636</div>
-          </a>
-
-          <a href="/service-areas/ak-nightmute-99690" class="area-card">
+          <a href="/alaska/nightmute-99690/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nightmute</span>
             <div class="area-zip">99690</div>
           </a>
 
-          <a href="/service-areas/ak-nikiski-99635" class="area-card">
+          <a href="/alaska/nikiski-99635/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nikiski</span>
             <div class="area-zip">99635</div>
           </a>
 
-          <a href="/service-areas/ak-nikolai-99691" class="area-card">
+          <a href="/alaska/nikolai-99691/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nikolai</span>
             <div class="area-zip">99691</div>
           </a>
 
-          <a href="/service-areas/ak-nikolski-99638" class="area-card">
+          <a href="/alaska/nikolski-99638/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nikolski</span>
             <div class="area-zip">99638</div>
           </a>
 
-          <a href="/service-areas/ak-ninilchik-99639" class="area-card">
+          <a href="/alaska/ninilchik-99639/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ninilchik</span>
             <div class="area-zip">99639</div>
           </a>
 
-          <a href="/service-areas/ak-noatak-99761" class="area-card">
+          <a href="/alaska/noatak-99761/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Noatak</span>
             <div class="area-zip">99761</div>
           </a>
 
-          <a href="/service-areas/ak-nome-99762" class="area-card">
+          <a href="/alaska/nome-99762/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nome</span>
             <div class="area-zip">99762</div>
           </a>
 
-          <a href="/service-areas/ak-nondalton-99640" class="area-card">
+          <a href="/alaska/nondalton-99640/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nondalton</span>
             <div class="area-zip">99640</div>
           </a>
 
-          <a href="/service-areas/ak-noorvik-99763" class="area-card">
+          <a href="/alaska/noorvik-99763/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Noorvik</span>
             <div class="area-zip">99763</div>
           </a>
 
-          <a href="/service-areas/ak-north-pole-99705" class="area-card">
+          <a href="/alaska/north-pole-99705/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">North Pole</span>
             <div class="area-zip">99705</div>
           </a>
 
-          <a href="/service-areas/ak-northpole-99705/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Northpole</span>
-            <div class="area-zip">99705</div>
-          </a>
-
-          <a href="/service-areas/ak-northway-99764" class="area-card">
+          <a href="/alaska/northway-99764/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Northway</span>
             <div class="area-zip">99764</div>
           </a>
 
-          <a href="/service-areas/ak-nuiqsut-99789" class="area-card">
+          <a href="/alaska/nuiqsut-99789/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nuiqsut</span>
             <div class="area-zip">99789</div>
           </a>
 
-          <a href="/service-areas/ak-nulato-99765" class="area-card">
+          <a href="/alaska/nulato-99765/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nulato</span>
             <div class="area-zip">99765</div>
           </a>
 
-          <a href="/service-areas/ak-nunam-iqua-99666" class="area-card">
+          <a href="/alaska/nunam-iqua-99666/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nunam Iqua</span>
             <div class="area-zip">99666</div>
           </a>
 
-          <a href="/service-areas/ak-nunamiqua-99666/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Nunamiqua</span>
-            <div class="area-zip">99666</div>
-          </a>
-
-          <a href="/service-areas/ak-nunapitchuk-99641" class="area-card">
+          <a href="/alaska/nunapitchuk-99641/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Nunapitchuk</span>
             <div class="area-zip">99641</div>
           </a>
 
-          <a href="/service-areas/ak-old-harbor-99643" class="area-card">
+          <a href="/alaska/old-harbor-99643/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Old Harbor</span>
             <div class="area-zip">99643</div>
           </a>
 
-          <a href="/service-areas/ak-oldharbor-99643/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Oldharbor</span>
-            <div class="area-zip">99643</div>
-          </a>
-
-          <a href="/service-areas/ak-ouzinkie-99644" class="area-card">
+          <a href="/alaska/ouzinkie-99644/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ouzinkie</span>
             <div class="area-zip">99644</div>
           </a>
 
-          <a href="/service-areas/ak-palmer-99645" class="area-card">
+          <a href="/alaska/palmer-99645/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Palmer</span>
             <div class="area-zip">99645</div>
           </a>
 
-          <a href="/service-areas/ak-pedro-bay-99647" class="area-card">
+          <a href="/alaska/pedro-bay-99647/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Pedro Bay</span>
             <div class="area-zip">99647</div>
           </a>
 
-          <a href="/service-areas/ak-pedrobay-99647/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pedrobay</span>
-            <div class="area-zip">99647</div>
-          </a>
-
-          <a href="/service-areas/ak-pelican-99832" class="area-card">
+          <a href="/alaska/pelican-99832/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Pelican</span>
             <div class="area-zip">99832</div>
           </a>
 
-          <a href="/service-areas/ak-perryville-99648" class="area-card">
+          <a href="/alaska/perryville-99648/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Perryville</span>
             <div class="area-zip">99648</div>
           </a>
 
-          <a href="/service-areas/ak-petersburg-99833" class="area-card">
+          <a href="/alaska/petersburg-99833/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Petersburg</span>
             <div class="area-zip">99833</div>
           </a>
 
-          <a href="/service-areas/ak-pilot-point-99649" class="area-card">
+          <a href="/alaska/pilot-point-99649/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Pilot Point</span>
             <div class="area-zip">99649</div>
           </a>
 
-          <a href="/service-areas/ak-pilot-station-99650" class="area-card">
+          <a href="/alaska/pilot-station-99650/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Pilot Station</span>
             <div class="area-zip">99650</div>
           </a>
 
-          <a href="/service-areas/ak-pilotpoint-99649/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pilotpoint</span>
-            <div class="area-zip">99649</div>
-          </a>
-
-          <a href="/service-areas/ak-pilotstation-99650/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pilotstation</span>
-            <div class="area-zip">99650</div>
-          </a>
-
-          <a href="/service-areas/ak-platinum-99651" class="area-card">
+          <a href="/alaska/platinum-99651/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Platinum</span>
             <div class="area-zip">99651</div>
           </a>
 
-          <a href="/service-areas/ak-point-baker-99927" class="area-card">
+          <a href="/alaska/point-baker-99927/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Point Baker</span>
             <div class="area-zip">99927</div>
           </a>
 
-          <a href="/service-areas/ak-point-hope-99766" class="area-card">
+          <a href="/alaska/point-hope-99766/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Point Hope</span>
             <div class="area-zip">99766</div>
           </a>
 
-          <a href="/service-areas/ak-point-lay-99759" class="area-card">
+          <a href="/alaska/point-lay-99759/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Point Lay</span>
             <div class="area-zip">99759</div>
           </a>
 
-          <a href="/service-areas/ak-pointbaker-99927/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pointbaker</span>
-            <div class="area-zip">99927</div>
-          </a>
-
-          <a href="/service-areas/ak-pointhope-99766/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pointhope</span>
-            <div class="area-zip">99766</div>
-          </a>
-
-          <a href="/service-areas/ak-pointlay-99759/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Pointlay</span>
-            <div class="area-zip">99759</div>
-          </a>
-
-          <a href="/service-areas/ak-port-alexander-99836" class="area-card">
+          <a href="/alaska/port-alexander-99836/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Port Alexander</span>
             <div class="area-zip">99836</div>
           </a>
 
-          <a href="/service-areas/ak-port-alsworth-99653" class="area-card">
+          <a href="/alaska/port-alsworth-99653/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Port Alsworth</span>
             <div class="area-zip">99653</div>
           </a>
 
-          <a href="/service-areas/ak-port-heiden-99549" class="area-card">
+          <a href="/alaska/port-heiden-99549/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Port Heiden</span>
             <div class="area-zip">99549</div>
           </a>
 
-          <a href="/service-areas/ak-port-lions-99550" class="area-card">
+          <a href="/alaska/port-lions-99550/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Port Lions</span>
             <div class="area-zip">99550</div>
           </a>
 
-          <a href="/service-areas/ak-portalexander-99836/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Portalexander</span>
-            <div class="area-zip">99836</div>
-          </a>
-
-          <a href="/service-areas/ak-portalsworth-99653/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Portalsworth</span>
-            <div class="area-zip">99653</div>
-          </a>
-
-          <a href="/service-areas/ak-portheiden-99549/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Portheiden</span>
-            <div class="area-zip">99549</div>
-          </a>
-
-          <a href="/service-areas/ak-portlions-99550/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Portlions</span>
-            <div class="area-zip">99550</div>
-          </a>
-
-          <a href="/service-areas/ak-prudhoe-bay-99734" class="area-card">
+          <a href="/alaska/prudhoe-bay-99734/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Prudhoe Bay</span>
             <div class="area-zip">99734</div>
           </a>
 
-          <a href="/service-areas/ak-prudhoebay-99734/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Prudhoebay</span>
-            <div class="area-zip">99734</div>
-          </a>
-
-          <a href="/service-areas/ak-quinhagak-99655" class="area-card">
+          <a href="/alaska/quinhagak-99655/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Quinhagak</span>
             <div class="area-zip">99655</div>
           </a>
 
-          <a href="/service-areas/ak-rampart-99767" class="area-card">
+          <a href="/alaska/rampart-99767/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Rampart</span>
             <div class="area-zip">99767</div>
           </a>
 
-          <a href="/service-areas/ak-red-devil-99656" class="area-card">
+          <a href="/alaska/red-devil-99656/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Red Devil</span>
             <div class="area-zip">99656</div>
           </a>
 
-          <a href="/service-areas/ak-reddevil-99656/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Reddevil</span>
-            <div class="area-zip">99656</div>
-          </a>
-
-          <a href="/service-areas/ak-ruby-99768" class="area-card">
+          <a href="/alaska/ruby-99768/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Ruby</span>
             <div class="area-zip">99768</div>
           </a>
 
-          <a href="/service-areas/ak-russian-mission-99657" class="area-card">
+          <a href="/alaska/russian-mission-99657/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Russian Mission</span>
             <div class="area-zip">99657</div>
           </a>
 
-          <a href="/service-areas/ak-russianmission-99657/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Russianmission</span>
-            <div class="area-zip">99657</div>
-          </a>
-
-          <a href="/service-areas/ak-saint-george-island-99591" class="area-card">
+          <a href="/alaska/saint-george-island-99591/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Saint George Island</span>
             <div class="area-zip">99591</div>
           </a>
 
-          <a href="/service-areas/ak-saint-marys-99658" class="area-card">
+          <a href="/alaska/saint-marys-99658/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Saint Marys</span>
             <div class="area-zip">99658</div>
           </a>
 
-          <a href="/service-areas/ak-saint-michael-99659" class="area-card">
+          <a href="/alaska/saint-michael-99659/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Saint Michael</span>
             <div class="area-zip">99659</div>
           </a>
 
-          <a href="/service-areas/ak-saint-paul-island-99660" class="area-card">
+          <a href="/alaska/saint-paul-island-99660/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Saint Paul Island</span>
             <div class="area-zip">99660</div>
           </a>
 
-          <a href="/service-areas/ak-saintgeorgeisland-99591/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Saintgeorgeisland</span>
-            <div class="area-zip">99591</div>
-          </a>
-
-          <a href="/service-areas/ak-saintmarys-99658/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Saintmarys</span>
-            <div class="area-zip">99658</div>
-          </a>
-
-          <a href="/service-areas/ak-saintmichael-99659/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Saintmichael</span>
-            <div class="area-zip">99659</div>
-          </a>
-
-          <a href="/service-areas/ak-saintpaulisland-99660/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Saintpaulisland</span>
-            <div class="area-zip">99660</div>
-          </a>
-
-          <a href="/service-areas/ak-salcha-99714" class="area-card">
+          <a href="/alaska/salcha-99714/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Salcha</span>
             <div class="area-zip">99714</div>
           </a>
 
-          <a href="/service-areas/ak-sand-point-99661" class="area-card">
+          <a href="/alaska/sand-point-99661/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Sand Point</span>
             <div class="area-zip">99661</div>
           </a>
 
-          <a href="/service-areas/ak-sandpoint-99661/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Sandpoint</span>
-            <div class="area-zip">99661</div>
-          </a>
-
-          <a href="/service-areas/ak-savoonga-99769" class="area-card">
+          <a href="/alaska/savoonga-99769/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Savoonga</span>
             <div class="area-zip">99769</div>
           </a>
 
-          <a href="/service-areas/ak-scammon-bay-99662" class="area-card">
+          <a href="/alaska/scammon-bay-99662/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Scammon Bay</span>
             <div class="area-zip">99662</div>
           </a>
 
-          <a href="/service-areas/ak-scammonbay-99662/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Scammonbay</span>
-            <div class="area-zip">99662</div>
-          </a>
-
-          <a href="/service-areas/ak-selawik-99770" class="area-card">
+          <a href="/alaska/selawik-99770/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Selawik</span>
             <div class="area-zip">99770</div>
           </a>
 
-          <a href="/service-areas/ak-seldovia-99663" class="area-card">
+          <a href="/alaska/seldovia-99663/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Seldovia</span>
             <div class="area-zip">99663</div>
           </a>
 
-          <a href="/service-areas/ak-seward-99664" class="area-card">
+          <a href="/alaska/seward-99664/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Seward</span>
             <div class="area-zip">99664</div>
           </a>
 
-          <a href="/service-areas/ak-shageluk-99665" class="area-card">
+          <a href="/alaska/shageluk-99665/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Shageluk</span>
             <div class="area-zip">99665</div>
           </a>
 
-          <a href="/service-areas/ak-shaktoolik-99771" class="area-card">
+          <a href="/alaska/shaktoolik-99771/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Shaktoolik</span>
             <div class="area-zip">99771</div>
           </a>
 
-          <a href="/service-areas/ak-shishmaref-99772" class="area-card">
+          <a href="/alaska/shishmaref-99772/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Shishmaref</span>
             <div class="area-zip">99772</div>
           </a>
 
-          <a href="/service-areas/ak-shungnak-99773" class="area-card">
+          <a href="/alaska/shungnak-99773/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Shungnak</span>
             <div class="area-zip">99773</div>
           </a>
 
-          <a href="/service-areas/ak-sitka-99835" class="area-card">
+          <a href="/alaska/sitka-99835/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Sitka</span>
             <div class="area-zip">99835</div>
           </a>
 
-          <a href="/service-areas/ak-skagway-99840" class="area-card">
+          <a href="/alaska/skagway-99840/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Skagway</span>
             <div class="area-zip">99840</div>
           </a>
 
-          <a href="/service-areas/ak-skwentna-99667" class="area-card">
+          <a href="/alaska/skwentna-99667/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Skwentna</span>
             <div class="area-zip">99667</div>
           </a>
 
-          <a href="/service-areas/ak-sleetmute-99668" class="area-card">
+          <a href="/alaska/sleetmute-99668/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Sleetmute</span>
             <div class="area-zip">99668</div>
           </a>
 
-          <a href="/service-areas/ak-soldotna-99669" class="area-card">
+          <a href="/alaska/soldotna-99669/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Soldotna</span>
             <div class="area-zip">99669</div>
           </a>
 
-          <a href="/service-areas/ak-south-naknek-99670" class="area-card">
+          <a href="/alaska/south-naknek-99670/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">South Naknek</span>
             <div class="area-zip">99670</div>
           </a>
 
-          <a href="/service-areas/ak-southnaknek-99670/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Southnaknek</span>
-            <div class="area-zip">99670</div>
-          </a>
-
-          <a href="/service-areas/ak-stebbins-99671" class="area-card">
+          <a href="/alaska/stebbins-99671/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Stebbins</span>
             <div class="area-zip">99671</div>
           </a>
 
-          <a href="/service-areas/ak-sterling-99672" class="area-card">
+          <a href="/alaska/sterling-99672/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Sterling</span>
             <div class="area-zip">99672</div>
           </a>
 
-          <a href="/service-areas/ak-stevens-village-99774" class="area-card">
+          <a href="/alaska/stevens-village-99774/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Stevens Village</span>
             <div class="area-zip">99774</div>
           </a>
 
-          <a href="/service-areas/ak-stevensvillage-99774/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Stevensvillage</span>
-            <div class="area-zip">99774</div>
-          </a>
-
-          <a href="/service-areas/ak-sutton-99674" class="area-card">
+          <a href="/alaska/sutton-99674/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Sutton</span>
             <div class="area-zip">99674</div>
           </a>
 
-          <a href="/service-areas/ak-takotna-99675" class="area-card">
+          <a href="/alaska/takotna-99675/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Takotna</span>
             <div class="area-zip">99675</div>
           </a>
 
-          <a href="/service-areas/ak-talkeetna-99676" class="area-card">
+          <a href="/alaska/talkeetna-99676/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Talkeetna</span>
             <div class="area-zip">99676</div>
           </a>
 
-          <a href="/service-areas/ak-tanacross-99776" class="area-card">
+          <a href="/alaska/tanacross-99776/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tanacross</span>
             <div class="area-zip">99776</div>
           </a>
 
-          <a href="/service-areas/ak-tanana-99777" class="area-card">
+          <a href="/alaska/tanana-99777/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tanana</span>
             <div class="area-zip">99777</div>
           </a>
 
-          <a href="/service-areas/ak-tatitlek-99677" class="area-card">
+          <a href="/alaska/tatitlek-99677/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tatitlek</span>
             <div class="area-zip">99677</div>
           </a>
 
-          <a href="/service-areas/ak-teller-99778" class="area-card">
+          <a href="/alaska/teller-99778/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Teller</span>
             <div class="area-zip">99778</div>
           </a>
 
-          <a href="/service-areas/ak-tenakee-springs-99841" class="area-card">
+          <a href="/alaska/tenakee-springs-99841/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tenakee Springs</span>
             <div class="area-zip">99841</div>
           </a>
 
-          <a href="/service-areas/ak-tenakeesprings-99841/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Tenakeesprings</span>
-            <div class="area-zip">99841</div>
-          </a>
-
-          <a href="/service-areas/ak-thorne-bay-99919" class="area-card">
+          <a href="/alaska/thorne-bay-99919/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Thorne Bay</span>
             <div class="area-zip">99919</div>
           </a>
 
-          <a href="/service-areas/ak-thornebay-99919/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Thornebay</span>
-            <div class="area-zip">99919</div>
-          </a>
-
-          <a href="/service-areas/ak-togiak-99678" class="area-card">
+          <a href="/alaska/togiak-99678/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Togiak</span>
             <div class="area-zip">99678</div>
           </a>
 
-          <a href="/service-areas/ak-tok-99780" class="area-card">
+          <a href="/alaska/tok-99780/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tok</span>
             <div class="area-zip">99780</div>
           </a>
 
-          <a href="/service-areas/ak-toksook-bay-99637" class="area-card">
+          <a href="/alaska/toksook-bay-99637/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Toksook Bay</span>
             <div class="area-zip">99637</div>
           </a>
 
-          <a href="/service-areas/ak-toksookbay-99637/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Toksookbay</span>
-            <div class="area-zip">99637</div>
-          </a>
-
-          <a href="/service-areas/ak-trapper-creek-99683" class="area-card">
+          <a href="/alaska/trapper-creek-99683/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Trapper Creek</span>
             <div class="area-zip">99683</div>
           </a>
 
-          <a href="/service-areas/ak-trappercreek-99683/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Trappercreek</span>
-            <div class="area-zip">99683</div>
-          </a>
-
-          <a href="/service-areas/ak-tuluksak-99679" class="area-card">
+          <a href="/alaska/tuluksak-99679/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tuluksak</span>
             <div class="area-zip">99679</div>
           </a>
 
-          <a href="/service-areas/ak-tuntutuliak-99680" class="area-card">
+          <a href="/alaska/tuntutuliak-99680/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tuntutuliak</span>
             <div class="area-zip">99680</div>
           </a>
 
-          <a href="/service-areas/ak-tununak-99681" class="area-card">
+          <a href="/alaska/tununak-99681/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tununak</span>
             <div class="area-zip">99681</div>
           </a>
 
-          <a href="/service-areas/ak-tyonek-99682" class="area-card">
+          <a href="/alaska/tyonek-99682/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Tyonek</span>
             <div class="area-zip">99682</div>
           </a>
 
-          <a href="/service-areas/ak-unalakleet-99684" class="area-card">
+          <a href="/alaska/unalakleet-99684/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Unalakleet</span>
             <div class="area-zip">99684</div>
           </a>
 
-          <a href="/service-areas/ak-unalaska-99685" class="area-card">
+          <a href="/alaska/unalaska-99685/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Unalaska</span>
             <div class="area-zip">99685</div>
           </a>
 
-          <a href="/service-areas/ak-valdez-99686" class="area-card">
+          <a href="/alaska/valdez-99686/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Valdez</span>
             <div class="area-zip">99686</div>
           </a>
 
-          <a href="/service-areas/ak-venetie-99781" class="area-card">
+          <a href="/alaska/venetie-99781/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Venetie</span>
             <div class="area-zip">99781</div>
           </a>
 
-          <a href="/service-areas/ak-wainwright-99782" class="area-card">
+          <a href="/alaska/wainwright-99782/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Wainwright</span>
             <div class="area-zip">99782</div>
           </a>
 
-          <a href="/service-areas/ak-wales-99783" class="area-card">
+          <a href="/alaska/wales-99783/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Wales</span>
             <div class="area-zip">99783</div>
           </a>
 
-          <a href="/service-areas/ak-wasilla-99623" class="area-card">
+          <a href="/alaska/wasilla-99654/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Wasilla</span>
-            <div class="area-zip">99623</div>
+            <div class="area-zip">99654</div>
           </a>
 
-          <a href="/service-areas/ak-white-mountain-99784" class="area-card">
+          <a href="/alaska/white-mountain-99784/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">White Mountain</span>
             <div class="area-zip">99784</div>
           </a>
 
-          <a href="/service-areas/ak-whitemountain-99784/" class="area-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="area-title">Whitemountain</span>
-            <div class="area-zip">99784</div>
-          </a>
-
-          <a href="/service-areas/ak-whittier-99693" class="area-card">
+          <a href="/alaska/whittier-99693/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Whittier</span>
             <div class="area-zip">99693</div>
           </a>
 
-          <a href="/service-areas/ak-willow-99688" class="area-card">
+          <a href="/alaska/willow-99688/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Willow</span>
             <div class="area-zip">99688</div>
           </a>
 
-          <a href="/service-areas/ak-wrangell-99929" class="area-card">
+          <a href="/alaska/wrangell-99929/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Wrangell</span>
             <div class="area-zip">99929</div>
           </a>
 
-          <a href="/service-areas/ak-yakutat-99689" class="area-card">
+          <a href="/alaska/yakutat-99689/" class="area-card">
             <i class="fas fa-map-marker-alt"></i>
             <span class="area-title">Yakutat</span>
             <div class="area-zip">99689</div>
@@ -2769,8 +2373,11 @@
 
             let cardsHtml = '';
             fetchedData.forEach(item => {
+              const stateSlug = slugify(item.state || stateLower);
+              const citySlug = slugify(item.city);
+              const urlPath = `/${stateSlug}/${citySlug}-${item.zip}/`;
               cardsHtml += `
-                <a href="${item.url_path}" class="area-card">
+                <a href="${urlPath}" class="area-card">
                   <i class="fas fa-map-marker-alt"></i>
                   <span class="area-title">${item.city}</span>
                   <div class="area-zip">${item.zip}</div>
@@ -2806,7 +2413,7 @@
               let cardsHtml = '';
               sortedCities.forEach(cityObj => {
                 cardsHtml += `
-                  <a href="/city/${slugify(stateLower)}/${slugify(cityObj.name)}/${cityObj.zip}" class="area-card">
+                  <a href="/${slugify(stateLower)}/${slugify(cityObj.name)}-${cityObj.zip}/" class="area-card">
                     <i class="fas fa-map-marker-alt"></i>
                     <span class="area-title">${cityObj.name}</span>
                     <div class="area-zip">${cityObj.zip}</div>
