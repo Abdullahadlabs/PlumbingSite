@@ -1,6 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      function slugify(text) {
+        if (!text) return '';
+        let decoded = text;
+        try {
+          let prev;
+          do {
+            prev = decoded;
+            decoded = decodeURIComponent(decoded);
+          } while (decoded !== prev);
+        } catch (e) {}
+        return decoded.toLowerCase().replace(/[^a-z0-9\s-_]/g, '').trim().replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+      }
+
+      function getCanonicalServiceSlug(serviceSlug) {
+        if (!serviceSlug) return 'drain-cleaning';
+        const clean = slugify(serviceSlug);
+        const map = {
+          'drain-cleaning': 'drain-cleaning',
+          'clogged-drain-repair': 'drain-cleaning',
+          'drain-cleaning-service': 'drain-cleaning',
+          'hydro-jetting': 'drain-cleaning',
+          'hydro-jetting-service': 'drain-cleaning',
+          'drain-repair': 'drain-cleaning',
+          'rooter-services': 'drain-cleaning',
+          'burst-pipe-repair': 'burst-pipe-repair',
+          'pipe-repair': 'burst-pipe-repair',
+          'pipe-leak-repair': 'burst-pipe-repair',
+          'whole-house-repiping': 'burst-pipe-repair',
+          'water-heater-repair': 'water-heater-repair',
+          'water-heater-installation': 'water-heater-repair',
+          'tankless-water-heater-installation': 'water-heater-repair',
+          'tankless-water-heater-repair': 'water-heater-repair',
+          'sewer-line-repair': 'sewer-line-repair',
+          'sewer-line-replacement': 'sewer-line-repair',
+          'drain-line-replacement': 'sewer-line-repair',
+          'emergency-plumbing': 'emergency-plumbing',
+          '24-hour-emergency-plumbing': 'emergency-plumbing',
+          'same-day-plumbing-repair': 'emergency-plumbing',
+          'leak-detection': 'leak-detection',
+          'slab-leak-repair': 'leak-detection',
+          'gas-line-repair': 'gas-line-repair',
+          'water-line-repair': 'water-line-repair'
+        };
+        return map[clean] || clean;
+      }
+
+      const search = window.location.search;
+      if (!search) return;
+      const params = new URLSearchParams(search);
+      if (params.has('city') || params.has('zip') || params.has('state')) {
+        const qCity = params.get('city') ? slugify(params.get('city')) : '';
+        const qState = params.get('state') ? slugify(params.get('state')) : 'alaska';
+        const qZip = params.get('zip') ? params.get('zip').replace(/[^0-9]/g, '') : '';
+        const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
+        const stateSlug = stateMap[qState] || qState;
+
+        let serviceSlug = '';
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        if (pathParts[0] === 'services' && pathParts[1]) {
+          serviceSlug = getCanonicalServiceSlug(pathParts[1]);
+        } else if (params.has('service')) {
+          serviceSlug = getCanonicalServiceSlug(params.get('service'));
+        }
+
+        if (stateSlug && qCity && qZip) {
+          let cleanStaticPath = `/${stateSlug}/${qCity}-${qZip}/`;
+          if (serviceSlug) {
+            cleanStaticPath += `${serviceSlug}/`;
+          }
+          window.location.replace(cleanStaticPath);
+        } else if (stateSlug) {
+          window.location.replace(`/state/${stateSlug}`);
+        }
+      }
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">

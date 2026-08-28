@@ -152,6 +152,18 @@
       let zip = params.get('zip');
       let state = params.get('state');
 
+      if (params.has('city') || params.has('zip')) {
+        const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
+        const qState = state ? state.toLowerCase() : 'alaska';
+        const stateSlug = stateMap[qState] || qState;
+        const qCity = city ? city.toLowerCase().replace(/[^a-z0-9\s-_]/g, '').trim().replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '') : '';
+        const qZip = zip ? zip.replace(/[^0-9]/g, '') : '';
+        if (stateSlug && qCity && qZip) {
+          window.location.replace(`/${stateSlug}/${qCity}-${qZip}/`);
+          return;
+        }
+      }
+
       const pathParts = window.location.pathname.split('/');
       const cityIdx = pathParts.indexOf('city');
       if (cityIdx !== -1 && cityIdx + 3 < pathParts.length) {

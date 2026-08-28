@@ -97,11 +97,44 @@
         const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
         const stateSlug = stateMap[qState] || qState;
         
+        function getCanonicalServiceSlug(serviceSlug) {
+          if (!serviceSlug) return 'drain-cleaning';
+          const clean = slugify(serviceSlug);
+          const map = {
+            'drain-cleaning': 'drain-cleaning',
+            'clogged-drain-repair': 'drain-cleaning',
+            'drain-cleaning-service': 'drain-cleaning',
+            'hydro-jetting': 'drain-cleaning',
+            'hydro-jetting-service': 'drain-cleaning',
+            'drain-repair': 'drain-cleaning',
+            'rooter-services': 'drain-cleaning',
+            'burst-pipe-repair': 'burst-pipe-repair',
+            'pipe-repair': 'burst-pipe-repair',
+            'pipe-leak-repair': 'burst-pipe-repair',
+            'whole-house-repiping': 'burst-pipe-repair',
+            'water-heater-repair': 'water-heater-repair',
+            'water-heater-installation': 'water-heater-repair',
+            'tankless-water-heater-installation': 'water-heater-repair',
+            'tankless-water-heater-repair': 'water-heater-repair',
+            'sewer-line-repair': 'sewer-line-repair',
+            'sewer-line-replacement': 'sewer-line-repair',
+            'drain-line-replacement': 'sewer-line-repair',
+            'emergency-plumbing': 'emergency-plumbing',
+            '24-hour-emergency-plumbing': 'emergency-plumbing',
+            'same-day-plumbing-repair': 'emergency-plumbing',
+            'leak-detection': 'leak-detection',
+            'slab-leak-repair': 'leak-detection',
+            'gas-line-repair': 'gas-line-repair',
+            'water-line-repair': 'water-line-repair'
+          };
+          return map[clean] || clean;
+        }
+
         let serviceSlug = 'drain-cleaning';
         if (servicesIdx !== -1 && servicesIdx + 1 < parts.length) {
-          serviceSlug = slugify(parts[servicesIdx + 1]);
+          serviceSlug = getCanonicalServiceSlug(parts[servicesIdx + 1]);
         } else if (params.has('service')) {
-          serviceSlug = slugify(params.get('service'));
+          serviceSlug = getCanonicalServiceSlug(params.get('service'));
         }
 
         if (stateSlug && qCity && qZip) {
