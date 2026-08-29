@@ -187,23 +187,49 @@ function generateStateMetaDescription(stateName, stateCode) {
   return `Need trusted plumbing services in ${s}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
 }
 
+const CUSTOM_STATE_SEO = {
+  'georgia': {
+    title: 'Georgia Emergency Plumbers – Licensed & Local | Home Plumbing USA',
+    metaDesc: 'Emergency plumber in Georgia? Home Plumbing USA connects you with licensed, vetted local pros for 24/7 repairs. Get a free quote — call now.'
+  },
+  'arizona': {
+    title: '24/7 Plumbing Repair in Arizona | Vetted Local Pros',
+    metaDesc: 'Burst pipe or clogged drain in Arizona? We dispatch background-checked, licensed local plumbers around the clock. Request your free quote today.'
+  },
+  'texas': {
+    title: 'Texas Plumber Near You – Fast, Licensed Dispatch',
+    metaDesc: 'Texas plumbing emergency? Home Plumbing USA matches you with licensed local pros, day or night. Call 877-516-8705 for immediate dispatch.'
+  },
+  'maine': {
+    title: 'Trusted Maine Plumbers, Available Day or Night',
+    metaDesc: 'Need a reliable plumber in Maine? We connect homeowners with vetted, licensed local pros for fast 24/7 repairs. Call 877-516-8705 to get help now.'
+  },
+  'virginia': {
+    title: 'Virginia Plumbing Help – Licensed Pros, Fast Response',
+    metaDesc: 'Virginia homeowners trust Home Plumbing USA to dispatch licensed local plumbers fast — 24/7 emergency service. Get your free quote in minutes.'
+  }
+};
+
 function generateStateHtml(templateHtml, state, stateCitiesIndex) {
   const stateName = state.name;
   const stateSlug = state.slug;
   const stateCode = state.code;
   const canonicalUrl = `${DOMAIN}/state/${stateSlug}/`;
 
-  // Unique Title Tag (strictly optimized <= 60 characters)
-  let titleTag = `24/7 Plumbers in ${stateName} | Emergency Plumbing Services`;
-  if (titleTag.length > 60) {
-    titleTag = `24/7 Plumbers in ${stateName} | Emergency Plumbing`;
-  }
-  if (titleTag.length > 60) {
-    titleTag = `Plumbers in ${stateName} | Home Plumbing USA`;
+  // Custom or dynamic Title Tag
+  const customSeo = CUSTOM_STATE_SEO[stateSlug];
+  let titleTag = customSeo && customSeo.title ? customSeo.title : `24/7 Plumbers in ${stateName} | Emergency Plumbing Services`;
+  if (!customSeo) {
+    if (titleTag.length > 60) {
+      titleTag = `24/7 Plumbers in ${stateName} | Emergency Plumbing`;
+    }
+    if (titleTag.length > 60) {
+      titleTag = `Plumbers in ${stateName} | Home Plumbing USA`;
+    }
   }
 
-  // Unique Meta Description (Strictly 150 - 160 characters)
-  const metaDesc = generateStateMetaDescription(stateName, stateCode);
+  // Custom or dynamic Meta Description
+  const metaDesc = customSeo && customSeo.metaDesc ? customSeo.metaDesc : generateStateMetaDescription(stateName, stateCode);
 
   // Unique Meta Keywords
   const metaKeywords = `plumbers in ${stateName}, emergency plumbing ${stateName}, 24/7 local plumber ${stateName}, ${stateName} plumbing experts, water heater repair ${stateName}, affordable plumber ${stateName}, licensed plumbers ${stateCode}`;

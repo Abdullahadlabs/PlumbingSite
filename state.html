@@ -238,14 +238,17 @@
       let areaServedName = '';
 
       if (currentPage === 'state') {
-        const displayState = stateName || 'your state';
-        title = `24/7 Plumbers in ${displayState} | Emergency Plumbing Services`;
-        if (title.length > 60) {
-          title = `24/7 Plumbers in ${displayState} | Emergency Plumbing`;
-        }
-        description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
-        if (description.length < 150) {
-          description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        const isCustomOrPrerendered = document.title && !document.title.includes('Your State');
+        if (!isCustomOrPrerendered) {
+          const displayState = stateName || 'your state';
+          title = `24/7 Plumbers in ${displayState} | Emergency Plumbing Services`;
+          if (title.length > 60) {
+            title = `24/7 Plumbers in ${displayState} | Emergency Plumbing`;
+          }
+          description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
+          if (description.length < 150) {
+            description = `Need trusted plumbing services in ${displayState}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+          }
         }
         schemaName = `Home Plumbing USA - ${stateName || 'State'}`;
         schemaDesc = `Professional plumbing and emergency repair services in ${stateName || 'State'}.`;
