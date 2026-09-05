@@ -108,9 +108,10 @@ ${urls.map(url => `  <url>
     generatedSitemaps.push(sitemapFilename);
   });
 
-  // Root static pages
+  // Root static pages & blog posts
   const rootUrls = [
     `${DOMAIN}/`,
+    `${DOMAIN}/blog`,
     `${DOMAIN}/about`,
     `${DOMAIN}/services`,
     `${DOMAIN}/projects`,
@@ -119,13 +120,26 @@ ${urls.map(url => `  <url>
     `${DOMAIN}/terms-and-conditions`
   ];
 
+  // Add individual blog post URLs if blogs.json exists
+  const blogsDataPath = path.join(__dirname, 'database', 'blogs.json');
+  if (fs.existsSync(blogsDataPath)) {
+    try {
+      const blogsList = JSON.parse(fs.readFileSync(blogsDataPath, 'utf8'));
+      blogsList.forEach(b => {
+        rootUrls.push(`${DOMAIN}/blog/${b.slug}/`);
+      });
+    } catch (e) {
+      console.warn('Could not read blogs.json for sitemap:', e.message);
+    }
+  }
+
   const sitemapPagesXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${rootUrls.map(url => `  <url>
     <loc>${url}</loc>
     <lastmod>${lastModDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${url.endsWith('/') ? '1.0' : '0.7'}</priority>
+    <changefreq>${url.includes('/blog/') ? 'weekly' : (url.endsWith('/') ? 'daily' : 'monthly')}</changefreq>
+    <priority>${url.endsWith('/') && !url.includes('/blog/') ? '1.0' : (url.includes('/blog') ? '0.8' : '0.7')}</priority>
   </url>`).join('\n')}
 </urlset>`;
 

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plumbing Guides, Daily Insights & Emergency Tips | Home Plumbing USA</title>
+  <meta name="description" content="Explore daily plumbing guides, expert maintenance tips, and emergency troubleshooting written by master plumbers. Learn how to diagnose issues, save energy, and know when to call a pro.">
+  <link rel="canonical" href="https://homeplumbingusa.com/blog">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://homeplumbingusa.com/blog">
+  <meta property="og:title" content="Plumbing Guides, Daily Insights & Emergency Tips | Home Plumbing USA">
+  <meta property="og:description" content="Explore daily plumbing guides, expert maintenance tips, and emergency troubleshooting written by master plumbers.">
+  <meta property="og:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://homeplumbingusa.com/blog/#blog",
+    "name": "Home Plumbing USA Daily Plumbing Guides",
+    "description": "Daily plumbing guides, expert maintenance advice, and emergency troubleshooting tutorials for homeowners.",
+    "url": "https://homeplumbingusa.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Home Plumbing USA",
+      "url": "https://homeplumbingusa.com/",
+      "logo": "https://homeplumbingusa.com/public/images/logo.svg"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="/public/images/favicon.png">
+
+  <style>
+    .blog-hub-hero {
+      padding: 60px 0 45px;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.98), rgba(15, 30, 60, 0.92));
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .blog-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 20px;
+      color: var(--primary-light);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .blog-search-box {
+      max-width: 600px;
+      margin: 28px auto 0;
+      position: relative;
+    }
+    .blog-search-input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .blog-search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.25);
+    }
+    .blog-search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .blog-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 32px auto 44px;
+      max-width: 1200px;
+    }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 9px 18px;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(37,99,235,0.4);
+    }
+    .blog-thumb-wrapper {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .blog-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover .blog-thumb {
+      transform: scale(1.05);
+    }
+    .blog-category-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(8px);
+      color: var(--accent);
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .blog-card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .blog-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.4;
+      margin-bottom: 12px;
+      transition: var(--transition);
+    }
+    .blog-card:hover .blog-card-title {
+      color: var(--primary-light);
+    }
+    .blog-card-excerpt {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      font-size: 0.88rem;
+    }
+    .blog-author-tag {
+      color: var(--text-light);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .read-more-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .no-results-msg {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      display: none;
+    }
+  </style>
+</head>
+<body data-prefix="/" data-depth="0">
+
+  <!-- Header -->
+  <header class="header" id="header" style="min-height: 120px;">
+    <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
+      <div class="top-bar-content">
+        <span class="pulse-dot"></span>
+        <span>Daily Plumbing Guides & Expert Advice &bull; Updated Daily by Master Plumbers</span>
+      </div>
+    </div>
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="logo" style="width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+      </a>
+      <nav class="nav" id="mainNav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/#states" class="nav-link">Areas We Serve</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/blog" class="nav-link active">Blog &amp; Guides <span class="nav-badge-pulse">Daily</span></a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
+        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call 24/7</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Blog Hero -->
+    <section class="blog-hub-hero">
+      <div class="container" style="max-width: 800px; margin: 0 auto;">
+        <div class="blog-badge"><i class="fas fa-newspaper" style="color: var(--accent);"></i> Daily Plumbing Knowledge Base</div>
+        <h1 style="font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 14px; line-height: 1.2;">
+          Daily Plumbing <span style="color: var(--accent);">Guides &amp; Advice</span>
+        </h1>
+        <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.7;">
+          Expert answers, practical maintenance walkthroughs, and emergency procedures published daily by certified plumbers.
+        </p>
+        <div class="blog-search-box">
+          <i class="fas fa-search blog-search-icon"></i>
+          <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search daily guides, clogs, water heaters, freezing pipes..." autocomplete="off">
+        </div>
+      </div>
+    </section>
+
+    <!-- Content & Filters -->
+    <section class="section" style="padding: 40px 0 70px; background: var(--bg-dark);">
+      <div class="container">
+        <!-- Filter Tabs -->
+        <div class="blog-filter-bar">
+          
+    <button class="filter-btn active" data-cat="all">
+      <i class="fas fa-th-large"></i> All Daily Guides
+    </button>
+  
+
+    <button class="filter-btn " data-cat="emergency-fixes">
+      <i class="fas fa-bolt"></i> Emergency Fixes
+    </button>
+  
+
+    <button class="filter-btn " data-cat="toilet-fixes">
+      <i class="fas fa-toilet"></i> Toilet Facts & Fixes
+    </button>
+  
+
+    <button class="filter-btn " data-cat="leak-detection-damage">
+      <i class="fas fa-magnifying-glass"></i> Leak Detection & Water Damage
+    </button>
+  
+
+    <button class="filter-btn " data-cat="remodel-renovation">
+      <i class="fas fa-hammer"></i> Remodel & Renovation Plumbing Ideas
+    </button>
+  
+
+    <button class="filter-btn " data-cat="faucet-fixture-tips">
+      <i class="fas fa-faucet"></i> Faucet & Fixture Tips
+    </button>
+  
+
+    <button class="filter-btn " data-cat="sump-pump-basement">
+      <i class="fas fa-shield-halved"></i> Sump Pump & Basement Protection
+    </button>
+  
+
+    <button class="filter-btn " data-cat="money-saving-tips">
+      <i class="fas fa-piggy-bank"></i> Money-Saving Plumbing Tips
+    </button>
+  
+
+    <button class="filter-btn " data-cat="water-quality-hard-water">
+      <i class="fas fa-filter"></i> Water Quality & Hard Water
+    </button>
+  
+
+    <button class="filter-btn " data-cat="water-heaters">
+      <i class="fas fa-temperature-high"></i> Water Heaters
+    </button>
+  
+
+    <button class="filter-btn " data-cat="drains-sewer">
+      <i class="fas fa-broom"></i> Drains & Sewer
+    </button>
+  
+
+    <button class="filter-btn " data-cat="diy-vs-pro">
+      <i class="fas fa-tools"></i> DIY vs. Pro
+    </button>
+  
+
+    <button class="filter-btn " data-cat="seasonal-maintenance">
+      <i class="fas fa-snowflake"></i> Seasonal Maintenance
+    </button>
+  
+        </div>
+
+        <!-- Blog Cards Grid -->
+        <div class="blog-grid" id="blogGrid">
+          
+    <article class="blog-card" data-category="emergency-fixes" data-keywords="emergency plumbing burst pipe water shutoff home safety how to locate and shut off your main water valve in 60 seconds">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project2-after.webp" alt="How to Locate and Shut Off Your Main Water Valve in 60 Seconds" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Emergency Fixes</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 5, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min read</span>
+          </div>
+          <h2 class="blog-card-title">How to Locate and Shut Off Your Main Water Valve in 60 Seconds</h2>
+          <p class="blog-card-excerpt">A sudden burst pipe can flood your home with 60 gallons of water every minute. Learn how to locate your main shutoff valve and stop the flow immediately before costly structural damage occurs.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Marcus Vance</span>
+          <a href="/blog/how-to-shut-off-main-water-valve/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="toilet-fixes" data-keywords="toilet repair ghost flushing flapper replacement water conservation toilet facts & fixes: stop constant running, ghost flushing & weak flushes">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project1-after.webp" alt="Toilet Facts & Fixes: Stop Constant Running, Ghost Flushing & Weak Flushes" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Toilet Facts & Fixes</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 5, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min read</span>
+          </div>
+          <h2 class="blog-card-title">Toilet Facts & Fixes: Stop Constant Running, Ghost Flushing & Weak Flushes</h2>
+          <p class="blog-card-excerpt">A running toilet wastes up to 200 gallons of water every day. Learn the anatomy of toilet tanks, why ghost flushing happens, and how to replace flappers and fill valves in 15 minutes.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> David Chen</span>
+          <a href="/blog/toilet-facts-and-running-fixes/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="leak-detection-damage" data-keywords="leak detection water damage slab leak pinhole leak leak detection & water damage: how to spot concealed plumbing leaks early">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project2-after.webp" alt="Leak Detection & Water Damage: How to Spot Concealed Plumbing Leaks Early" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Leak Detection & Water Damage</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 4, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">Leak Detection & Water Damage: How to Spot Concealed Plumbing Leaks Early</h2>
+          <p class="blog-card-excerpt">Concealed pinhole leaks inside walls or under slabs can cause thousands in hidden mold and structural wood rot. Learn how to read your water meter and spot early signs.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Marcus Vance</span>
+          <a href="/blog/detect-hidden-water-leaks-damage/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="water-heaters" data-keywords="water heater repair tankless water heater maintenance energy efficiency 5 warning signs your water heater is failing (before it floods your home)">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project1-after.webp" alt="5 Warning Signs Your Water Heater Is Failing (Before It Floods Your Home)" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Water Heaters</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 4, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">5 Warning Signs Your Water Heater Is Failing (Before It Floods Your Home)</h2>
+          <p class="blog-card-excerpt">Water heaters don't last forever. Recognize these 5 subtle indicators—from popping noises to rusty tint—so you can repair or replace your unit before a catastrophic tank rupture.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> David Chen</span>
+          <a href="/blog/warning-signs-water-heater-failing/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="drains-sewer" data-keywords="drain cleaning hydro jetting sewer line repair root intrusion hydro-jetting vs. snaking: which clears clogged drain pipes for good?">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project3-after.webp" alt="Hydro-Jetting vs. Snaking: Which Clears Clogged Drain Pipes for Good?" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Drains & Sewer</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 3, 2026</span>
+            <span><i class="fas fa-clock"></i> 6 min read</span>
+          </div>
+          <h2 class="blog-card-title">Hydro-Jetting vs. Snaking: Which Clears Clogged Drain Pipes for Good?</h2>
+          <p class="blog-card-excerpt">Struggling with repeating drain clogs or gurgling sewer lines? Learn the exact mechanical differences between cable snakes and 4,000 PSI hydro-jetting, and when each method is required.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Marcus Vance</span>
+          <a href="/blog/hydro-jetting-vs-snaking/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="remodel-renovation" data-keywords="remodel plumbing bathroom renovation rough-in rules home value remodel & renovation plumbing ideas: essential rough-in rules & upgrades">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/hero-plumbing.webp" alt="Remodel & Renovation Plumbing Ideas: Essential Rough-In Rules & Upgrades" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Remodel & Renovation Plumbing Ideas</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 3, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">Remodel & Renovation Plumbing Ideas: Essential Rough-In Rules & Upgrades</h2>
+          <p class="blog-card-excerpt">Planning a kitchen or bathroom renovation? Discover vital rough-in plumbing considerations, vent line requirements, curbless shower drainage, and luxury fixtures that add long-term home value.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Sarah Jenkins</span>
+          <a href="/blog/bathroom-remodel-plumbing-ideas/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="faucet-fixture-tips" data-keywords="faucet repair low water pressure aerator cleaning fixtures faucet & fixture tips: how to clear aerator scale & fix low water pressure">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project2-after.webp" alt="Faucet & Fixture Tips: How to Clear Aerator Scale & Fix Low Water Pressure" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Faucet & Fixture Tips</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 2, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min read</span>
+          </div>
+          <h2 class="blog-card-title">Faucet & Fixture Tips: How to Clear Aerator Scale & Fix Low Water Pressure</h2>
+          <p class="blog-card-excerpt">Is your kitchen pull-down sprayer sputtering or bathroom faucet trickling? Learn how mineral scaling chokes aerator screens, and how a simple vinegar soak restores full water volume.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> David Chen</span>
+          <a href="/blog/faucet-fixture-low-pressure-tips/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="sump-pump-basement" data-keywords="sump pump basement waterproofing battery backup flood prevention sump pump & basement protection: why battery backups prevent disasters">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/hero-plumbing-team.webp" alt="Sump Pump & Basement Protection: Why Battery Backups Prevent Disasters" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Sump Pump & Basement Protection</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 2, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">Sump Pump & Basement Protection: Why Battery Backups Prevent Disasters</h2>
+          <p class="blog-card-excerpt">Severe rainstorms that cause basement flooding often knock out municipal electrical power. Learn why a secondary battery backup sump pump is your home's best insurance policy.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Marcus Vance</span>
+          <a href="/blog/sump-pump-failure-basement-protection/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="money-saving-tips" data-keywords="money saving utility bills water conservation eco friendly money-saving plumbing tips: 7 practical ways to slash your water bills by 25%">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/hero-plumbing.webp" alt="Money-Saving Plumbing Tips: 7 Practical Ways to Slash Your Water Bills by 25%" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Money-Saving Plumbing Tips</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Sep 1, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">Money-Saving Plumbing Tips: 7 Practical Ways to Slash Your Water Bills by 25%</h2>
+          <p class="blog-card-excerpt">Rising utility rates eating into your household budget? Implement these 7 easy, high-impact plumbing adjustments to cut water waste and lower energy heating bills immediately.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Sarah Jenkins</span>
+          <a href="/blog/money-saving-home-plumbing-tips/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="water-quality-hard-water" data-keywords="water quality hard water water softener scale buildup water quality & hard water: what mineral scale really does to pipes & fixtures">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/project2-after.webp" alt="Water Quality & Hard Water: What Mineral Scale Really Does to Pipes & Fixtures" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Water Quality & Hard Water</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Aug 31, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">Water Quality & Hard Water: What Mineral Scale Really Does to Pipes & Fixtures</h2>
+          <p class="blog-card-excerpt">Over 85% of American homes have hard water. Learn how dissolved calcium and magnesium choke water flow, destroy appliances, and how whole-house water softeners protect your investment.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> David Chen</span>
+          <a href="/blog/hard-water-effects-on-plumbing/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="diy-vs-pro" data-keywords="diy plumbing home maintenance plumbing safety cost guide diy vs. pro: 4 plumbing fixes you can do yourself (and 3 you should never touch)">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/hero-plumbing.webp" alt="DIY vs. Pro: 4 Plumbing Fixes You Can Do Yourself (and 3 You Should Never Touch)" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">DIY vs Call a Pro</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Aug 30, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          <h2 class="blog-card-title">DIY vs. Pro: 4 Plumbing Fixes You Can Do Yourself (and 3 You Should Never Touch)</h2>
+          <p class="blog-card-excerpt">Tackling your own home repairs can be rewarding and cost-effective—if you know your limits. Discover which plumbing projects are safe for homeowners and which risk water damage or code violations.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Sarah Jenkins</span>
+          <a href="/blog/diy-vs-pro-plumbing-repairs/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+    <article class="blog-card" data-category="seasonal-maintenance" data-keywords="frozen pipes burst pipe repair winter preparation insulation how to protect pipes from freezing and bursting in sudden cold snaps">
+      <div class="blog-thumb-wrapper">
+        <img src="/public/images/hero-plumbing-team.webp" alt="How to Protect Pipes from Freezing and Bursting in Sudden Cold Snaps" class="blog-thumb" loading="lazy">
+        <span class="blog-category-tag">Seasonal Maintenance</span>
+      </div>
+      <div class="blog-card-body">
+        <div>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar-alt"></i> Aug 29, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min read</span>
+          </div>
+          <h2 class="blog-card-title">How to Protect Pipes from Freezing and Bursting in Sudden Cold Snaps</h2>
+          <p class="blog-card-excerpt">When sub-freezing temperatures arrive, uninsulated pipes can freeze and burst within hours. Learn the exact protective protocol used by professional plumbers in cold climate regions.</p>
+        </div>
+        <div class="blog-card-footer">
+          <span class="blog-author-tag"><i class="fas fa-user-check" style="color: var(--primary-light);"></i> Marcus Vance</span>
+          <a href="/blog/prevent-frozen-pipes-winter-guide/" class="read-more-link">Read Guide <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  
+
+          <div class="no-results-msg" id="noResults">
+            <i class="fas fa-search" style="font-size: 2.5rem; color: var(--border-color); margin-bottom: 12px; display: block;"></i>
+            <h3>No articles found matching your criteria.</h3>
+            <p>Try searching for a different keyword or resetting your category filter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Dispatch Banner -->
+    <section class="cta-section" style="padding: 4rem 0; background: var(--gradient-cta); color: #fff; text-align: center;">
+      <div class="container" style="max-width: 760px; margin: 0 auto;">
+        <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Have a Plumbing Emergency That Can't Wait?</h2>
+        <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Don't spend hours troubleshooting when water is actively leaking. Connect with vetted, licensed local plumbers in under 45 minutes.</p>
+        <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" style="background: var(--bg-darker); border-top: 1px solid var(--border-color); padding: 70px 0 30px;">
+    <div class="container">
+      <div class="footer-grid" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 50px;">
+        <div class="footer-about">
+          <a href="/" class="logo footer-logo" style="display: inline-block; margin-bottom: 18px;">
+            <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
+          </a>
+          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Daily Homeowner Plumbing Guides</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Empowering homeowners nationwide with daily preventative advice, troubleshooting guides, and rapid 24/7 licensed plumbing dispatch.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Quick Links</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Home</a>
+            <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Daily Guides</a>
+            <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">All Services</a>
+            <a href="/about" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">About Us</a>
+            <a href="/contact" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Top Services</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Emergency Plumbing</a>
+            <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Burst Pipe Repair</a>
+            <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Water Heater Repair</a>
+            <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Drain Cleaning</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">24/7 Dispatch</div>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">Talk directly with a live dispatch supervisor right now:</p>
+          <a href="tel:877-516-8705" class="btn btn-accent" style="padding: 12px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 8px; font-size: 0.95rem;">
+            <i class="fas fa-phone-alt"></i> (877) 516-8705
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; color: var(--text-muted); font-size: 0.88rem;">
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network.</p>
+        <div style="margin-top: 8px;">
+          <a href="/privacy-policy" style="color: var(--text-muted); margin: 0 8px;">Privacy Policy</a> &bull;
+          <a href="/terms-and-conditions" style="color: var(--text-muted); margin: 0 8px;">Terms &amp; Conditions</a> &bull;
+          <a href="/disclaimer" style="color: var(--text-muted); margin: 0 8px;">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('blogSearch');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.blog-card');
+      const noResults = document.getElementById('noResults');
+
+      let currentCat = 'all';
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('category');
+      if (catParam) {
+        const targetBtn = document.querySelector('.filter-btn[data-cat="' + catParam + '"]');
+        if (targetBtn) {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          targetBtn.classList.add('active');
+          currentCat = catParam;
+        }
+      }
+
+      function filterArticles() {
+        const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          const cardKeywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+          const cardTitle = card.querySelector('.blog-card-title').textContent.toLowerCase();
+          const cardExcerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+
+          const matchesCat = (currentCat === 'all' || cardCat === currentCat);
+          const matchesQuery = !query || cardTitle.includes(query) || cardExcerpt.includes(query) || cardKeywords.includes(query);
+
+          if (matchesCat && matchesQuery) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCat = btn.getAttribute('data-cat');
+          filterArticles();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterArticles);
+      }
+
+      filterArticles();
+    });
+  </script>
+</body>
+</html>
