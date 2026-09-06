@@ -119,6 +119,21 @@ function buildPostHtml(post, allPosts) {
     ]
   };
 
+  if (post.faqs && post.faqs.length > 0) {
+    schemaObj["@graph"].push({
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      "mainEntity": post.faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a
+        }
+      }))
+    });
+  }
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,6 +229,71 @@ ${JSON.stringify(schemaObj, null, 2)}
       border-radius: var(--radius-md);
       margin-bottom: 30px;
       border: 1px solid var(--border-color);
+    }
+    .article-content img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      margin: 20px 0 10px;
+      display: block;
+    }
+    .article-content figure {
+      margin: 28px 0;
+    }
+    .article-content figcaption {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .article-table-wrapper {
+      overflow-x: auto;
+      margin: 28px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+    .article-content table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+    .article-content th {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--text-white);
+      padding: 14px 16px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .article-content td {
+      padding: 14px 16px;
+      color: var(--text-light);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .article-content tr:last-child td {
+      border-bottom: none;
+    }
+    .article-content tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .faq-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .faq-question {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .faq-answer {
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.7;
     }
     .post-tag {
       display: inline-block;
