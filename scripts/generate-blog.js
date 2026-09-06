@@ -277,23 +277,9 @@ ${JSON.stringify(schemaObj, null, 2)}
     .article-content tr:hover td {
       background: rgba(255, 255, 255, 0.02);
     }
-    .faq-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
-      margin-bottom: 16px;
-    }
-    .faq-question {
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .faq-answer {
-      color: var(--text-light);
-      margin: 0;
-      line-height: 1.7;
+    .article-content .faq-container {
+      max-width: 100%;
+      margin: 24px 0 32px;
     }
     .post-tag {
       display: inline-block;
