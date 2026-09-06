@@ -1,5 +1,9 @@
+DirectoryIndex index.html index.php
 RewriteEngine On
 RewriteBase /
+
+# Ensure /blog or /blog/ cleanly serves the blog hub index
+RewriteRule ^blog/?$ blog/index.html [L]
 
 # --- Server-Side 301 Redirect Rules for Clean Canonical Static URLs ---
 

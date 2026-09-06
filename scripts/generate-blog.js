@@ -957,10 +957,13 @@ blogs.forEach(post => {
   console.log(`  [Blog Post] Built /blog/${post.slug}/index.html`);
 });
 
-// Update blog.html hub
+// Update blog.html hub and blog/index.html (prevents 403 Forbidden on /blog/)
 const hubPath = path.join(__dirname, '..', 'blog.html');
 const hubHtml = buildBlogHubHtml(blogs);
 fs.writeFileSync(hubPath, hubHtml, 'utf8');
-console.log(`  [Blog Hub] Updated blog.html successfully with ${CATEGORIES.length} categories and ${blogs.length} cards!`);
+
+const blogDirIndex = path.join(blogRootDir, 'index.html');
+fs.writeFileSync(blogDirIndex, hubHtml, 'utf8');
+console.log(`  [Blog Hub] Updated blog.html and blog/index.html successfully with ${CATEGORIES.length} categories and ${blogs.length} cards!`);
 
 console.log(`\nBlog generation complete! Total ${generatedCount} static post pages generated + blog.html updated.`);
