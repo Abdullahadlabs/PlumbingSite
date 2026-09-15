@@ -39,6 +39,12 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
+function normalizeCanonicalUrl(url) {
+  if (!url) return '';
+  const normalized = url.replace(/(https?:\/\/)|(\/)+/g, (m, proto) => proto || '/');
+  return normalized.endsWith('/') ? normalized : `${normalized}/`;
+}
+
 function getServiceCopy(serviceSlug, cityName, stateCode, stateName, zip) {
   const isAK = stateCode === 'AK';
   const isTX = stateCode === 'TX';
@@ -794,9 +800,10 @@ function buildServicePage(state, cityZip, service, nearbyZips) {
   const serviceSlug = service.slug;
   const serviceName = service.name;
 
-  const pageUrl = `${DOMAIN}/${stateSlug}/${cityZipSlug}/${serviceSlug}/`;
-  const hubUrl = `${DOMAIN}/${stateSlug}/${cityZipSlug}/`;
-  const stateUrl = `${DOMAIN}/state/${stateSlug}/`;
+  const cleanBase = DOMAIN.replace(/\/+$/, '');
+  const pageUrl = normalizeCanonicalUrl(`${cleanBase}/${stateSlug}/${cityZipSlug}/${serviceSlug}/`);
+  const hubUrl = normalizeCanonicalUrl(`${cleanBase}/${stateSlug}/${cityZipSlug}/`);
+  const stateUrl = normalizeCanonicalUrl(`${cleanBase}/state/${stateSlug}/`);
 
   // Strict H1 Matching & Title Tag (<= 60 chars)
   let title = `${serviceName} Services in ${cityName}, ${stateCode} (${zip}) | 24/7`;
@@ -830,14 +837,14 @@ function buildServicePage(state, cityZip, service, nearbyZips) {
   const faqsData = getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, zip);
 
   const otherServicesHtml = SERVICES.filter(s => s.slug !== serviceSlug).map(s => `
-    <a href="/${stateSlug}/${cityZipSlug}/${s.slug}/" class="list-link">
+    <a href="${normalizeCanonicalUrl(`/${stateSlug}/${cityZipSlug}/${s.slug}/`)}" class="list-link">
       <span><i class="fas fa-wrench" style="margin-right: 8px; color: var(--primary);"></i> ${s.name}</span>
       <i class="fas fa-chevron-right"></i>
     </a>
   `).join('\n');
 
   const nearbyHtml = nearbyZips.slice(0, 8).map(nz => `
-    <a href="/${stateSlug}/${nz.slug}/${serviceSlug}/" class="list-link">
+    <a href="${normalizeCanonicalUrl(`/${stateSlug}/${nz.slug}/${serviceSlug}/`)}" class="list-link">
       <span><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--primary);"></i> ${nz.city} (${nz.zip})</span>
       <i class="fas fa-chevron-right"></i>
     </a>
@@ -1151,10 +1158,10 @@ ${JSON.stringify(faqSchemaObj, null, 2)}
         </div>
         <div class="footer-col">
           <div class="footer-title">Emergency Services</div>
-          <a href="/${stateSlug}/${cityZipSlug}/emergency-plumbing/">Emergency Plumbing</a>
-          <a href="/${stateSlug}/${cityZipSlug}/burst-pipe-repair/">Burst Pipe Repair</a>
-          <a href="/${stateSlug}/${cityZipSlug}/water-heater-repair/">Water Heater Repair</a>
-          <a href="/${stateSlug}/${cityZipSlug}/drain-cleaning/">Drain Cleaning</a>
+          <a href="${normalizeCanonicalUrl(`/${stateSlug}/${cityZipSlug}/emergency-plumbing/`)}">Emergency Plumbing</a>
+          <a href="${normalizeCanonicalUrl(`/${stateSlug}/${cityZipSlug}/burst-pipe-repair/`)}">Burst Pipe Repair</a>
+          <a href="${normalizeCanonicalUrl(`/${stateSlug}/${cityZipSlug}/water-heater-repair/`)}">Water Heater Repair</a>
+          <a href="${normalizeCanonicalUrl(`/${stateSlug}/${cityZipSlug}/drain-cleaning/`)}">Drain Cleaning</a>
         </div>
         <div class="footer-col">
           <div class="footer-title">24/7 Dispatch</div>

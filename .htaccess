@@ -1,37 +1,107 @@
+# ======================================================================
+# HOME PLUMBING USA - HIGH-PERFORMANCE APACHE CONFIGURATION
+# Canonical URL Routing, Trailing Slash Normalization & Static Precedence
+# ======================================================================
+
 DirectoryIndex index.html index.php
-RewriteEngine On
-RewriteBase /
+Options -Indexes +FollowSymLinks
 
-# Ensure /blog or /blog/ cleanly serves the blog hub index
-RewriteRule ^blog/?$ blog/index.html [L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
 
-# --- Server-Side 301 Redirect Rules for Clean Canonical Static URLs ---
+  # ----------------------------------------------------------------------
+  # 1. NORMALIZE DUPLICATE SLASHES (//+)
+  # Redirect any request containing consecutive slashes to clean single slash
+  # ----------------------------------------------------------------------
+  # 1A. Handle multiple leading slashes (e.g. //alaska/... -> /alaska/...)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/{2,}([^\s?]*) [NC]
+  RewriteRule ^ /%1 [R=301,L,NE]
 
-# A. Redirect URLs containing spaces, %20, %25 or percent signs in the path
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%25252520|%252520|%2520|%20|%2525|%25|%)(.*)\sHTTP [NC]
-RewriteRule ^ /%1-%2 [R=301,L,NE]
+  # 1B. Handle multiple internal slashes (e.g. /alaska//anchorage -> /alaska/anchorage)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s+([^\s?]*?)/{2,}([^\s?]*) [NC]
+  RewriteRule ^ %1/%2 [R=301,L,NE]
 
-# B. Redirect state or city URLs containing underscores to hyphens
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)_(.*)\sHTTP [NC]
-RewriteRule ^ /%1-%2 [R=301,L,NE]
+  # ----------------------------------------------------------------------
+  # 2. CANONICAL INDEX.HTML STRIPPING
+  # Redirect direct requests for index.html to clean trailing slash or root
+  # ----------------------------------------------------------------------
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.html(?:\s|\?) [NC]
+  RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
-# C. Redirect state or city URLs containing consecutive hyphens to a single hyphen
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)--(.*)\sHTTP [NC]
-RewriteRule ^ /%1-%2 [R=301,L,NE]
+  # ----------------------------------------------------------------------
+  # 3. ENFORCE TRAILING SLASH ON PHYSICAL DIRECTORIES
+  # Automatically 301 redirect directory paths lacking a trailing slash
+  # so Apache resolves index.html natively and relative assets stay intact
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !(.*)/$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
 
-# D. Redirect uppercase state names in state routes (e.g., /state/Alaska -> /state/alaska)
-RewriteCond %{REQUEST_URI} ^/state/alaska$ [NC]
-RewriteCond %{REQUEST_URI} !^/state/alaska$
-RewriteRule ^ /state/alaska [R=301,L]
+  # ----------------------------------------------------------------------
+  # 4. PRIORITIZE PHYSICAL FILES & STATIC HYPER-LOCAL DIRECTORIES
+  # If an exact static folder, index.html, or file exists, serve it directly
+  # and terminate rewrite processing immediately.
+  # ----------------------------------------------------------------------
+  # Static asset alias: /images/* -> public/images/*
+  RewriteRule ^images/(.*)$ public/images/$1 [L]
 
-RewriteCond %{REQUEST_URI} ^/state/texas$ [NC]
-RewriteCond %{REQUEST_URI} !^/state/texas$
-RewriteRule ^ /state/texas [R=301,L]
+  # Static blog hub handler
+  RewriteRule ^blog/?$ blog/index.html [L]
 
-RewriteCond %{REQUEST_URI} ^/state/florida$ [NC]
-RewriteCond %{REQUEST_URI} !^/state/florida$
-RewriteRule ^ /state/florida [R=301,L]
+  # Direct serving: existing physical files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
+  # Hyper-Local Static Routes (Explicit direct serving fallback)
+  RewriteCond %{DOCUMENT_ROOT}/$1/$2/$3/index.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.html [L]
+
+  RewriteCond %{DOCUMENT_ROOT}/$1/$2/index.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.html [L]
+
+  # ----------------------------------------------------------------------
+  # 5. URL PATH HYGIENE (SPACES, UNDERSCORES, HYPHENS, STATES)
+  # ----------------------------------------------------------------------
+  # Normalize spaces, %20, %25 to hyphens
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)(?:\s|%25252520|%252520|%2520|%20|%2525|%25|%)(.*)\sHTTP [NC]
+  RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+  # Normalize underscores to hyphens
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)_(.*)\sHTTP [NC]
+  RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+  # Normalize consecutive hyphens to a single hyphen
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*)--(.*)\sHTTP [NC]
+  RewriteRule ^ /%1-%2 [R=301,L,NE]
+
+  # Redirect bare state directories to state hubs
+  RewriteRule ^(?:alaska|texas|florida)/?$ /state/$0/ [R=301,L,NC]
+
+  # Normalize uppercase state names in state routes (e.g., /state/Alaska -> /state/alaska/)
+  RewriteCond %{REQUEST_URI} ^/state/alaska/?$ [NC]
+  RewriteCond %{REQUEST_URI} !^/state/alaska/$
+  RewriteRule ^ /state/alaska/ [R=301,L]
+
+  RewriteCond %{REQUEST_URI} ^/state/texas/?$ [NC]
+  RewriteCond %{REQUEST_URI} !^/state/texas/$
+  RewriteRule ^ /state/texas/ [R=301,L]
+
+  RewriteCond %{REQUEST_URI} ^/state/florida/?$ [NC]
+  RewriteCond %{REQUEST_URI} !^/state/florida/$
+  RewriteRule ^ /state/florida/ [R=301,L]
+
+  # Remove .html extension globally from page requests (e.g. /about.html -> /about)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html(?:\s|\?) [NC]
+  RewriteRule ^ %1 [R=301,L]
+
+  # ----------------------------------------------------------------------
+  # 6. LEGACY DYNAMIC QUERY PARAMETER 301 REDIRECTS
+  # Map legacy query strings to static canonical hyper-local folders
+  # ----------------------------------------------------------------------
 # --- 1. Query-Parameter Disabling: Redirect Query URLs to Physical Static Folders ---
 
 # 1A. Alaska: /services/{service}?city={city}&state=ak&zip={zip} -> /alaska/{city}-{zip}/{canonical-service}/
@@ -230,55 +300,44 @@ RewriteRule ^service-areas/ak-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /alaska/$1-$2/ [R=30
 RewriteRule ^service-areas/tx-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /texas/$1-$2/ [R=301,L,NE]
 RewriteRule ^service-areas/fl-([^-]+(?:-[^-]+)*)-(\d{5})/?$ /florida/$1-$2/ [R=301,L,NE]
 
-# --- 2. Static Asset and Core Routing ---
 
-# Rewrite /images/* requests to public/images/*
-RewriteRule ^images/(.*)$ public/images/$1 [L]
+  # ----------------------------------------------------------------------
+  # 7. STATE ROUTES
+  # ----------------------------------------------------------------------
+  # A. Serve static pre-rendered state page if available (state/<slug>/index.html)
+  RewriteCond %{DOCUMENT_ROOT}/state/$1/index.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^state/([^/]+)/?$ state/$1/index.html [L]
 
-# Remove .html extension globally
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
-RewriteRule ^ %1 [R=301,L]
+  # B. Serve static html file if available (state/<slug>.html)
+  RewriteCond %{DOCUMENT_ROOT}/state/$1.html -f
+  RewriteRule ^state/([^/]+)/?$ state/$1.html [L]
 
-# --- 3. Hyper-Local Physical Static Routes (Direct Serving) ---
+  # C. Route to state.html
+  RewriteRule ^state/([^/]+)/?$ state.html [L]
 
-# 3A. Hyper-Local Static Service Pages (e.g., /alaska/anchorage-99507/drain-cleaning/)
-RewriteCond %{DOCUMENT_ROOT}/$1/$2/$3/index.html -f
-RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ $1/$2/$3/index.html [L]
+  # ----------------------------------------------------------------------
+  # 8. CLEAN SERVICE ROUTES
+  # ----------------------------------------------------------------------
+  # A. Serve static pre-rendered service page if available (services/<slug>/index.html)
+  RewriteCond %{DOCUMENT_ROOT}/services/$1/index.html -f [OR]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^services/([^/]+)/?$ services/$1/index.html [L]
 
-# 3B. Hyper-Local City-ZIP Hub Pages (e.g., /alaska/anchorage-99507/)
-RewriteCond %{DOCUMENT_ROOT}/$1/$2/index.html -f
-RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2/index.html [L]
+  # B. Serve static html file if available (services/<slug>.html)
+  RewriteCond %{DOCUMENT_ROOT}/services/$1.html -f
+  RewriteRule ^services/([^/]+)/?$ services/$1.html [L]
 
-# --- 4. State Routes ---
+  # C. Route to service-detail.html
+  RewriteRule ^services/([^/]+)/?$ service-detail.html [L]
 
-# A. Serve static pre-rendered state page if available (state/<slug>/index.html)
-RewriteCond %{DOCUMENT_ROOT}/state/$1/index.html -f
-RewriteRule ^state/([^/]+)/?$ state/$1/index.html [L]
-
-# B. Serve static html file if available (state/<slug>.html)
-RewriteCond %{DOCUMENT_ROOT}/state/$1.html -f
-RewriteRule ^state/([^/]+)/?$ state/$1.html [L]
-
-# C. Route to state.html
-RewriteRule ^state/([^/]+)/?$ state.html [L]
-
-# --- 5. Clean Service Routes ---
-
-# A. Serve static pre-rendered service page if available (services/<slug>/index.html)
-RewriteCond %{DOCUMENT_ROOT}/services/$1/index.html -f
-RewriteRule ^services/([^/]+)/?$ services/$1/index.html [L]
-
-# B. Serve static html file if available (services/<slug>.html)
-RewriteCond %{DOCUMENT_ROOT}/services/$1.html -f
-RewriteRule ^services/([^/]+)/?$ services/$1.html [L]
-
-# C. Route to service-detail.html
-RewriteRule ^services/([^/]+)/?$ service-detail.html [L]
-
-# --- 6. Fallback to check if actual file exists without extension ---
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ $1.html [L]
+  # ----------------------------------------------------------------------
+  # 9. ROOT STATIC PAGE RESOLUTION (Extensionless .html fallback)
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
 
 # --- Core Web Vitals Optimization: Gzip Compression & Cache Control ---
 <IfModule mod_deflate.c>

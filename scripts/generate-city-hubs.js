@@ -47,6 +47,12 @@ function capitalize(str) {
     .join(' ');
 }
 
+function normalizeCanonicalUrl(url) {
+  if (!url) return '';
+  const normalized = url.replace(/(https?:\/\/)|(\/)+/g, (m, proto) => proto || '/');
+  return normalized.endsWith('/') ? normalized : `${normalized}/`;
+}
+
 function buildCityZipHub(state, cityZip, nearbyZips) {
   const stateSlug = state.slug;
   const stateName = state.name;
@@ -55,8 +61,9 @@ function buildCityZipHub(state, cityZip, nearbyZips) {
   const zip = cityZip.zip;
   const cityZipSlug = cityZip.folder_name || `${slugify(cityName)}-${zip}`;
 
-  const pageUrl = `${DOMAIN}/${stateSlug}/${cityZipSlug}/`;
-  const stateUrl = `${DOMAIN}/state/${stateSlug}/`;
+  const cleanBase = DOMAIN.replace(/\/+$/, '');
+  const pageUrl = normalizeCanonicalUrl(`${cleanBase}/${stateSlug}/${cityZipSlug}/`);
+  const stateUrl = normalizeCanonicalUrl(`${cleanBase}/state/${stateSlug}/`);
 
   // 1. Meta Tags
   const title = `Plumbers in ${cityName}, ${stateCode} ${zip} | 24/7 Emergency Plumbing`;

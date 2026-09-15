@@ -60,7 +60,7 @@ function main() {
 
     // State main page
     urls.push({
-      loc: `${DOMAIN}/state/${stateSlug}`,
+      loc: `${DOMAIN}/state/${stateSlug}/`,
       changefreq: 'weekly',
       priority: '0.9'
     });

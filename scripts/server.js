@@ -21,7 +21,18 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let reqUrl = decodeURI(req.url.split('?')[0]);
+  let rawUrl = req.url.split('?')[0];
+  let query = req.url.includes('?') ? '?' + req.url.split('?')[1] : '';
+
+  // 1. Normalize duplicate slashes (e.g. //alaska/... -> /alaska/...)
+  if (rawUrl.match(/\/{2,}/)) {
+    const cleanUrl = rawUrl.replace(/\/+/g, '/') + query;
+    res.writeHead(301, { 'Location': cleanUrl });
+    res.end();
+    return;
+  }
+
+  let reqUrl = decodeURI(rawUrl);
   let filePath = path.join(ROOT, reqUrl);
 
   // Security check: ensure within ROOT
@@ -31,8 +42,13 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // If directory, look for index.html
+  // 2. Enforce trailing slash on directories
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    if (!reqUrl.endsWith('/')) {
+      res.writeHead(301, { 'Location': reqUrl + '/' + query });
+      res.end();
+      return;
+    }
     filePath = path.join(filePath, 'index.html');
   } else if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
     filePath = filePath + '.html';
