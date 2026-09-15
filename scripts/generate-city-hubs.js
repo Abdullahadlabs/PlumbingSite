@@ -87,7 +87,7 @@ function buildCityZipHub(state, cityZip, nearbyZips) {
     }
 
     return `
-      <div class="service-card animate-on-scroll" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
             <i class="fas ${icon}"></i>
@@ -577,7 +577,10 @@ ${JSON.stringify(schemaObj, null, 2)}
           <!-- Case Study 1 -->
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
-              <img src="/public/images/project1-after.webp" alt="Water heater replacement in ${cityName}" style="width: 100%; height: 100%; object-fit: cover;">
+              <picture>
+                <source srcset="/public/images/project1-after.webp" type="image/webp">
+                <img src="/public/images/project1-after.png" alt="Water heater replacement in ${cityName}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project1-after.png';">
+              </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
@@ -594,7 +597,10 @@ ${JSON.stringify(schemaObj, null, 2)}
           <!-- Case Study 2 -->
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
-              <img src="/public/images/project2-after.webp" alt="Slab leak detection in ${cityName}" style="width: 100%; height: 100%; object-fit: cover;">
+              <picture>
+                <source srcset="/public/images/project2-after.webp" type="image/webp">
+                <img src="/public/images/project2-after.png" alt="Slab leak detection in ${cityName}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project2-after.png';">
+              </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
@@ -611,7 +617,10 @@ ${JSON.stringify(schemaObj, null, 2)}
           <!-- Case Study 3 -->
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
-              <img src="/public/images/project3-after.webp" alt="Drainage refit in ${cityName}" style="width: 100%; height: 100%; object-fit: cover;">
+              <picture>
+                <source srcset="/public/images/project3-after.webp" type="image/webp">
+                <img src="/public/images/project3-after.png" alt="Drainage refit in ${cityName}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project3-after.png';">
+              </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
