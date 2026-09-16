@@ -111,26 +111,30 @@ function buildCityZipHub(state, cityZip, nearbyZips) {
     `;
   }).join('\n');
 
-  // 3. Nearby Areas Generation
+  // 3. Nearby Areas Generation (Guarantee 20 unique cities)
   let coverageList = [];
-  if (cityZip.nearby_areas && Array.isArray(cityZip.nearby_areas) && cityZip.nearby_areas.length > 0) {
-    coverageList = cityZip.nearby_areas.slice(0, 10).map(area => {
+  const seenZips = new Set([zip]);
+  if (cityZip.nearby_areas && Array.isArray(cityZip.nearby_areas)) {
+    cityZip.nearby_areas.forEach(area => {
       const areaCity = area.city || capitalize(area.slug.replace(/^(fl|ak|tx)-/, '').replace(/-\d{5}$/, '').replace(/-/g, ' '));
       const areaZip = area.zip || area.slug.split('-').pop();
       const areaSlug = `${slugify(areaCity)}-${areaZip}`;
-      return {
-        city: areaCity,
-        zip: areaZip,
-        slug: areaSlug
-      };
+      if (!seenZips.has(areaZip)) {
+        seenZips.add(areaZip);
+        coverageList.push({ city: areaCity, zip: areaZip, slug: areaSlug });
+      }
     });
-  } else {
-    coverageList = nearbyZips.slice(0, 10).map(nz => ({
-      city: nz.city,
-      zip: nz.zip,
-      slug: nz.slug
-    }));
   }
+  if (coverageList.length < 20 && Array.isArray(nearbyZips)) {
+    for (const nz of nearbyZips) {
+      if (!seenZips.has(nz.zip)) {
+        seenZips.add(nz.zip);
+        coverageList.push({ city: nz.city, zip: nz.zip, slug: nz.slug });
+        if (coverageList.length >= 20) break;
+      }
+    }
+  }
+  coverageList = coverageList.slice(0, 20);
 
   const nearbyHtml = coverageList.map(nz => `
     <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
@@ -347,6 +351,18 @@ ${JSON.stringify(schemaObj, null, 2)}
       .trust-grid { grid-template-columns: 1fr !important; }
       .hero h1 { font-size: 2.15rem !important; }
     }
+
+    /* Ensure service cards & animated elements are always 100% visible */
+    .service-card, .featured-service-card {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+    .animate-on-scroll {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
   </style>
   <link rel="icon" type="image/png" href="/public/images/favicon.png">
 </head>
@@ -465,7 +481,176 @@ ${JSON.stringify(schemaObj, null, 2)}
       </div>
     </section>
 
-    <!-- 3. ABOUT SECTION (LOCAL AUTHORITY) -->
+    <!-- 3. TOP FEATURED SERVICES (HIGH-CONVERTING SPOTLIGHT) -->
+    <section class="featured-services-section" style="padding: 5rem 0; background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-title text-center" style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem;">
+          <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Priority Solutions</div>
+          <h2 style="font-size: 2.2rem; color: #fff;">Top Featured Plumbing Services in ${cityName}, ${stateCode}</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">Direct dispatch and premier residential solutions engineered specifically for ${cityName} (${zip}) households and businesses.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+          <!-- Featured 1 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              24/7 Rapid Callout
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">24/7 Emergency Plumbing Dispatch</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Under 45-minute urgent response across ${cityName} for catastrophic pipe fractures, sewage overflows, and hot water heater ruptures. Fully stocked mobile vans arrive ready to stabilize your property.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-clock" style="color: var(--primary-light); margin-right: 5px;"></i> &lt; 45 Min Arrival</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-file-invoice" style="color: var(--primary-light); margin-right: 5px;"></i> Flat-Rate Quoting</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/emergency-plumbing/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Featured 2 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              Energy Efficient
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-fire-flame-curved"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Tankless &amp; Hybrid Water Heaters</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Replace mineral-encrusted water tanks with continuous-flow tankless or high-recovery hybrid heaters tailored for ${cityName}'s hard groundwater. Includes expansion tanks, relief valves, and electrical/gas hookup to code.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-droplet" style="color: var(--primary-light); margin-right: 5px;"></i> Continuous Hot Water</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-shield" style="color: var(--primary-light); margin-right: 5px;"></i> Scale Resistant</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/water-heater-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Featured 3 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              Deep Clean
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-broom"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Hydro-Jetting &amp; Root Removal</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Scour grease, heavy sediment, and invasive tree roots from main sewer channels with 4,000 PSI high-velocity water jetting. Restores full interior pipe diameter without corrosive, pipe-eating chemicals.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-gauge-high" style="color: var(--primary-light); margin-right: 5px;"></i> 4,000 PSI Output</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-tree" style="color: var(--primary-light); margin-right: 5px;"></i> Root Slicing</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/drain-cleaning/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Featured 4 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              Zero Destruction
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-satellite-dish"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Electronic Slab Leak Detection</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Pinpoint pressurized water leaks hidden under ${cityName} concrete slabs using ultrasonic acoustic listening discs and forward-looking infrared (FLIR) thermal scanners. Eliminates floor destruction and guesswork.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-crosshairs" style="color: var(--primary-light); margin-right: 5px;"></i> Sub-Inch Accuracy</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-hammer" style="color: var(--primary-light); margin-right: 5px;"></i> No Tile Damage</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/leak-detection/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Featured 5 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              Trenchless Tech
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-screwdriver-wrench"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Sewer Line Repair &amp; Camera Scans</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Evaluate failing lateral lines with HD fiber-optic camera snakes. We carry out spot repairs, trenchless pipe bursting, and heavy-duty schedule 40 PVC replacements that safeguard lawns and landscaping.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-video" style="color: var(--primary-light); margin-right: 5px;"></i> HD Video Inspection</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-seedling" style="color: var(--primary-light); margin-right: 5px;"></i> Yard Preservation</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/sewer-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Featured 6 -->
+          <div class="featured-service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div style="position: absolute; top: 12px; right: 12px; background: rgba(234, 88, 12, 0.15); color: #fb923c; border: 1px solid rgba(234,88,12,0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+              Safety Certified
+            </div>
+            <div>
+              <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 18px;">
+                <i class="fas fa-fire"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Gas Line Repair &amp; Piping</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Certified natural gas and LP propane pipe installation, valve refits, and emergency leak shut-offs. We use electronic combustible sniffers and pressure decay testing to guarantee code compliance and property safety.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-shield-halved" style="color: var(--primary-light); margin-right: 5px;"></i> 100% Airtight Test</span>
+                <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-stamp" style="color: var(--primary-light); margin-right: 5px;"></i> Municipal Code Signoff</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
+              <a href="/${stateSlug}/${cityZipSlug}/gas-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+                Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+              </a>
+              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ABOUT SECTION (LOCAL AUTHORITY) -->
     <section class="about-section" style="padding: 5rem 0; background: var(--bg-dark);">
       <div class="container">
         <div style="max-width: 860px; margin: 0 auto; text-align: center;">
@@ -662,13 +847,141 @@ ${JSON.stringify(schemaObj, null, 2)}
       </div>
     </section>
 
-    <!-- 8. COVERAGE AREAS -->
-    <section class="section" id="areas" style="padding: 5rem 0; background: var(--bg-surface);">
+    <!-- 8. MAINTENANCE TIPS SECTION (SEO OPTIMIZED) -->
+    <section class="maintenance-tips-section" id="maintenance-tips" style="padding: 5rem 0; background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-title text-center" style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem;">
+          <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Preventative Care &amp; Longevity</div>
+          <h2 style="font-size: 2.2rem; color: #fff;">Seasonal Plumbing Maintenance Tips for ${cityName}, ${stateCode}</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">${stateName}'s high-mineral groundwater, seasonal storms, and sandy subsoils demand proactive maintenance. Follow these licensed plumber recommendations to extend fixture life and prevent emergency pipe disasters.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+          <!-- Tip 1 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(37,99,235,0.15); color: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-filter"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #60a5fa; background: rgba(59,130,246,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(59,130,246,0.2);">Semi-Annual</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">1. Hard Water Descaling &amp; Tank Flushing</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">${cityName}'s groundwater carries high concentrations of dissolved limestone and magnesium. Drain and flush 3–5 gallons from your water heater tank every 6 months to remove hardened calcification, preserving heating efficiency and stopping lower element burnout.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Prevents rumbling noises &amp; lowers electric draw</span>
+            </div>
+          </div>
+
+          <!-- Tip 2 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(16,185,129,0.15); color: #34d399; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-cloud-showers-heavy"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #34d399; background: rgba(16,185,129,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(16,185,129,0.2);">Pre-Storm</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">2. Sewer Cleanout &amp; Downspout Isolation</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">During ${stateName}'s rainy season, groundwater saturates sandy soil. Inspect outside PVC sewer cleanout caps to ensure they are airtight and uncracked. Route roof gutter downspouts at least 10 feet away from buried lateral lines and septic drain fields.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Prevents toilet and shower drain sewage backflow</span>
+            </div>
+          </div>
+
+          <!-- Tip 3 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(245,158,11,0.15); color: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-faucet-drip"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #fbbf24; background: rgba(245,158,11,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(245,158,11,0.2);">Every 6 Months</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">3. Main Water Shutoff Valve Exercise</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">In an unexpected burst pipe emergency, every second counts. Locate your home's main water cutoff valve (typically near the front hose bib or street water meter box) and cycle it fully clockwise and counter-clockwise twice yearly to prevent internal gate freeze-up.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Ensures 100% immediate emergency shut-off control</span>
+            </div>
+          </div>
+
+          <!-- Tip 4 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(168,85,247,0.15); color: #c084fc; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-tree"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #c084fc; background: rgba(168,85,247,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(168,85,247,0.2);">Biennial Scan</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">4. Tree Root Prevention &amp; Camera Scans</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">${cityName}'s regional trees and shrubbery vigorously hunt underground moisture during dry spells. If toilets gurgle or drains empty with hesitation, request an optical sewer camera inspection to locate root intrusion before roots crack schedule 40 pipe joints.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Avoids thousands in emergency yard trenching repairs</span>
+            </div>
+          </div>
+
+          <!-- Tip 5 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(239,68,68,0.15); color: #f87171; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-gauge"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #f87171; background: rgba(239,68,68,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(239,68,68,0.2);">Quarterly Test</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">5. Household Water Pressure Testing</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">Water pressure exceeding 75 PSI stresses copper joints, toilet valves, and flex hoses on washing machines. Screw a simple pressure gauge onto an exterior hose bib. If pressure spikes above 80 PSI, have a pressure reducing valve (PRV) installed to local plumbing code.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Prevents catastrophic high-pressure supply line blowouts</span>
+            </div>
+          </div>
+
+          <!-- Tip 6 -->
+          <div class="tip-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); transition: var(--transition);">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(6,182,212,0.15); color: #22d3ee; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                  <i class="fas fa-magnifying-glass-chart"></i>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #22d3ee; background: rgba(6,182,212,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(6,182,212,0.2);">Monthly Audit</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">6. Concrete Slab Leak Indicator Audits</h3>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">Shut off all water fixtures indoors. Check your water meter's low-flow leak detection triangle or digital sweep hand. If it rotates while all faucets remain off, pressurized water is escaping beneath your concrete foundation, requiring non-invasive acoustic tracing immediately.</p>
+            </div>
+            <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+              <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Halts hidden structural erosion before foundation cracks</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pro-Tip Consultation Banner -->
+        <div style="background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px 32px; margin-top: 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: var(--shadow-md);">
+          <div style="max-width: 620px;">
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 6px;">Need a Comprehensive Plumbing Audit in ${cityName}?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our certified ${stateName} technicians conduct whole-house water pressure testing, hard water mineral analysis, and thermal camera leak inspections.</p>
+          </div>
+          <div>
+            <a href="tel:877-516-8705" class="btn btn-secondary" style="background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+              <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. COVERAGE AREAS (20 NEARBY CITIES) -->
+    <section class="section" id="areas" style="padding: 5rem 0; background: var(--bg-dark);">
       <div class="container">
         <div class="section-header" style="text-align: center; margin-bottom: 40px;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Coverage Network</div>
-          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Plumbing Service Coverage Areas</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our technicians provide emergency repairs and scheduled plumbing services across ${stateName} and neighboring communities.</p>
+          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Plumbing Service Coverage Areas (20 Nearby Cities)</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our technicians provide emergency repairs, drain clearing, and scheduled plumbing services across ${cityName} and neighboring ${stateName} communities.</p>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
           ${nearbyHtml}
@@ -856,6 +1169,11 @@ ${JSON.stringify(schemaObj, null, 2)}
           nav.classList.toggle('active');
         });
       }
+
+      // Ensure all cards and animated elements are immediately visible
+      document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+        el.classList.add('visible');
+      });
     });
   </script>
 </body>
