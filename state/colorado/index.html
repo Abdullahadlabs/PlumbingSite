@@ -28,33 +28,29 @@
       let cleanPath = currentPath;
       let needsRedirect = false;
 
-      const parts = currentPath.split('/');
-      const cityIdx = parts.indexOf('city');
-      const stateIdx = parts.indexOf('state');
+      const nonEmpties = currentPath.split('/').filter(Boolean);
+      const cityIdx = nonEmpties.indexOf('city');
+      const stateIdx = nonEmpties.indexOf('state');
 
-      if (cityIdx !== -1 && cityIdx + 3 < parts.length) {
-        const statePart = parts[cityIdx + 1];
-        const cityPart = parts[cityIdx + 2];
-        const zipPart = parts[cityIdx + 3];
+      if (cityIdx !== -1 && cityIdx + 3 < nonEmpties.length) {
+        const statePart = nonEmpties[cityIdx + 1];
+        const cityPart = nonEmpties[cityIdx + 2];
+        const zipPart = nonEmpties[cityIdx + 3];
         const cleanState = slugify(statePart);
         const cleanCity = slugify(cityPart);
         const cleanZip = zipPart.replace(/[^0-9]/g, '');
 
-        if (statePart !== cleanState || cityPart !== cleanCity || zipPart !== cleanZip || parts.length > cityIdx + 4 || (parts.length === cityIdx + 4 && currentPath.endsWith('/'))) {
+        if (statePart !== cleanState || cityPart !== cleanCity || zipPart !== cleanZip || nonEmpties.length > cityIdx + 4 || !currentPath.endsWith('/')) {
           needsRedirect = true;
-          parts[cityIdx + 1] = cleanState;
-          parts[cityIdx + 2] = cleanCity;
-          parts[cityIdx + 3] = cleanZip;
-          cleanPath = parts.slice(0, cityIdx + 4).join('/');
+          cleanPath = `/city/${cleanState}/${cleanCity}/${cleanZip}/`;
         }
-      } else if (stateIdx !== -1 && stateIdx + 1 < parts.length) {
-        const statePart = parts[stateIdx + 1];
+      } else if (stateIdx !== -1 && stateIdx + 1 < nonEmpties.length) {
+        const statePart = nonEmpties[stateIdx + 1];
         const cleanState = slugify(statePart);
 
-        if (statePart !== cleanState || parts.length > stateIdx + 2 || (parts.length === stateIdx + 2 && currentPath.endsWith('/'))) {
+        if (statePart !== cleanState || nonEmpties.length > stateIdx + 2 || !currentPath.endsWith('/')) {
           needsRedirect = true;
-          parts[stateIdx + 1] = cleanState;
-          cleanPath = parts.slice(0, stateIdx + 2).join('/');
+          cleanPath = `/state/${cleanState}/`;
         }
       }
 
@@ -121,8 +117,8 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Home Plumbing USA">
   <meta name="publisher" content="Home Plumbing USA">
-  <title>24/7 Plumbers in Colorado | Emergency Plumbing Services</title>
-  <meta name="description" content="Looking for emergency plumbers in Colorado? Home Plumbing USA matches you with vetted local specialists for 24/7 fast pipe & leak repairs. Call 877-516-8705!">
+  <title>24/7 Colorado Plumber – Licensed Pro Referral Network</title>
+  <meta name="description" content="Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!">
   <meta name="keywords" content="plumbers in Colorado, emergency plumbing Colorado, 24/7 local plumber Colorado, Colorado plumbing experts, water heater repair Colorado, affordable plumber Colorado, licensed plumbers CO">
   <script>
     (function() {
@@ -431,15 +427,15 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://homeplumbingusa.com/state/colorado/">
-  <meta property="og:title" content="24/7 Plumbers in Colorado | Emergency Plumbing Services">
-  <meta property="og:description" content="Looking for emergency plumbers in Colorado? Home Plumbing USA matches you with vetted local specialists for 24/7 fast pipe & leak repairs. Call 877-516-8705!">
+  <meta property="og:title" content="24/7 Colorado Plumber – Licensed Pro Referral Network">
+  <meta property="og:description" content="Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!">
   <meta property="og:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://homeplumbingusa.com/state/colorado/">
-  <meta name="twitter:title" content="24/7 Plumbers in Colorado | Emergency Plumbing Services">
-  <meta name="twitter:description" content="Looking for emergency plumbers in Colorado? Home Plumbing USA matches you with vetted local specialists for 24/7 fast pipe & leak repairs. Call 877-516-8705!">
+  <meta name="twitter:title" content="24/7 Colorado Plumber – Licensed Pro Referral Network">
+  <meta name="twitter:description" content="Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!">
   <meta name="twitter:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
   <script type="application/ld+json">
 {
@@ -800,15 +796,65 @@
           <p class="section-desc">We dispatch plumbers to communities throughout the state. Select your city below to view available service options and technicians.</p>
         </div>
         <div class="areas-grid" id="areas-grid">
-          <div class="no-providers-container" style="text-align: center; padding: 50px 30px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 600px; margin: 0 auto; grid-column: 1 / -1;">
-            <i class="fas fa-exclamation-circle" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px; display: block;"></i>
-            <h3 style="color: var(--text-white); margin-bottom: 12px; font-size: 1.5rem;">No Local Providers Found Yet</h3>
-            <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; line-height: 1.6;">We are currently expanding our network of vetted plumbers in Colorado. Enter your email below to be notified as soon as local plumbing technicians become active in your region.</p>
-            <form onsubmit="event.preventDefault(); alert('Thank you! We will notify you when coverage becomes active in Colorado.'); this.reset();" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
-              <input type="email" placeholder="Enter your email" style="padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-white); font-size: 0.95rem;" required>
-              <button type="submit" class="btn btn-accent" style="padding: 12px; font-weight: 600; cursor: pointer; border: none; border-radius: var(--radius-sm);">Notify Me</button>
-            </form>
-          </div>
+          <a href="/colorado/lakewood-80123/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80123</div>
+          </a>
+
+          <a href="/colorado/lakewood-80214/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80214</div>
+          </a>
+
+          <a href="/colorado/lakewood-80215/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80215</div>
+          </a>
+
+          <a href="/colorado/lakewood-80226/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80226</div>
+          </a>
+
+          <a href="/colorado/lakewood-80227/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80227</div>
+          </a>
+
+          <a href="/colorado/lakewood-80228/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80228</div>
+          </a>
+
+          <a href="/colorado/lakewood-80232/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80232</div>
+          </a>
+
+          <a href="/colorado/lakewood-80235/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80235</div>
+          </a>
+
+          <a href="/colorado/lakewood-80236/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80236</div>
+          </a>
+
+          <a href="/colorado/lakewood-80401/" class="area-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="area-title">Lakewood</span>
+            <div class="area-zip">80401</div>
+          </a>
         </div>
       </div>
     </section>
@@ -1013,6 +1059,11 @@
 
         const gridEl = document.getElementById('areas-grid');
         if (gridEl) {
+          // If the page already contains pre-rendered area cards, preserve them
+          if (gridEl.querySelector('.area-card')) {
+            return;
+          }
+
           // Render loading indicator
           gridEl.innerHTML = `
             <div class="loading-container" style="text-align: center; padding: 50px 30px; width: 100%; grid-column: 1 / -1;">

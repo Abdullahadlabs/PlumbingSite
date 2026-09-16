@@ -74,11 +74,12 @@ function slugify(text) {
 function buildAllStateCitiesIndex() {
   const stateIndex = new Map();
 
-  // 1. Index physical static state directories first (alaska, texas, florida)
+  // 1. Index physical static state directories first (alaska, texas, florida, colorado)
   const physicalStates = [
     { code: 'AK', slug: 'alaska' },
     { code: 'TX', slug: 'texas' },
-    { code: 'FL', slug: 'florida' }
+    { code: 'FL', slug: 'florida' },
+    { code: 'CO', slug: 'colorado' }
   ];
   physicalStates.forEach(stObj => {
     const stDir = path.join(__dirname, '..', stObj.slug);
@@ -116,7 +117,7 @@ function buildAllStateCitiesIndex() {
       console.log('Loading database/seo-pages.json for city index...');
       const seoData = JSON.parse(fs.readFileSync(seoPagesPath, 'utf8'));
       if (Array.isArray(seoData)) {
-        const stateSlugMap = { 'AK': 'alaska', 'TX': 'texas', 'FL': 'florida' };
+        const stateSlugMap = { 'AK': 'alaska', 'TX': 'texas', 'FL': 'florida', 'CO': 'colorado' };
         seoData.forEach(item => {
           if (item.state && item.city) {
             const st = item.state.toUpperCase();
@@ -188,6 +189,10 @@ function generateStateMetaDescription(stateName, stateCode) {
 }
 
 const CUSTOM_STATE_SEO = {
+  'colorado': {
+    title: '24/7 Colorado Plumber – Licensed Pro Referral Network',
+    metaDesc: 'Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!'
+  },
   'georgia': {
     title: 'Georgia Emergency Plumbers – Licensed & Local | Home Plumbing USA',
     metaDesc: 'Emergency plumber in Georgia? Home Plumbing USA connects you with licensed, vetted local pros for 24/7 repairs. Get a free quote — call now.'

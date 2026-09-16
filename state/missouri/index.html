@@ -28,33 +28,29 @@
       let cleanPath = currentPath;
       let needsRedirect = false;
 
-      const parts = currentPath.split('/');
-      const cityIdx = parts.indexOf('city');
-      const stateIdx = parts.indexOf('state');
+      const nonEmpties = currentPath.split('/').filter(Boolean);
+      const cityIdx = nonEmpties.indexOf('city');
+      const stateIdx = nonEmpties.indexOf('state');
 
-      if (cityIdx !== -1 && cityIdx + 3 < parts.length) {
-        const statePart = parts[cityIdx + 1];
-        const cityPart = parts[cityIdx + 2];
-        const zipPart = parts[cityIdx + 3];
+      if (cityIdx !== -1 && cityIdx + 3 < nonEmpties.length) {
+        const statePart = nonEmpties[cityIdx + 1];
+        const cityPart = nonEmpties[cityIdx + 2];
+        const zipPart = nonEmpties[cityIdx + 3];
         const cleanState = slugify(statePart);
         const cleanCity = slugify(cityPart);
         const cleanZip = zipPart.replace(/[^0-9]/g, '');
 
-        if (statePart !== cleanState || cityPart !== cleanCity || zipPart !== cleanZip || parts.length > cityIdx + 4 || (parts.length === cityIdx + 4 && currentPath.endsWith('/'))) {
+        if (statePart !== cleanState || cityPart !== cleanCity || zipPart !== cleanZip || nonEmpties.length > cityIdx + 4 || !currentPath.endsWith('/')) {
           needsRedirect = true;
-          parts[cityIdx + 1] = cleanState;
-          parts[cityIdx + 2] = cleanCity;
-          parts[cityIdx + 3] = cleanZip;
-          cleanPath = parts.slice(0, cityIdx + 4).join('/');
+          cleanPath = `/city/${cleanState}/${cleanCity}/${cleanZip}/`;
         }
-      } else if (stateIdx !== -1 && stateIdx + 1 < parts.length) {
-        const statePart = parts[stateIdx + 1];
+      } else if (stateIdx !== -1 && stateIdx + 1 < nonEmpties.length) {
+        const statePart = nonEmpties[stateIdx + 1];
         const cleanState = slugify(statePart);
 
-        if (statePart !== cleanState || parts.length > stateIdx + 2 || (parts.length === stateIdx + 2 && currentPath.endsWith('/'))) {
+        if (statePart !== cleanState || nonEmpties.length > stateIdx + 2 || !currentPath.endsWith('/')) {
           needsRedirect = true;
-          parts[stateIdx + 1] = cleanState;
-          cleanPath = parts.slice(0, stateIdx + 2).join('/');
+          cleanPath = `/state/${cleanState}/`;
         }
       }
 
@@ -1013,6 +1009,11 @@
 
         const gridEl = document.getElementById('areas-grid');
         if (gridEl) {
+          // If the page already contains pre-rendered area cards, preserve them
+          if (gridEl.querySelector('.area-card')) {
+            return;
+          }
+
           // Render loading indicator
           gridEl.innerHTML = `
             <div class="loading-container" style="text-align: center; padding: 50px 30px; width: 100%; grid-column: 1 / -1;">
