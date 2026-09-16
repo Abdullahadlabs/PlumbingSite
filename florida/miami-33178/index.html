@@ -242,15 +242,18 @@
 
   <!-- Header -->
   <header class="header" id="header" style="min-height: 120px;">
-    <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap; background: var(--bg-darker); border-bottom: 1px solid var(--border-color);">
-      <div class="container flex-between" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-        <div style="display: flex; align-items: center; gap: 8px;">
+    <div class="top-bar city-top-bar">
+      <div class="container top-bar-inner">
+        <div class="top-bar-info">
           <span class="pulse-dot"></span>
-          <span>Professional Plumbing Team Available 24/7 in <strong>Miami, FL (33178)</strong></span>
+          <span class="top-bar-text">
+            <span class="top-bar-lead">Professional Plumbing Team </span>Available 24/7 in <strong>Miami, FL (33178)</strong>
+          </span>
         </div>
-        <div>
-          <a href="tel:877-516-8705" style="color: #fff; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
-            <i class="fas fa-phone-alt" style="color: var(--accent);"></i> Emergency Line: (877) 516-8705
+        <div class="top-bar-cta">
+          <a href="tel:877-516-8705" class="top-bar-phone-link">
+            <i class="fas fa-phone-alt top-bar-phone-icon"></i>
+            <span class="top-bar-phone-label">Emergency Line: </span>(877) 516-8705
           </a>
         </div>
       </div>
@@ -642,8 +645,8 @@
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
-                <source srcset="/public/images/project1-after.webp" type="image/webp">
-                <img src="/public/images/project1-after.png" alt="Water heater replacement in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project1-after.png';">
+                <source srcset="/images/project1-after.webp" type="image/webp">
+                <img src="/images/project1-after.png" alt="Water heater replacement in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project1-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
@@ -662,8 +665,8 @@
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
-                <source srcset="/public/images/project2-after.webp" type="image/webp">
-                <img src="/public/images/project2-after.png" alt="Slab leak detection in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project2-after.png';">
+                <source srcset="/images/project2-after.webp" type="image/webp">
+                <img src="/images/project2-after.png" alt="Slab leak detection in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project2-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
@@ -682,8 +685,8 @@
           <div class="project-card" style="background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
-                <source srcset="/public/images/project3-after.webp" type="image/webp">
-                <img src="/public/images/project3-after.png" alt="Drainage refit in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='/public/images/project3-after.png';">
+                <source srcset="/images/project3-after.webp" type="image/webp">
+                <img src="/images/project3-after.png" alt="Drainage refit in Miami" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project3-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>

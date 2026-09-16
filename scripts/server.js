@@ -33,6 +33,9 @@ const server = http.createServer((req, res) => {
   }
 
   let reqUrl = decodeURI(rawUrl);
+  if (reqUrl.startsWith('/images/')) {
+    reqUrl = reqUrl.replace('/images/', '/public/images/');
+  }
   let filePath = path.join(ROOT, reqUrl);
 
   // Security check: ensure within ROOT
