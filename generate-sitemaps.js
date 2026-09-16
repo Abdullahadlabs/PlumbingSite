@@ -36,7 +36,7 @@ const STATE_MAP = {
   'wi': 'wisconsin', 'wy': 'wyoming'
 };
 
-const STATE_SLUGS = ['alaska', 'texas', 'florida'];
+const STATE_SLUGS = ['alaska', 'texas', 'florida', 'colorado'];
 
 function main() {
   const lastModDate = new Date().toISOString().split('T')[0];
@@ -92,7 +92,7 @@ function main() {
     });
 
     // Write XML file for state
-    const sitemapFilename = `sitemap-${stateCode}.xml`;
+    const sitemapFilename = stateSlug === 'colorado' ? 'sitemap-colorado.xml' : `sitemap-${stateCode}.xml`;
     const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(url => `  <url>
