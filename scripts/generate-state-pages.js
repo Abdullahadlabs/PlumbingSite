@@ -330,7 +330,142 @@ function generateStateHtml(templateHtml, state, stateCitiesIndex) {
   // 7. Inject pre-rendered area cards into #areas-grid
   html = html.replace(/<div class="areas-grid" id="areas-grid">[\s\S]*?<\/div>/i, `<div class="areas-grid" id="areas-grid">${citiesHtml}\n        </div>`);
 
+  // 8. Inject state-specific mega-dropdown
+  const stateMegaDropdown = generateStateMegaDropdown(stateSlug);
+  html = html.replace(/<div class="mega-dropdown">[\s\S]*?<\/div>\s*<\/div>\s*<a href="#cities"/i, `${stateMegaDropdown}\n        </div>\n        <a href="#cities"`);
+
   return html;
+}
+
+function generateStateMegaDropdown(stateSlug) {
+  const STATE_HUBS = {
+    'florida': {
+      p1: 'miami-33122',
+      p2: 'orlando-32801',
+      p3: 'tampa-33602',
+      p4: 'jacksonville-32099'
+    },
+    'texas': {
+      p1: 'houston-77002',
+      p2: 'dallas-75201',
+      p3: 'austin-78701',
+      p4: 'san-antonio-78201',
+      p5: 'fort-worth-76102'
+    },
+    'alaska': {
+      p1: 'anchorage-99507',
+      p2: 'fairbanks-99701',
+      p3: 'juneau-99801',
+      p4: 'anchorage-99501'
+    },
+    'colorado': {
+      p1: 'lakewood-80226',
+      p2: 'lakewood-80123',
+      p3: 'lakewood-80401',
+      p4: 'lakewood-80226'
+    }
+  };
+
+  const hubs = STATE_HUBS[stateSlug];
+  if (!hubs) {
+    return `
+          <div class="mega-dropdown">
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Emergency & Repair</div>
+              <a href="#services" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Water Heater & Drains</div>
+              <a href="#services" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Leak & Pipe Services</div>
+              <a href="#services" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Fixtures & Specialty</div>
+              <a href="#services" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair & Installation</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-sink"></i> Faucet & Sink Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
+              <a href="#services" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install & Repair</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
+            </div>
+          </div>`;
+  }
+
+  const p1 = hubs.p1;
+  const p2 = hubs.p2;
+  const p3 = hubs.p3;
+  const p4 = hubs.p4;
+  const p5 = hubs.p5 || p1;
+
+  return `
+          <div class="mega-dropdown">
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Emergency & Repair</div>
+              <a href="/${stateSlug}/${p1}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
+              <a href="/${stateSlug}/${p2}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
+              <a href="/${stateSlug}/${p1}/burst-pipe-repair/" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
+              <a href="/${stateSlug}/${p3}/burst-pipe-repair/" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
+              <a href="/${stateSlug}/${p4}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Water Heater & Drains</div>
+              <a href="/${stateSlug}/${p2}/water-heater-repair/" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
+              <a href="/${stateSlug}/${p1}/water-heater-repair/" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
+              <a href="/${stateSlug}/${p3}/water-heater-repair/" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
+              <a href="/${stateSlug}/${p1}/drain-cleaning/" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
+              <a href="/${stateSlug}/${p2}/drain-cleaning/" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
+              <a href="/${stateSlug}/${p3}/drain-cleaning/" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
+              <a href="/${stateSlug}/${p4}/sewer-line-repair/" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
+              <a href="/${stateSlug}/${p1}/sewer-line-repair/" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Leak & Pipe Services</div>
+              <a href="/${stateSlug}/${p1}/leak-detection/" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
+              <a href="/${stateSlug}/${p3}/leak-detection/" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
+              <a href="/${stateSlug}/${p2}/leak-detection/" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
+              <a href="/${stateSlug}/${p4}/gas-line-repair/" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
+              <a href="/${stateSlug}/${p3}/gas-line-repair/" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
+              <a href="/${stateSlug}/${p1}/gas-line-repair/" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
+              <a href="/${stateSlug}/${p2}/water-line-repair/" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
+              <a href="/${stateSlug}/${p1}/water-line-repair/" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Fixtures & Specialty</div>
+              <a href="/${stateSlug}/${p4}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair & Installation</a>
+              <a href="/${stateSlug}/${p2}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-sink"></i> Faucet & Sink Repair</a>
+              <a href="/${stateSlug}/${p1}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
+              <a href="/${stateSlug}/${p5}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
+              <a href="/${stateSlug}/${p3}/emergency-plumbing/" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install & Repair</a>
+              <a href="/state/${stateSlug}/" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
+            </div>
+          </div>`;
 }
 
 function main() {

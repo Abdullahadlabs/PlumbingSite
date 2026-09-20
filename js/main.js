@@ -1346,6 +1346,112 @@ function initMain() {
     }
   });
 
+  // ==================== STATE-SPECIFIC MEGA-DROPDOWN ROUTING ====================
+  function updateMegaDropdownForCurrentState() {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    let currentState = '';
+
+    if (pathParts[0] === 'state' && pathParts[1]) {
+      currentState = getStateSlug(pathParts[1]);
+    } else if (['florida', 'texas', 'alaska', 'colorado'].includes(pathParts[0])) {
+      currentState = pathParts[0];
+    }
+
+    if (!currentState) return;
+
+    const STATE_HUBS = {
+      'florida': {
+        p1: 'miami-33122',
+        p2: 'orlando-32801',
+        p3: 'tampa-33602',
+        p4: 'jacksonville-32099'
+      },
+      'texas': {
+        p1: 'houston-77002',
+        p2: 'dallas-75201',
+        p3: 'austin-78701',
+        p4: 'san-antonio-78201',
+        p5: 'fort-worth-76102'
+      },
+      'alaska': {
+        p1: 'anchorage-99507',
+        p2: 'fairbanks-99701',
+        p3: 'juneau-99801',
+        p4: 'anchorage-99501'
+      },
+      'colorado': {
+        p1: 'lakewood-80226',
+        p2: 'lakewood-80123',
+        p3: 'lakewood-80401',
+        p4: 'lakewood-80226'
+      }
+    };
+
+    const hubs = STATE_HUBS[currentState];
+    const dropdown = document.querySelector('.mega-dropdown');
+    if (!dropdown) return;
+
+    const links = dropdown.querySelectorAll('a.dropdown-link');
+    links.forEach(a => {
+      const text = a.textContent.trim().toLowerCase();
+
+      if (text.includes('commercial plumbing') || text.includes('backflow testing') || text.includes('water pressure repair') || text.includes('sump pump')) {
+        a.setAttribute('href', `/state/${currentState}/`);
+        return;
+      }
+
+      if (!hubs) {
+        a.setAttribute('href', `#services`);
+        return;
+      }
+
+      const { p1, p2, p3, p4, p5 = p1 } = hubs;
+
+      if (text.includes('drain cleaning') || text.includes('hydro jetting') || text.includes('clogged drain')) {
+        let hub = p1;
+        if (text.includes('clogged')) hub = p2;
+        else if (text.includes('hydro')) hub = p3;
+        a.setAttribute('href', `/${currentState}/${hub}/drain-cleaning/`);
+      } else if (text.includes('water heater') || text.includes('tankless')) {
+        let hub = p1;
+        if (text.includes('repair')) hub = p2;
+        else if (text.includes('tankless')) hub = p3;
+        a.setAttribute('href', `/${currentState}/${hub}/water-heater-repair/`);
+      } else if (text.includes('burst pipe') || text.includes('repiping')) {
+        let hub = text.includes('repiping') ? p3 : p1;
+        a.setAttribute('href', `/${currentState}/${hub}/burst-pipe-repair/`);
+      } else if (text.includes('sewer line')) {
+        let hub = text.includes('replacement') ? p1 : p4;
+        a.setAttribute('href', `/${currentState}/${hub}/sewer-line-repair/`);
+      } else if (text.includes('leak detection') || text.includes('slab leak') || text.includes('pipe leak')) {
+        let hub = p1;
+        if (text.includes('slab')) hub = p3;
+        else if (text.includes('pipe')) hub = p2;
+        a.setAttribute('href', `/${currentState}/${hub}/leak-detection/`);
+      } else if (text.includes('gas line') || text.includes('gas leak')) {
+        let hub = p1;
+        if (text.includes('installation')) hub = p4;
+        else if (text.includes('detection')) hub = p3;
+        a.setAttribute('href', `/${currentState}/${hub}/gas-line-repair/`);
+      } else if (text.includes('water line')) {
+        let hub = text.includes('repair') ? p2 : p1;
+        a.setAttribute('href', `/${currentState}/${hub}/water-line-repair/`);
+      } else if (text.includes('toilet') || text.includes('faucet') || text.includes('sink') || text.includes('garbage disposal') || text.includes('kitchen') || text.includes('bathroom') || text.includes('emergency') || text.includes('same day') || text.includes('maintenance')) {
+        let hub = p1;
+        if (text.includes('same day')) hub = p2;
+        else if (text.includes('maintenance')) hub = p4;
+        else if (text.includes('toilet')) hub = p4;
+        else if (text.includes('sink') || text.includes('faucet')) hub = p2;
+        else if (text.includes('kitchen')) hub = p5;
+        else if (text.includes('bathroom')) hub = p3;
+        a.setAttribute('href', `/${currentState}/${hub}/emergency-plumbing/`);
+      }
+    });
+  }
+
+  // Update mega dropdown links to match active state context
+  updateMegaDropdownForCurrentState();
+
   // Execute dynamic SEO automation
   applyDynamicSEO();
 }
