@@ -1,19 +1,173 @@
-<!DOCTYPE html>
+/**
+ * build-alaska.js
+ * ================
+ * Generates all Alaska (AK) zip-code landing pages to match the
+ * Florida silver-springs-34488 reference structure (14 rich sections, ~1562 lines).
+ *
+ * Usage:  node scripts/build-alaska.js
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const DOMAIN = 'https://homeplumbingusa.com';
+const PHONE = '877-516-8705';
+const PHONE_DISPLAY = '(877) 516-8705';
+const STATE_NAME = 'Alaska';
+const STATE_CODE = 'AK';
+const STATE_SLUG = 'alaska';
+const YEAR = new Date().getFullYear();
+
+const ALASKA_DIR = path.join(__dirname, '..', 'alaska');
+const NEARBY_DATA_PATH = path.join(__dirname, 'alaska-nearby-data.json');
+
+// Load nearby city data
+const nearbyData = JSON.parse(fs.readFileSync(NEARBY_DATA_PATH, 'utf8'));
+
+// Services configuration with unique icons
+const SERVICES = [
+  { slug: 'drain-cleaning', name: 'Drain Cleaning', icon: 'fa-broom',
+    desc: (c,z) => `Clear out stubborn blockages, frozen grease, and mineral buildup from your drains. Our licensed plumbers in ${c} utilize high-velocity hydro-jetters and mechanical snakes to scrub pipe walls clean without using harsh chemicals.` },
+  { slug: 'burst-pipe-repair', name: 'Burst Pipe Repair', icon: 'fa-water',
+    desc: (c,z) => `A burst pipe can flood a home in minutes, especially during ${c}'s extreme cold snaps. We replace split lines in ${c} using copper pipe cutters and PEX crimping tools to execute a durable, leak-free connection.` },
+  { slug: 'water-heater-repair', name: 'Water Heater Repair', icon: 'fa-temperature-high',
+    desc: (c,z) => `Restore your hot water supply quickly with our professional water heater repair services in ${c}. Our experienced technicians use digital multimeters and tank flushing hoses to diagnose heating element failures and clear out sediment buildup.` },
+  { slug: 'sewer-line-repair', name: 'Sewer Line Repair', icon: 'fa-screwdriver-wrench',
+    desc: (c,z) => `Sewer backups require advanced diagnostic and repair equipment. We inspect your main sewer line in ${c} using fiber-optic sewer cameras and perform repairs with heavy-duty pipe excavators to restore proper flow.` },
+  { slug: 'emergency-plumbing', name: 'Emergency Plumbing', icon: 'fa-bolt',
+    desc: (c,z) => `Emergency plumbing issues require immediate action to prevent severe property damage. Our certified dispatch team in ${c} is active 24/7, arriving with high-capacity utility pumps and emergency pipe clamps to secure your home.` },
+  { slug: 'leak-detection', name: 'Leak Detection', icon: 'fa-magnifying-glass',
+    desc: (c,z) => `Locate hidden water leaks behind walls or under foundations before they cause structural damage. We pinpoint the exact leak location in ${c} using acoustic listening devices and infrared thermal imaging cameras.` },
+  { slug: 'gas-line-repair', name: 'Gas Line Repair', icon: 'fa-fire',
+    desc: (c,z) => `Gas line issues present serious safety hazards that demand certified expertise. In ${c}, we resolve gas leaks quickly using electronic gas sniffers and professional iron pipe threaders to ensure a 100% airtight seal.` },
+  { slug: 'water-line-repair', name: 'Water Line Repair', icon: 'fa-faucet-drip',
+    desc: (c,z) => `Fix low water pressure or discolored water caused by deteriorated supply lines. Our technicians in ${c} deploy underground pipe locators and trenchless pipe pullers to repair water lines with minimal yard disruption.` }
+];
+
+function parseDirName(dirName) {
+  const match = dirName.match(/^(.+)-(\d{5})$/);
+  if (!match) return null;
+  const slug = match[1];
+  const zip = match[2];
+  const city = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return { city, zip, slug: dirName, citySlug: slug };
+}
+
+function generatePage(dirName) {
+  const info = parseDirName(dirName);
+  if (!info) return null;
+  const { city, zip } = info;
+  const pageSlug = `${STATE_SLUG}/${dirName}`;
+  const pageUrl = `${DOMAIN}/${pageSlug}/`;
+  const stateUrl = `${DOMAIN}/state/${STATE_SLUG}/`;
+
+  // Nearby cities
+  const nearby = (nearbyData[dirName] || []).slice(0, 20);
+
+  // Generate nearby area cards HTML
+  const nearbyCardsHtml = nearby.map(n => {
+    const nInfo = parseDirName(n.slug);
+    const nCity = nInfo ? nInfo.city : n.label.replace(/\s*\(\d+\)/, '');
+    const nZip = nInfo ? nInfo.zip : (n.label.match(/\((\d+)\)/) || ['',''])[1];
+    return `
+    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
+      <div>
+        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> ${nCity}, ${STATE_CODE}
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: ${nZip} | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
+      </div>
+      <a href="/${STATE_SLUG}/${n.slug}/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+      </a>
+    </div>
+  `;
+  }).join('\n');
+
+  // Generate service cards HTML
+  const serviceCardsHtml = SERVICES.map(svc => `
+      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
+            <i class="fas ${svc.icon}"></i>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">${svc.name}</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">${svc.desc(city, zip)}</p>
+        </div>
+        <div>
+          <a href="/${pageSlug}/${svc.slug}/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
+            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+          </a>
+        </div>
+      </div>
+    `).join('\n');
+
+  // FAQ data
+  const faqs = [
+    { q: `Is 24/7 emergency plumbing services available in ${city}?`,
+      a: `Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in ${city} immediately to resolve urgent leaks, backups, or system failures.` },
+    { q: `How quickly can a plumber arrive at my property in ${city} ${zip}?`,
+      a: `On average, emergency plumbers in our network can arrive at your address in ${city} (${zip}) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist.` },
+    { q: `Are the technicians licensed and insured in ${STATE_CODE}?`,
+      a: `Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your plumbing services will be handled safely, professionally, and in complete compliance with ${STATE_CODE} building codes.` },
+    { q: `Do you charge by the hour or provide flat-rate pricing?`,
+      a: `We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your ${city} property and present your options, ensuring there are no surprise charges or hidden fees.` },
+    { q: `How do Alaska's extreme cold temperatures affect my plumbing?`,
+      a: `${STATE_NAME}'s sub-zero winters pose serious risks to residential plumbing. Water inside uninsulated pipes can freeze and expand, cracking copper, PVC, and galvanized lines. We recommend heat tape wrapping, pipe insulation, and maintaining indoor temperatures above 55°F to prevent catastrophic freeze-bursts.` },
+    { q: `How can I protect my pipes from freezing in ${city}?`,
+      a: `Install self-regulating heat tape on exposed water supply lines, add foam pipe insulation to all pipes in unheated crawl spaces and basements, and allow a slow drip on exterior faucets during extreme cold events. Our plumbers in ${city} provide professional winterization assessments.` },
+    { q: `Is there a warranty or guarantee on the plumbing services work?`,
+      a: `Yes! All plumbing services repairs are backed by a workmanship guarantee from the matching plumbing provider. Replaced parts, fixtures, and appliances are also covered by their respective manufacturer warranties.` },
+    { q: `What should I do immediately if I find a water leak?`,
+      a: `Locate your main water shutoff valve (usually found near the water meter or street connection) and turn it completely clockwise. This cuts off the supply and stops active water damage at your ${city} home while you call us for emergency dispatch.` },
+    { q: `Is high-pressure hydro-jetting safe for older pipes in ${city}?`,
+      a: `Yes. Our plumbers conduct a fiber-optic sewer camera inspection first to check the pipe structure. If the sewer line is structurally sound, hydro-jetting is the safest, most effective way to clear grease, sludge, and tree roots.` },
+    { q: `How do you ensure plumbing installations comply with ${STATE_CODE} building codes?`,
+      a: `Our network plumbers are fully versed in local building codes and the ${STATE_CODE} Plumbing Code. We ensure correct slope, venting, and material selection for all installations in ${city}, passing any municipal inspections.` }
+  ];
+
+  const faqSchemaEntries = faqs.map(f => `        {
+          "@type": "Question",
+          "name": ${JSON.stringify(f.q)},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": ${JSON.stringify(f.a)}
+          }
+        }`).join(',\n');
+
+  const faqAccordionHtml = faqs.map(f => `
+    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
+      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">${f.q}</h3>
+        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
+      </button>
+      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
+        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+          <p style="margin: 0;">${f.a}</p>
+        </div>
+      </div>
+    </div>
+  `).join('\n');
+
+  const mapQuery = encodeURIComponent(`${city}, ${STATE_CODE} ${zip}`);
+
+  // Build the full HTML
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plumbers in Trapper Creek, AK 99683 | 24/7 Emergency Plumbing</title>
-  <meta name="description" content="Need emergency plumbing in Trapper Creek, AK (99683)? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call 877-516-8705!">
-  <meta name="keywords" content="plumbers Trapper Creek 99683, emergency plumbing Trapper Creek, 24 hour plumber Trapper Creek AK, local plumbers 99683, drain cleaning Trapper Creek">
-  <link rel="canonical" href="https://homeplumbingusa.com/alaska/trapper-creek-99683/">
+  <title>Plumbers in ${city}, ${STATE_CODE} ${zip} | 24/7 Emergency Plumbing</title>
+  <meta name="description" content="Need emergency plumbing in ${city}, ${STATE_CODE} (${zip})? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call ${PHONE}!">
+  <meta name="keywords" content="plumbers ${city} ${zip}, emergency plumbing ${city}, 24 hour plumber ${city} ${STATE_CODE}, local plumbers ${zip}, drain cleaning ${city}">
+  <link rel="canonical" href="${pageUrl}">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://homeplumbingusa.com/alaska/trapper-creek-99683/">
-  <meta property="og:title" content="Plumbers in Trapper Creek, AK 99683 | 24/7 Emergency Plumbing">
-  <meta property="og:description" content="Need emergency plumbing in Trapper Creek, AK (99683)? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call 877-516-8705!">
-  <meta property="og:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:title" content="Plumbers in ${city}, ${STATE_CODE} ${zip} | 24/7 Emergency Plumbing">
+  <meta property="og:description" content="Need emergency plumbing in ${city}, ${STATE_CODE} (${zip})? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call ${PHONE}!">
+  <meta property="og:image" content="${DOMAIN}/public/images/hero-plumbing.webp">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -22,18 +176,18 @@
   "@graph": [
     {
       "@type": "PlumbingService",
-      "@id": "https://homeplumbingusa.com/alaska/trapper-creek-99683/#plumbingservice",
-      "name": "Home Plumbing USA - Trapper Creek (99683)",
-      "description": "Need emergency plumbing in Trapper Creek, AK (99683)? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call 877-516-8705!",
-      "url": "https://homeplumbingusa.com/alaska/trapper-creek-99683/",
-      "telephone": "877-516-8705",
+      "@id": "${pageUrl}#plumbingservice",
+      "name": "Home Plumbing USA - ${city} (${zip})",
+      "description": "Need emergency plumbing in ${city}, ${STATE_CODE} (${zip})? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call ${PHONE}!",
+      "url": "${pageUrl}",
+      "telephone": "${PHONE}",
       "priceRange": "$$",
-      "image": "https://homeplumbingusa.com/public/images/hero-plumbing.webp",
+      "image": "${DOMAIN}/public/images/hero-plumbing.webp",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Trapper Creek",
-        "addressRegion": "AK",
-        "postalCode": "99683",
+        "addressLocality": "${city}",
+        "addressRegion": "${STATE_CODE}",
+        "postalCode": "${zip}",
         "addressCountry": "US"
       },
       "openingHoursSpecification": {
@@ -53,117 +207,38 @@
       "provider": {
         "@type": "LocalBusiness",
         "name": "Home Plumbing USA",
-        "image": "https://homeplumbingusa.com/public/images/hero-plumbing.webp"
+        "image": "${DOMAIN}/public/images/hero-plumbing.webp"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://homeplumbingusa.com/alaska/trapper-creek-99683/#breadcrumb",
+      "@id": "${pageUrl}#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://homeplumbingusa.com/"
+          "item": "${DOMAIN}/"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Alaska",
-          "item": "https://homeplumbingusa.com/state/alaska/"
+          "name": "${STATE_NAME}",
+          "item": "${stateUrl}"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Trapper Creek (99683)",
-          "item": "https://homeplumbingusa.com/alaska/trapper-creek-99683/"
+          "name": "${city} (${zip})",
+          "item": "${pageUrl}"
         }
       ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://homeplumbingusa.com/alaska/trapper-creek-99683/#faq",
+      "@id": "${pageUrl}#faq",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is 24/7 emergency plumbing services available in Trapper Creek?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in Trapper Creek immediately to resolve urgent leaks, backups, or system failures."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How quickly can a plumber arrive at my property in Trapper Creek 99683?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "On average, emergency plumbers in our network can arrive at your address in Trapper Creek (99683) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are the technicians licensed and insured in AK?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your plumbing services will be handled safely, professionally, and in complete compliance with AK building codes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you charge by the hour or provide flat-rate pricing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your Trapper Creek property and present your options, ensuring there are no surprise charges or hidden fees."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do Alaska's extreme cold temperatures affect my plumbing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Alaska's sub-zero winters pose serious risks to residential plumbing. Water inside uninsulated pipes can freeze and expand, cracking copper, PVC, and galvanized lines. We recommend heat tape wrapping, pipe insulation, and maintaining indoor temperatures above 55°F to prevent catastrophic freeze-bursts."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I protect my pipes from freezing in Trapper Creek?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Install self-regulating heat tape on exposed water supply lines, add foam pipe insulation to all pipes in unheated crawl spaces and basements, and allow a slow drip on exterior faucets during extreme cold events. Our plumbers in Trapper Creek provide professional winterization assessments."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is there a warranty or guarantee on the plumbing services work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! All plumbing services repairs are backed by a workmanship guarantee from the matching plumbing provider. Replaced parts, fixtures, and appliances are also covered by their respective manufacturer warranties."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What should I do immediately if I find a water leak?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Locate your main water shutoff valve (usually found near the water meter or street connection) and turn it completely clockwise. This cuts off the supply and stops active water damage at your Trapper Creek home while you call us for emergency dispatch."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is high-pressure hydro-jetting safe for older pipes in Trapper Creek?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Our plumbers conduct a fiber-optic sewer camera inspection first to check the pipe structure. If the sewer line is structurally sound, hydro-jetting is the safest, most effective way to clear grease, sludge, and tree roots."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do you ensure plumbing installations comply with AK building codes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our network plumbers are fully versed in local building codes and the AK Plumbing Code. We ensure correct slope, venting, and material selection for all installations in Trapper Creek, passing any municipal inspections."
-          }
-        }
+${faqSchemaEntries}
       ]
     }
   ]
@@ -245,8 +320,8 @@
     <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <a href="tel:877-516-8705" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-          <span>24/7 Emergency Plumbers in <strong>Trapper Creek, AK (99683)</strong><span class="top-bar-sub"> - Same Price, Holidays Included!</span></span>
+        <a href="tel:${PHONE}" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+          <span>24/7 Emergency Plumbers in <strong>${city}, ${STATE_CODE} (${zip})</strong><span class="top-bar-sub"> - Same Price, Holidays Included!</span></span>
         </a>
       </div>
     </div>
@@ -264,8 +339,8 @@
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta" style="display: flex; align-items: center; gap: 16px;">
-        <a href="tel:877-516-8705" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call Now</a>
+        <a href="tel:${PHONE}" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> ${PHONE}</a>
+        <a href="tel:${PHONE}" class="btn btn-primary btn-sm">Call Now</a>
       </div>
     </div>
   </header>
@@ -277,33 +352,33 @@
         <div class="breadcrumbs" style="display: flex; gap: 8px; align-items: center; font-size: 0.9rem; margin-bottom: 24px; color: var(--text-muted); flex-wrap: wrap;">
           <a href="/" style="color: var(--primary-light); text-decoration: none;">Home</a>
           <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
-          <a href="https://homeplumbingusa.com/state/alaska/" style="color: var(--primary-light); text-decoration: none;">Alaska</a>
+          <a href="${stateUrl}" style="color: var(--primary-light); text-decoration: none;">${STATE_NAME}</a>
           <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
-          <span style="color: #fff;">Trapper Creek (99683)</span>
+          <span style="color: #fff;">${city} (${zip})</span>
         </div>
 
         <div class="grid-2 hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center;">
           <div class="hero-content">
             <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); color: var(--primary-light); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 16px;">
-              <i class="fas fa-shield-alt" style="color: var(--accent);"></i> Licensed &amp; Insured Plumbing Specialists in Trapper Creek
+              <i class="fas fa-shield-alt" style="color: var(--accent);"></i> Licensed &amp; Insured Plumbing Specialists in ${city}
             </div>
             <h1 style="font-size: 2.75rem; line-height: 1.2; color: #fff; margin-bottom: 1.25rem; font-weight: 800;">
-              Professional Plumbing Services in <span style="color: var(--accent);">Trapper Creek, AK 99683</span>
+              Professional Plumbing Services in <span style="color: var(--accent);">${city}, ${STATE_CODE} ${zip}</span>
             </h1>
             <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.7;">
-              When frozen pipes threaten your property or a backed-up sewer brings your day to a halt, Home Plumbing USA connects you with prompt, effective solutions in Trapper Creek (99683). We tackle everything from stubborn frozen drains and leaking water heaters to complex slab leaks with precision. Expect a licensed professional at your door in under 45 minutes with upfront flat-rate pricing and no hidden fees.
+              When frozen pipes threaten your property or a backed-up sewer brings your day to a halt, Home Plumbing USA connects you with prompt, effective solutions in ${city} (${zip}). We tackle everything from stubborn frozen drains and leaking water heaters to complex slab leaks with precision. Expect a licensed professional at your door in under 45 minutes with upfront flat-rate pricing and no hidden fees.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+              <a href="tel:${PHONE}" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-phone-alt"></i> Call ${PHONE_DISPLAY}
               </a>
               <a href="#services" class="btn btn-outline" style="border: 2px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-wrench"></i> View Services in 99683
+                <i class="fas fa-wrench"></i> View Services in ${zip}
               </a>
             </div>
           </div>
           <div class="hero-image-container" style="border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); background: #0f1e3a;">
-            <img src="/public/images/hero-plumbing.webp" srcset="/public/images/hero-plumbing-mobile.webp 480w, /public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Professional plumber in Trapper Creek AK" style="width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover;">
+            <img src="/public/images/hero-plumbing.webp" srcset="/public/images/hero-plumbing-mobile.webp 480w, /public/images/hero-plumbing.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Professional plumber in ${city} ${STATE_CODE}" style="width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover;">
           </div>
         </div>
       </div>
@@ -314,28 +389,28 @@
       <div class="container">
         <div class="grid-2 trust-grid" style="display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: 3.5rem;">
           <div class="trust-image-block" style="border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
-            <img src="/public/images/hero-plumbing-team.webp" alt="Plumbing specialists serving Trapper Creek AK" style="width: 100%; height: auto; display: block;">
+            <img src="/public/images/hero-plumbing-team.webp" alt="Plumbing specialists serving ${city} ${STATE_CODE}" style="width: 100%; height: auto; display: block;">
           </div>
           <div>
             <div class="section-title left-aligned" style="text-align: left; margin-bottom: 2rem;">
               <h2 style="font-size: 2.1rem; color: #fff; margin-bottom: 0.75rem;">Quality Craftsmanship &amp; Safe Execution</h2>
-              <p style="font-size: 1.05rem; color: var(--text-muted); margin: 0;">We focus on delivering safe, code-compliant plumbing solutions for local households in Trapper Creek (99683).</p>
+              <p style="font-size: 1.05rem; color: var(--text-muted); margin: 0;">We focus on delivering safe, code-compliant plumbing solutions for local households in ${city} (${zip}).</p>
             </div>
             <div class="grid-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
               <div class="badge-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <div style="font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-certificate"></i></div>
                 <h3 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.15rem;">Licensed Plumbers</h3>
-                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">Our crew includes certified, professional plumbers, each bringing deep knowledge and experience to every task across Trapper Creek's diverse neighborhoods.</p>
+                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">Our crew includes certified, professional plumbers, each bringing deep knowledge and experience to every task across ${city}'s diverse neighborhoods.</p>
               </div>
               <div class="badge-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <div style="font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-clock"></i></div>
                 <h3 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.15rem;">24/7 Fast Dispatch</h3>
-                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">We offer rapid 24/7 emergency dispatches, getting to homes in Trapper Creek and surrounding communities quickly. For any urgent leak, count on us to be there fast.</p>
+                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">We offer rapid 24/7 emergency dispatches, getting to homes in ${city} and surrounding communities quickly. For any urgent leak, count on us to be there fast.</p>
               </div>
               <div class="badge-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <div style="font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-shield-check"></i></div>
                 <h3 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.15rem;">Safety Compliant</h3>
-                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">All our work follows strict OSHA standards and local Alaska building &amp; plumbing codes, protecting both our team and your property during every service call.</p>
+                <p style="font-size: 0.88rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.6;">All our work follows strict OSHA standards and local ${STATE_NAME} building &amp; plumbing codes, protecting both our team and your property during every service call.</p>
               </div>
               <div class="badge-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
                 <div style="font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-file-invoice-dollar"></i></div>
@@ -353,8 +428,8 @@
       <div class="container">
         <div class="section-title text-center" style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Priority Solutions</div>
-          <h2 style="font-size: 2.2rem; color: #fff;">Top Featured Plumbing Services in Trapper Creek, AK</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">Direct dispatch and premier residential solutions engineered specifically for Trapper Creek (99683) households and businesses.</p>
+          <h2 style="font-size: 2.2rem; color: #fff;">Top Featured Plumbing Services in ${city}, ${STATE_CODE}</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">Direct dispatch and premier residential solutions engineered specifically for ${city} (${zip}) households and businesses.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
@@ -368,17 +443,17 @@
                 <i class="fas fa-bolt"></i>
               </div>
               <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">24/7 Emergency Plumbing Dispatch</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Under 45-minute urgent response across Trapper Creek for catastrophic pipe fractures, sewage overflows, and hot water heater ruptures. Fully stocked mobile vans arrive ready to stabilize your property.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Under 45-minute urgent response across ${city} for catastrophic pipe fractures, sewage overflows, and hot water heater ruptures. Fully stocked mobile vans arrive ready to stabilize your property.</p>
               <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-clock" style="color: var(--primary-light); margin-right: 5px;"></i> &lt; 45 Min Arrival</span>
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-file-invoice" style="color: var(--primary-light); margin-right: 5px;"></i> Flat-Rate Quoting</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/emergency-plumbing/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/emergency-plumbing/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -394,17 +469,17 @@
                 <i class="fas fa-fire-flame-curved"></i>
               </div>
               <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Tankless &amp; Hybrid Water Heaters</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Replace sediment-loaded water tanks with continuous-flow tankless or high-recovery hybrid heaters built to withstand Trapper Creek's extreme cold. Includes expansion tanks, relief valves, and electrical/gas hookup to code.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Replace sediment-loaded water tanks with continuous-flow tankless or high-recovery hybrid heaters built to withstand ${city}'s extreme cold. Includes expansion tanks, relief valves, and electrical/gas hookup to code.</p>
               <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-droplet" style="color: var(--primary-light); margin-right: 5px;"></i> Continuous Hot Water</span>
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-shield" style="color: var(--primary-light); margin-right: 5px;"></i> Freeze Resistant</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/water-heater-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/water-heater-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -427,10 +502,10 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/drain-cleaning/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/drain-cleaning/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -446,17 +521,17 @@
                 <i class="fas fa-satellite-dish"></i>
               </div>
               <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Electronic Slab Leak Detection</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Pinpoint pressurized water leaks hidden under Trapper Creek foundations using ultrasonic acoustic listening discs and forward-looking infrared (FLIR) thermal scanners. Eliminates floor destruction and guesswork.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px;">Pinpoint pressurized water leaks hidden under ${city} foundations using ultrasonic acoustic listening discs and forward-looking infrared (FLIR) thermal scanners. Eliminates floor destruction and guesswork.</p>
               <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-crosshairs" style="color: var(--primary-light); margin-right: 5px;"></i> Sub-Inch Accuracy</span>
                 <span style="background: rgba(255,255,255,0.05); color: var(--text-light); font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color);"><i class="fas fa-hammer" style="color: var(--primary-light); margin-right: 5px;"></i> No Tile Damage</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/leak-detection/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/leak-detection/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -479,10 +554,10 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/sewer-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/sewer-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -505,10 +580,10 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 16px;">
-              <a href="/alaska/trapper-creek-99683/gas-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
+              <a href="/${pageSlug}/gas-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:${PHONE}" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -523,13 +598,13 @@
         <div style="max-width: 860px; margin: 0 auto; text-align: center;">
           <div class="section-title" style="margin-bottom: 2rem;">
             <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Local Expertise</div>
-            <h2 style="font-size: 2.2rem; color: #fff;">Professional Pipe Repair &amp; Drain Cleaning in Trapper Creek, AK</h2>
+            <h2 style="font-size: 2.2rem; color: #fff;">Professional Pipe Repair &amp; Drain Cleaning in ${city}, ${STATE_CODE}</h2>
           </div>
           <p style="font-size: 1.05rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
-            Home Plumbing USA is built on a network of vetted local professionals, deeply familiar with Trapper Creek's unique plumbing challenges. From managing permafrost-affected ground movement and extreme freeze-thaw cycles to dealing with glacial sediment buildup, our dedication to honest, effective work keeps homes across our community running smoothly in Trapper Creek (99683) and surrounding areas.
+            Home Plumbing USA is built on a network of vetted local professionals, deeply familiar with ${city}'s unique plumbing challenges. From managing permafrost-affected ground movement and extreme freeze-thaw cycles to dealing with glacial sediment buildup, our dedication to honest, effective work keeps homes across our community running smoothly in ${city} (${zip}) and surrounding areas.
           </p>
           <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-            Our licensed experts perform every task adhering strictly to Alaska's building codes and plumbing safety regulations. We use high-grade copper, CPVC, and PEX piping, chosen for its durability and freeze resistance in our arctic climate, ensuring lasting repairs. Each work zone is kept tidy, laying down floor protection to minimize disruption and leaving your property spotless.
+            Our licensed experts perform every task adhering strictly to ${STATE_NAME}'s building codes and plumbing safety regulations. We use high-grade copper, CPVC, and PEX piping, chosen for its durability and freeze resistance in our arctic climate, ensuring lasting repairs. Each work zone is kept tidy, laying down floor protection to minimize disruption and leaving your property spotless.
           </p>
           <div>
             <a href="/about" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">More About Our Standards <i class="fas fa-arrow-right"></i></a>
@@ -544,14 +619,14 @@
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">How It Works</div>
           <h2 style="font-size: 2.2rem; color: #fff;">Our Streamlined Service Workflow</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">We combine rapid response times with structured testing to deliver reliable plumbing repairs in Trapper Creek.</p>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">We combine rapid response times with structured testing to deliver reliable plumbing repairs in ${city}.</p>
         </div>
         <div class="process-timeline" style="position: relative; max-width: 800px; margin: 0 auto;">
           <div class="process-step" style="position: relative; margin-bottom: 2.5rem; padding-left: 70px;">
             <div class="process-dot" style="position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; box-shadow: var(--shadow-glow);">1</div>
             <div class="process-content" style="background: var(--bg-card); padding: 20px 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
               <h3 style="color: var(--text-white); font-size: 1.2rem; margin-bottom: 6px;">Immediate Dispatch</h3>
-              <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Call us anytime for immediate service; we match and dispatch a licensed plumber to your Trapper Creek location 24/7, day or night.</p>
+              <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Call us anytime for immediate service; we match and dispatch a licensed plumber to your ${city} location 24/7, day or night.</p>
             </div>
           </div>
           <div class="process-step" style="position: relative; margin-bottom: 2.5rem; padding-left: 70px;">
@@ -572,7 +647,7 @@
             <div class="process-dot" style="position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; box-shadow: var(--shadow-glow);">4</div>
             <div class="process-content" style="background: var(--bg-card); padding: 20px 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
               <h3 style="color: var(--text-white); font-size: 1.2rem; margin-bottom: 6px;">Code-Compliant Repair</h3>
-              <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our team performs code-compliant repair work using premium, durable materials, ensuring a lasting fix that meets all Alaska plumbing standards.</p>
+              <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our team performs code-compliant repair work using premium, durable materials, ensuring a lasting fix that meets all ${STATE_NAME} plumbing standards.</p>
             </div>
           </div>
           <div class="process-step" style="position: relative; padding-left: 70px;">
@@ -591,14 +666,14 @@
       <div class="container">
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Why Choose Us</div>
-          <h2 style="font-size: 2.2rem; color: #fff;">Why Call Us in Trapper Creek?</h2>
+          <h2 style="font-size: 2.2rem; color: #fff;">Why Call Us in ${city}?</h2>
           <p style="color: var(--text-muted); font-size: 1.05rem;">We deliver high-quality plumbing services backed by code compliance, certified pros, and upfront pricing.</p>
         </div>
         <div class="why-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
           <div class="why-card" style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
             <div style="font-size: 1.6rem; color: var(--primary-light); margin-bottom: 12px;"><i class="fas fa-award"></i></div>
             <h3 style="color: var(--text-white); margin-bottom: 8px; font-size: 1.2rem;">1. Plumbing Experience</h3>
-            <p style="font-size: 0.92rem; margin: 0; color: var(--text-muted); line-height: 1.6;">Our network technicians bring years of diagnostic troubleshooting experience covering everything from complex freeze-burst repairs to entire pipe system overhauls across Trapper Creek.</p>
+            <p style="font-size: 0.92rem; margin: 0; color: var(--text-muted); line-height: 1.6;">Our network technicians bring years of diagnostic troubleshooting experience covering everything from complex freeze-burst repairs to entire pipe system overhauls across ${city}.</p>
           </div>
           <div class="why-card" style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
             <div style="font-size: 1.6rem; color: var(--primary-light); margin-bottom: 12px;"><i class="fas fa-user-check"></i></div>
@@ -613,7 +688,7 @@
           <div class="why-card" style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
             <div style="font-size: 1.6rem; color: var(--primary-light); margin-bottom: 12px;"><i class="fas fa-stopwatch"></i></div>
             <h3 style="color: var(--text-white); margin-bottom: 8px; font-size: 1.2rem;">4. Under 45-Min Response</h3>
-            <p style="font-size: 0.92rem; margin: 0; color: var(--text-muted); line-height: 1.6;">Expect fast dispatches, often under 45 minutes, getting our mobile team to your location along Trapper Creek's corridors quickly for urgent needs.</p>
+            <p style="font-size: 0.92rem; margin: 0; color: var(--text-muted); line-height: 1.6;">Expect fast dispatches, often under 45 minutes, getting our mobile team to your location along ${city}'s corridors quickly for urgent needs.</p>
           </div>
           <div class="why-card" style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
             <div style="font-size: 1.6rem; color: var(--primary-light); margin-bottom: 12px;"><i class="fas fa-hand-holding-dollar"></i></div>
@@ -630,7 +705,7 @@
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Recent Work</div>
           <h2 style="font-size: 2.2rem; color: #fff;">Completed Plumbing Case Studies</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">Explore recent water line installations and emergency repairs in Trapper Creek and surrounding areas.</p>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">Explore recent water line installations and emergency repairs in ${city} and surrounding areas.</p>
         </div>
         <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;">
           <!-- Case Study 1 -->
@@ -638,14 +713,14 @@
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
                 <source srcset="/images/project1-after.webp" type="image/webp">
-                <img src="/images/project1-after.png" alt="Water heater replacement in Trapper Creek" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project1-after.png';">
+                <img src="/images/project1-after.png" alt="Water heater replacement in ${city}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project1-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <h3 style="color: var(--text-white); font-size: 1.25rem; margin-bottom: 8px;">Water Heater Replacement</h3>
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Dismantled an aging, corroded water tank in Trapper Creek and installed a high-efficiency tankless system, configuring expansion tanks and vent lines to code.</p>
+                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Dismantled an aging, corroded water tank in ${city} and installed a high-efficiency tankless system, configuring expansion tanks and vent lines to code.</p>
               </div>
               <div style="border-top: 1px solid var(--border-color); padding-top: 12px;">
                 <p style="font-size: 0.88rem; font-weight: 600; color: #4ade80; margin: 0;"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> Outcome: Restored continuous hot water and reduced energy draw.</p>
@@ -658,14 +733,14 @@
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
                 <source srcset="/images/project2-after.webp" type="image/webp">
-                <img src="/images/project2-after.png" alt="Frozen pipe repair in Trapper Creek" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project2-after.png';">
+                <img src="/images/project2-after.png" alt="Frozen pipe repair in ${city}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project2-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <h3 style="color: var(--text-white); font-size: 1.25rem; margin-bottom: 8px;">Frozen Pipe Emergency Repiping</h3>
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Used thermal thawing equipment to locate a freeze-burst beneath an exterior wall in Trapper Creek, performing a surgical PEX bypass with heat tape wrapping to prevent future freeze damage.</p>
+                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Used thermal thawing equipment to locate a freeze-burst beneath an exterior wall in ${city}, performing a surgical PEX bypass with heat tape wrapping to prevent future freeze damage.</p>
               </div>
               <div style="border-top: 1px solid var(--border-color); padding-top: 12px;">
                 <p style="font-size: 0.88rem; font-weight: 600; color: #4ade80; margin: 0;"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> Outcome: Repaired burst line and winterized exposed piping against future freezes.</p>
@@ -678,14 +753,14 @@
             <div class="project-image-wrapper" style="height: 220px; overflow: hidden; position: relative;">
               <picture>
                 <source srcset="/images/project3-after.webp" type="image/webp">
-                <img src="/images/project3-after.png" alt="Drainage refit in Trapper Creek" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project3-after.png';">
+                <img src="/images/project3-after.png" alt="Drainage refit in ${city}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; if(this.parentElement && this.parentElement.querySelector('source')) this.parentElement.querySelector('source').remove(); this.src='/images/project3-after.png';">
               </picture>
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(10,22,40,0.85); color: var(--accent); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Completed</span>
             </div>
             <div class="project-content-block" style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <h3 style="color: var(--text-white); font-size: 1.25rem; margin-bottom: 8px;">Main Sewer Line Refit</h3>
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Removed failing frost-damaged sewer pipes in Trapper Creek, cleared obstructions via high-pressure hydro-jetting, and installed heavy-duty PVC cleanouts.</p>
+                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">Removed failing frost-damaged sewer pipes in ${city}, cleared obstructions via high-pressure hydro-jetting, and installed heavy-duty PVC cleanouts.</p>
               </div>
               <div style="border-top: 1px solid var(--border-color); padding-top: 12px;">
                 <p style="font-size: 0.88rem; font-weight: 600; color: #4ade80; margin: 0;"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> Outcome: Restored 100% free flow drainage and passed municipal code inspection.</p>
@@ -704,139 +779,12 @@
       <div class="container">
         <div class="section-header" style="text-align: center; margin-bottom: 40px;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Capabilities</div>
-          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Our Plumbing Services in Trapper Creek (99683)</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our licensed team delivers comprehensive plumbing solutions for homes and businesses throughout Trapper Creek (99683). Select your required service below for diagnostic protocols, upfront pricing, and fast dispatch.</p>
+          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Our Plumbing Services in ${city} (${zip})</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our licensed team delivers comprehensive plumbing solutions for homes and businesses throughout ${city} (${zip}). Select your required service below for diagnostic protocols, upfront pricing, and fast dispatch.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
-          
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-broom"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Drain Cleaning</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Clear out stubborn blockages, frozen grease, and mineral buildup from your drains. Our licensed plumbers in Trapper Creek utilize high-velocity hydro-jetters and mechanical snakes to scrub pipe walls clean without using harsh chemicals.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/drain-cleaning/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-water"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Burst Pipe Repair</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">A burst pipe can flood a home in minutes, especially during Trapper Creek's extreme cold snaps. We replace split lines in Trapper Creek using copper pipe cutters and PEX crimping tools to execute a durable, leak-free connection.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/burst-pipe-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-temperature-high"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Water Heater Repair</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Restore your hot water supply quickly with our professional water heater repair services in Trapper Creek. Our experienced technicians use digital multimeters and tank flushing hoses to diagnose heating element failures and clear out sediment buildup.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/water-heater-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-screwdriver-wrench"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Sewer Line Repair</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Sewer backups require advanced diagnostic and repair equipment. We inspect your main sewer line in Trapper Creek using fiber-optic sewer cameras and perform repairs with heavy-duty pipe excavators to restore proper flow.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/sewer-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Emergency Plumbing</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Emergency plumbing issues require immediate action to prevent severe property damage. Our certified dispatch team in Trapper Creek is active 24/7, arriving with high-capacity utility pumps and emergency pipe clamps to secure your home.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/emergency-plumbing/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-magnifying-glass"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Leak Detection</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Locate hidden water leaks behind walls or under foundations before they cause structural damage. We pinpoint the exact leak location in Trapper Creek using acoustic listening devices and infrared thermal imaging cameras.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/leak-detection/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-fire"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Gas Line Repair</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Gas line issues present serious safety hazards that demand certified expertise. In Trapper Creek, we resolve gas leaks quickly using electronic gas sniffers and professional iron pipe threaders to ensure a 100% airtight seal.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/gas-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
-
-      <div class="service-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div class="service-icon" style="width: 52px; height: 52px; border-radius: 12px; background: var(--gradient-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 20px;">
-            <i class="fas fa-faucet-drip"></i>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-white); margin-bottom: 12px;">Water Line Repair</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin-bottom: 20px;">Fix low water pressure or discolored water caused by deteriorated supply lines. Our technicians in Trapper Creek deploy underground pipe locators and trenchless pipe pullers to repair water lines with minimal yard disruption.</p>
-        </div>
-        <div>
-          <a href="/alaska/trapper-creek-99683/water-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;">
-            Learn More <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-    
+          ${serviceCardsHtml}
         </div>
       </div>
     </section>
@@ -846,8 +794,8 @@
       <div class="container">
         <div class="section-title text-center" style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Preventative Care &amp; Longevity</div>
-          <h2 style="font-size: 2.2rem; color: #fff;">Seasonal Plumbing Maintenance Tips for Trapper Creek, AK</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">Alaska's extreme arctic temperatures, permafrost ground conditions, and long winters demand proactive maintenance. Follow these licensed plumber recommendations to extend fixture life and prevent emergency pipe disasters.</p>
+          <h2 style="font-size: 2.2rem; color: #fff;">Seasonal Plumbing Maintenance Tips for ${city}, ${STATE_CODE}</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">${STATE_NAME}'s extreme arctic temperatures, permafrost ground conditions, and long winters demand proactive maintenance. Follow these licensed plumber recommendations to extend fixture life and prevent emergency pipe disasters.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
@@ -861,7 +809,7 @@
                 <span style="font-size: 0.75rem; font-weight: 800; color: #60a5fa; background: rgba(59,130,246,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(59,130,246,0.2);">Pre-Winter</span>
               </div>
               <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">1. Pipe Freeze Prevention &amp; Heat Tape Checks</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">Trapper Creek's sub-zero winters can freeze unprotected pipes in hours. Before the first hard freeze, inspect all heat tape connections on exposed water lines, replace worn insulation foam, and verify that self-regulating heat cables are drawing proper wattage with a clamp meter.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">${city}'s sub-zero winters can freeze unprotected pipes in hours. Before the first hard freeze, inspect all heat tape connections on exposed water lines, replace worn insulation foam, and verify that self-regulating heat cables are drawing proper wattage with a clamp meter.</p>
             </div>
             <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Prevents catastrophic freeze-burst pipe failures</span>
@@ -878,7 +826,7 @@
                 <span style="font-size: 0.75rem; font-weight: 800; color: #34d399; background: rgba(16,185,129,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(16,185,129,0.2);">Annual</span>
               </div>
               <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">2. Septic System Winter Prep &amp; Vent Stack Clearing</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">In Alaska's frozen ground conditions, septic tanks process waste more slowly. Have your tank inspected and pumped before winter, and ensure roof vent stacks are clear of ice and snow to prevent dangerous sewer gas buildup indoors.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">In ${STATE_NAME}'s frozen ground conditions, septic tanks process waste more slowly. Have your tank inspected and pumped before winter, and ensure roof vent stacks are clear of ice and snow to prevent dangerous sewer gas buildup indoors.</p>
             </div>
             <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Prevents toilet and shower drain sewage backflow</span>
@@ -912,7 +860,7 @@
                 <span style="font-size: 0.75rem; font-weight: 800; color: #c084fc; background: rgba(168,85,247,0.1); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; border: 1px solid rgba(168,85,247,0.2);">Spring Thaw</span>
               </div>
               <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px;">4. Frost Heave &amp; Foundation Pipe Inspection</h3>
-              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">Trapper Creek's freeze-thaw cycles cause ground to heave and shift, stressing underground water and sewer connections. After spring thaw, inspect visible foundation penetrations for new cracks or gaps and check basement pipes for signs of displacement or slow leaks.</p>
+              <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin: 0;">${city}'s freeze-thaw cycles cause ground to heave and shift, stressing underground water and sewer connections. After spring thaw, inspect visible foundation penetrations for new cracks or gaps and check basement pipes for signs of displacement or slow leaks.</p>
             </div>
             <div style="margin-top: 18px; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <span style="font-size: 0.82rem; color: #4ade80; font-weight: 600;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i> Pro-Benefit: Catches ground-shift damage before major flooding</span>
@@ -957,12 +905,12 @@
         <!-- Pro-Tip Consultation Banner -->
         <div style="background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px 32px; margin-top: 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: var(--shadow-md);">
           <div style="max-width: 620px;">
-            <h4 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 6px;">Need a Comprehensive Plumbing Audit in Trapper Creek?</h4>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our certified Alaska technicians conduct whole-house water pressure testing, freeze-risk assessments, and thermal camera leak inspections.</p>
+            <h4 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 6px;">Need a Comprehensive Plumbing Audit in ${city}?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our certified ${STATE_NAME} technicians conduct whole-house water pressure testing, freeze-risk assessments, and thermal camera leak inspections.</p>
           </div>
           <div>
-            <a href="tel:877-516-8705" class="btn btn-secondary" style="background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-              <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+            <a href="tel:${PHONE}" class="btn btn-secondary" style="background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+              <i class="fas fa-phone-alt"></i> Call ${PHONE_DISPLAY}
             </a>
           </div>
         </div>
@@ -974,114 +922,11 @@
       <div class="container">
         <div class="section-header" style="text-align: center; margin-bottom: 40px;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Coverage Network</div>
-          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Plumbing Service Coverage Areas (8 Nearby Cities)</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our technicians provide emergency repairs, drain clearing, and scheduled plumbing services across Trapper Creek and neighboring Alaska communities.</p>
+          <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">Plumbing Service Coverage Areas (${nearby.length} Nearby Cities)</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">Our technicians provide emergency repairs, drain clearing, and scheduled plumbing services across ${city} and neighboring ${STATE_NAME} communities.</p>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
-          
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99501 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99501/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99502 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99502/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99503 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99503/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99504 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99504/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Jber, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99505 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/jber-99505/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Jber, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99506 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/jber-99506/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99507 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99507/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
-
-    <div class="area-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition);">
-      <div>
-        <h3 style="font-size: 1.05rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-          <i class="fas fa-map-pin" style="color: var(--primary); font-size: 0.9rem;"></i> Anchorage, AK
-        </h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">ZIP Code: 99508 | Prompt emergency repairs, water line fixes, and drain cleaning.</p>
-      </div>
-      <a href="/alaska/anchorage-99508/" style="color: var(--accent); font-size: 0.88rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        Schedule Service <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
-      </a>
-    </div>
-  
+          ${nearbyCardsHtml}
         </div>
       </div>
     </section>
@@ -1092,19 +937,19 @@
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Testimonials</div>
           <h2 style="font-size: 2.2rem; color: #fff;">Reviews From Local Property Owners</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">See what clients in Trapper Creek say about our professional plumbing diagnostics and upfront quotes.</p>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">See what clients in ${city} say about our professional plumbing diagnostics and upfront quotes.</p>
         </div>
         <div class="grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
           <div class="testimonial-card" style="background: var(--bg-card); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div class="stars" style="color: var(--accent); margin-bottom: 1rem; font-size: 1.15rem;">★★★★★</div>
               <p style="font-size: 0.95rem; color: var(--text-light); font-style: italic; margin-bottom: 1.5rem; line-height: 1.65;">
-                "A sudden burst pipe caused water to pool across our floor in Trapper Creek. Home Plumbing USA arrived in under 40 minutes, shut off the main line, and replaced the split section without any mess. Truly exceptional service!"
+                "A sudden burst pipe caused water to pool across our floor in ${city}. Home Plumbing USA arrived in under 40 minutes, shut off the main line, and replaced the split section without any mess. Truly exceptional service!"
               </p>
             </div>
             <div class="testimonial-author" style="display: flex; flex-direction: column; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <h4 style="font-size: 1rem; color: var(--text-white); margin-bottom: 2px;">Robert H.</h4>
-              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Burst Pipe Repair | Trapper Creek, AK</span>
+              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Burst Pipe Repair | ${city}, ${STATE_CODE}</span>
             </div>
           </div>
           
@@ -1112,12 +957,12 @@
             <div>
               <div class="stars" style="color: var(--accent); margin-bottom: 1rem; font-size: 1.15rem;">★★★★★</div>
               <p style="font-size: 0.95rem; color: var(--text-light); font-style: italic; margin-bottom: 1.5rem; line-height: 1.65;">
-                "Upgrading to a tankless water heater in Trapper Creek was seamless. The plumber walked us through our options, gave us an exact upfront price, and completed the installation cleanly. Our hot water is endless now!"
+                "Upgrading to a tankless water heater in ${city} was seamless. The plumber walked us through our options, gave us an exact upfront price, and completed the installation cleanly. Our hot water is endless now!"
               </p>
             </div>
             <div class="testimonial-author" style="display: flex; flex-direction: column; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <h4 style="font-size: 1rem; color: var(--text-white); margin-bottom: 2px;">Sarah M.</h4>
-              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Tankless Heater Upgrade | Trapper Creek, AK</span>
+              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Tankless Heater Upgrade | ${city}, ${STATE_CODE}</span>
             </div>
           </div>
 
@@ -1130,7 +975,7 @@
             </div>
             <div class="testimonial-author" style="display: flex; flex-direction: column; border-top: 1px solid var(--border-color); padding-top: 12px;">
               <h4 style="font-size: 1rem; color: var(--text-white); margin-bottom: 2px;">David L.</h4>
-              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Sewer Line Hydro-Jetting | Trapper Creek, AK</span>
+              <span style="font-size: 0.82rem; color: var(--primary-light); font-weight: 600;">Sewer Line Hydro-Jetting | ${city}, ${STATE_CODE}</span>
             </div>
           </div>
         </div>
@@ -1143,139 +988,10 @@
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Got Questions?</div>
           <h2 style="font-size: 2.2rem; color: #fff;">Frequently Asked Questions</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">Get answers to the most common questions about our plumbing services, safety codes, and dispatch times in Trapper Creek.</p>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">Get answers to the most common questions about our plumbing services, safety codes, and dispatch times in ${city}.</p>
         </div>
         <div class="faq-container" style="max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px;">
-          
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">Is 24/7 emergency plumbing services available in Trapper Creek?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in Trapper Creek immediately to resolve urgent leaks, backups, or system failures.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">How quickly can a plumber arrive at my property in Trapper Creek 99683?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">On average, emergency plumbers in our network can arrive at your address in Trapper Creek (99683) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">Are the technicians licensed and insured in AK?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your plumbing services will be handled safely, professionally, and in complete compliance with AK building codes.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">Do you charge by the hour or provide flat-rate pricing?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your Trapper Creek property and present your options, ensuring there are no surprise charges or hidden fees.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">How do Alaska's extreme cold temperatures affect my plumbing?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Alaska's sub-zero winters pose serious risks to residential plumbing. Water inside uninsulated pipes can freeze and expand, cracking copper, PVC, and galvanized lines. We recommend heat tape wrapping, pipe insulation, and maintaining indoor temperatures above 55°F to prevent catastrophic freeze-bursts.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">How can I protect my pipes from freezing in Trapper Creek?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Install self-regulating heat tape on exposed water supply lines, add foam pipe insulation to all pipes in unheated crawl spaces and basements, and allow a slow drip on exterior faucets during extreme cold events. Our plumbers in Trapper Creek provide professional winterization assessments.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">Is there a warranty or guarantee on the plumbing services work?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Yes! All plumbing services repairs are backed by a workmanship guarantee from the matching plumbing provider. Replaced parts, fixtures, and appliances are also covered by their respective manufacturer warranties.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">What should I do immediately if I find a water leak?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Locate your main water shutoff valve (usually found near the water meter or street connection) and turn it completely clockwise. This cuts off the supply and stops active water damage at your Trapper Creek home while you call us for emergency dispatch.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">Is high-pressure hydro-jetting safe for older pipes in Trapper Creek?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Yes. Our plumbers conduct a fiber-optic sewer camera inspection first to check the pipe structure. If the sewer line is structurally sound, hydro-jetting is the safest, most effective way to clear grease, sludge, and tree roots.</p>
-        </div>
-      </div>
-    </div>
-  
-
-    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card); transition: var(--transition);">
-      <button class="faq-trigger" type="button" aria-expanded="false" style="width: 100%; text-align: left; padding: 18px 24px; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <h3 class="faq-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-white); margin: 0;">How do you ensure plumbing installations comply with AK building codes?</h3>
-        <span class="faq-icon" style="font-size: 1.5rem; font-weight: 400; color: var(--primary-light); line-height: 1; flex-shrink: 0;">+</span>
-      </button>
-      <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
-        <div class="faq-content-inner" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-          <p style="margin: 0;">Our network plumbers are fully versed in local building codes and the AK Plumbing Code. We ensure correct slope, venting, and material selection for all installations in Trapper Creek, passing any municipal inspections.</p>
-        </div>
-      </div>
-    </div>
-  
+          ${faqAccordionHtml}
         </div>
       </div>
     </section>
@@ -1286,10 +1002,10 @@
         <div class="section-title text-center" style="text-align: center; max-width: 700px; margin: 0 auto 2.5rem;">
           <div class="section-label" style="display: inline-block; padding: 4px 14px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Local Coverage</div>
           <h2 style="font-size: 2.2rem; color: #fff;">Service Area Network</h2>
-          <p style="color: var(--text-muted); font-size: 1.05rem;">We provide 24/7 emergency dispatch services across Trapper Creek (99683) and surrounding areas.</p>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">We provide 24/7 emergency dispatch services across ${city} (${zip}) and surrounding areas.</p>
         </div>
         <div class="map-container" style="width: 100%; height: 420px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
-          <iframe src="https://maps.google.com/maps?q=Trapper%20Creek%2C%20AK%2099683&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://maps.google.com/maps?q=${mapQuery}&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </section>
@@ -1297,11 +1013,11 @@
     <!-- 12. FINAL CTA BANNER -->
     <section class="cta-section" style="padding: 5rem 0; background: var(--gradient-cta); color: #fff; text-align: center;">
       <div class="container" style="max-width: 760px; margin: 0 auto;">
-        <h2 style="font-size: 2.4rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Request a No-Obligation Quote in Trapper Creek</h2>
-        <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Contact our dispatch center now to receive an upfront, transparent flat-rate estimate. Experienced licensed technicians stationed across Trapper Creek (99683) are ready for fast 24/7 dispatch.</p>
+        <h2 style="font-size: 2.4rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Request a No-Obligation Quote in ${city}</h2>
+        <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Contact our dispatch center now to receive an upfront, transparent flat-rate estimate. Experienced licensed technicians stationed across ${city} (${zip}) are ready for fast 24/7 dispatch.</p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-          <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-            <i class="fas fa-phone-alt"></i> Call Now: (877) 516-8705
+          <a href="tel:${PHONE}" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fas fa-phone-alt"></i> Call Now: ${PHONE_DISPLAY}
           </a>
         </div>
       </div>
@@ -1316,17 +1032,17 @@
           <a href="/" class="logo footer-logo" style="display: inline-block; margin-bottom: 18px;">
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
-          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">24/7 Plumbers in Trapper Creek, AK</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Connecting property owners across Trapper Creek (99683) with vetted, licensed local plumbing contractors for 24/7 emergency repair and installations.</p>
+          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">24/7 Plumbers in ${city}, ${STATE_CODE}</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Connecting property owners across ${city} (${zip}) with vetted, licensed local plumbing contractors for 24/7 emergency repair and installations.</p>
           <div style="display: flex; align-items: center; gap: 10px; color: var(--accent); font-weight: 700;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+            <i class="fas fa-phone-alt"></i> ${PHONE_DISPLAY}
           </div>
         </div>
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Quick Links</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Home</a>
-            <a href="https://homeplumbingusa.com/state/alaska/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Alaska Plumbers</a>
+            <a href="${stateUrl}" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">${STATE_NAME} Plumbers</a>
             <a href="/about" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">About Us</a>
             <a href="/projects" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Projects</a>
             <a href="/contact" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Contact</a>
@@ -1335,24 +1051,24 @@
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Emergency Services</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
-            <a href="/alaska/trapper-creek-99683/emergency-plumbing/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Emergency Plumbing</a>
-            <a href="/alaska/trapper-creek-99683/burst-pipe-repair/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Burst Pipe Repair</a>
-            <a href="/alaska/trapper-creek-99683/water-heater-repair/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Water Heater Repair</a>
-            <a href="/alaska/trapper-creek-99683/drain-cleaning/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Drain Cleaning</a>
-            <a href="/alaska/trapper-creek-99683/leak-detection/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Leak Detection</a>
+            <a href="/${pageSlug}/emergency-plumbing/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Emergency Plumbing</a>
+            <a href="/${pageSlug}/burst-pipe-repair/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Burst Pipe Repair</a>
+            <a href="/${pageSlug}/water-heater-repair/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Water Heater Repair</a>
+            <a href="/${pageSlug}/drain-cleaning/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Drain Cleaning</a>
+            <a href="/${pageSlug}/leak-detection/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Leak Detection</a>
           </div>
         </div>
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">24/7 Active Dispatch</div>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 12px;"><strong>Emergency Dispatch:</strong> 24 Hours / 7 Days</p>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;"><strong>Office Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</p>
-          <a href="tel:877-516-8705" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+          <a href="tel:${PHONE}" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+            <i class="fas fa-phone-alt"></i> ${PHONE_DISPLAY}
           </a>
         </div>
       </div>
       <div class="footer-bottom" style="border-top: 1px solid var(--border-color); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.85rem; color: var(--text-muted);">
-        <p style="margin: 0;">&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network.</p>
+        <p style="margin: 0;">&copy; ${YEAR} Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network.</p>
         <div class="footer-links" style="display: flex; gap: 16px;">
           <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
           <a href="/terms-and-conditions" style="color: var(--text-muted); text-decoration: none;">Terms</a>
@@ -1386,4 +1102,43 @@
   </script>
 
 </body>
-</html>
+</html>`;
+}
+
+// ==== MAIN EXECUTION ====
+
+console.log('====================================================');
+console.log('BUILDING ALASKA (AK) ZIP PAGES — FULL RESTRUCTURE');
+console.log('====================================================\n');
+
+const dirs = fs.readdirSync(ALASKA_DIR).filter(d => {
+  return fs.statSync(path.join(ALASKA_DIR, d)).isDirectory();
+});
+
+console.log(`Found ${dirs.length} Alaska zip directories.\n`);
+
+let success = 0;
+let errors = 0;
+
+dirs.forEach((dir, i) => {
+  try {
+    const html = generatePage(dir);
+    if (!html) {
+      console.log(`SKIP: ${dir} (could not parse)`);
+      return;
+    }
+    const outPath = path.join(ALASKA_DIR, dir, 'index.html');
+    fs.writeFileSync(outPath, html, 'utf8');
+    success++;
+    if ((i + 1) % 50 === 0 || i === dirs.length - 1) {
+      console.log(`Progress: ${i + 1}/${dirs.length} pages generated...`);
+    }
+  } catch (err) {
+    console.error(`ERROR: ${dir} — ${err.message}`);
+    errors++;
+  }
+});
+
+console.log(`\n====================================================`);
+console.log(`DONE! Generated ${success} pages. Errors: ${errors}.`);
+console.log(`====================================================`);
