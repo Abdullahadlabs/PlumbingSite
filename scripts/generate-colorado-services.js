@@ -1,14 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const { LAKEWOOD_ZIPS, SERVICES, DOMAIN, COLORADO_DIR } = require('./colorado-data');
+const { LAKEWOOD_ZIPS, SERVICES, DOMAIN, COLORADO_DIR, ensureDir } = require('./colorado-data');
 
-function ensureDir(dirPath) {
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-}
-
-// Generate the 5 Signs section customized by service
+// ======================================================================
+// 1. GENERATE 5 SIGNS SECTION
+// ======================================================================
 function generate5Signs(serviceSlug, serviceName, zipObj) {
   const signsByService = {
     'drain-cleaning': [
@@ -16,19 +12,19 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-hourglass-half',
         title: 'Slow Shower & Sink Drainage',
-        desc: `Water standing in tub or sink basins indicates progressive buildup of hair, soap scum, and hard water scale clinging to interior pipe walls in your ${zipObj.neighborhood} home.`
+        desc: `Water standing in tub or sink basins indicates progressive buildup of hair, soap scum, and hard mineral scale clinging to interior pipe walls in your ${zipObj.neighborhood} home.`
       },
       {
         num: '02',
         icon: 'fa-arrows-rotate',
         title: 'Frequent, Stubborn Clogs',
-        desc: `When simple plunging only gives temporary relief, hardened food grease or root intrusion deep in the underground lateral requires high-velocity hydro-jetting.`
+        desc: `When simple plunging only provides temporary relief, hardened food grease or root intrusion deep in the underground lateral requires high-velocity hydro-jetting.`
       },
       {
         num: '03',
         icon: 'fa-volume-high',
         title: 'Gurgling Fixtures & Vents',
-        desc: `Bubbling toilet bowls or gurgling sounds when the washing machine drains mean displaced sewer gases are trapped behind a choking obstruction.`
+        desc: `Bubbling toilet bowls or gurgling sounds when laundry standpipes drain indicate displaced sewer gases trapped behind an advancing pipe blockage.`
       },
       {
         num: '04',
@@ -41,7 +37,7 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         urgent: true,
         icon: 'fa-triangle-exclamation',
         title: 'Simultaneous Fixture Backups',
-        desc: `When using the kitchen sink forces dirty water up into a basement shower drain, your main building drain is fully blocked and requires immediate 24/7 emergency dispatch.`
+        desc: `When using the kitchen sink forces dirty water up into a basement shower drain, your main building drain is fully blocked and requires immediate 24/7 emergency rooter dispatch.`
       }
     ],
     'burst-pipe-repair': [
@@ -54,27 +50,27 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
       {
         num: '02',
         icon: 'fa-snowflake',
-        title: 'Frozen Pipes Following Cold Fronts',
-        desc: `Sub-zero Front Range temperatures cause exposed pipes in unheated crawlspaces or exterior walls to freeze solid. Once ice thaws, split copper or PEX lines burst immediately.`
+        title: 'Frozen Pipes Following Front Range Freezes',
+        desc: `Sub-zero Rocky Mountain cold fronts cause exposed pipes in unheated crawlspaces, exterior walls, or uninsulated cantilevers to freeze solid. Once ice thaws, split lines burst immediately.`
       },
       {
         num: '03',
         icon: 'fa-water',
         title: 'Water Stains on Drywall or Ceilings',
-        desc: `Dark bubbling damp spots, soft drywall, or water dripping through light fixtures reveal concealed pressurized pipe splits inside wall cavities.`
+        desc: `Dark bubbling damp spots, soft drywall, or water dripping through light fixtures reveal concealed pressurized pipe splits inside wall cavities in ${zipObj.neighborhood}.`
       },
       {
         num: '04',
         icon: 'fa-volume-high',
         title: 'Hissing Sounds Inside Walls',
-        desc: `The audible sound of continuous running or spraying water when all fixtures are turned off signals an active pinhole or joint failure behind your walls.`
+        desc: `The audible sound of continuous running or spraying water when all faucets are turned off signals an active pinhole or solder joint failure behind finished walls.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-triangle-exclamation',
         title: 'Uncontrolled Basement Flooding',
-        desc: `Pressurized supply line ruptures can dump hundreds of gallons an hour into finished basements. Shut off the main valve and call our 24/7 emergency line immediately.`
+        desc: `Pressurized supply line ruptures can discharge hundreds of gallons an hour into finished basements. Shut off your main water valve and call our 24/7 emergency dispatch line immediately.`
       }
     ],
     'water-heater-repair': [
@@ -82,32 +78,32 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-temperature-arrow-down',
         title: 'Inadequate or Tepid Hot Water',
-        desc: `Running out of hot water rapidly or receiving only lukewarm water signals burned-out electric heating elements or faulty gas burner control assemblies.`
+        desc: `Running out of hot water rapidly or receiving only lukewarm water signals burned-out electric heating elements, faulty dip tubes, or impaired gas burner assemblies.`
       },
       {
         num: '02',
         icon: 'fa-burst',
         title: 'Popping or Rumbling Tank Sounds',
-        desc: `At Lakewood's elevation of ${zipObj.elevation}, hard water minerals settle to the tank bottom. Water trapped beneath this dense sediment crust boils loudly and overheats the tank bottom.`
+        desc: `At Lakewood's elevation of ${zipObj.elevation}, hard water minerals settle to the tank bottom. Water trapped beneath dense calcium sediment boils violently and overheats tank steel.`
       },
       {
         num: '03',
         icon: 'fa-faucet',
-        title: 'Discolored or Rusty Water',
-        desc: `Brownish or metallic-tasting hot water indicates that the sacrificial anode rod has completely depleted, allowing corrosive water to attack the steel tank lining.`
+        title: 'Discolored or Rusty Hot Water',
+        desc: `Brownish or metallic-tasting hot water indicates that the sacrificial anode rod has fully depleted, allowing corrosive water to attack the steel tank lining.`
       },
       {
         num: '04',
         icon: 'fa-triangle-exclamation',
         title: 'Moisture Around Tank Base',
-        desc: `Puddling water around your tank in ${zipObj.zip} indicates failing inlet nipples, a leaking temperature-pressure relief (TPR) valve, or internal tank fracture.`
+        desc: `Puddling water around your tank in ${zipObj.zip} indicates failing dielectric nipples, a leaking temperature-pressure relief (TPR) valve, or internal tank fracture.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-fire-flame-curved',
         title: 'Pilot Light or Gas Burner Failures',
-        desc: `Frequent thermocouple lockouts or sulfur smells near gas water heaters represent combustion hazards that require immediate certified technician inspection.`
+        desc: `Frequent thermocouple lockouts, lazy yellow flames, or sulfur odors near gas water heaters represent combustion hazards that require immediate certified technician service.`
       }
     ],
     'sewer-line-repair': [
@@ -115,65 +111,65 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-toilet',
         title: 'Persistent Main Drain Clogs',
-        desc: `Recurring backups in basement toilets or laundry standpipes across ${zipObj.neighborhood} point to deep structural sewer pipe issues rather than simple fixture clogs.`
+        desc: `Recurring backups in basement toilets or laundry standpipes across ${zipObj.neighborhood} point to deep structural lateral pipe defects rather than simple fixture clogs.`
       },
       {
         num: '02',
         icon: 'fa-tree',
-        title: 'Tree Root Infiltration',
-        desc: `Mature root systems from neighborhood cottonwoods or willows seek moisture through hairline joints in older clay or cast-iron lines, creating dense structural mats.`
+        title: 'Cottonwood & Willow Tree Root Intrusion',
+        desc: `Mature root systems seek moisture through hairline joints in older clay or cast-iron lines, expanding into dense flow-blocking root mats.`
       },
       {
         num: '03',
         icon: 'fa-layer-group',
-        title: 'Soil Heave & Pipe Bellies',
-        desc: `Expansive ${zipObj.soilType} shifts during wet-dry cycles, causing underground sewer pipes to sag (belly). Grease and solids settle in the low point, creating perpetual blockages.`
+        title: 'Bentonite Soil Heave & Pipe Bellies',
+        desc: `Expansive ${zipObj.soilType} shifts during wet-dry cycles, causing underground sewer laterals to sag. Waste pools in the belly, creating recurrent blockages.`
       },
       {
         num: '04',
         icon: 'fa-plant-wilt',
-        title: 'Soggy, Sunken Yard Patches',
-        desc: `Unusually lush green patches, foul odors, or localized soil sinkholes in your yard indicate a collapsed or separated sewer lateral discharging sewage below lawn grade.`
+        title: 'Soggy, Sunken Yard Depressions',
+        desc: `Unusually green grass patches, sewage odors, or ground sinkage in your yard indicate a collapsed or separated sewer lateral leaking below grade.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-biohazard',
-        title: 'Raw Sewage Backing Up Inside',
-        desc: `Blackwater bubbling up from lowest-level drains poses extreme biohazard and structural risks requiring immediate CCTV camera inspection and trenchless repair.`
+        title: 'Raw Sewage Backing Up Indoors',
+        desc: `Contaminated blackwater bubbling up from basement floor drains poses severe health and structural risks requiring immediate CCTV inspection and trenchless relining.`
       }
     ],
     'emergency-plumbing': [
       {
         num: '01',
         icon: 'fa-faucet-drip',
-        title: 'Active Water Flooding',
-        desc: `Uncontrolled water escaping from split supply lines, fractured valves, or failed washing machine hoses in ${zipObj.zip} threatens electrical and structural safety.`
+        title: 'Active High-Volume Flooding',
+        desc: `Uncontrolled water escaping from split supply pipes, ruptured valves, or failed appliance connectors in ${zipObj.zip} threatens structural and electrical safety.`
       },
       {
         num: '02',
         icon: 'fa-biohazard',
         title: 'Complete Sewer Line Inversion',
-        desc: `When toilets and lower-level drains overflow simultaneously with contaminated wastewater, your property requires immediate emergency mechanical snaking or jetting.`
+        desc: `When toilets and lower-level fixtures overflow simultaneously with wastewater, your property requires immediate priority mechanical snaking or hydro-jetting.`
       },
       {
         num: '03',
         icon: 'fa-gas-pump',
         title: 'Gas Odors Near Appliances',
-        desc: `A pungent rotten-egg mercaptan smell near water heaters or furnaces in ${zipObj.neighborhood} signals an active natural gas leak demanding emergency evacuation and repair.`
+        desc: `A pungent rotten-egg mercaptan smell near water heaters or furnaces in ${zipObj.neighborhood} signals an active natural gas leak demanding emergency evacuation and licensed repair.`
       },
       {
         num: '04',
         icon: 'fa-snowflake',
         title: 'Frozen Main Lines Before Freeze Thaw',
-        desc: `Completely frozen water feeds during Lakewood sub-zero snaps can rupture violently as air warms. Emergency thawing prevents cataclysmic wall blowouts.`
+        desc: `Completely frozen water feeds during Lakewood sub-zero snaps can rupture violently as weather warms. Emergency line thawing prevents destructive wall blowouts.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-bell',
-        title: 'Inoperable Main Shutoff Valve',
-        desc: `If your primary water shutoff valve is seized or corroded open during an active leak, emergency municipal curb-stop isolation is required immediately.`
+        title: 'Inoperable Main Water Shutoff Valve',
+        desc: `If your primary interior water shutoff valve is seized open during an active leak, emergency municipal curb-stop isolation is required immediately.`
       }
     ],
     'leak-detection': [
@@ -181,32 +177,32 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-file-invoice-dollar',
         title: 'Unexplained Water Bill Spikes',
-        desc: `A sudden increase in monthly water consumption with no change in family usage indicates thousands of gallons escaping from an underground or under-slab pipe breach.`
+        desc: `A sudden increase in monthly water consumption with no changes in family usage indicates thousands of gallons escaping from an underground or under-slab breach.`
       },
       {
         num: '02',
         icon: 'fa-gauge-high',
         title: 'Constantly Spinning Water Meter',
-        desc: `If your water meter's leak indicator triangle spins while all house faucets, ice makers, and irrigation systems are shut off, water is escaping continuously.`
+        desc: `If your water meter's leak indicator triangle spins while all house faucets and irrigation valves are shut off, water is escaping continuously under pressure.`
       },
       {
         num: '03',
         icon: 'fa-temperature-high',
         title: 'Warm Spots on Concrete Floors',
-        desc: `In slab-on-grade homes across ${zipObj.neighborhood}, noticeable warm patches on hardwood or tile floors indicate an eroding hot water copper supply line buried in concrete.`
+        desc: `In slab-on-grade homes across ${zipObj.neighborhood}, noticeable warm floor patches indicate an eroding hot water copper supply line buried beneath concrete.`
       },
       {
         num: '04',
         icon: 'fa-water',
-        title: 'Damp Flooring & Musty Odors',
-        desc: `Persistent moisture under baseboards, peeling vinyl flooring, or musty mildew smells point to concealed water vapor migrating from a slab crack.`
+        title: 'Damp Baseboards & Musty Odors',
+        desc: `Persistent moisture under baseboards, buckling hardwood, or musty mildew odors point to concealed pressurized water vapor migrating from sub-slab cracks.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-triangle-exclamation',
         title: 'Foundation Cracks & Ground Settlement',
-        desc: `Unchecked underground water leaks wash away support soils and trigger rapid swelling in ${zipObj.soilType}, causing structural foundation fractures.`
+        desc: `Unchecked underground water leaks wash away support gravel and trigger rapid swelling in ${zipObj.soilType}, causing structural foundation fractures.`
       }
     ],
     'gas-line-repair': [
@@ -214,32 +210,32 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-radiation',
         title: 'Rotten Egg Mercaptan Odor',
-        desc: `Natural gas is naturally odorless; utilities add sulfurous mercaptan so leaks can be detected. If you smell rotten eggs anywhere in your ${zipObj.zip} home, act immediately.`
+        desc: `Natural gas is odorless; utilities add sulfurous mercaptan so leaks are detectable. If you smell rotten eggs in your ${zipObj.zip} home, evacuate immediately.`
       },
       {
         num: '02',
         icon: 'fa-volume-high',
         title: 'Hissing or Whistling Gas Pipes',
-        desc: `An audible hissing noise near gas meter manifolds, furnace connections, or flexible appliance lines indicates high-pressure gas escaping into living quarters.`
+        desc: `An audible hissing noise near gas meters, furnace connections, or appliance flex lines indicates high-pressure gas escaping into living quarters.`
       },
       {
         num: '03',
         icon: 'fa-seedling',
         title: 'Dead Lawn Patches Over Gas Lines',
-        desc: `Patches of dead or yellowed grass directly over an underground gas service line in ${zipObj.neighborhood} reveal gas saturating root zones and displacing oxygen.`
+        desc: `Patches of dead or yellowed turf directly above buried gas supply piping in ${zipObj.neighborhood} reveal gas saturating root zones and displacing oxygen.`
       },
       {
         num: '04',
         icon: 'fa-head-side-cough',
         title: 'Physical Symptoms of Gas Exposure',
-        desc: `Unexplained dizziness, nausea, headaches, or fatigue while indoors are classic symptoms of gas inhalation or carbon monoxide poisoning from incomplete venting.`
+        desc: `Unexplained dizziness, nausea, headaches, or fatigue while indoors are classic symptoms of natural gas inhalation or carbon monoxide accumulation.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-fire',
         title: 'Appliance Yellow Flames & Soot',
-        desc: `Gas appliances should burn with a clean blue flame. Lazy yellow or orange flames accompanied by soot deposits indicate dangerous burner malfunction.`
+        desc: `Gas burners should produce steady blue flames. Lazy yellow or orange flames accompanied by soot deposits indicate dangerous incomplete combustion.`
       }
     ],
     'water-line-repair': [
@@ -247,32 +243,32 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         num: '01',
         icon: 'fa-droplet-slash',
         title: 'Persistent Low Household Pressure',
-        desc: `A permanent decline in water volume when running two fixtures at once indicates scaling, root intrusion, or pinhole fractures in your underground main supply line.`
+        desc: `A permanent decline in water volume when running two fixtures at once indicates mineral scaling, root intrusion, or pinhole fractures in your underground main supply line.`
       },
       {
         num: '02',
         icon: 'fa-glass-water-droplet',
-        title: 'Rusty or Turbid Tap Water',
-        desc: `Brown, yellow, or gritty sediment appearing in drinking water suggests aging galvanized supply pipes corroding internally or soil entering a fractured line.`
+        title: 'Discolored or Sediment-Heavy Water',
+        desc: `Brown, yellow, or gritty water at your faucets indicates that aging galvanized or copper service lines are corroding internally or drawing in exterior soil.`
       },
       {
         num: '03',
         icon: 'fa-water',
-        title: 'Unexplained Soggy Lawn Areas',
-        desc: `Spongy, marshy spots on your front yard between the water meter pit and your house foundation in ${zipObj.zip} indicate an active underground water main rupture.`
+        title: 'Unexplained Wet Patches in Yard',
+        desc: `Spongy, soggy turf or standing puddles between your street meter pit and foundation wall in ${zipObj.zip} indicate an active underground water main break.`
       },
       {
         num: '04',
         icon: 'fa-faucet',
-        title: 'Sudden Air Sputtering from Faucets',
-        desc: `Pipes coughing or spurting pockets of air when faucets are turned on means air is being drawn into the pressurized supply line through an exterior crack.`
+        title: 'Air Sputtering from Faucets',
+        desc: `Faucets coughing air pockets when turned on indicate that exterior air is being siphoned into pressurized service lines through subterranean fracture points.`
       },
       {
         num: '05 • Emergency',
         urgent: true,
         icon: 'fa-triangle-exclamation',
-        title: 'Pavement Cracking or Driveway Sinkage',
-        desc: `Water line leaks erode subsurface gravel and subsoil over time, causing driveways, sidewalks, and porch slabs to settle, crack, or collapse.`
+        title: 'Driveway Sinkage & Concrete Cracking',
+        desc: `Subterranean water leaks erode structural gravel and subsoil over time, causing driveways, sidewalks, and front porches to settle, crack, or collapse.`
       }
     ]
   };
@@ -296,7 +292,7 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
         <i class="fas fa-triangle-exclamation"></i> Diagnostic Indicators
       </div>
       <h2 style="font-size: 1.85rem; font-weight: 800; color: #fff; margin-bottom: 12px;">5 Signs You Need ${serviceName} in Lakewood, CO (${zipObj.zip})</h2>
-      <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px;">Don't wait for minor issues to escalate into severe structural water or gas damage. Contact our Lakewood dispatch desk if you identify any of these 5 warning signs:</p>
+      <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px;">Don't wait for minor symptoms to escalate into catastrophic structural water or gas damage. Contact our Lakewood dispatch desk if you notice any of these 5 warning signs:</p>
       <div class="signs-grid">
         ${signsHtml}
       </div>
@@ -304,14 +300,16 @@ function generate5Signs(serviceSlug, serviceName, zipObj) {
   `;
 }
 
-// Generate hyper-local technical copy tailored to the Lakewood ZIP
+// ======================================================================
+// 2. GENERATE LOCAL CONTENT
+// ======================================================================
 function generateLocalContent(serviceSlug, serviceName, zipObj) {
   const localCopy = {
     'drain-cleaning': {
-      p1Title: `High-Altitude Grease Solidification & Scale in ${zipObj.neighborhood}`,
-      p1: `In Lakewood (${zipObj.zip}), elevation ranges around ${zipObj.elevation}. Cooler foundation ground temperatures and mountain air cause fats, cooking oils, and grease to solidify inside residential drain lines much faster than at sea level. Combined with dissolved calcium and magnesium from ${zipObj.waterSource}, drains in ${zipObj.neighborhood} develop tough calcified scaling that chokes gravity flow. Our network contractors utilize commercial-grade electric snake rooters and 4,000 PSI hydro-jetting to blast lines spotless without harsh chemical acids.`,
-      p2Title: `Video Sewer Inspection & Bentonite Soil Diagnostics`,
-      p2: `Because ${zipObj.zip} sits on ${zipObj.soilType}, ground shifting frequently creates pipe bellies where water pools and accumulates solids. Matched plumbing technicians run high-resolution color CCTV cameras with digital locators down your lateral line to verify whether your stoppage is caused by grease, tree root intrusion, or soil shear fractures before hydro-jetting clean.`
+      p1Title: `High-Altitude Grease Solidification & Mineral Scale in ${zipObj.neighborhood}`,
+      p1: `In Lakewood (${zipObj.zip}), elevation reaches approximately ${zipObj.elevation}. Cooler subterranean soil temperatures and mountain air cause kitchen grease, cooking oils, and soap scum to solidify inside residential drain laterals far more rapidly than at sea level. Combined with dissolved calcium and magnesium minerals from ${zipObj.waterSource}, drains in ${zipObj.neighborhood} develop rock-hard calcified scaling that chokes gravity flow. Our network contractors utilize commercial-grade electric snake rooters and 4,000 PSI hydro-jetting to blast lines clean without caustic chemicals.`,
+      p2Title: `Video Sewer Scoping & Bentonite Clay Diagnostics in ${zipObj.zip}`,
+      p2: `Because homes in ${zipObj.neighborhood} are built over ${zipObj.soilType}, ground shifting during seasonal moisture cycles frequently creates pipe sags (bellies) where water pools and accumulates solids. Matched plumbing technicians run high-resolution color CCTV cameras with digital locators down your lateral line to verify whether your stoppage is caused by grease, tree root intrusion, or soil shear fractures before clearing.`
     },
     'burst-pipe-repair': {
       p1Title: `Sub-Zero Freeze Swings & Attic Pipe Ruptures in ${zipObj.zip}`,
@@ -327,26 +325,26 @@ function generateLocalContent(serviceSlug, serviceName, zipObj) {
     },
     'sewer-line-repair': {
       p1Title: `Bentonite Clay Soil Movement & Sewer Line Bellies in ${zipObj.neighborhood}`,
-      p1: `Homes in Lakewood (${zipObj.zip}) are built over ${zipObj.soilType}. These expansive clay soils expand dramatically when saturated with spring snowmelt and shrink during summer dry spells. This repeated ground movement exerts immense vertical and lateral pressure on underground sewer laterals, creating low sags (bellies), cracked joints, and offset pipes that snag household waste.`,
-      p2Title: `Trenchless Pipe Relining & Minimal Yard Excavation in ${zipObj.zip}`,
-      p2: `Rather than digging up driveways and landscaping in ${zipObj.neighborhood}, network sewer specialists deploy trenchless cured-in-place pipe (CIPP) relining. By inserting an epoxy-saturated sleeve that cures into a seamless, jointless pipe inside the old host line, homeowners receive a smooth root-proof lateral with up to 50-year structural life.`
+      p1: `Homes in Lakewood (${zipObj.zip}) sit above ${zipObj.soilType}. These expansive clay soils expand dramatically when saturated with spring snowmelt and shrink during summer dry spells. This repeated ground movement exerts immense vertical and lateral pressure on underground sewer laterals, creating low sags (bellies), cracked joints, and offset pipes that snag household waste.`,
+      p2Title: `Trenchless CIPP Epoxy Relining & Yard Preservation in ${zipObj.zip}`,
+      p2: `Rather than excavating manicured lawns, driveways, or mature landscaping in ${zipObj.neighborhood}, network sewer specialists deploy trenchless cured-in-place pipe (CIPP) relining. By inserting an epoxy-saturated sleeve that cures into a structural pipe inside the existing host line, homeowners receive a seamless, root-proof lateral with up to 50-year structural life.`
     },
     'emergency-plumbing': {
-      p1Title: `24/7 Rapid Dispatch for Critical Failures in Lakewood (${zipObj.zip})`,
-      p1: `Plumbing catastrophes don't keep business hours. Whether an uncontained burst pipe is flooding a finished basement in ${zipObj.neighborhood}, a main sewer line is backing up blackwater, or a water heater has ruptured, Home Plumbing USA coordinates 24/7 on-call dispatch with local licensed contractors across ${zipObj.zip}.`,
-      p2Title: `Immediate System Stabilization & Upfront Flat-Rate Estimates`,
+      p1Title: `24/7 Rapid Priority Dispatch for Critical Emergencies in Lakewood (${zipObj.zip})`,
+      p1: `Plumbing emergencies do not follow business hours. Whether an uncontained pipe burst is flooding finished living space, a main sewer line is backing up contaminated wastewater, or a gas line has developed a leak in ${zipObj.neighborhood}, Home Plumbing USA coordinates 24/7 on-call dispatch with licensed local independent contractors.`,
+      p2Title: `Fully Equipped Mobile Vehicles & Upfront Flat-Rate Estimates`,
       p2: `Network contractors arrive in fully-equipped service vehicles carrying utility pumps, pipe-freezing kits, commercial rooters, and replacement manifolds. The technician quickly stops active flooding, inspects the issue in person, and provides a clear flat-rate written quote before repairs begin.`
     },
     'leak-detection': {
-      p1Title: `Non-Invasive Acoustic & Thermal Slab Leak Detection in ${zipObj.zip}`,
-      p1: `Slab-on-grade construction and basement concrete floors across ${zipObj.neighborhood} frequently conceal copper pipe pinhole leaks caused by aggressive soil minerals and thermal friction. Homeowners often notice unexplained spikes in water bills, hot floor spots, or musty basement humidity before water surfaces visually.`,
-      p2Title: `Precision Ultrasonic Microphones & Infrared Diagnostics`,
-      p2: `Technicians dispatched in Lakewood (${zipObj.zip}) utilize sensitive ultrasonic ground microphones, nitrogen pressure-decay testing, and FLIR thermal imaging cameras. We pinpoint the exact leak coordinate to within inches without tearing up your flooring, enabling minimally invasive spot repairs or overhead PEX reroutes.`
+      p1Title: `Non-Invasive Acoustic & Thermal Slab Leak Detection in ${zipObj.neighborhood}`,
+      p1: `Slab-on-grade foundation construction across Lakewood frequently conceals copper pipe pinhole leaks caused by aggressive soil minerals, ground shifting, and thermal friction. Homeowners in ${zipObj.zip} often notice unexplained spikes in water bills, hot floor spots, or musty foundation humidity before water surfaces visually.`,
+      p2Title: `Ultrasonic Ground Microphones & Digital Infrared Diagnostics`,
+      p2: `Technicians dispatched in ${zipObj.zip} utilize sensitive ultrasonic ground microphones, nitrogen pressure-decay testing, and FLIR thermal imaging cameras. We pinpoint the exact leak coordinate to within inches without tearing up your flooring, enabling minimally invasive spot repairs or overhead PEX reroutes.`
     },
     'gas-line-repair': {
-      p1Title: `Certified Gas Line Pressure Testing & Leak Location in ${zipObj.neighborhood}`,
-      p1: `Natural gas leaks present acute safety risks. In Lakewood (${zipObj.zip}), aging black iron lines, ground shifting in ${zipObj.soilType}, and corroded appliance flex connectors can develop leaks. Mercaptan rotten-egg smells or hissing lines near furnaces require immediate evacuation and licensed repair.`,
-      p2Title: `Code Compliance, High-Altitude Gas Manifolds & Utility Sign-Off`,
+      p1Title: `Certified Gas Pressure Testing & Mercaptan Leak Location in ${zipObj.zip}`,
+      p1: `Natural gas leaks present acute safety risks. In ${zipObj.neighborhood}, aging black iron lines, ground shifting in ${zipObj.soilType}, and corroded appliance flex connectors can develop leaks. Mercaptan rotten-egg smells or hissing lines near furnaces require immediate evacuation and licensed repair.`,
+      p2Title: `Code Compliance, Heavy-Duty Black Iron Piping & Municipal Sign-Off`,
       p2: `Licensed gas fitters in our network use digital combustible gas sniffers, replace deteriorated piping with heavy-duty black iron or CSST, perform digital manometer pressure drop tests, and ensure full compliance with City of Lakewood and Xcel Energy safety inspection standards.`
     },
     'water-line-repair': {
@@ -360,11 +358,13 @@ function generateLocalContent(serviceSlug, serviceName, zipObj) {
   return localCopy[serviceSlug] || localCopy['drain-cleaning'];
 }
 
-// Generate 16-18 distinct FAQs per service and ZIP to guarantee uniqueness and anti-duplication
+// ======================================================================
+// 3. GENERATE EXACTLY 20 SERVICE-SPECIFIC FAQs
+// ======================================================================
 function generateFAQs(serviceSlug, serviceName, zipObj) {
-  // Base FAQs common to the service but localized
   const faqs = [];
 
+  // Group 1: 5 Baseline Colorado / Regional Questions
   faqs.push({
     q: `What is the typical emergency response window for ${serviceName.toLowerCase()} in Lakewood ${zipObj.zip}?`,
     a: `For urgent plumbing emergencies in Lakewood (${zipObj.zip}), our dispatch network maintains a standard response window of 30 to 45 minutes under normal traffic and weather conditions. An on-call independent licensed contractor is matched to your specific location.`
@@ -390,12 +390,7 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     a: `Yes. Technicians provide transparent, upfront flat-rate written estimates on-site before any physical repair begins. You know the exact total cost with no hidden fees or surprise hourly overages.`
   });
 
-  faqs.push({
-    q: `Does water from ${zipObj.waterSource} cause hard mineral scale buildup?`,
-    a: `Water supplied in ${zipObj.zip} carries moderate to hard dissolved calcium and magnesium minerals. Over time, these minerals precipitate out, coating heating elements, clogging aerators, and constricting pipe diameters, which our plumbers clean and descale.`
-  });
-
-  // Service-specific technical questions (unique to each service)
+  // Group 2: 8 Deep Technical Service-Specific Questions
   if (serviceSlug === 'drain-cleaning') {
     faqs.push({
       q: `Is high-pressure hydro-jetting safe for older pipes in Lakewood ${zipObj.zip}?`,
@@ -406,12 +401,28 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       a: `Sub-zero winter temperatures along the Front Range cool underground building drains. When warm cooking grease and soap scum hit cold pipes in ${zipObj.zip}, they congeal and solidify far faster, rapidly forming thick obstructions.`
     });
     faqs.push({
-      q: `Can chemical liquid drain cleaners damage my plumbing?`,
+      q: `Can chemical liquid drain cleaners damage my Lakewood home's plumbing?`,
       a: `Yes. Caustic chemical drain cleaners generate high heat that can warp PVC pipes, soften rubber seals, and corrode aging cast iron. Mechanical motorized snaking and hydro-jetting are far safer and longer-lasting solutions.`
     });
     faqs.push({
       q: `How far can your motorized drain snake reach in Lakewood homes?`,
       a: `Commercial drain snakes on network service trucks carry heavy-duty cables extending 100 to 150 feet, allowing technicians to reach all the way from cleanout ports to the municipal main in Lakewood.`
+    });
+    faqs.push({
+      q: `What is the difference between clearing a single fixture clog versus a main sewer stoppage?`,
+      a: `A single fixture clog affects only one sink or shower and is resolved with a small portable auger. A main sewer stoppage causes wastewater to back up into multiple lower-level fixtures simultaneously and requires heavy-duty rooters or hydro-jetting through the main cleanout.`
+    });
+    faqs.push({
+      q: `How does video camera inspection help identify drain clogs in ${zipObj.zip}?`,
+      a: `High-definition waterproof cameras with digital depth locators travel through lines to reveal the exact nature of the obstruction—whether grease buildup, invasive tree roots, or pipe collapses—eliminating guesswork.`
+    });
+    faqs.push({
+      q: `Can tree roots be permanently cleared from Lakewood drains with hydro-jetting?`,
+      a: `Hydro-jetting with specialized rotating root-cutting nozzles shears roots flush with pipe walls and flushes debris away. To prevent regrowth, trenchless epoxy pipe relining or pipe replacement is recommended.`
+    });
+    faqs.push({
+      q: `What preventive maintenance keeps kitchen drains running smoothly in Lakewood?`,
+      a: `Avoid pouring grease or coffee grounds down disposals, scrape dinner plates into trash bins, flush drains with boiling water weekly, and use bio-enzymatic drain cleaners rather than harsh corrosive acids.`
     });
   } else if (serviceSlug === 'burst-pipe-repair') {
     faqs.push({
@@ -430,6 +441,22 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `Will homeowners insurance cover frozen burst pipe repairs in Lakewood?`,
       a: `Most Colorado homeowners policies cover sudden, accidental burst pipe water damage, provided the home was properly heated. Network plumbers provide detailed itemized diagnostic reports for insurance claims.`
     });
+    faqs.push({
+      q: `What should I do immediately after shutting off water for a burst pipe?`,
+      a: `Open lowest faucets to drain residual line pressure, turn off electrical circuit breakers in flooded areas, move valuables away from water, and contact our 24/7 dispatch desk for priority emergency dispatch.`
+    });
+    faqs.push({
+      q: `Can pinhole pipe leaks cause burst pipe damage over time?`,
+      a: `Yes. Undetected pinhole leaks in copper supply lines gradually weaken pipe integrity while soaking drywall and insulation. Eventually, weakened pipe joints can rupture catastrophically under normal municipal pressure.`
+    });
+    faqs.push({
+      q: `How do plumbers locate burst pipes behind drywall without tearing down entire walls?`,
+      a: `Technicians use sensitive acoustic listening tools, thermal imaging FLIR cameras, and moisture meters to pinpoint the exact leak location, minimizing drywall cutting to a surgical access panel.`
+    });
+    faqs.push({
+      q: `Are exterior hose bibs prone to freezing and bursting in Lakewood?`,
+      a: `Yes. Standard hose bibs trap water inside outside walls. We install freeze-proof sillcocks featuring extended shutoff valves located deep within heated wall cavities, paired with self-draining vacuum breakers.`
+    });
   } else if (serviceSlug === 'water-heater-repair') {
     faqs.push({
       q: `How often should I flush my water heater in Lakewood (${zipObj.zip})?`,
@@ -446,6 +473,22 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     faqs.push({
       q: `How long do water heaters last at Lakewood's elevation?`,
       a: `Standard tank water heaters in Lakewood typically last 8 to 12 years. Regular anode rod replacement and annual sediment flushing can extend equipment lifespan significantly.`
+    });
+    faqs.push({
+      q: `Do network plumbers service both gas and electric water heaters in Lakewood?`,
+      a: `Yes. Network technicians are fully equipped to diagnose and repair gas burners, thermocouples, pilot assemblies, electric heating elements, thermostats, and TPR safety valves.`
+    });
+    faqs.push({
+      q: `Are tankless water heaters efficient at Lakewood's high altitude?`,
+      a: `Yes, modern condensing tankless water heaters feature automatic high-altitude fan calibration. They supply continuous hot water and eliminate standby energy losses common in mountain climates.`
+    });
+    faqs.push({
+      q: `What causes yellow pilot flames on gas water heaters in ${zipObj.zip}?`,
+      a: `A lazy yellow or orange flame indicates incomplete combustion, dirty burner orifices, or restricted intake airflow. Technicians adjust air-gas ratios to restore clean, efficient blue flames.`
+    });
+    faqs.push({
+      q: `What is the role of the sacrificial anode rod in protecting my tank?`,
+      a: `The magnesium or aluminum anode rod corrodes in place of the steel tank lining. Replacing the depleted anode rod every 3 to 5 years prevents tank interior rust and catastrophic leaks.`
     });
   } else if (serviceSlug === 'sewer-line-repair') {
     faqs.push({
@@ -464,6 +507,22 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `Do City of Lakewood sewer repairs require permits?`,
       a: `Yes. Major sewer excavations and lateral replacements require permits from the City of Lakewood Building Commission and relevant sanitation districts. Network contractors handle all permitting.`
     });
+    faqs.push({
+      q: `Who is responsible for the sewer line connecting my house to the street in Lakewood?`,
+      a: `The property owner is responsible for the entire sewer lateral connecting the home's foundation to the municipal sewer main under the street, including lines running across the private yard.`
+    });
+    faqs.push({
+      q: `How does pipe bursting compare to open trench sewer replacement?`,
+      a: `Pipe bursting pulls a heavy conical expansion head through old deteriorated pipe, fracturing it outward while simultaneously pulling a new seamless HDPE pipe into place with minimal surface excavation.`
+    });
+    faqs.push({
+      q: `How long does a trenchless epoxy relined sewer lateral last?`,
+      a: `CIPP epoxy sewer liners are structurally rated for 50+ years of reliable service. They resist corrosion, tree root penetration, and ground movement far better than legacy clay or cast iron.`
+    });
+    faqs.push({
+      q: `What diagnostic steps precede any sewer line repair recommendation?`,
+      a: `Plumbers conduct a multi-angle high-resolution CCTV camera inspection, record digital footage, pinpoint defect depths with electronic locators, and review options with the homeowner.`
+    });
   } else if (serviceSlug === 'emergency-plumbing') {
     faqs.push({
       q: `Do you charge extra emergency dispatch fees for nights or holidays in Lakewood?`,
@@ -476,6 +535,26 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     faqs.push({
       q: `Can emergency plumbers handle gas leaks as well as water leaks?`,
       a: `Yes. Matched emergency contractors carry gas diagnostic tools, electronic sniffers, and replacement black iron and CSST materials to isolate and repair hazardous natural gas leaks safely.`
+    });
+    faqs.push({
+      q: `What types of plumbing situations constitute a true emergency?`,
+      a: `True emergencies include burst pressurized water pipes, uncontrolled sewage backing up into living quarters, strong gas odors, water heater tank ruptures, and total loss of water service in winter.`
+    });
+    faqs.push({
+      q: `Are emergency plumbing dispatch operators available 24 hours a day?`,
+      a: `Yes. Our dispatch phone line (877-516-8705) is staffed by live operators 24 hours a day, 7 days a week, 365 days a year, coordinating fast arrivals across Lakewood and Jefferson County.`
+    });
+    faqs.push({
+      q: `Do emergency plumbers arrive with replacement parts on service trucks?`,
+      a: `Yes. Network service trucks are stocked with commercial snake cables, PEX and copper piping, standard valves, fittings, submersible sump pumps, and water heater repair components.`
+    });
+    faqs.push({
+      q: `How do emergency plumbers protect my home during water extraction and repair?`,
+      a: `Technicians lay protective floor runners, use clean shoe covers, deploy commercial wet vacs and submersible utility pumps, and quickly contain moisture to protect floors and walls.`
+    });
+    faqs.push({
+      q: `Can emergency plumbers restore temporary water if repairs require multiple days?`,
+      a: `Whenever possible, technicians install temporary isolation bypasses or capped manifolds so unaffected bathrooms and kitchen fixtures retain running water during multi-day projects.`
     });
   } else if (serviceSlug === 'leak-detection') {
     faqs.push({
@@ -490,6 +569,26 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `Can a leak detection diagnostic lower my high Lakewood water bill?`,
       a: `Yes. Once a hidden leak is pinpointed and repaired, Lakewood and Denver Water often provide sewer or water bill adjustments upon submission of a licensed plumber's repair receipt.`
     });
+    faqs.push({
+      q: `What non-destructive diagnostic tools are used for leak detection?`,
+      a: `Technicians deploy ultrasonic ground sensors, FLIR infrared thermal cameras, electronic gas tracer detectors, and digital manometer pressure decay instruments.`
+    });
+    faqs.push({
+      q: `What repair options exist for slab leaks under Lakewood foundations?`,
+      a: `Depending on the pipe's location and condition, technicians can perform a localized direct slab access repair or execute an overhead PEX bypass through walls or attics, avoiding floor demolition.`
+    });
+    faqs.push({
+      q: `How does pressure decay testing confirm the presence of a hidden leak?`,
+      a: `Plumbers isolate the home's plumbing lines, attach a precision digital pressure gauge, and monitor for pressure drops over time. A dropping gauge confirms an active closed-system breach.`
+    });
+    faqs.push({
+      q: `Can leak detection identify irrigation line leaks outside the home?`,
+      a: `Yes. Network technicians test exterior sprinkler lines, backflow prevention devices, and underground main service lines between the street water meter and foundation.`
+    });
+    faqs.push({
+      q: `Does homeowner's insurance cover the cost of professional leak detection?`,
+      a: `Many insurance policies cover the cost of locating and accessing concealed leaks when resulting in accidental water damage. Network plumbers provide detailed diagnostic reports for claims.`
+    });
   } else if (serviceSlug === 'gas-line-repair') {
     faqs.push({
       q: `What should I do immediately if I smell gas in my Lakewood home?`,
@@ -502,6 +601,26 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     faqs.push({
       q: `How do network gas plumbers test for micro-leaks?`,
       a: `Technicians hook up digital manometers to gas manifolds and perform pressurized decay tests, verifying zero pressure drop over time to confirm 100% airtight integrity under Colorado code.`
+    });
+    faqs.push({
+      q: `Are plumbing contractors licensed to repair gas lines in Colorado?`,
+      a: `Yes. Master and Journeyman plumbers licensed by the Colorado State Plumbing Board are fully certified and tested for natural gas and propane fuel piping installation and repair.`
+    });
+    faqs.push({
+      q: `What pipe materials are approved for indoor residential gas lines in Lakewood?`,
+      a: `Approved materials include heavy-wall black iron pipe with threaded malleable fittings and corrugated stainless steel tubing (CSST) with certified mechanical fittings and electrical bonding.`
+    });
+    faqs.push({
+      q: `How do expansive clay soils impact underground gas yard lines?`,
+      a: `Cyclical soil swelling in ${zipObj.soilType} exerts shear force on buried gas lines leading to fire pits or outbuildings. We install flexible PE gas piping with tracer wire to absorb ground movement.`
+    });
+    faqs.push({
+      q: `Does Xcel Energy inspect gas line repairs before restoring gas service?`,
+      a: `Yes. When gas is shut off for repairs, local building permits and utility safety pressure inspections are typically required before Xcel Energy will unlock the gas meter.`
+    });
+    faqs.push({
+      q: `Can network plumbers install new gas lines for outdoor kitchens and fire pits?`,
+      a: `Yes. Technicians calculate appliance BTU demands, size gas supply lines appropriately, trench and install underground gas piping, and perform pressure tests to municipal code.`
     });
   } else if (serviceSlug === 'water-line-repair') {
     faqs.push({
@@ -516,9 +635,29 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `What depth are water service lines buried in Lakewood to prevent freezing?`,
       a: `Per Jefferson County and Colorado building codes, municipal water supply lines must be buried at least 4.5 to 5 feet deep, well below the local winter frost penetration line.`
     });
+    faqs.push({
+      q: `What pipe materials are recommended for new water service lines in Lakewood?`,
+      a: `Plumbers install heavy-gauge seamless Type K copper or 200 PSI certified High-Density Polyethylene (HDPE), both of which resist corrosive mountain soils and ground shifting.`
+    });
+    faqs.push({
+      q: `Can a leaking water service line damage my home's concrete foundation?`,
+      a: `Yes. Water escaping near foundation footings saturates ${zipObj.soilType}, causing bentonite clay to heave and exert extreme upward hydraulic pressure against basement walls and floors.`
+    });
+    faqs.push({
+      q: `Who is responsible for repairs to the water service line in Lakewood?`,
+      a: `The property owner is responsible for the water service lateral from the curb stop or meter pit all the way into the home. Municipal water utilities maintain only the street main.`
+    });
+    faqs.push({
+      q: `How long does a trenchless water service line replacement take?`,
+      a: `Most residential trenchless water line installations are completed in a single working day (4 to 8 hours), minimizing water outage time and preserving yard landscaping.`
+    });
+    faqs.push({
+      q: `Does Denver Water or local Lakewood water districts require permits for water line repairs?`,
+      a: `Yes. Water service replacements require excavation and tapping permits from the governing water district and the City of Lakewood. Network contractors coordinate all permits and inspections.`
+    });
   }
 
-  // Neighborhood-specific FAQ rotation to guarantee high uniqueness across Lakewood ZIPs
+  // Group 3: 3 Neighborhood/Micro-geographic Questions
   if (zipObj.zip === '80226') {
     faqs.push({
       q: `How does Belmar commercial development affect plumbing infrastructure in 80226?`,
@@ -567,6 +706,10 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `Does Consolidated Mutual Water Company serve all of Lakewood 80215?`,
       a: `Yes, Consolidated Mutual is the primary provider for 80215, supplying treated water from Clear Creek and Ralston reservoirs with seasonal hardness variations.`
     });
+    faqs.push({
+      q: `What plumbing precautions apply to semi-rural agricultural parcels in 80215?`,
+      a: `Properties utilizing irrigation ditches, historic well hookups, or outbuildings require code-compliant backflow preventers (RPZ valves) to isolate drinking water from agricultural contaminants.`
+    });
   } else if (zipObj.zip === '80227') {
     faqs.push({
       q: `How does Bear Creek's high groundwater table in 80227 affect basements?`,
@@ -575,6 +718,10 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     faqs.push({
       q: `Are backwater prevention valves recommended near Bear Creek in 80227?`,
       a: `Yes. During heavy spring rain and snowmelt surges, municipal sewer mains can become surcharged, making full-port backwater check valves essential to prevent street wastewater backing up into lower-level fixtures.`
+    });
+    faqs.push({
+      q: `What water district manages service in South Lakewood 80227?`,
+      a: `Service in 80227 is provided via Denver Water and the Bancroft-Clover Water and Sanitation District, delivering water under monitored regional distribution pressures.`
     });
   } else if (zipObj.zip === '80232') {
     faqs.push({
@@ -585,6 +732,10 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `How does clay soil swelling affect driveway water mains in 80232?`,
       a: `Cyclical expansion in 80232's bentonite clay exerts differential shear force against buried water lines beneath driveways, causing joint leaks and pavement cracking.`
     });
+    faqs.push({
+      q: `Who supplies drinking water to Lakewood 80232 residences?`,
+      a: `Consolidated Mutual Water Company supplies 80232 residences, delivering treated mountain runoff that benefits from regular annual water heater flushing.`
+    });
   } else if (zipObj.zip === '80235') {
     faqs.push({
       q: `How do Bear Creek Lake park conditions in 80235 influence plumbing?`,
@@ -593,6 +744,49 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     faqs.push({
       q: `What is the elevation impact in 80235 near the Morrison boundary?`,
       a: `Reaching 5,680 feet near Morrison, water heaters in 80235 experience accelerated thermal mineral precipitation and require calibrated high-altitude gas orifices.`
+    });
+    faqs.push({
+      q: `What sewer sanitation districts operate near the Morrison border in 80235?`,
+      a: `Sanitation is coordinated between local special districts and Denver Water networks, requiring specialized permitting for private lateral connections.`
+    });
+  } else if (zipObj.zip === '80123') {
+    faqs.push({
+      q: `How do South Platte river terrace soils impact plumbing in South Lakewood 80123?`,
+      a: `Gravelly alluvial clay terrace soils in 80123 create shifting subterranean friction on buried lines during freeze-thaw cycles, making flexible PEX supply lines and seamless HDPE drains the preferred repair choices.`
+    });
+    faqs.push({
+      q: `What water utilities serve shared boundary communities in 80123?`,
+      a: `Properties along the Lakewood and Littleton boundary in 80123 are served by Denver Water and Platte Canyon Water and Sanitation District.`
+    });
+    faqs.push({
+      q: `Why do mature neighborhoods in 80123 face frequent sewer root blockages?`,
+      a: `Homes established in the 1960s-1970s feature large mature deciduous shade trees whose root systems penetrate older clay lateral joints in search of winter moisture.`
+    });
+  } else if (zipObj.zip === '80236') {
+    faqs.push({
+      q: `What slab-on-grade plumbing risks affect East Lakewood homes in 80236?`,
+      a: `Many mid-century residences in Harvey Park and East Lakewood (80236) were built on concrete slab foundations with under-slab copper plumbing prone to pinhole leaks from soil mineral reactions.`
+    });
+    faqs.push({
+      q: `Who manages water supply lines in Lakewood 80236?`,
+      a: `Denver Water directly supplies 80236 properties, delivering treated mountain water that meets all state and federal drinking standards.`
+    });
+    faqs.push({
+      q: `How are under-slab copper pipe leaks resolved in 80236 without breaking floors?`,
+      a: `Plumbers perform an overhead PEX repipe, routing brand new water lines through walls and ceiling joists to bypass failed under-slab pipes entirely.`
+    });
+  } else if (zipObj.zip === '80401') {
+    faqs.push({
+      q: `How do rocky foothill soils affect underground plumbing in West Lakewood 80401?`,
+      a: `Bordering Golden at 5,800 feet, 80401 features decomposed granite and shallow bedrock. Excavation requires pneumatic rock-breaking tools or trenchless directional boring.`
+    });
+    faqs.push({
+      q: `What winter freeze precautions apply to foothill elevations in 80401?`,
+      a: `Higher foothill elevations bring colder wind chills and deeper frost penetration, making pipe insulation and frost-proof sillcocks mandatory.`
+    });
+    faqs.push({
+      q: `What water districts serve residences in 80401?`,
+      a: `Water is supplied by Consolidated Mutual Water Company and Golden Municipal Water, with distribution networks operating under elevated mountain pressures.`
     });
   } else {
     faqs.push({
@@ -603,9 +797,13 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
       q: `What water source supplies properties in ${zipObj.zip}?`,
       a: `Drinking water in ${zipObj.zip} is supplied via ${zipObj.waterSource}, maintaining treated mountain snowmelt with moderate calcium-carbonate hardness.`
     });
+    faqs.push({
+      q: `What pipe materials are best for Lakewood homes in ${zipObj.zip}?`,
+      a: `Plumbers recommend PEX-A expansion tubing for water supply lines and schedule-40 PVC or HDPE for drains to withstand Colorado freeze-thaw cycles and clay ground heave.`
+    });
   }
 
-  // Common additional FAQs to reach 16-18 total
+  // Group 4: 4 Network Standards & Colorado Climate Care Questions
   faqs.push({
     q: `What workmanship warranties cover ${serviceName.toLowerCase()} in Lakewood (${zipObj.zip})?`,
     a: `All service repairs executed through our contractor network come with a 100% workmanship warranty backed by the executing licensed contractor, alongside manufacturer guarantees on parts and piping.`
@@ -617,18 +815,8 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
   });
 
   faqs.push({
-    q: `Can technicians provide plumbing inspection reports for Lakewood home buyers or sellers?`,
-    a: `Yes. Network technicians provide comprehensive whole-home plumbing diagnostic inspections, including digital sewer scope video files and pressure testing reports for real estate transactions.`
-  });
-
-  faqs.push({
-    q: `How can I prevent winter pipe freeze emergencies while on vacation in Colorado?`,
-    a: `Never turn your heating thermostat below 55°F, leave cabinet doors open below kitchen and bathroom sinks, disconnect all outdoor garden hoses, and have a trusted neighbor inspect the home during extreme freezes.`
-  });
-
-  faqs.push({
-    q: `Are network technicians equipped to service commercial properties in Lakewood ${zipObj.zip}?`,
-    a: `Yes. In addition to residential homes, network contractors service commercial retail, restaurants, and office complexes throughout Lakewood, providing grease trap maintenance, commercial water heaters, and backflow testing.`
+    q: `How can I prevent winter pipe freeze emergencies while away from my Colorado home?`,
+    a: `Never set thermostats below 55°F, leave cabinet doors open under sinks, disconnect exterior garden hoses, shut off water at the main valve if leaving for extended periods, and have someone inspect the home during extreme freezes.`
   });
 
   faqs.push({
@@ -636,11 +824,12 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     a: `Matched plumbing contractors accept all major credit cards (Visa, MasterCard, Amex, Discover), personal checks, debit cards, and electronic payments upon satisfactory service completion.`
   });
 
-  return faqs;
+  // Guarantee exactly 20 FAQs
+  return faqs.slice(0, 20);
 }
 
 // ======================================================================
-// 3. GENERATE HYPER-LOCAL SERVICE PAGE (/colorado/lakewood-[zip]/[service-slug]/index.html)
+// 4. GENERATE HYPER-LOCAL SERVICE PAGE (/colorado/lakewood-[zip]/[service-slug]/index.html)
 // ======================================================================
 function generateServicePage(zipObj, serviceObj) {
   const cityZipSlug = `lakewood-${zipObj.zip}`;
@@ -653,8 +842,9 @@ function generateServicePage(zipObj, serviceObj) {
   const cityHubUrl = `${DOMAIN}/colorado/${cityZipSlug}/`;
   const stateUrl = `${DOMAIN}/colorado/`;
 
-  const title = `${serviceName} in Lakewood, CO (${zipObj.zip}) | 24/7 Pro Dispatch`;
+  const metaTitle = `${serviceName} in Lakewood, CO (${zipObj.zip}) | 24/7 Pro Dispatch`;
   const metaDesc = `Fast, reliable ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip}). Vetted licensed pros, upfront flat-rate pricing & 24/7 emergency dispatch. Call 877-516-8705!`;
+  const serviceImageUrl = `${DOMAIN}/public/images/services/${serviceSlug}.webp`;
 
   const localCopy = generateLocalContent(serviceSlug, serviceName, zipObj);
   const signsHtml = generate5Signs(serviceSlug, serviceName, zipObj);
@@ -701,7 +891,7 @@ function generateServicePage(zipObj, serviceObj) {
         "url": pageUrl,
         "telephone": "877-516-8705",
         "priceRange": "$$",
-        "image": `${DOMAIN}/public/images/hero-plumbing.webp`,
+        "image": serviceImageUrl,
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": zipObj.lat,
@@ -776,7 +966,7 @@ function generateServicePage(zipObj, serviceObj) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title}</title>
+  <title>${metaTitle}</title>
   <meta name="description" content="${metaDesc}">
   <meta name="keywords" content="${serviceName.toLowerCase()} Lakewood CO, ${serviceName.toLowerCase()} ${zipObj.zip}, emergency plumber Lakewood, 24/7 plumbing repair Lakewood CO">
   <link rel="canonical" href="${pageUrl}">
@@ -784,24 +974,24 @@ function generateServicePage(zipObj, serviceObj) {
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="${pageUrl}">
-  <meta property="og:title" content="${title}">
+  <meta property="og:title" content="${metaTitle}">
   <meta property="og:description" content="${metaDesc}">
-  <meta property="og:image" content="${DOMAIN}/public/images/hero-plumbing.webp">
+  <meta property="og:image" content="${serviceImageUrl}">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="${pageUrl}">
-  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:title" content="${metaTitle}">
   <meta name="twitter:description" content="${metaDesc}">
-  <meta name="twitter:image" content="${DOMAIN}/public/images/hero-plumbing.webp">
+  <meta name="twitter:image" content="${serviceImageUrl}">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
 ${JSON.stringify(schemaObj, null, 2)}
   </script>
 
-  <link rel="preload" as="image" href="/public/images/hero-plumbing-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
-  <link rel="preload" as="image" href="/public/images/hero-plumbing.webp" fetchpriority="high" media="(min-width: 601px)">
+  <link rel="preload" as="image" href="/public/images/services/${serviceSlug}-mobile.webp" fetchpriority="high" media="(max-width: 600px)">
+  <link rel="preload" as="image" href="/public/images/services/${serviceSlug}.webp" fetchpriority="high" media="(min-width: 601px)">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -914,16 +1104,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               ${serviceName} in <span style="color: var(--accent);">Lakewood, CO (${zipObj.zip})</span>
             </h1>
             <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.7;">
-              ${
-                zipObj.zip === '80226' ? `In Central Lakewood & Belmar (${zipObj.zip}), commercial density and mid-century residential tracts demand specialized diagnostic equipment. Whether clearing calcified scale along Alameda Avenue or installing code-compliant water heater expansion tanks, our network connects you directly with on-call independent contractors.` :
-                zipObj.zip === '80214' ? `Along the historic West Colfax corridor in Northeast Lakewood (${zipObj.zip}), post-war homes with original cast-iron sewer lines and galvanized plumbing require experienced local attention. Our dispatch network matches your property with licensed professionals ready for emergency rooter clearing and pipe repairs.` :
-                zipObj.zip === '80228' ? `Throughout Green Mountain and West Lakewood (${zipObj.zip}), steep foothill grades, rapid mountain freeze shifts, and high elevations (${zipObj.elevation}) create unique plumbing challenges. From winter line thawing to pressure reducing valve adjustments, on-call contractors provide fast 24/7 service.` :
-                zipObj.zip === '80215' ? `In Eiber and Morse Park (${zipObj.zip}), large lots and mature tree canopies frequently cause extensive root infiltration into sewer laterals. Matched contractors provide video sewer camera inspections, heavy-duty root cutting, and trenchless pipe relining.` :
-                zipObj.zip === '80227' ? `In South Lakewood and the Bear Creek valley (${zipObj.zip}), high seasonal groundwater levels and alluvial soils place intense hydrostatic pressure on residential plumbing systems. Network specialists handle emergency sump pump replacements, backwater valves, and leak repairs.` :
-                zipObj.zip === '80232' ? `In Kendrick Lake and Lochwood (${zipObj.zip}), 1960s-1970s residential neighborhoods face bentonite clay soil shifts and aging copper piping. We connect you with local contractors equipped for upfront flat-rate diagnostics and lasting repairs.` :
-                zipObj.zip === '80235' ? `Bordering Bear Creek Lake Park (${zipObj.zip}), foothill runoff and high seasonal water tables require dedicated drainage solutions. Our network connects local property owners with licensed specialists for water lines, drains, and water heaters.` :
-                `In ${zipObj.neighborhood} (${zipObj.zip}), mountain climate conditions, ${zipObj.elevation} elevation, and ${zipObj.soilType} require specialized plumbing care. Home Plumbing USA coordinates fast dispatch with independent licensed contractors.`
-              }
+              In ${zipObj.neighborhood} (${zipObj.zip}), elevation ranges around ${zipObj.elevation} amidst shifting ${zipObj.soilType}. Extreme Rocky Mountain cold fronts and hard water from ${zipObj.waterSource} demand experienced local plumbing technicians equipped with specialized diagnostic tools. Our dispatch network connects you directly with independent licensed Colorado contractors 24/7/365.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
               <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
@@ -935,7 +1116,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             </div>
           </div>
           <div class="hero-image-container" style="border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); background: #0f1e3a;">
-            <img src="/public/images/hero-plumbing.webp" alt="Technician performing ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip})" style="width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover;">
+            <img src="/public/images/services/${serviceSlug}.webp" srcset="/public/images/services/${serviceSlug}-mobile.webp 480w, /public/images/services/${serviceSlug}.webp 1200w" sizes="(max-width: 600px) 480px, 1200px" alt="Technician performing ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip})" style="width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover;">
           </div>
         </div>
       </div>
@@ -963,7 +1144,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             <div class="quick-info-text">
               <span class="quick-info-label">Network Dispatch Standard</span>
               <strong class="quick-info-value">30–45 Min Window</strong>
-              <span class="quick-info-sub">Active West Metro Coverage</span>
+              <span class="quick-info-sub">Active Lakewood Coverage</span>
             </div>
           </div>
 
@@ -1072,7 +1253,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             </div>
 
             <div class="sidebar-widget">
-              <h3>${serviceName} in Nearby ZIPs</h3>
+              <h3>${serviceName} in Nearby Lakewood ZIPs</h3>
               ${nearbyZipsHtml}
             </div>
 

@@ -209,12 +209,13 @@ function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9\s-_]/g, '').trim().replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-console.log('Generating Colorado State & Lakewood Hubs and Service Pages...');
 ensureDir(COLORADO_DIR);
 
 module.exports = {
   LAKEWOOD_ZIPS,
   SERVICES,
   DOMAIN,
-  COLORADO_DIR
+  COLORADO_DIR,
+  ensureDir,
+  slugify
 };
