@@ -40,7 +40,7 @@ function compilePage(loc) {
 
   // 1. Title Tag & Meta Description Fallbacks
   const title = loc.title_tag || `Emergency Plumbers in ${city}, ${stateCode} ${zip} | Home Plumbing USA`;
-  const metaDesc = loc.meta_description || `Need professional plumbing services in ${city}, ${stateCode}? Certified, insured, and available 24/7. Call us today at 877-516-8705 for a free quote!`;
+  const metaDesc = loc.meta_description || `Need professional plumbing services in ${city}, ${stateCode}? Certified, insured, and available 24/7. Call us today at 888-217-4803 for a free quote!`;
   
   const rawH1 = loc.h1 || `Plumbing Services in ${city}, ${stateCode} (${zip})`;
   const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
@@ -602,7 +602,7 @@ ${isAnchorage ? `<link rel="preload" as="image" href="/public/images/clogged-dra
       </nav>
 
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
+        <a href="tel:888-217-4803" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
         <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
 
@@ -622,7 +622,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
             <h1 class="hero-title">${h1Formatted}</h1>
             <p class="hero-text" style="color: rgba(255, 255, 255, 0.9); max-width: 700px; margin: 0 auto 24px;">${intro}</p>
             <div class="hero-buttons" style="margin-top: 30px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
+              <a href="tel:888-217-4803" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
               <a href="/contact" class="btn btn-outline btn-lg" style="text-decoration: none; color: #fff; border-color: rgba(255,255,255,0.4);"><i class="fas fa-paper-plane"></i> Request Online Quote</a>
             </div>
           </div>
@@ -637,7 +637,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
             <h1 class="hero-title">${h1Formatted}</h1>
             <p class="hero-text">${intro}</p>
             <div class="hero-buttons" style="margin-top: 30px; display: flex; gap: 16px;">
-              <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
+              <a href="tel:888-217-4803" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now (24/7 Emergency)</a>
               <a href="/contact" class="btn btn-outline btn-lg" style="text-decoration: none; color: #fff; border-color: rgba(255,255,255,0.4);"><i class="fas fa-paper-plane"></i> Request Online Quote</a>
             </div>
           </div>
@@ -770,7 +770,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
           <div class="process-card animate-on-scroll">
             <div class="process-number">01</div>
             <p class="process-title">Call Dispatch</p>
-            <p>Call us at 877-516-8705. Speak with a coordinator to describe your plumbing problem.</p>
+            <p>Call us at 888-217-4803. Speak with a coordinator to describe your plumbing problem.</p>
           </div>
           <div class="process-card animate-on-scroll">
             <div class="process-number">02</div>
@@ -921,7 +921,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
         <p>Technicians are active in ${city}, ${stateCode}${zip ? ' ' + zip : ''} and nearby regions for plumbing repairs and installations. Call for immediate dispatch.</p>
         <div class="cta-buttons">
           <a href="/contact" class="btn-quote">Request a Quote</a>
-          <a href="tel:877-516-8705" class="btn-call">Call Now: 877-516-8705</a>
+          <a href="tel:888-217-4803" class="btn-call">Call Now: 888-217-4803</a>
         </div>
       </div>
     </section>
@@ -949,7 +949,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
         <div class="footer-col">
           <div class="footer-title">Local Info</div>
           <a href="#"><i class="fas fa-map-marker-alt"></i> ${city}, ${stateCode} ${zip}</a>
-          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
+          <a href="tel:888-217-4803" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -972,7 +972,7 @@ ${isAnchorage ? `    <!-- Hero Section -->
 
   <script src="/js/main.js" defer></script>
   <div class="mobile-sticky-bar">
-    <a href="tel:877-516-8705" class="sticky-btn call-btn">
+    <a href="tel:888-217-4803" class="sticky-btn call-btn">
       <i class="fas fa-phone-alt"></i> Call Now
     </a>
     <a href="/contact" class="sticky-btn quote-btn">
@@ -998,7 +998,7 @@ function compileServicePage(sub) {
   const stateName = stateMap[stateCode] || stateCode;
 
   const title = sub.title_tag || `${sub.service_name} in ${city}, ${stateCode} ${zip} | Home Plumbing USA`;
-  const metaDesc = sub.meta_description || `Home Plumbing USA provides ${sub.service_name.toLowerCase()} in ${city}, ${stateCode} ${zip}. Licensed, insured, and available for same-day service. Call 877-516-8705.`;
+  const metaDesc = sub.meta_description || `Home Plumbing USA provides ${sub.service_name.toLowerCase()} in ${city}, ${stateCode} ${zip}. Licensed, insured, and available for same-day service. Call 888-217-4803.`;
   
   const rawH1 = sub.h1 || `${sub.service_name} in ${city}, ${stateCode} (${zip})`;
   const h1Formatted = rawH1.replace(/(in\s+)(.+)/i, '$1<span class="highlight">$2</span>');
@@ -1252,7 +1252,7 @@ function compileServicePage(sub) {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "${sub.service_name}",
-    "provider": {"@type": "Plumber", "name": "Home Plumbing USA", "telephone": "+1-877-516-8705"},
+    "provider": {"@type": "Plumber", "name": "Home Plumbing USA", "telephone": "+1-888-217-4803"},
     "areaServed": {"@type": "PostalAddress", "postalCode": "${zip}", "addressLocality": "${city}", "addressRegion": "${stateCode}", "addressCountry": "US"}
   }
   </script>
@@ -1305,7 +1305,7 @@ function compileServicePage(sub) {
         <a href="../../../contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
+        <a href="tel:888-217-4803" class="header-phone"><i class="fas fa-phone"></i> Call Now</a>
         <a href="../../../contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
@@ -1325,7 +1325,7 @@ function compileServicePage(sub) {
           <h1 class="hero-title">${h1Formatted}</h1>
           <p class="hero-text" style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; margin-top: 10px;">Connecting home and business owners in ${city}, ${stateCode} &amp; Surrounding Areas with vetted, independent local plumbing experts in real-time. Fast, reliable service matches 24/7.</p>
           <div class="hero-buttons" style="margin-top: 20px;">
-            <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone-alt"></i> Call Now — Avg. 15-Min Response</a>
+            <a href="tel:888-217-4803" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone-alt"></i> Call Now — Avg. 15-Min Response</a>
           </div>
         </div>
         <div class="hero-image-wrapper" style="position: relative; width: 100%; min-height: 350px; display: flex; justify-content: center;">
@@ -1425,7 +1425,7 @@ function compileServicePage(sub) {
           <div class="sidebar-widget cta-widget">
             <h3>Need ${sub.service_name} in ${city}?</h3>
             <p>Call now for same-day service in ${zip} and the surrounding area.</p>
-            <a href="tel:877-516-8705" class="btn btn-lg" style="background:#fff; color: var(--primary); width: 100%; justify-content: center; text-decoration: none; font-weight: 600;"><i class="fas fa-phone-alt"></i> Call Now</a>
+            <a href="tel:888-217-4803" class="btn btn-lg" style="background:#fff; color: var(--primary); width: 100%; justify-content: center; text-decoration: none; font-weight: 600;"><i class="fas fa-phone-alt"></i> Call Now</a>
           </div>
         </div>
       </div>
@@ -1491,9 +1491,9 @@ function compileServicePage(sub) {
     <div class="container">
       <div class="cta-content">
         <h2>Get ${sub.service_name} in ${city}, ${stateCode} ${zip}</h2>
-        <div class="cta-phone" style="font-size: 2.2rem; font-weight: 800; margin: 15px 0;"><i class="fas fa-phone"></i> <a href="tel:877-516-8705" style="color: #fff; text-decoration: none;">877-516-8705</a></div>
+        <div class="cta-phone" style="font-size: 2.2rem; font-weight: 800; margin: 15px 0;"><i class="fas fa-phone"></i> <a href="tel:888-217-4803" style="color: #fff; text-decoration: none;">888-217-4803</a></div>
         <div class="cta-buttons" style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
-          <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now</a>
+          <a href="tel:888-217-4803" class="btn btn-accent btn-lg" style="text-decoration: none;"><i class="fas fa-phone"></i> Call Now</a>
           <a href="${parentUrl}" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: #fff; text-decoration: none;"><i class="fas fa-map-location-dot"></i> View All ${city} Services</a>
         </div>
       </div>
@@ -1522,7 +1522,7 @@ function compileServicePage(sub) {
         </div>
         <div class="footer-col">
           <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 15px;">Contact Info</h3>
-          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
+          <a href="tel:888-217-4803" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-map-marker-alt"></i> Serving ${city}, ${stateCode} ${zip}</span>
           <span style="display: block; margin-bottom: 8px;"><i class="fas fa-clock"></i> 24/7 Emergency Service</span>
         </div>

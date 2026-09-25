@@ -67,7 +67,7 @@ function buildCityZipHub(state, cityZip, nearbyZips) {
 
   // 1. Meta Tags
   const title = `Plumbers in ${cityName}, ${stateCode} ${zip} | 24/7 Emergency Plumbing`;
-  const metaDesc = `Need emergency plumbing in ${cityName}, ${stateCode} (${zip})? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call 877-516-8705!`;
+  const metaDesc = `Need emergency plumbing in ${cityName}, ${stateCode} (${zip})? Expect flat-rate estimates, licensed pros, and under 45-minute responses for residential and commercial pipe repairs. Call 888-217-4803!`;
 
   // 2. Services Grid Generation (Matching 8 primary services with local descriptions)
   const serviceIcons = {
@@ -215,7 +215,7 @@ function buildCityZipHub(state, cityZip, nearbyZips) {
         "name": `Home Plumbing USA - ${cityName} (${zip})`,
         "description": metaDesc,
         "url": pageUrl,
-        "telephone": "877-516-8705",
+        "telephone": "888-217-4803",
         "priceRange": "$$",
         "image": `${DOMAIN}/public/images/hero-plumbing.webp`,
         "address": {
@@ -373,7 +373,7 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <a href="tel:877-516-8705" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <a href="tel:888-217-4803" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
           <span>24/7 Emergency Plumbers in <strong>${cityName}, ${stateCode} (${zip})</strong><span class="top-bar-sub"> - Same Price, Holidays Included!</span></span>
         </a>
       </div>
@@ -392,8 +392,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta" style="display: flex; align-items: center; gap: 16px;">
-        <a href="tel:877-516-8705" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call Now</a>
+        <a href="tel:888-217-4803" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call Now</a>
       </div>
     </div>
   </header>
@@ -422,8 +422,8 @@ ${JSON.stringify(schemaObj, null, 2)}
               When burst pipes flood your property or a backed-up sewer brings your day to a halt, Home Plumbing USA connects you with prompt, effective solutions in ${cityName} (${zip}). We tackle everything from stubborn clogged drains and leaking water heaters to complex slab leaks with precision. Expect a licensed professional at your door in under 45 minutes with upfront flat-rate pricing and no hidden fees.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+              <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-phone-alt"></i> Call (888) 217-4803
               </a>
               <a href="#services" class="btn btn-outline" style="border: 2px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fas fa-wrench"></i> View Services in ${zip}
@@ -506,7 +506,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/emergency-plumbing/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -532,7 +532,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/water-heater-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -558,7 +558,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/drain-cleaning/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -584,7 +584,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/leak-detection/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -610,7 +610,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/sewer-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -636,7 +636,7 @@ ${JSON.stringify(schemaObj, null, 2)}
               <a href="/${stateSlug}/${cityZipSlug}/gas-line-repair/" style="color: var(--primary-light); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 6px;">
                 Learn More <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
               </a>
-              <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+              <a href="tel:888-217-4803" style="color: var(--accent); font-weight: 700; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
                 <i class="fas fa-phone-alt"></i> Call Now
               </a>
             </div>
@@ -962,8 +962,8 @@ ${JSON.stringify(schemaObj, null, 2)}
             <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">Our certified ${stateName} technicians conduct whole-house water pressure testing, hard water mineral analysis, and thermal camera leak inspections.</p>
           </div>
           <div>
-            <a href="tel:877-516-8705" class="btn btn-secondary" style="background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-              <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+            <a href="tel:888-217-4803" class="btn btn-secondary" style="background: var(--accent); color: #fff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+              <i class="fas fa-phone-alt"></i> Call (888) 217-4803
             </a>
           </div>
         </div>
@@ -1069,8 +1069,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <h2 style="font-size: 2.4rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Request a No-Obligation Quote in ${cityName}</h2>
         <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Contact our dispatch center now to receive an upfront, transparent flat-rate estimate. Experienced licensed technicians stationed across ${cityName} (${zip}) are ready for fast 24/7 dispatch.</p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-          <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-            <i class="fas fa-phone-alt"></i> Call Now: (877) 516-8705
+          <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fas fa-phone-alt"></i> Call Now: (888) 217-4803
           </a>
         </div>
       </div>
@@ -1088,7 +1088,7 @@ ${JSON.stringify(schemaObj, null, 2)}
           <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">24/7 Plumbers in ${cityName}, ${stateCode}</h3>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Connecting property owners across ${cityName} (${zip}) with vetted, licensed local plumbing contractors for 24/7 emergency repair and installations.</p>
           <div style="display: flex; align-items: center; gap: 10px; color: var(--accent); font-weight: 700;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+            <i class="fas fa-phone-alt"></i> (888) 217-4803
           </div>
         </div>
         <div class="footer-col">
@@ -1115,8 +1115,8 @@ ${JSON.stringify(schemaObj, null, 2)}
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">24/7 Active Dispatch</div>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 12px;"><strong>Emergency Dispatch:</strong> 24 Hours / 7 Days</p>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;"><strong>Office Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</p>
-          <a href="tel:877-516-8705" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+          <a href="tel:888-217-4803" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+            <i class="fas fa-phone-alt"></i> (888) 217-4803
           </a>
         </div>
       </div>

@@ -289,7 +289,7 @@ function generateQuickInfoHtml(serviceSlug, cityName, stateCode, zip) {
             </div>
             <div class="quick-info-text">
               <span class="quick-info-label">Direct 24/7 Dispatch</span>
-              <a href="tel:877-516-8705" class="quick-info-phone">877-516-8705</a>
+              <a href="tel:888-217-4803" class="quick-info-phone">888-217-4803</a>
               <span class="quick-info-sub">Live ${cityName} Operator</span>
             </div>
           </div>
@@ -640,7 +640,7 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
       },
       {
         q: `What emergency steps should I take if sewage starts backing up into my basement or shower?`,
-        a: `Immediately stop running all water inside your home—including dishwashers, washing machines, and sink faucets. Keep family members and pets away from contaminated wastewater to avoid biohazard risks. Locate and shut off your main water valve if water continues overflowing, and immediately call our 24/7 Anchorage dispatch hotline at 877-516-8705 for urgent priority service.`
+        a: `Immediately stop running all water inside your home—including dishwashers, washing machines, and sink faucets. Keep family members and pets away from contaminated wastewater to avoid biohazard risks. Locate and shut off your main water valve if water continues overflowing, and immediately call our 24/7 Anchorage dispatch hotline at 888-217-4803 for urgent priority service.`
       },
       {
         q: `Do you charge extra fees for night, weekend, or holiday dispatch in Anchorage?`,
@@ -684,7 +684,7 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
       },
       {
         q: `How do I schedule same-day or emergency drain cleaning in Anchorage (99507)?`,
-        a: `Simply call our 24/7 Anchorage dispatch hotline directly at 877-516-8705. Our dispatch coordinators will record your address in 99507, assess the severity of your drainage issue, and route the closest licensed on-call technician with an arrival window typically under 45 minutes.`
+        a: `Simply call our 24/7 Anchorage dispatch hotline directly at 888-217-4803. Our dispatch coordinators will record your address in 99507, assess the severity of your drainage issue, and route the closest licensed on-call technician with an arrival window typically under 45 minutes.`
       }
     ];
   }
@@ -769,7 +769,7 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
     },
     {
       q: `How do I book service with Home Plumbing USA in ${cityName} (${zip})?`,
-      a: `Simply call our 24/7 hotline at 877-516-8705 to speak directly with an active dispatch supervisor and get connected with a local technician.`
+      a: `Simply call our 24/7 hotline at 888-217-4803 to speak directly with an active dispatch supervisor and get connected with a local technician.`
     }
   ];
 }
@@ -816,9 +816,9 @@ function buildServicePage(state, cityZip, service, nearbyZips) {
 
   // Unique Meta Description (Strictly 150-160 chars)
   const metaDescriptions = [
-    `Need ${serviceName.toLowerCase()} in ${cityName}, ${stateCode} (${zip})? Home Plumbing USA connects you with vetted, 24/7 licensed local plumbers. Call 877-516-8705 for fast service!`,
-    `Looking for fast ${serviceName.toLowerCase()} in ${cityName} ${zip}? Home Plumbing USA matches you with licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`,
-    `Top-rated ${serviceName.toLowerCase()} in ${cityName}, ${stateCode} ${zip}. Connect with licensed local plumbers for same-day & 24/7 emergency repairs. Call 877-516-8705 now!`
+    `Need ${serviceName.toLowerCase()} in ${cityName}, ${stateCode} (${zip})? Home Plumbing USA connects you with vetted, 24/7 licensed local plumbers. Call 888-217-4803 for fast service!`,
+    `Looking for fast ${serviceName.toLowerCase()} in ${cityName} ${zip}? Home Plumbing USA matches you with licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`,
+    `Top-rated ${serviceName.toLowerCase()} in ${cityName}, ${stateCode} ${zip}. Connect with licensed local plumbers for same-day & 24/7 emergency repairs. Call 888-217-4803 now!`
   ];
   let metaDesc = metaDescriptions[0];
   for (const m of metaDescriptions) {
@@ -856,7 +856,7 @@ function buildServicePage(state, cityZip, service, nearbyZips) {
     "name": `Home Plumbing USA - ${serviceName} in ${cityName} (${zip})`,
     "description": metaDesc,
     "url": pageUrl,
-    "telephone": "877-516-8705",
+    "telephone": "888-217-4803",
     "priceRange": "$$",
     "areaServed": {
       "@type": "PostalAddress",
@@ -1047,8 +1047,8 @@ ${JSON.stringify(faqSchemaObj, null, 2)}
       </nav>
 
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call 24/7</a>
+        <a href="tel:888-217-4803" class="header-phone"><i class="fas fa-phone"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call 24/7</a>
       </div>
     </div>
   </header>
@@ -1073,7 +1073,7 @@ ${JSON.stringify(faqSchemaObj, null, 2)}
             <h1 style="font-size: 2.8rem; font-weight: 900; line-height: 1.15; color: #fff; margin: 12px 0 18px;">${copy.h1}</h1>
             <p class="hero-text" style="font-size: 1.15rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 24px;">${copy.problem}</p>
             <div class="hero-buttons">
-              <a href="tel:877-516-8705" class="btn btn-accent btn-lg"><i class="fas fa-phone"></i> Call 877-516-8705</a>
+              <a href="tel:888-217-4803" class="btn btn-accent btn-lg"><i class="fas fa-phone"></i> Call 888-217-4803</a>
               <a href="#services-list" class="btn btn-outline btn-lg"><i class="fas fa-list-check"></i> Service Details</a>
             </div>
           </div>
@@ -1120,7 +1120,7 @@ ${JSON.stringify(faqSchemaObj, null, 2)}
               <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 10px;"><i class="fas fa-phone-volume"></i></div>
               <h3>Need Help in ${cityName}?</h3>
               <p>Certified local technicians available 24/7. Average response time is 30–45 minutes in ${zip}.</p>
-              <a href="tel:877-516-8705" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 700; font-size: 1.05rem;"><i class="fas fa-phone"></i> 877-516-8705</a>
+              <a href="tel:888-217-4803" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 700; font-size: 1.05rem;"><i class="fas fa-phone"></i> 888-217-4803</a>
             </div>
 
             <div class="sidebar-widget">
@@ -1166,7 +1166,7 @@ ${JSON.stringify(faqSchemaObj, null, 2)}
         <div class="footer-col">
           <div class="footer-title">24/7 Dispatch</div>
           <p>Call our active dispatch supervisor for ${cityName} right now:</p>
-          <a href="tel:877-516-8705" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700;"><i class="fas fa-phone"></i> 877-516-8705</a>
+          <a href="tel:888-217-4803" class="footer-call-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700;"><i class="fas fa-phone"></i> 888-217-4803</a>
         </div>
       </div>
       <div class="footer-bottom">

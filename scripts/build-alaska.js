@@ -11,8 +11,8 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://homeplumbingusa.com';
-const PHONE = '877-516-8705';
-const PHONE_DISPLAY = '(877) 516-8705';
+const PHONE = '888-217-4803';
+const PHONE_DISPLAY = '(888) 217-4803';
 const STATE_NAME = 'Alaska';
 const STATE_CODE = 'AK';
 const STATE_SLUG = 'alaska';

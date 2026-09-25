@@ -383,8 +383,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call 24/7</a>
+        <a href="tel:888-217-4803" class="header-phone"><i class="fas fa-phone"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call 24/7</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -447,8 +447,8 @@ ${JSON.stringify(schemaObj, null, 2)}
             <div style="font-size: 2.2rem; color: var(--accent); margin-bottom: 10px;"><i class="fas fa-phone-volume"></i></div>
             <h3 style="border: none; margin-bottom: 8px;">Facing a Plumbing Emergency?</h3>
             <p style="font-size: 0.92rem; color: rgba(255,255,255,0.85); margin-bottom: 18px; line-height: 1.6;">Don't let a minor leak become severe water damage. Licensed plumbers are standing by for under 45-minute dispatch.</p>
-            <a href="tel:877-516-8705" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 800; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-              <i class="fas fa-phone-alt"></i> (877) 516-8705
+            <a href="tel:888-217-4803" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 800; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+              <i class="fas fa-phone-alt"></i> (888) 217-4803
             </a>
           </div>
 
@@ -485,8 +485,8 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="container" style="max-width: 760px; margin: 0 auto;">
       <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Need Immediate Hands-On Plumbing Help?</h2>
       <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Our dispatch operators are online 24 hours a day, 7 days a week. Connect with a licensed local plumbing specialist in under 45 minutes.</p>
-      <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-        <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+      <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+        <i class="fas fa-phone-alt"></i> Call (888) 217-4803
       </a>
     </div>
   </section>
@@ -524,8 +524,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">24/7 Dispatch</div>
           <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">Talk directly with a live dispatch supervisor right now:</p>
-          <a href="tel:877-516-8705" class="btn btn-accent" style="padding: 12px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 8px; font-size: 0.95rem;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+          <a href="tel:888-217-4803" class="btn btn-accent" style="padding: 12px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 8px; font-size: 0.95rem;">
+            <i class="fas fa-phone-alt"></i> (888) 217-4803
           </a>
         </div>
       </div>
@@ -832,8 +832,8 @@ function buildBlogHubHtml(allPosts) {
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta">
-        <a href="tel:877-516-8705" class="header-phone"><i class="fas fa-phone"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call 24/7</a>
+        <a href="tel:888-217-4803" class="header-phone"><i class="fas fa-phone"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call 24/7</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -885,8 +885,8 @@ function buildBlogHubHtml(allPosts) {
       <div class="container" style="max-width: 760px; margin: 0 auto;">
         <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 1rem; font-weight: 800;">Have a Plumbing Emergency That Can't Wait?</h2>
         <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Don't spend hours troubleshooting when water is actively leaking. Connect with vetted, licensed local plumbers in under 45 minutes.</p>
-        <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-          <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+        <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--accent); color: #fff; font-size: 1.15rem; font-weight: 800; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <i class="fas fa-phone-alt"></i> Call (888) 217-4803
         </a>
       </div>
     </section>
@@ -925,8 +925,8 @@ function buildBlogHubHtml(allPosts) {
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">24/7 Dispatch</div>
           <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">Talk directly with a live dispatch supervisor right now:</p>
-          <a href="tel:877-516-8705" class="btn btn-accent" style="padding: 12px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 8px; font-size: 0.95rem;">
-            <i class="fas fa-phone-alt"></i> (877) 516-8705
+          <a href="tel:888-217-4803" class="btn btn-accent" style="padding: 12px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 8px; font-size: 0.95rem;">
+            <i class="fas fa-phone-alt"></i> (888) 217-4803
           </a>
         </div>
       </div>

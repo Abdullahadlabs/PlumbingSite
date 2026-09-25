@@ -602,7 +602,7 @@ async function main() {
         folder_name: serviceFolderName,
         url_path: urlPath,
         title_tag: `${service.name} in ${cleanCity}, ${loc.state} ${loc.zip} | Home Plumbing USA`,
-        meta_description: `Home Plumbing USA provides ${service.name.toLowerCase()} in ${cleanCity}, ${loc.state} ${loc.zip}. Licensed, insured, and available for same-day service. Call 877-516-8705.`,
+        meta_description: `Home Plumbing USA provides ${service.name.toLowerCase()} in ${cleanCity}, ${loc.state} ${loc.zip}. Licensed, insured, and available for same-day service. Call 888-217-4803.`,
         meta_keywords: `plumbers in ${cleanCity}, ${loc.state}, emergency plumbing ${cleanCity}, ${loc.state}, 24/7 local plumber ${cleanCity}, ${loc.state}, ${cleanCity}, ${loc.state} plumbing experts, water heater repair ${cleanCity}, ${loc.state}, affordable plumber ${cleanCity}, ${loc.state}`,
         h1: `${service.name} in ${cleanCity}, ${loc.state} ${loc.zip}`,
         intro_paragraph: paragraphs.intro,

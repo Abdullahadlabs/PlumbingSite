@@ -152,21 +152,21 @@ function generateStateMetaDescription(stateName, stateCode) {
 
   const templates = [
     // Base 152-155 (For short states 4-8 chars)
-    `Need trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs & drain cleaning. Call 877-516-8705!`,
-    `Looking for emergency plumbers in ${s}? Home Plumbing USA matches you with vetted local specialists for 24/7 fast pipe & leak repairs. Call 877-516-8705!`,
-    `Need 24/7 emergency plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for fast repairs, drains & leak service. Call 877-516-8705!`,
-    `Need emergency plumbing in ${s}? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!`,
+    `Need trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs & drain cleaning. Call 888-217-4803!`,
+    `Looking for emergency plumbers in ${s}? Home Plumbing USA matches you with vetted local specialists for 24/7 fast pipe & leak repairs. Call 888-217-4803!`,
+    `Need 24/7 emergency plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for fast repairs, drains & leak service. Call 888-217-4803!`,
+    `Need emergency plumbing in ${s}? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 888-217-4803!`,
     // Base 145-150 (For medium states 7-11 chars)
-    `Need reliable plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs & drain service. Call 877-516-8705!`,
-    `Need fast emergency plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 repairs & leak detection. Call 877-516-8705!`,
-    `Find trusted local plumbers in ${s}. Home Plumbing USA connects you with licensed, vetted technicians for 24/7 emergency plumbing repairs. Call 877-516-8705!`,
-    `Looking for trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs. Call 877-516-8705 today!`,
+    `Need reliable plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs & drain service. Call 888-217-4803!`,
+    `Need fast emergency plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 repairs & leak detection. Call 888-217-4803!`,
+    `Find trusted local plumbers in ${s}. Home Plumbing USA connects you with licensed, vetted technicians for 24/7 emergency plumbing repairs. Call 888-217-4803!`,
+    `Looking for trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local technicians for 24/7 emergency repairs. Call 888-217-4803 today!`,
     // Base 138-145 (For long states 11-15 chars)
-    `Fast, reliable plumbing in ${s}. Home Plumbing USA connects you with licensed, local plumbers 24/7 for emergency repairs & drains. Call 877-516-8705!`,
-    `Looking for reliable plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for 24/7 emergency repairs. Call 877-516-8705!`,
-    `Get 24/7 plumbing services in ${s}. Home Plumbing USA matches you with vetted, licensed local plumbers for fast emergency repairs. Call 877-516-8705!`,
-    `Need trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for 24/7 emergency repairs & service. Call 877-516-8705!`,
-    `Find licensed plumbers in ${s}. Home Plumbing USA connects you with vetted, local contractors for 24/7 emergency plumbing repairs. Call 877-516-8705!`
+    `Fast, reliable plumbing in ${s}. Home Plumbing USA connects you with licensed, local plumbers 24/7 for emergency repairs & drains. Call 888-217-4803!`,
+    `Looking for reliable plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for 24/7 emergency repairs. Call 888-217-4803!`,
+    `Get 24/7 plumbing services in ${s}. Home Plumbing USA matches you with vetted, licensed local plumbers for fast emergency repairs. Call 888-217-4803!`,
+    `Need trusted plumbers in ${s}? Home Plumbing USA connects you with licensed local experts for 24/7 emergency repairs & service. Call 888-217-4803!`,
+    `Find licensed plumbers in ${s}. Home Plumbing USA connects you with vetted, local contractors for 24/7 emergency plumbing repairs. Call 888-217-4803!`
   ];
 
   // Rotate starting offset per state for maximum natural variation
@@ -185,13 +185,13 @@ function generateStateMetaDescription(stateName, stateCode) {
     if (c.length >= 150 && c.length <= 160) return c;
   }
 
-  return `Need trusted plumbing services in ${s}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+  return `Need trusted plumbing services in ${s}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`;
 }
 
 const CUSTOM_STATE_SEO = {
   'colorado': {
     title: '24/7 Colorado Plumber – Licensed Pro Referral Network',
-    metaDesc: 'Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 877-516-8705!'
+    metaDesc: 'Need emergency plumbers in Colorado? Home Plumbing USA connects you with licensed local contractors for 24/7 pipe repairs & drain cleaning. Call 888-217-4803!'
   },
   'georgia': {
     title: 'Georgia Emergency Plumbers – Licensed & Local | Home Plumbing USA',
@@ -203,11 +203,11 @@ const CUSTOM_STATE_SEO = {
   },
   'texas': {
     title: 'Texas Plumber Near You – Fast, Licensed Dispatch',
-    metaDesc: 'Texas plumbing emergency? Home Plumbing USA matches you with licensed local pros, day or night. Call 877-516-8705 for immediate dispatch.'
+    metaDesc: 'Texas plumbing emergency? Home Plumbing USA matches you with licensed local pros, day or night. Call 888-217-4803 for immediate dispatch.'
   },
   'maine': {
     title: 'Trusted Maine Plumbers, Available Day or Night',
-    metaDesc: 'Need a reliable plumber in Maine? We connect homeowners with vetted, licensed local pros for fast 24/7 repairs. Call 877-516-8705 to get help now.'
+    metaDesc: 'Need a reliable plumber in Maine? We connect homeowners with vetted, licensed local pros for fast 24/7 repairs. Call 888-217-4803 to get help now.'
   },
   'virginia': {
     title: 'Virginia Plumbing Help – Licensed Pros, Fast Response',
@@ -246,7 +246,7 @@ function generateStateHtml(templateHtml, state, stateCitiesIndex) {
     "name": `Home Plumbing USA - ${stateName}`,
     "description": `Professional plumbing and emergency repair services across ${stateName}. Licensed, vetted plumbers available 24/7.`,
     "url": canonicalUrl,
-    "telephone": "877-516-8705",
+    "telephone": "888-217-4803",
     "priceRange": "$$",
     "areaServed": {
       "@type": "AdministrativeArea",

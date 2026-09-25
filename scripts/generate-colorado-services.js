@@ -542,7 +542,7 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
     });
     faqs.push({
       q: `Are emergency plumbing dispatch operators available 24 hours a day?`,
-      a: `Yes. Our dispatch phone line (877-516-8705) is staffed by live operators 24 hours a day, 7 days a week, 365 days a year, coordinating fast arrivals across Lakewood and Jefferson County.`
+      a: `Yes. Our dispatch phone line (888-217-4803) is staffed by live operators 24 hours a day, 7 days a week, 365 days a year, coordinating fast arrivals across Lakewood and Jefferson County.`
     });
     faqs.push({
       q: `Do emergency plumbers arrive with replacement parts on service trucks?`,
@@ -811,7 +811,7 @@ function generateFAQs(serviceSlug, serviceName, zipObj) {
 
   faqs.push({
     q: `How do I schedule non-emergency service for a future date in ${zipObj.neighborhood}?`,
-    a: `You can call our dispatch desk at 877-516-8705 anytime 24/7 to schedule an appointment at your convenience, with morning, afternoon, and weekend arrival windows available.`
+    a: `You can call our dispatch desk at 888-217-4803 anytime 24/7 to schedule an appointment at your convenience, with morning, afternoon, and weekend arrival windows available.`
   });
 
   faqs.push({
@@ -843,7 +843,7 @@ function generateServicePage(zipObj, serviceObj) {
   const stateUrl = `${DOMAIN}/colorado/`;
 
   const metaTitle = `${serviceName} in Lakewood, CO (${zipObj.zip}) | 24/7 Pro Dispatch`;
-  const metaDesc = `Fast, reliable ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip}). Vetted licensed pros, upfront flat-rate pricing & 24/7 emergency dispatch. Call 877-516-8705!`;
+  const metaDesc = `Fast, reliable ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip}). Vetted licensed pros, upfront flat-rate pricing & 24/7 emergency dispatch. Call 888-217-4803!`;
   const serviceImageUrl = `${DOMAIN}/public/images/services/${serviceSlug}.webp`;
 
   const localCopy = generateLocalContent(serviceSlug, serviceName, zipObj);
@@ -889,7 +889,7 @@ function generateServicePage(zipObj, serviceObj) {
         "name": `Home Plumbing USA - ${serviceName} in Lakewood (${zipObj.zip})`,
         "description": metaDesc,
         "url": pageUrl,
-        "telephone": "877-516-8705",
+        "telephone": "888-217-4803",
         "priceRange": "$$",
         "image": serviceImageUrl,
         "geo": {
@@ -1060,7 +1060,7 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>24/7 ${serviceName} in <strong>Lakewood, CO (${zipObj.zip})</strong> &bull; Vetted Independent Network &bull; <a href="tel:877-516-8705" style="color: inherit; text-decoration: none; font-weight: 700;">877-516-8705</a></span>
+        <span>24/7 ${serviceName} in <strong>Lakewood, CO (${zipObj.zip})</strong> &bull; Vetted Independent Network &bull; <a href="tel:888-217-4803" style="color: inherit; text-decoration: none; font-weight: 700;">888-217-4803</a></span>
       </div>
     </div>
     <div class="header-inner container" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
@@ -1075,8 +1075,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta" style="display: flex; align-items: center; gap: 16px;">
-        <a href="tel:877-516-8705" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call Now</a>
+        <a href="tel:888-217-4803" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call Now</a>
       </div>
     </div>
   </header>
@@ -1107,8 +1107,8 @@ ${JSON.stringify(schemaObj, null, 2)}
               In ${zipObj.neighborhood} (${zipObj.zip}), elevation ranges around ${zipObj.elevation} amidst shifting ${zipObj.soilType}. Extreme Rocky Mountain cold fronts and hard water from ${zipObj.waterSource} demand experienced local plumbing technicians equipped with specialized diagnostic tools. Our dispatch network connects you directly with independent licensed Colorado contractors 24/7/365.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+              <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-phone-alt"></i> Call (888) 217-4803
               </a>
               <a href="#details" class="btn btn-outline" style="border: 2px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fas fa-wrench"></i> Diagnostic Protocols
@@ -1165,7 +1165,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             </div>
             <div class="quick-info-text">
               <span class="quick-info-label">Live Dispatch Coordination</span>
-              <a href="tel:877-516-8705" style="font-size: 1.15rem; color: #fff; font-weight: 800; text-decoration: none; display: block;">877-516-8705</a>
+              <a href="tel:888-217-4803" style="font-size: 1.15rem; color: #fff; font-weight: 800; text-decoration: none; display: block;">888-217-4803</a>
               <span class="quick-info-sub">24/7 Colorado Operator</span>
             </div>
           </div>
@@ -1242,8 +1242,8 @@ ${JSON.stringify(schemaObj, null, 2)}
               <div style="font-size: 2.4rem; color: var(--accent); margin-bottom: 10px;"><i class="fas fa-phone-volume"></i></div>
               <h3>Need Immediate Help in Lakewood?</h3>
               <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 18px;">Independent contractors on-call 24/7 across ${zipObj.neighborhood}. Typical dispatch response in 30–45 minutes.</p>
-              <a href="tel:877-516-8705" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 800; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 8px; background: var(--gradient-accent); color: #fff; box-shadow: var(--shadow-accent-glow);">
-                <i class="fas fa-phone"></i> 877-516-8705
+              <a href="tel:888-217-4803" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 800; font-size: 1.05rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 8px; background: var(--gradient-accent); color: #fff; box-shadow: var(--shadow-accent-glow);">
+                <i class="fas fa-phone"></i> 888-217-4803
               </a>
             </div>
 
@@ -1279,7 +1279,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 16px;">Providing ${serviceName.toLowerCase()} referral and emergency dispatch services in Lakewood, CO (${zipObj.zip}) and surrounding communities 24/7/365.</p>
-          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">24/7 Dispatch Hotline: <a href="tel:877-516-8705" style="color: var(--accent); text-decoration: none; font-weight: 700;">877-516-8705</a></p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">24/7 Dispatch Hotline: <a href="tel:888-217-4803" style="color: var(--accent); text-decoration: none; font-weight: 700;">888-217-4803</a></p>
         </div>
 
         <div>
@@ -1306,8 +1306,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <div>
           <h4 style="color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Network Standards</h4>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px;">Workmanship guarantees and flat-rate pricing provided directly by independent, licensed Colorado contractors matched through our platform.</p>
-          <a href="tel:877-516-8705" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
-            <i class="fas fa-phone"></i> 877-516-8705
+          <a href="tel:888-217-4803" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+            <i class="fas fa-phone"></i> 888-217-4803
           </a>
         </div>
       </div>

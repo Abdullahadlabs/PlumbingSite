@@ -577,7 +577,7 @@ function initMain() {
   document.querySelectorAll('[data-track="phone"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const location = e.currentTarget.getAttribute('data-location') || 'general';
-      const number = e.currentTarget.getAttribute('href') || 'tel:877-516-8705';
+      const number = e.currentTarget.getAttribute('href') || 'tel:888-217-4803';
       
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -1211,7 +1211,7 @@ function initMain() {
       }
       description = `Need trusted plumbing services in ${stateName}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
       if (description.length < 150) {
-        description = `Need trusted plumbing services in ${stateName}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        description = `Need trusted plumbing services in ${stateName}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`;
       }
       schemaName = `Home Plumbing USA - ${seo.state || 'State'}`;
       schemaDesc = `Referral matching service for professional plumbing in ${seo.state || 'State'}.`;
@@ -1227,7 +1227,7 @@ function initMain() {
       }
       description = `Need trusted plumbing services in ${locationLabel}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call today!`;
       if (description.length < 150) {
-        description = `Need trusted plumbing services in ${locationLabel}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        description = `Need trusted plumbing services in ${locationLabel}? Home Plumbing USA connects you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`;
       }
       schemaName = `Home Plumbing USA - ${cityName}`;
       schemaDesc = `Referral matching service for professional plumbing in ${cityName}, ${stateName}.`;
@@ -1240,9 +1240,9 @@ function initMain() {
       const locationLabel = stateCode ? `${cityName}, ${stateCode}` : cityName;
 
       title = `${serviceName} in ${locationLabel} | Home Plumbing USA`;
-      description = `Need ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+      description = `Need ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`;
       if (description.length < 150) {
-        description = `Looking for ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 877-516-8705!`;
+        description = `Looking for ${serviceName.toLowerCase()} in ${locationLabel}? Home Plumbing USA matches you with vetted, licensed local plumbers for 24/7 emergency repairs. Call 888-217-4803!`;
       }
       schemaName = `Home Plumbing USA - ${cityName}`;
       schemaDesc = `Referral matching service for ${serviceName.toLowerCase()} in ${locationLabel}.`;
@@ -1281,7 +1281,7 @@ function initMain() {
       "name": schemaName,
       "description": schemaDesc,
       "url": pageUrl,
-      "telephone": "877-516-8705",
+      "telephone": "888-217-4803",
       "priceRange": "$$",
       "areaServed": {
         "@type": "AdministrativeArea",

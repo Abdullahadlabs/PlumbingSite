@@ -19,7 +19,7 @@ function slugify(text) {
 function generateStateHub() {
   const pageUrl = `${DOMAIN}/colorado/`;
   const title = `Plumbing Services in Colorado | 24/7 Licensed Pro Network`;
-  const metaDesc = `Connect with vetted, licensed plumbing contractors across Colorado. 24/7 emergency dispatch, upfront flat-rate pricing, and cold-climate expertise. Call 877-516-8705!`;
+  const metaDesc = `Connect with vetted, licensed plumbing contractors across Colorado. 24/7 emergency dispatch, upfront flat-rate pricing, and cold-climate expertise. Call 888-217-4803!`;
 
   const schemaObj = {
     "@context": "https://schema.org",
@@ -30,7 +30,7 @@ function generateStateHub() {
         "name": "Home Plumbing USA - Colorado Contractor Network",
         "description": metaDesc,
         "url": pageUrl,
-        "telephone": "877-516-8705",
+        "telephone": "888-217-4803",
         "priceRange": "$$",
         "image": `${DOMAIN}/public/images/hero-plumbing.webp`,
         "address": {
@@ -194,7 +194,7 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>24/7 Colorado Plumbing Dispatch Network &bull; Vetted Independent Contractors &bull; <a href="tel:877-516-8705" style="color: inherit; text-decoration: none; font-weight: 700;">877-516-8705</a></span>
+        <span>24/7 Colorado Plumbing Dispatch Network &bull; Vetted Independent Contractors &bull; <a href="tel:888-217-4803" style="color: inherit; text-decoration: none; font-weight: 700;">888-217-4803</a></span>
       </div>
     </div>
     <div class="header-inner container" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
@@ -209,8 +209,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta" style="display: flex; align-items: center; gap: 16px;">
-        <a href="tel:877-516-8705" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call 24/7</a>
+        <a href="tel:888-217-4803" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call 24/7</a>
       </div>
     </div>
   </header>
@@ -237,8 +237,8 @@ ${JSON.stringify(schemaObj, null, 2)}
               Home Plumbing USA operates as an emergency dispatch and referral network connecting property owners across Colorado with independent, licensed, and background-checked plumbing contractors. From high-altitude water heater adjustments and frozen pipe mitigation to bentonite clay sewer repairs, we coordinate fast on-call dispatch with upfront flat-rate pricing.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+              <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-phone-alt"></i> Call (888) 217-4803
               </a>
               <a href="#coverage" class="btn btn-outline" style="border: 2px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fas fa-location-dot"></i> View Coverage Areas
@@ -329,8 +329,8 @@ ${JSON.stringify(schemaObj, null, 2)}
       <div class="container">
         <h2 style="font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 14px;">Need Emergency Plumbing Dispatch in Colorado?</h2>
         <p style="color: var(--text-light); font-size: 1.15rem; max-width: 680px; margin: 0 auto 28px; line-height: 1.6;">Our live operators connect you with vetted, licensed independent plumbing contractors 24 hours a day, 7 days a week.</p>
-        <a href="tel:877-516-8705" class="btn btn-accent" style="padding: 16px 36px; font-size: 1.15rem; font-weight: 800; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; background: var(--gradient-accent); color: #fff; box-shadow: var(--shadow-accent-glow);">
-          <i class="fas fa-phone-alt"></i> Call (877) 516-8705 Now
+        <a href="tel:888-217-4803" class="btn btn-accent" style="padding: 16px 36px; font-size: 1.15rem; font-weight: 800; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; background: var(--gradient-accent); color: #fff; box-shadow: var(--shadow-accent-glow);">
+          <i class="fas fa-phone-alt"></i> Call (888) 217-4803 Now
         </a>
       </div>
     </section>
@@ -345,7 +345,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 16px;">Home Plumbing USA is a nationwide referral and dispatch network connecting property owners with independent, licensed, and insured plumbing professionals. We do not provide direct contracting services.</p>
-          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Dispatch Center: <a href="tel:877-516-8705" style="color: var(--accent); text-decoration: none; font-weight: 700;">877-516-8705</a></p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">Dispatch Center: <a href="tel:888-217-4803" style="color: var(--accent); text-decoration: none; font-weight: 700;">888-217-4803</a></p>
         </div>
 
         <div>
@@ -373,8 +373,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <div>
           <h4 style="color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Network Standards</h4>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px;">All matched providers are verified for active Colorado state plumbing licensure, commercial general liability insurance, and upfront flat-rate pricing compliance.</p>
-          <a href="tel:877-516-8705" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
-            <i class="fas fa-phone"></i> 877-516-8705
+          <a href="tel:888-217-4803" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+            <i class="fas fa-phone"></i> 888-217-4803
           </a>
         </div>
       </div>
@@ -407,7 +407,7 @@ function generateCityZipHub(zipObj) {
   const pageUrl = `${DOMAIN}/colorado/${cityZipSlug}/`;
   const stateUrl = `${DOMAIN}/colorado/`;
   const title = `Plumbers in Lakewood, CO ${zipObj.zip} | 24/7 Emergency Plumbing`;
-  const metaDesc = `Need emergency plumbing in Lakewood, CO (${zipObj.zip})? Home Plumbing USA connects you with vetted, licensed local contractors 24/7. Call 877-516-8705!`;
+  const metaDesc = `Need emergency plumbing in Lakewood, CO (${zipObj.zip})? Home Plumbing USA connects you with vetted, licensed local contractors 24/7. Call 888-217-4803!`;
 
   const nearbyList = LAKEWOOD_ZIPS.filter(z => z.zip !== zipObj.zip);
   const nearbyHtml = nearbyList.map(nz => `
@@ -464,7 +464,7 @@ function generateCityZipHub(zipObj) {
     },
     {
       q: `What should I do if a water pipe bursts during a Lakewood winter freeze?`,
-      a: `Immediately shut off your home's main water shut-off valve (typically located in the basement near the water meter or in the crawlspace) to halt active flooding, then call our 24/7 dispatch line at 877-516-8705.`
+      a: `Immediately shut off your home's main water shut-off valve (typically located in the basement near the water meter or in the crawlspace) to halt active flooding, then call our 24/7 dispatch line at 888-217-4803.`
     },
     {
       q: `Does Lakewood water cause mineral scaling on faucets and fixtures?`,
@@ -497,7 +497,7 @@ function generateCityZipHub(zipObj) {
         "name": `Home Plumbing USA - Lakewood (${zipObj.zip})`,
         "description": metaDesc,
         "url": pageUrl,
-        "telephone": "877-516-8705",
+        "telephone": "888-217-4803",
         "priceRange": "$$",
         "image": `${DOMAIN}/public/images/hero-plumbing.webp`,
         "geo": {
@@ -619,7 +619,7 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>24/7 Plumbers Dispatched to <strong>Lakewood, CO (${zipObj.zip})</strong> &bull; Vetted Independent Network &bull; <a href="tel:877-516-8705" style="color: inherit; text-decoration: none; font-weight: 700;">877-516-8705</a></span>
+        <span>24/7 Plumbers Dispatched to <strong>Lakewood, CO (${zipObj.zip})</strong> &bull; Vetted Independent Network &bull; <a href="tel:888-217-4803" style="color: inherit; text-decoration: none; font-weight: 700;">888-217-4803</a></span>
       </div>
     </div>
     <div class="header-inner container" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
@@ -634,8 +634,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-cta" style="display: flex; align-items: center; gap: 16px;">
-        <a href="tel:877-516-8705" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 877-516-8705</a>
-        <a href="tel:877-516-8705" class="btn btn-primary btn-sm">Call Now</a>
+        <a href="tel:888-217-4803" class="header-phone" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; text-decoration: none;"><i class="fas fa-phone" style="color: var(--accent);"></i> 888-217-4803</a>
+        <a href="tel:888-217-4803" class="btn btn-primary btn-sm">Call Now</a>
       </div>
     </div>
   </header>
@@ -664,8 +664,8 @@ ${JSON.stringify(schemaObj, null, 2)}
               Connecting homeowners and commercial property managers in Lakewood (${zipObj.zip}) with independent, background-checked plumbing contractors. Whether you face sub-zero frozen pipe ruptures, expansive clay soil sewer backups, or high-altitude water heater malfunctions in ${zipObj.neighborhood}, our 24/7 network provides prompt, professional dispatch.
             </p>
             <div class="hero-ctas" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <a href="tel:877-516-8705" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fas fa-phone-alt"></i> Call (877) 516-8705
+              <a href="tel:888-217-4803" class="btn btn-accent" style="background: var(--gradient-accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: var(--shadow-accent-glow); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-phone-alt"></i> Call (888) 217-4803
               </a>
               <a href="#services" class="btn btn-outline" style="border: 2px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fas fa-wrench"></i> Services in ${zipObj.zip}
@@ -722,7 +722,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             </div>
             <div class="quick-info-text">
               <span class="quick-info-label">Live Dispatch Coordination</span>
-              <a href="tel:877-516-8705" style="font-size: 1.15rem; color: #fff; font-weight: 800; text-decoration: none; display: block;">877-516-8705</a>
+              <a href="tel:888-217-4803" style="font-size: 1.15rem; color: #fff; font-weight: 800; text-decoration: none; display: block;">888-217-4803</a>
               <span class="quick-info-sub">24/7 Colorado Operator</span>
             </div>
           </div>
@@ -818,7 +818,7 @@ ${JSON.stringify(schemaObj, null, 2)}
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 16px;">Serving Lakewood, CO (${zipObj.zip}) and neighboring Jefferson County areas with vetted independent plumbing contractors 24 hours a day, 365 days a year.</p>
-          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">24/7 Dispatch Desk: <a href="tel:877-516-8705" style="color: var(--accent); text-decoration: none; font-weight: 700;">877-516-8705</a></p>
+          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">24/7 Dispatch Desk: <a href="tel:888-217-4803" style="color: var(--accent); text-decoration: none; font-weight: 700;">888-217-4803</a></p>
         </div>
 
         <div>
@@ -845,8 +845,8 @@ ${JSON.stringify(schemaObj, null, 2)}
         <div>
           <h4 style="color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Referral Network Disclosure</h4>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px;">Home Plumbing USA connects consumers with independent local plumbing contractors. Services are performed by licensed third-party professionals.</p>
-          <a href="tel:877-516-8705" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
-            <i class="fas fa-phone"></i> 877-516-8705
+          <a href="tel:888-217-4803" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(37,99,235,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+            <i class="fas fa-phone"></i> 888-217-4803
           </a>
         </div>
       </div>
