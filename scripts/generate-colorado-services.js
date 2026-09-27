@@ -842,6 +842,11 @@ function generateServicePage(zipObj, serviceObj) {
   const cityHubUrl = `${DOMAIN}/colorado/${cityZipSlug}/`;
   const stateUrl = `${DOMAIN}/colorado/`;
 
+  if (zipObj.zip === '80226' && serviceSlug === 'drain-cleaning') {
+    // Retain restructured reference page layout
+    return;
+  }
+
   const metaTitle = `${serviceName} in Lakewood, CO (${zipObj.zip}) | 24/7 Pro Dispatch`;
   const metaDesc = `Fast, reliable ${serviceName.toLowerCase()} in Lakewood, CO (${zipObj.zip}). Vetted licensed pros, upfront flat-rate pricing & 24/7 emergency dispatch. Call 888-217-4803!`;
   const serviceImageUrl = `${DOMAIN}/public/images/services/${serviceSlug}.webp`;
