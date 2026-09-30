@@ -104,7 +104,7 @@ function generatePage(dirName) {
 
   // FAQ data
   const faqs = [
-    { q: `Is 24/7 emergency plumbing services available in ${city}?`,
+    { q: `Are 24/7 emergency plumbing services available in ${city}?`,
       a: `Yes! Our dispatch network operates 24 hours a day, 7 days a week, including weekends and holidays. We can connect you with an emergency plumber in ${city} immediately to resolve urgent leaks, backups, or system failures.` },
     { q: `How quickly can a plumber arrive at my property in ${city} ${zip}?`,
       a: `On average, emergency plumbers in our network can arrive at your address in ${city} (${zip}) within 45 minutes. Response times may vary slightly depending on road conditions and current call volume, but we always dispatch the closest available specialist.` },
@@ -112,8 +112,8 @@ function generatePage(dirName) {
       a: `Absolutely. Every plumber matched through our system holds active state-level licensing and comprehensive liability insurance. This guarantees that your plumbing services will be handled safely, professionally, and in complete compliance with ${STATE_CODE} building codes.` },
     { q: `Do you charge by the hour or provide flat-rate pricing?`,
       a: `We provide transparent flat-rate written estimates before any physical repairs begin. The technician will inspect the issue in person at your ${city} property and present your options, ensuring there are no surprise charges or hidden fees.` },
-    { q: `How do Alaska's extreme cold temperatures affect my plumbing?`,
-      a: `${STATE_NAME}'s sub-zero winters pose serious risks to residential plumbing. Water inside uninsulated pipes can freeze and expand, cracking copper, PVC, and galvanized lines. We recommend heat tape wrapping, pipe insulation, and maintaining indoor temperatures above 55°F to prevent catastrophic freeze-bursts.` },
+    { q: `What are the most common plumbing emergencies experienced in ${city} homes?`,
+      a: `The most common emergencies in ${city} include burst water lines during freeze-thaw cycles, failing water heater pressure valves, clogged sewer laterals caused by grease buildup or root intrusion, and frozen crawlspace waste lines. Our 24/7 dispatch network connects you with immediate local help for any plumbing crisis.` },
     { q: `How can I protect my pipes from freezing in ${city}?`,
       a: `Install self-regulating heat tape on exposed water supply lines, add foam pipe insulation to all pipes in unheated crawl spaces and basements, and allow a slow drip on exterior faucets during extreme cold events. Our plumbers in ${city} provide professional winterization assessments.` },
     { q: `Is there a warranty or guarantee on the plumbing services work?`,

@@ -1350,14 +1350,39 @@ function initMain() {
   function updateMegaDropdownForCurrentState() {
     const pathParts = window.location.pathname.split('/').filter(Boolean);
     let currentState = '';
+    let currentCityHub = '';
 
     if (pathParts[0] === 'state' && pathParts[1]) {
       currentState = getStateSlug(pathParts[1]);
     } else if (['florida', 'texas', 'alaska', 'colorado'].includes(pathParts[0])) {
       currentState = pathParts[0];
+      if (pathParts[1] && pathParts[1].includes('-')) {
+        currentCityHub = pathParts[1];
+      }
     }
 
-    if (!currentState) return;
+    const dropdown = document.querySelector('.mega-dropdown');
+    if (!dropdown) return;
+    const links = dropdown.querySelectorAll('a.dropdown-link');
+
+    // If on a national / non-state page, point to clean service catalog anchors
+    if (!currentState) {
+      links.forEach(a => {
+        const text = a.textContent.trim().toLowerCase();
+        if (text.includes('drain cleaning') || text.includes('clogged') || text.includes('hydro') || text.includes('sewer line')) {
+          a.setAttribute('href', '/services#drain-sewer');
+        } else if (text.includes('water heater') || text.includes('tankless')) {
+          a.setAttribute('href', '/services#water-heaters');
+        } else if (text.includes('burst pipe') || text.includes('repiping') || text.includes('leak detection') || text.includes('slab leak') || text.includes('pipe leak') || text.includes('gas line') || text.includes('water line')) {
+          a.setAttribute('href', '/services#leaks-pipes');
+        } else if (text.includes('toilet') || text.includes('faucet') || text.includes('sink') || text.includes('garbage disposal') || text.includes('kitchen') || text.includes('bathroom') || text.includes('backflow') || text.includes('sump pump') || text.includes('pressure')) {
+          a.setAttribute('href', '/services#fixtures-pumps');
+        } else {
+          a.setAttribute('href', '/services#emergency');
+        }
+      });
+      return;
+    }
 
     const STATE_HUBS = {
       'florida': {
@@ -1388,10 +1413,7 @@ function initMain() {
     };
 
     const hubs = STATE_HUBS[currentState];
-    const dropdown = document.querySelector('.mega-dropdown');
-    if (!dropdown) return;
 
-    const links = dropdown.querySelectorAll('a.dropdown-link');
     links.forEach(a => {
       const text = a.textContent.trim().toLowerCase();
 
@@ -1400,54 +1422,101 @@ function initMain() {
         return;
       }
 
+      // If state doesn't have granular city hubs, route to state services directory
       if (!hubs) {
-        a.setAttribute('href', `#services`);
+        a.setAttribute('href', `/state/${currentState}/#services`);
         return;
       }
 
+      // If user is inside an active city hub, keep links in that city context
       const { p1, p2, p3, p4, p5 = p1 } = hubs;
 
       if (text.includes('drain cleaning') || text.includes('hydro jetting') || text.includes('clogged drain')) {
-        let hub = p1;
-        if (text.includes('clogged')) hub = p2;
-        else if (text.includes('hydro')) hub = p3;
+        let hub = currentCityHub || (text.includes('clogged') ? p2 : (text.includes('hydro') ? p3 : p1));
         a.setAttribute('href', `/${currentState}/${hub}/drain-cleaning/`);
       } else if (text.includes('water heater') || text.includes('tankless')) {
-        let hub = p1;
-        if (text.includes('repair')) hub = p2;
-        else if (text.includes('tankless')) hub = p3;
+        let hub = currentCityHub || (text.includes('repair') ? p2 : (text.includes('tankless') ? p3 : p1));
         a.setAttribute('href', `/${currentState}/${hub}/water-heater-repair/`);
       } else if (text.includes('burst pipe') || text.includes('repiping')) {
-        let hub = text.includes('repiping') ? p3 : p1;
+        let hub = currentCityHub || (text.includes('repiping') ? p3 : p1);
         a.setAttribute('href', `/${currentState}/${hub}/burst-pipe-repair/`);
       } else if (text.includes('sewer line')) {
-        let hub = text.includes('replacement') ? p1 : p4;
+        let hub = currentCityHub || (text.includes('replacement') ? p1 : p4);
         a.setAttribute('href', `/${currentState}/${hub}/sewer-line-repair/`);
       } else if (text.includes('leak detection') || text.includes('slab leak') || text.includes('pipe leak')) {
-        let hub = p1;
-        if (text.includes('slab')) hub = p3;
-        else if (text.includes('pipe')) hub = p2;
+        let hub = currentCityHub || (text.includes('slab') ? p3 : (text.includes('pipe') ? p2 : p1));
         a.setAttribute('href', `/${currentState}/${hub}/leak-detection/`);
       } else if (text.includes('gas line') || text.includes('gas leak')) {
-        let hub = p1;
-        if (text.includes('installation')) hub = p4;
-        else if (text.includes('detection')) hub = p3;
+        let hub = currentCityHub || (text.includes('installation') ? p4 : (text.includes('detection') ? p3 : p1));
         a.setAttribute('href', `/${currentState}/${hub}/gas-line-repair/`);
       } else if (text.includes('water line')) {
-        let hub = text.includes('repair') ? p2 : p1;
+        let hub = currentCityHub || (text.includes('repair') ? p2 : p1);
         a.setAttribute('href', `/${currentState}/${hub}/water-line-repair/`);
       } else if (text.includes('toilet') || text.includes('faucet') || text.includes('sink') || text.includes('garbage disposal') || text.includes('kitchen') || text.includes('bathroom') || text.includes('emergency') || text.includes('same day') || text.includes('maintenance')) {
-        let hub = p1;
-        if (text.includes('same day')) hub = p2;
-        else if (text.includes('maintenance')) hub = p4;
-        else if (text.includes('toilet')) hub = p4;
-        else if (text.includes('sink') || text.includes('faucet')) hub = p2;
-        else if (text.includes('kitchen')) hub = p5;
-        else if (text.includes('bathroom')) hub = p3;
+        let hub = currentCityHub || (text.includes('same day') ? p2 : (text.includes('maintenance') ? p4 : (text.includes('toilet') ? p4 : (text.includes('sink') || text.includes('faucet') ? p2 : (text.includes('kitchen') ? p5 : (text.includes('bathroom') ? p3 : p1))))));
         a.setAttribute('href', `/${currentState}/${hub}/emergency-plumbing/`);
       }
     });
   }
+
+  // ==================== LEAD INTAKE / QUOTE MODAL ====================
+  function initLeadModal() {
+    const modal = document.getElementById('leadModal');
+    if (!modal) return;
+
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    function openModal(defaultService) {
+      if (defaultService) {
+        const select = document.getElementById('leadService');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === defaultService) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const nameInput = document.getElementById('leadName');
+      if (nameInput) setTimeout(() => nameInput.focus(), 50);
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    // Wire up trigger buttons
+    document.querySelectorAll('[data-open-modal="quote"], a[href="/contact"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (btn.classList.contains('btn') && (btn.textContent.includes('Quote') || btn.textContent.includes('Expert'))) {
+          e.preventDefault();
+          openModal();
+        }
+      });
+    });
+
+    window.openQuoteModal = openModal;
+  }
+
+  // Initialize interactive modal
+  initLeadModal();
 
   // Update mega dropdown links to match active state context
   updateMegaDropdownForCurrentState();

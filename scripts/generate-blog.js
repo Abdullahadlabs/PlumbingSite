@@ -23,7 +23,7 @@ function formatDate(dateStr) {
 }
 
 const CATEGORIES = [
-  { slug: 'all', name: 'All Daily Guides', icon: 'fa-th-large' },
+  { slug: 'all', name: 'All Guides & Tips', icon: 'fa-th-large' },
   { slug: 'emergency-fixes', name: 'Emergency Fixes', icon: 'fa-bolt' },
   { slug: 'toilet-fixes', name: 'Toilet Facts & Fixes', icon: 'fa-toilet' },
   { slug: 'leak-detection-damage', name: 'Leak Detection & Water Damage', icon: 'fa-magnifying-glass' },
@@ -65,7 +65,7 @@ function buildPostHtml(post, allPosts) {
         "isPartOf": {
           "@type": "Blog",
           "@id": `${DOMAIN}/blog/#blog`,
-          "name": "Home Plumbing USA Daily Guides & Advice",
+          "name": "Home Plumbing USA Essential Guides & Tips",
           "publisher": {
             "@type": "Organization",
             "name": "Home Plumbing USA",
@@ -139,7 +139,7 @@ function buildPostHtml(post, allPosts) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${post.title} | Home Plumbing USA Daily Guides</title>
+  <title>${post.title} | Home Plumbing USA Essential Guides & Tips</title>
   <meta name="description" content="${post.excerpt}">
   <link rel="canonical" href="${pageUrl}">
 
@@ -367,7 +367,7 @@ ${JSON.stringify(schemaObj, null, 2)}
     <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>Daily Plumbing Guides & Expert Advice &bull; 24/7 Nationwide Emergency Support</span>
+        <span>Essential Plumbing Guides & Tips &bull; 24/7 Nationwide Emergency Support</span>
       </div>
     </div>
     <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
@@ -376,9 +376,9 @@ ${JSON.stringify(schemaObj, null, 2)}
       </a>
       <nav class="nav" id="mainNav">
         <a href="/" class="nav-link">Home</a>
-        <a href="/#states" class="nav-link">Areas We Serve</a>
+        <a href="/#coverage-map" class="nav-link">Areas We Serve</a>
         <a href="/services" class="nav-link">Services</a>
-        <a href="/blog" class="nav-link active">Blog &amp; Guides <span class="nav-badge-pulse">Daily</span></a>
+        <a href="/blog" class="nav-link active">Blog &amp; Guides <span class="nav-badge-pulse">Guides</span></a>
         <a href="/about" class="nav-link">About</a>
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
@@ -453,7 +453,7 @@ ${JSON.stringify(schemaObj, null, 2)}
           </div>
 
           <div class="sidebar-card">
-            <h3>Recent Daily Guides</h3>
+            <h3>Recent Essential Guides</h3>
             <div class="related-posts-list">
               ${relatedHtml}
             </div>
@@ -499,14 +499,14 @@ ${JSON.stringify(schemaObj, null, 2)}
           <a href="/" class="logo footer-logo" style="display: inline-block; margin-bottom: 18px;">
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
-          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Daily Homeowner Plumbing Guides</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Empowering homeowners nationwide with daily preventative advice, troubleshooting guides, and rapid 24/7 licensed plumbing dispatch.</p>
+          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Homeowner Plumbing Guides & Tips</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Empowering homeowners nationwide with essential preventative advice, troubleshooting guides, and rapid 24/7 licensed plumbing dispatch.</p>
         </div>
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Quick Links</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Home</a>
-            <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Daily Guides</a>
+            <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Essential Guides</a>
             <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">All Services</a>
             <a href="/about" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">About Us</a>
             <a href="/contact" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Contact</a>
@@ -580,15 +580,15 @@ function buildBlogHubHtml(allPosts) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plumbing Guides, Daily Insights & Emergency Tips | Home Plumbing USA</title>
-  <meta name="description" content="Explore daily plumbing guides, expert maintenance tips, and emergency troubleshooting written by master plumbers. Learn how to diagnose issues, save energy, and know when to call a pro.">
+  <title>Essential Plumbing Guides, Expert Tips & Homeowner Advice | Home Plumbing USA</title>
+  <meta name="description" content="Explore essential plumbing guides, expert maintenance tips, and emergency troubleshooting written by certified plumbers. Learn how to diagnose issues, save energy, and know when to call a pro.">
   <link rel="canonical" href="https://homeplumbingusa.com/blog">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://homeplumbingusa.com/blog">
-  <meta property="og:title" content="Plumbing Guides, Daily Insights & Emergency Tips | Home Plumbing USA">
-  <meta property="og:description" content="Explore daily plumbing guides, expert maintenance tips, and emergency troubleshooting written by master plumbers.">
+  <meta property="og:title" content="Essential Plumbing Guides, Expert Tips & Homeowner Advice | Home Plumbing USA">
+  <meta property="og:description" content="Explore essential plumbing guides, expert maintenance tips, and emergency troubleshooting written by certified plumbers.">
   <meta property="og:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
 
   <!-- Schema.org JSON-LD -->
@@ -597,8 +597,8 @@ function buildBlogHubHtml(allPosts) {
     "@context": "https://schema.org",
     "@type": "Blog",
     "@id": "https://homeplumbingusa.com/blog/#blog",
-    "name": "Home Plumbing USA Daily Plumbing Guides",
-    "description": "Daily plumbing guides, expert maintenance advice, and emergency troubleshooting tutorials for homeowners.",
+    "name": "Home Plumbing USA Essential Plumbing Guides & Tips",
+    "description": "Essential homeowner plumbing guides, expert maintenance advice, and emergency troubleshooting tutorials.",
     "url": "https://homeplumbingusa.com/blog",
     "publisher": {
       "@type": "Organization",
@@ -816,7 +816,7 @@ function buildBlogHubHtml(allPosts) {
     <div class="top-bar" style="min-height: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
       <div class="top-bar-content">
         <span class="pulse-dot"></span>
-        <span>Daily Plumbing Guides & Expert Advice &bull; Updated Daily by Master Plumbers</span>
+        <span>Essential Plumbing Guides & Tips &bull; Practical Homeowner Maintenance</span>
       </div>
     </div>
     <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
@@ -825,9 +825,9 @@ function buildBlogHubHtml(allPosts) {
       </a>
       <nav class="nav" id="mainNav">
         <a href="/" class="nav-link">Home</a>
-        <a href="/#states" class="nav-link">Areas We Serve</a>
+        <a href="/#coverage-map" class="nav-link">Areas We Serve</a>
         <a href="/services" class="nav-link">Services</a>
-        <a href="/blog" class="nav-link active">Blog &amp; Guides <span class="nav-badge-pulse">Daily</span></a>
+        <a href="/blog" class="nav-link active">Blog &amp; Guides <span class="nav-badge-pulse">Guides</span></a>
         <a href="/about" class="nav-link">About</a>
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
@@ -845,16 +845,16 @@ function buildBlogHubHtml(allPosts) {
     <!-- Blog Hero -->
     <section class="blog-hub-hero">
       <div class="container" style="max-width: 800px; margin: 0 auto;">
-        <div class="blog-badge"><i class="fas fa-newspaper" style="color: var(--accent);"></i> Daily Plumbing Knowledge Base</div>
+        <div class="blog-badge"><i class="fas fa-newspaper" style="color: var(--accent);"></i> Homeowner Plumbing Knowledge Base</div>
         <h1 style="font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 14px; line-height: 1.2;">
-          Daily Plumbing <span style="color: var(--accent);">Guides &amp; Advice</span>
+          Essential Plumbing <span style="color: var(--accent);">Guides &amp; Tips</span>
         </h1>
         <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.7;">
-          Expert answers, practical maintenance walkthroughs, and emergency procedures published daily by certified plumbers.
+          Expert answers, practical maintenance walkthroughs, and emergency procedures curated by certified plumbing professionals.
         </p>
         <div class="blog-search-box">
           <i class="fas fa-search blog-search-icon"></i>
-          <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search daily guides, clogs, water heaters, freezing pipes..." autocomplete="off">
+          <input type="text" id="blogSearch" class="blog-search-input" placeholder="Search homeowner guides, maintenance tips, water heaters, freezing pipes..." autocomplete="off">
         </div>
       </div>
     </section>
@@ -900,14 +900,14 @@ function buildBlogHubHtml(allPosts) {
           <a href="/" class="logo footer-logo" style="display: inline-block; margin-bottom: 18px;">
             <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52">
           </a>
-          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Daily Homeowner Plumbing Guides</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Empowering homeowners nationwide with daily preventative advice, troubleshooting guides, and rapid 24/7 licensed plumbing dispatch.</p>
+          <h3 class="footer-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Homeowner Plumbing Guides & Tips</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">Empowering homeowners nationwide with essential preventative advice, troubleshooting guides, and rapid 24/7 licensed plumbing dispatch.</p>
         </div>
         <div class="footer-col">
           <div class="footer-title" style="font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 16px;">Quick Links</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Home</a>
-            <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Daily Guides</a>
+            <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Essential Guides</a>
             <a href="/services" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">All Services</a>
             <a href="/about" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">About Us</a>
             <a href="/contact" style="color: var(--text-muted); text-decoration: none; font-size: 0.92rem;">Contact</a>

@@ -627,8 +627,8 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
         a: `Standard localized drain clearing (such as single sinks, tubs, or toilets) typically ranges from $149 to $249 in Anchorage. Main sewer lateral clearing or high-pressure hydro-jetting generally costs between $295 and $595. Before any work begins, our licensed plumbers conduct a physical inspection and provide an upfront, flat-rate written quote with zero hidden dispatch or mileage fees.`
       },
       {
-        q: `Can frozen drain pipes mimic a regular drain clog during Alaska winters?`,
-        a: `Yes. In sub-arctic climates like Anchorage, partial ice damming inside crawlspace waste pipes often causes slow draining, gurgling, or bubbling that homeowners mistake for a hair or grease clog. Plunging or chemical cleaners will not resolve an ice blockage and can rupture cold-brittle pipes. A certified Anchorage technician uses thermal imaging and gentle heated flushing to safely restore flow.`
+        q: `What are the warning signs of a main sewer lateral stoppage versus a localized drain clog?`,
+        a: `Key warning signs of a main sewer lateral stoppage include multiple fixtures backing up simultaneously, sewage rising into basement floor drains or shower pans when a toilet is flushed, and loud gurgling across secondary sink traps. Localized clogs affect only one isolated sink or tub and can be resolved with portable augering, whereas main lateral stoppages demand high-capacity mechanical rooting or hydro-jetting.`
       },
       {
         q: `Are commercial liquid chemical drain cleaners safe for my Anchorage plumbing?`,
@@ -675,8 +675,8 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
         a: `Yes. Kitchen sink clogs frequently stem from fibrous food waste (such as celery, potato peels, and coffee grounds) jamming disposal impellers or settling inside the under-sink p-trap. Our technicians clear jammed disposal units, disassemble and clean trap assemblies, and clear the downstream secondary waste arm to ensure rapid drainage.`
       },
       {
-        q: `How can I prevent drain lines from freezing or clogging during sub-zero Anchorage cold snaps?`,
-        a: `Maintain indoor crawlspace temperatures above 55°F using insulated skirting and foundation vents closed during winter. Avoid pouring cooking oils, bacon grease, or coffee grounds down kitchen sinks. Never flush wipes, paper towels, or hygiene products down toilets. During extreme -20°F cold snaps, allowing a pencil-thin trickle of warm water to run through vulnerable fixtures can prevent stationary ice formation in unheated crawlspace drain runs.`
+        q: `Do you provide commercial drain cleaning for restaurants and businesses in Anchorage?`,
+        a: `Yes. We connect commercial facilities, restaurants, food service kitchens, and property managers across Anchorage with commercial drain specialists. Services include commercial grease trap line hydro-jetting, floor drain augering, code-compliant interceptor maintenance, and scheduled after-hours preventive cleanouts to minimize business disruption.`
       },
       {
         q: `What is the difference between clearing a single fixture clog versus a main sewer stoppage?`,
@@ -716,8 +716,8 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
       a: `We provide transparent flat-rate pricing based on an initial physical assessment. You receive an itemized quote with zero hidden fees before any work starts.`
     },
     {
-      q: `Can cold weather in ${cityName} trigger sudden plumbing failures?`,
-      a: `Yes. Sub-freezing temperatures or rapid temperature drops cause rapid pipe contraction, frozen water expansion, and valve failures that demand emergency intervention.`
+      q: `What are the most critical signs that I need emergency ${serviceName.toLowerCase()}?`,
+      a: `Signs requiring immediate emergency dispatch include uncontrolled active water leaks, raw sewage backing up into tubs or toilets, total loss of building water supply, strong natural gas odors, or water heater tanks actively flooding. Addressing these urgent issues immediately prevents structural collapse and hazardous mold growth.`
     },
     {
       q: `Do you provide commercial plumbing services in ${cityName} (${zip})?`,
@@ -732,8 +732,8 @@ function getFaqsData(serviceSlug, serviceName, cityName, stateCode, stateName, z
       a: `Our matched technicians accept all major credit cards, debit cards, cash, checks, and offer financing options for major repair or replacement projects.`
     },
     {
-      q: `How do I prevent my supply lines from freezing in ${cityName}?`,
-      a: `Insulate exposed pipes in crawl spaces, maintain thermostat settings above 55°F, and let faucets drip slowly during extreme freeze alerts.`
+      q: `How can high municipal water pressure cause plumbing failures in ${cityName}?`,
+      a: `Water pressure exceeding 80 PSI places severe stress on pipe fittings, flexible supply lines, and internal water heater tanks, frequently triggering sudden bursts or noisy water hammer vibrations. Network plumbers test your incoming line pressure and can calibrate or install a pressure-reducing valve (PRV) to safeguard your entire home.`
     },
     {
       q: `Do you handle municipal permitting for major repairs in ${cityName}?`,
