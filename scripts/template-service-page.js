@@ -9,8 +9,8 @@
  */
 
 const DOMAIN = 'https://homeplumbingusa.com';
-const PHONE = '888-217-4803';
-const PHONE_DISPLAY = '(888) 217-4803';
+const PHONE = '888-217-2114';
+const PHONE_DISPLAY = '(888) 217-2114';
 
 const DEFAULT_SERVICES = [
   { slug: 'drain-cleaning', name: 'Drain Cleaning', icon: 'fa-broom' },
@@ -65,7 +65,7 @@ const SERVICE_CONTENT = {
     warningTitle: (c) => `Emergency Burst Pipe Action Plan`,
     warningDesc: (c, z) => `Shut off your main water isolation valve immediately. If water is near electrical outlets or breaker panels, avoid standing in water, switch off power if safe, and call our 24/7 emergency dispatch.`,
     faqs: (c, s, sn, z) => [
-      { q: `What should I do immediately when a pipe bursts in ${c}?`, a: `Immediately locate and close your property's main water shutoff valve. Turn off power at the main breaker if water is near electrical systems, and call 888-217-4803 for emergency dispatch.` },
+      { q: `What should I do immediately when a pipe bursts in ${c}?`, a: `Immediately locate and close your property's main water shutoff valve. Turn off power at the main breaker if water is near electrical systems, and call 888-217-2114 for emergency dispatch.` },
       { q: `How quickly can an emergency plumber arrive in ${c} (${z})?`, a: `Our emergency dispatch routes active technicians to arrive within 30 to 45 minutes on average for active flooding emergencies in ${c}.` },
       { q: `Will insurance cover burst pipe repairs in ${c}?`, a: `Most homeowner policies cover water damage resulting from sudden and accidental pipe bursts. Our matched plumbers provide detailed itemized diagnostic reports and invoices to support your insurance claim.` },
       { q: `Do technicians replace or patch ruptured pipes?`, a: `For long-term reliability and code compliance, our plumbers excise damaged sections completely and install durable PEX or copper couplings rather than temporary surface patches.` },
@@ -141,7 +141,7 @@ const SERVICE_CONTENT = {
       { q: `Do you charge higher rates for nights, weekends, or holidays in ${c}?`, a: `No hidden surcharges. Dispatched technicians provide an upfront flat-rate price quote on-site before performing any repair work.` },
       { q: `What should I do while waiting for the emergency plumber to arrive?`, a: `Turn off your property's main water shutoff valve. If water is near electrical fixtures, turn off power at the main breaker panel from a dry location.` },
       { q: `Are the emergency plumbers licensed in ${sn}?`, a: `Yes. Every technician in our network holds active state licensing, full insurance, and carries professional equipment for same-day resolution.` },
-      { q: `How do I request emergency service in ${c} (${z})?`, a: `Call our 24/7 toll-free dispatch hotline at 888-217-4803. A representative will dispatch the nearest available technician to your home immediately.` }
+      { q: `How do I request emergency service in ${c} (${z})?`, a: `Call our 24/7 toll-free dispatch hotline at 888-217-2114. A representative will dispatch the nearest available technician to your home immediately.` }
     ]
   },
   'leak-detection': {
@@ -185,7 +185,7 @@ const SERVICE_CONTENT = {
     warningTitle: (c) => `CRITICAL GAS EMERGENCY PROTOCOL`,
     warningDesc: (c, z) => `If you smell sulfur or rotten eggs, hear a hissing gas line, or experience dizziness: EVACUATE THE BUILDING IMMEDIATELY. Do not touch light switches or cell phones indoors. Call 911, your gas utility, and our certified dispatch.`,
     faqs: (c, s, sn, z) => [
-      { q: `What should I do if I smell natural gas in my ${c} home?`, a: `Evacuate all occupants and pets immediately. Do not operate light switches, appliances, or phones indoors. Once safely outside, call 911, your local gas utility, and 888-217-4803.` },
+      { q: `What should I do if I smell natural gas in my ${c} home?`, a: `Evacuate all occupants and pets immediately. Do not operate light switches, appliances, or phones indoors. Once safely outside, call 911, your local gas utility, and 888-217-2114.` },
       { q: `Can any plumber work on gas lines in ${sn}?`, a: `No. Only plumbers who carry specific gas fitter licensing and fuel gas endorsements are legally authorized to install or repair natural gas and propane systems in ${sn}.` },
       { q: `Why did the gas company turn off my gas meter?`, a: `If the utility detects a leak during inspection, they shut and lock the meter for safety. A licensed plumber must repair the line, pass a pressure test, and provide certification to restore service.` },
       { q: `Do you install new gas lines for outdoor kitchens and generators in ${c}?`, a: `Yes. We install underground poly lines and high-capacity CSST or rigid iron lines sized properly for outdoor kitchens, pool heaters, and standby generators.` },
