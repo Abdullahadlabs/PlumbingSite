@@ -213,6 +213,21 @@ Options -Indexes +FollowSymLinks
   RewriteRule ^city/(?:fl|florida)/([^/]+)/([^/]+)/?$ https://homeplumbingusa.com/florida/$1-$2/ [R=301,L,NE]
   RewriteRule ^city/(?:co|colorado)/([^/]+)/([^/]+)/?$ https://homeplumbingusa.com/colorado/$1-$2/ [R=301,L,NE]
 
+  # Restore legacy city/service URLs only when the exact replacement exists.
+  # Keep unknown/removed services as genuine 404s instead of redirecting them
+  # to an unrelated page. Preserve campaign query parameters.
+  RewriteCond %{DOCUMENT_ROOT}/alaska/$1-$2/$3/index.html -f
+  RewriteRule ^service-areas/ak-([a-z0-9-]+)-(\d{5})/([a-z0-9-]+)/?$ /alaska/$1-$2/$3/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/texas/$1-$2/$3/index.html -f
+  RewriteRule ^service-areas/tx-([a-z0-9-]+)-(\d{5})/([a-z0-9-]+)/?$ /texas/$1-$2/$3/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/florida/$1-$2/$3/index.html -f
+  RewriteRule ^service-areas/fl-([a-z0-9-]+)-(\d{5})/([a-z0-9-]+)/?$ /florida/$1-$2/$3/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/colorado/$1-$2/$3/index.html -f
+  RewriteRule ^service-areas/co-([a-z0-9-]+)-(\d{5})/([a-z0-9-]+)/?$ /colorado/$1-$2/$3/ [R=301,L]
+
   # 4N. Legacy Routes: /service-areas/{state}-{city}-{zip} -> /{state}/{city}-{zip}/
   RewriteRule ^service-areas/ak-([^-]+(?:-[^-]+)*)-(\d{5})/?$ https://homeplumbingusa.com/alaska/$1-$2/ [R=301,L,NE]
   RewriteRule ^service-areas/tx-([^-]+(?:-[^-]+)*)-(\d{5})/?$ https://homeplumbingusa.com/texas/$1-$2/ [R=301,L,NE]
@@ -253,9 +268,11 @@ Options -Indexes +FollowSymLinks
   # ----------------------------------------------------------------------
   # 9. ROOT STATIC PAGE RESOLUTION (Extensionless .html fallback)
   # ----------------------------------------------------------------------
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.*)$ $1.html [L]
+  # Match the complete root-page path, not REQUEST_FILENAME (which may
+  # exclude PATH_INFO). The old wildcard appended .html repeatedly for
+  # /privacy-policy/ and /terms-and-conditions/, causing HTTP 500.
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([a-z0-9-]+)/?$ $1.html [L,DPI]
 </IfModule>
 
 # --- Core Web Vitals Optimization: Gzip Compression & Cache Control ---
