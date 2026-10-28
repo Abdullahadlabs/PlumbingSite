@@ -112,6 +112,27 @@ Options -Indexes +FollowSymLinks
   RewriteRule ^city/(?:fl|florida)/([^/]+)/([^/]+)/?$ https://homeplumbingusa.com/florida/$1-$2/ [R=301,L,NE]
   RewriteRule ^city/(?:co|colorado)/([^/]+)/([^/]+)/?$ https://homeplumbingusa.com/colorado/$1-$2/ [R=301,L,NE]
 
+  # Historical compact city names: match only verified equivalent HTML pages.
+  RewriteCond %{DOCUMENT_ROOT}/texas/el-paso-$1/$2/index.html -f
+  RewriteRule ^(?:service-areas/tx-elpaso|texas/elpaso)-(\d{5})/([a-z0-9-]+)/?$ /texas/el-paso-$1/$2/ [R=301,L]
+  RewriteCond %{DOCUMENT_ROOT}/texas/el-paso-$1/index.html -f
+  RewriteRule ^(?:service-areas/tx-elpaso|texas/elpaso)-(\d{5})/?$ /texas/el-paso-$1/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/texas/spring-branch-$1/$2/index.html -f
+  RewriteRule ^(?:service-areas/tx-springbranch|texas/springbranch)-(\d{5})/([a-z0-9-]+)/?$ /texas/spring-branch-$1/$2/ [R=301,L]
+  RewriteCond %{DOCUMENT_ROOT}/texas/spring-branch-$1/index.html -f
+  RewriteRule ^(?:service-areas/tx-springbranch|texas/springbranch)-(\d{5})/?$ /texas/spring-branch-$1/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/texas/san-antonio-$1/$2/index.html -f
+  RewriteRule ^(?:service-areas/tx-sanantonio|texas/sanantonio)-(\d{5})/([a-z0-9-]+)/?$ /texas/san-antonio-$1/$2/ [R=301,L]
+  RewriteCond %{DOCUMENT_ROOT}/texas/san-antonio-$1/index.html -f
+  RewriteRule ^(?:service-areas/tx-sanantonio|texas/sanantonio)-(\d{5})/?$ /texas/san-antonio-$1/ [R=301,L]
+
+  RewriteCond %{DOCUMENT_ROOT}/alaska/holy-cross-$1/$2/index.html -f
+  RewriteRule ^(?:service-areas/ak-holycross|alaska/holycross)-(\d{5})/([a-z0-9-]+)/?$ /alaska/holy-cross-$1/$2/ [R=301,L]
+  RewriteCond %{DOCUMENT_ROOT}/alaska/holy-cross-$1/index.html -f
+  RewriteRule ^(?:service-areas/ak-holycross|alaska/holycross)-(\d{5})/?$ /alaska/holy-cross-$1/ [R=301,L]
+
   # Restore legacy city/service URLs only when the exact replacement exists.
   # Keep unknown/removed services as genuine 404s instead of redirecting them
   # to an unrelated page. Preserve campaign query parameters.

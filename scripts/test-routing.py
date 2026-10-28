@@ -47,6 +47,16 @@ cases += [
     ('/services/nonexistent-service?city=Austin&state=TX&zip=78735', 404, None),
     ('/service-detail.html?city=Austin&state=TX&zip=78735&service[]=drain-cleaning', 404, None),
 ]
+cases += [
+    ('/service-areas/tx-elpaso-79907/water-line-repair/', 301, '/texas/el-paso-79907/water-line-repair/'),
+    ('/service-areas/tx-springbranch-78070/gas-line-repair/', 301, '/texas/spring-branch-78070/gas-line-repair/'),
+    ('/service-areas/tx-sanantonio-78248/burst-pipe-repair/', 301, '/texas/san-antonio-78248/burst-pipe-repair/'),
+    ('/service-areas/tx-sanantonio-78211/', 301, '/texas/san-antonio-78211/'),
+    ('/service-areas/tx-sanantonio-78233/', 301, '/texas/san-antonio-78233/'),
+    ('/service-areas/ak-holycross-99602/emergency-plumbing/', 301, '/alaska/holy-cross-99602/emergency-plumbing/'),
+    ('/texas/sanantonio-78211/', 301, '/texas/san-antonio-78211/'),
+    ('/service-areas/tx-sanantonio-00000/drain-cleaning/', 404, None),
+]
 failed = []
 for path, expected, location in cases:
     try:
