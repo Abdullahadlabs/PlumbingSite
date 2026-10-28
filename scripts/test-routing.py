@@ -35,6 +35,18 @@ cases += [(p, 404, None) for p in [
     '/service-areas/tx-austin-78735/nonexistent-service/',
     '/privacy-policy/not-a-page', '/definitely-not-a-page/',
 ]]
+cases += [
+    ('/services/water-heater-installation?city=Miami%20Gardens&state=FL&zip=33056', 301, '/florida/miami-gardens-33056/water-heater-repair/'),
+    ('/services/water-line-installation?city=Chignik+Lake&state=AK&zip=99548', 301, '/alaska/chignik-lake-99548/water-line-repair/'),
+    ('/services/water-line-repair?city=Chignik%25252520Lake&state=AK&zip=99548', 301, '/alaska/chignik-lake-99548/water-line-repair/'),
+    ('/service-detail.html?city=Austin&state=TX&zip=78735&service=drain-cleaning&gclid=test', 301, '/texas/austin-78735/drain-cleaning/?gclid=test'),
+    ('/city-zip.html?city=Austin&state=TX&zip=78735', 301, '/texas/austin-78735/'),
+    ('/services.html?state=TX', 301, '/state/texas/'),
+    ('/Florida/Miami-Gardens-33056/Water-Heater-Repair/', 301, '/florida/miami-gardens-33056/water-heater-repair/'),
+    ('/services/drain-cleaning?city=Not-A-City&state=TX&zip=00000', 404, None),
+    ('/services/nonexistent-service?city=Austin&state=TX&zip=78735', 404, None),
+    ('/service-detail.html?city=Austin&state=TX&zip=78735&service[]=drain-cleaning', 404, None),
+]
 failed = []
 for path, expected, location in cases:
     try:
