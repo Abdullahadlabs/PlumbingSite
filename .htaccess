@@ -29,6 +29,11 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.html(?:\s|\?) [NC]
   RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
+  # State folders contain city pages, but these three have no index.html.
+  # Redirect before the physical-directory bypass to avoid directory 403s.
+  # Colorado has its own index.html and remains at /colorado/.
+  RewriteRule ^(alaska|texas|florida)/?$ /state/$1/ [R=301,L]
+
   # ----------------------------------------------------------------------
   # 3. ENFORCE TRAILING SLASH ON PHYSICAL DIRECTORIES
   # Automatically 301 redirect directory paths lacking a trailing slash
@@ -83,9 +88,6 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{REQUEST_URI} !\.(?:css|js|png|jpg|jpeg|gif|webp|avif|svg|woff2|woff|ico)$ [NC]
   RewriteCond expr "tolower(%{REQUEST_URI}) =~ /(.*)/"
   RewriteRule [A-Z] %1 [R=301,L]
-
-  # Redirect bare state directories to state hubs
-  RewriteRule ^(?:alaska|texas|florida|colorado)/?$ /state/$0/ [R=301,L,NC]
 
   # Remove .html extension globally from page requests (e.g. /about.html -> /about)
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html(?:\s|\?) [NC]
@@ -283,6 +285,10 @@ Options -Indexes +FollowSymLinks
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 month"
+  # HTML must revalidate; sitemap updates should not stay cached for a month.
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/xml "access plus 1 hour"
+  ExpiresByType text/xml "access plus 1 hour"
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/avif "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"

@@ -27,6 +27,9 @@ for old, new in [
     for suffix in ['', '/', '/?utm_source=regression']:
         query = '?utm_source=regression' if '?' in suffix else ''
         cases.append(('/service-areas/' + old + suffix, 301, '/' + new + '/' + query))
+cases += [(f'/{state}{slash}', 301, f'/state/{state}/')
+          for state in ['alaska', 'texas', 'florida'] for slash in ['', '/']]
+cases += [('/colorado/', 200, None)]
 cases += [(p, 404, None) for p in [
     '/service-areas/tx-nonexistent-00000/drain-cleaning/',
     '/service-areas/tx-austin-78735/nonexistent-service/',

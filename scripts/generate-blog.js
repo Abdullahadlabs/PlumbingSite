@@ -582,11 +582,11 @@ function buildBlogHubHtml(allPosts) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essential Plumbing Guides, Expert Tips & Homeowner Advice | Home Plumbing USA</title>
   <meta name="description" content="Explore essential plumbing guides, expert maintenance tips, and emergency troubleshooting written by certified plumbers. Learn how to diagnose issues, save energy, and know when to call a pro.">
-  <link rel="canonical" href="https://homeplumbingusa.com/blog">
+  <link rel="canonical" href="https://homeplumbingusa.com/blog/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://homeplumbingusa.com/blog">
+  <meta property="og:url" content="https://homeplumbingusa.com/blog/">
   <meta property="og:title" content="Essential Plumbing Guides, Expert Tips & Homeowner Advice | Home Plumbing USA">
   <meta property="og:description" content="Explore essential plumbing guides, expert maintenance tips, and emergency troubleshooting written by certified plumbers.">
   <meta property="og:image" content="https://homeplumbingusa.com/public/images/hero-plumbing.webp">
@@ -599,7 +599,7 @@ function buildBlogHubHtml(allPosts) {
     "@id": "https://homeplumbingusa.com/blog/#blog",
     "name": "Home Plumbing USA Essential Plumbing Guides & Tips",
     "description": "Essential homeowner plumbing guides, expert maintenance advice, and emergency troubleshooting tutorials.",
-    "url": "https://homeplumbingusa.com/blog",
+    "url": "https://homeplumbingusa.com/blog/",
     "publisher": {
       "@type": "Organization",
       "name": "Home Plumbing USA",
