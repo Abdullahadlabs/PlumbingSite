@@ -1216,7 +1216,7 @@ ${JSON.stringify(schemaObj, null, 2)}
 }
 
 module.exports = {
-  renderServicePage,
+  renderServicePage: params => require('./referral-copy').normalize(renderServicePage(params)),
   DEFAULT_SERVICES,
   DOMAIN,
   PHONE,

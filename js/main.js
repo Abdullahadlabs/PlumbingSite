@@ -1460,63 +1460,7 @@ function initMain() {
   }
 
   // ==================== LEAD INTAKE / QUOTE MODAL ====================
-  function initLeadModal() {
-    const modal = document.getElementById('leadModal');
-    if (!modal) return;
-
-    const closeBtn = document.getElementById('closeModalBtn');
-
-    function openModal(defaultService) {
-      if (defaultService) {
-        const select = document.getElementById('leadService');
-        if (select) {
-          for (let i = 0; i < select.options.length; i++) {
-            if (select.options[i].value === defaultService) {
-              select.selectedIndex = i;
-              break;
-            }
-          }
-        }
-      }
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      const nameInput = document.getElementById('leadName');
-      if (nameInput) setTimeout(() => nameInput.focus(), 50);
-    }
-
-    function closeModal() {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display === 'flex') {
-        closeModal();
-      }
-    });
-
-    // Wire up trigger buttons
-    document.querySelectorAll('[data-open-modal="quote"], a[href="/contact"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if (btn.classList.contains('btn') && (btn.textContent.includes('Quote') || btn.textContent.includes('Expert'))) {
-          e.preventDefault();
-          openModal();
-        }
-      });
-    });
-
-    window.openQuoteModal = openModal;
-  }
-
-  // Initialize interactive modal
-  initLeadModal();
+  // Quote links navigate directly to /contact; no preliminary collection of personal data.
 
   // Update mega dropdown links to match active state context
   updateMegaDropdownForCurrentState();

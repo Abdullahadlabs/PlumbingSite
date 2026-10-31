@@ -1363,62 +1363,6 @@
     </a>
   </div>
 
-  <!-- ==================== LEAD INTAKE / QUOTE MODAL ==================== -->
-  <div id="leadModal" class="lead-modal-backdrop" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(6, 15, 29, 0.85); backdrop-filter: blur(8px); z-index: 999999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="lead-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-md); max-width: 520px; width: 100%; padding: 32px; box-shadow: var(--shadow-lg); position: relative; color: var(--text-white); animation: modalFadeIn 0.3s ease;">
-      <button type="button" id="closeModalBtn" aria-label="Close modal" style="position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-muted); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
-        <i class="fas fa-times" style="font-size: 1rem;"></i>
-      </button>
-
-      <div style="text-align: center; margin-bottom: 24px;">
-        <span style="display: inline-block; padding: 4px 12px; background: rgba(37,99,235,0.15); color: var(--primary-light); border-radius: 20px; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; margin-bottom: 8px;">Plumbing Referral Request</span>
-        <h3 id="modalTitle" style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 8px; font-family: var(--font-heading);">Request a Plumbing Referral</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin: 0;">Request a referral to an independent provider. Availability, prices, and appointment times must be confirmed with the provider.</p>
-      </div>
-
-      <form id="leadIntakeForm" action="/contact" method="GET" style="display: flex; flex-direction: column; gap: 16px;">
-        <div>
-          <label for="leadName" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px;">Your Name</label>
-          <input type="text" id="leadName" name="name" required placeholder="John Smith" style="width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-size: 0.92rem; outline: none;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px;">
-          <div>
-            <label for="leadPhone" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px;">Phone Number</label>
-            <input type="tel" id="leadPhone" name="phone" required placeholder="(877) 516-8705" style="width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-size: 0.92rem; outline: none;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
-          </div>
-          <div>
-            <label for="leadZip" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px;">ZIP Code</label>
-            <input type="text" id="leadZip" name="zip" required placeholder="e.g. 77002" maxlength="5" pattern="[0-9]{5}" style="width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-size: 0.92rem; outline: none;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
-          </div>
-        </div>
-
-        <div>
-          <label for="leadService" style="display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px;">Service Needed</label>
-          <select id="leadService" name="service" style="width: 100%; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-size: 0.92rem; outline: none;">
-            <option value="emergency-plumbing">Ask About Availability Plumbing Repair</option>
-            <option value="water-heater">Water Heater Repair / Replacement</option>
-            <option value="drain-cleaning">Drain Cleaning & Sewer Clearance</option>
-            <option value="leak-detection">Hidden Leak Detection & Pipe Repair</option>
-            <option value="burst-pipe">Burst Pipe Immediate Shutoff</option>
-            <option value="fixtures">Toilet, Faucet & Fixture Repair</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-accent" style="width: 100%; padding: 14px; font-weight: 800; font-size: 1.05rem; border-radius: var(--radius-sm); justify-content: center; margin-top: 6px;">
-          <i class="fas fa-bolt"></i> Connect with Local Pro Now
-        </button>
-
-        <div style="text-align: center; margin-top: 8px;">
-          <a href="tel:877-516-8705" style="color: var(--accent); font-weight: 700; font-size: 0.92rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <i class="fas fa-phone-alt"></i> Or Call Now Hotline: 877-516-8705
-          </a>
-          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; margin-bottom: 0;">🔒 Free matching service. No obligation. Your information is protected.</p>
-        </div>
-      </form>
-    </div>
-  </div>
-
 </body>
 </html>
 
