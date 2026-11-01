@@ -1216,7 +1216,7 @@ ${JSON.stringify(schemaObj, null, 2)}
 }
 
 module.exports = {
-  renderServicePage: params => require('./referral-copy').normalize(renderServicePage(params)),
+  renderServicePage: params => require('./service-mobile-layout').apply(require('./referral-copy').normalize(renderServicePage(params))),
   DEFAULT_SERVICES,
   DOMAIN,
   PHONE,
