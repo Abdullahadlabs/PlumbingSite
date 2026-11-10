@@ -1,0 +1,43 @@
+name: Apply verified referral corrections
+on:
+  push:
+    branches: [fix/referral-corrections-20261101]
+    paths:
+      - scripts/referral-copy.js
+      - scripts/apply-referral-corrections.js
+      - scripts/test-referral-corrections.js
+      - .github/workflows/referral-correction.yml
+permissions:
+  contents: write
+concurrency:
+  group: referral-correction
+  cancel-in-progress: false
+jobs:
+  correct-static-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/node_modules/
+            !/public/
+      - name: Check source and apply static corrections
+        run: |
+          node --check js/main.js
+          node --check scripts/template-service-page.js
+          node scripts/test-referral-corrections.js
+          node scripts/apply-referral-corrections.js
+          node scripts/test-referral-corrections.js --all
+          node scripts/test-sitemaps.js
+      - name: Commit corrected HTML on the repair branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Apply referral disclosures and remove unsupported claims from static service pages'
+          git push origin HEAD:fix/referral-corrections-20261101

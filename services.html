@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      function slugify(text) {
+        if (!text) return '';
+        let decoded = text;
+        try {
+          let prev;
+          do {
+            prev = decoded;
+            decoded = decodeURIComponent(decoded);
+          } while (decoded !== prev);
+        } catch (e) {}
+        return decoded.toLowerCase().replace(/[^a-z0-9\s-_]/g, '').trim().replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+      }
+
+      function getCanonicalServiceSlug(serviceSlug) {
+        if (!serviceSlug) return 'drain-cleaning';
+        const clean = slugify(serviceSlug);
+        const map = {
+          'drain-cleaning': 'drain-cleaning',
+          'clogged-drain-repair': 'drain-cleaning',
+          'drain-cleaning-service': 'drain-cleaning',
+          'hydro-jetting': 'drain-cleaning',
+          'hydro-jetting-service': 'drain-cleaning',
+          'drain-repair': 'drain-cleaning',
+          'rooter-services': 'drain-cleaning',
+          'burst-pipe-repair': 'burst-pipe-repair',
+          'pipe-repair': 'burst-pipe-repair',
+          'pipe-leak-repair': 'burst-pipe-repair',
+          'whole-house-repiping': 'burst-pipe-repair',
+          'water-heater-repair': 'water-heater-repair',
+          'water-heater-installation': 'water-heater-repair',
+          'tankless-water-heater-installation': 'water-heater-repair',
+          'tankless-water-heater-repair': 'water-heater-repair',
+          'sewer-line-repair': 'sewer-line-repair',
+          'sewer-line-replacement': 'sewer-line-repair',
+          'drain-line-replacement': 'sewer-line-repair',
+          'emergency-plumbing': 'emergency-plumbing',
+          '24-hour-emergency-plumbing': 'emergency-plumbing',
+          'same-day-plumbing-repair': 'emergency-plumbing',
+          'leak-detection': 'leak-detection',
+          'slab-leak-repair': 'leak-detection',
+          'gas-line-repair': 'gas-line-repair',
+          'water-line-repair': 'water-line-repair'
+        };
+        return map[clean] || clean;
+      }
+
+      const search = window.location.search;
+      if (!search) return;
+      const params = new URLSearchParams(search);
+      if (params.has('city') || params.has('zip') || params.has('state')) {
+        const qCity = params.get('city') ? slugify(params.get('city')) : '';
+        const qState = params.get('state') ? slugify(params.get('state')) : 'alaska';
+        const qZip = params.get('zip') ? params.get('zip').replace(/[^0-9]/g, '') : '';
+        const stateMap = { 'ak': 'alaska', 'tx': 'texas', 'fl': 'florida' };
+        const stateSlug = stateMap[qState] || qState;
+
+        let serviceSlug = '';
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        if (pathParts[0] === 'services' && pathParts[1]) {
+          serviceSlug = getCanonicalServiceSlug(pathParts[1]);
+        } else if (params.has('service')) {
+          serviceSlug = getCanonicalServiceSlug(params.get('service'));
+        }
+
+        if (stateSlug && qCity && qZip) {
+          let cleanStaticPath = `/${stateSlug}/${qCity}-${qZip}/`;
+          if (serviceSlug) {
+            cleanStaticPath += `${serviceSlug}/`;
+          }
+          window.location.replace(cleanStaticPath);
+        } else if (stateSlug) {
+          window.location.replace(`/state/${stateSlug}`);
+        }
+      }
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Home Plumbing USA">
+  <meta name="publisher" content="Home Plumbing USA">
+  <title>Emergency Plumbing &amp; Repair Services | Home Plumbing USA</title>
+  <meta name="description" content="Explore our nationwide catalog of 53 plumbing repair services. From drain cleaning to emergency water heater fixes, find vetted local experts in your area!">
+  <meta name="keywords" content="24/7 emergency plumber, nationwide plumbing referral, local plumbers near me, vetted plumbing experts, water heater repair, drain cleaning, affordable plumbing services, residential plumbing">
+  <link rel="canonical" href="https://homeplumbingusa.com/services">
+    <!-- Google Tag Manager (Delayed for Performance) -->
+  <script>
+    (function() {
+      function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NHGT9PF7');
+      }
+      function scheduleGTM() {
+        setTimeout(loadGTM, 3500);
+      }
+      if (document.readyState === 'complete') {
+        scheduleGTM();
+      } else {
+        window.addEventListener('load', scheduleGTM);
+      }
+      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      triggerEvents.forEach(function(e) {
+        window.addEventListener(e, loadGTM, { passive: true, once: true });
+      });
+    })();
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Tailwind Play CDN: loaded lazily to eliminate TBT -->
+  <script>
+    (function() {
+      function loadTailwind() {
+        if (window.tailwindLoaded) return;
+        window.tailwindLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() {
+          if (window.tailwind) {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    navy: '#0a1628',
+                    'navy-mid': '#111d33',
+                    blue: { DEFAULT: '#2563eb', light: '#3b82f6' },
+                    orange: { DEFAULT: '#f59e0b', dark: '#d97706' },
+                    green: '#2563eb',
+                    red: '#e63946'
+                  }
+                }
+              }
+            };
+          }
+        };
+        document.head.appendChild(s);
+      }
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(loadTailwind, { timeout: 5000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadTailwind, 3000); });
+      }
+      const triggerEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      triggerEvents.forEach(function(e) {
+        window.addEventListener(e, loadTailwind, { passive: true, once: true });
+      });
+    })();
+  </script>
+  <!-- Google Fonts Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body data-prefix="/" data-depth="0">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHGT9PF7"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header" style="min-height: 120px;">
+    <div class="top-bar" style="min-height: 40px; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;">
+      <div class="top-bar-content">
+        <span class="pulse-dot"></span>
+        <span>24/7 Emergency Plumbers - Same Price, Holidays Included!</span>
+      </div>
+    </div>
+    <div class="header-inner" style="min-height: 80px; height: 80px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" class="logo" style="min-height: 52px; width: 247px; max-width: 100%; display: flex; align-items: center;">
+        <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" style="width: 247px; height: 52px; aspect-ratio: 247 / 52; display: block; object-fit: contain; object-position: left center;">
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About Us</a>
+        <div class="nav-item">
+          <a href="/services" class="nav-link dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+          <div class="mega-dropdown">
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Emergency &amp; Repair</div>
+              <a href="/services#emergency" class="dropdown-link"><i class="fas fa-bolt"></i> 24 Hour Emergency Plumbing</a>
+              <a href="/services#emergency" class="dropdown-link"><i class="fas fa-clock"></i> Same Day Plumbing Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-pipe-section"></i> Burst Pipe Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-house-chimney"></i> Whole House Repiping</a>
+              <a href="/services#emergency" class="dropdown-link"><i class="fas fa-clipboard-check"></i> Plumbing Maintenance</a>
+              <a href="/services#emergency" class="dropdown-link"><i class="fas fa-building"></i> Commercial Plumbing</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Water Heater &amp; Drains</div>
+              <a href="/services#water-heaters" class="dropdown-link"><i class="fas fa-temperature-high"></i> Water Heater Repair</a>
+              <a href="/services#water-heaters" class="dropdown-link"><i class="fas fa-fire"></i> Water Heater Installation</a>
+              <a href="/services#water-heaters" class="dropdown-link"><i class="fas fa-fire-flame-simple"></i> Tankless Water Heater</a>
+              <a href="/services#drain-sewer" class="dropdown-link"><i class="fas fa-broom"></i> Drain Cleaning</a>
+              <a href="/services#drain-sewer" class="dropdown-link"><i class="fas fa-plug-circle-xmark"></i> Clogged Drain Repair</a>
+              <a href="/services#drain-sewer" class="dropdown-link"><i class="fas fa-water"></i> Hydro Jetting</a>
+              <a href="/services#drain-sewer" class="dropdown-link"><i class="fas fa-screwdriver-wrench"></i> Sewer Line Repair</a>
+              <a href="/services#drain-sewer" class="dropdown-link"><i class="fas fa-arrows-rotate"></i> Sewer Line Replacement</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Leak &amp; Pipe Services</div>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-magnifying-glass"></i> Leak Detection</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-layer-group"></i> Slab Leak Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-droplet"></i> Pipe Leak Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-fire-burner"></i> Gas Line Installation</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-triangle-exclamation"></i> Gas Leak Detection</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-wrench"></i> Gas Line Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-faucet-drip"></i> Water Line Repair</a>
+              <a href="/services#leaks-pipes" class="dropdown-link"><i class="fas fa-faucet"></i> Water Line Installation</a>
+            </div>
+            <div class="dropdown-category">
+              <div class="dropdown-category-title">Fixtures &amp; Specialty</div>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-toilet"></i> Toilet Repair &amp; Installation</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-sink"></i> Faucet &amp; Sink Repair</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-recycle"></i> Garbage Disposal Repair</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-kitchen-set"></i> Kitchen Plumbing</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-bath"></i> Bathroom Plumbing</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-arrows-left-right"></i> Backflow Testing</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-pump-soap"></i> Sump Pump Install &amp; Repair</a>
+              <a href="/services#fixtures-pumps" class="dropdown-link"><i class="fas fa-gauge-high"></i> Water Pressure Repair</a>
+            </div>
+          </div>
+        </div>
+        <a href="/#coverage-map" class="nav-link">Areas We Serve</a>
+        <a href="/projects" class="nav-link">Projects</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="tel:877-516-8705" class="header-phone phone-cta-upgraded" data-track="phone" data-location="nav" aria-label="Call toll-free (877) 516-8705 for a plumbing referral"><svg class="phone-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="phone-cta-copy"><span class="phone-cta-label">CALL TOLL-FREE</span><span class="phone-cta-number">(877) 516-8705</span></span></a>
+        <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <main>
+  <section class="bg-navy text-white py-16 text-center" id="emergency">
+    <div class="max-w-4xl mx-auto px-4 space-y-4">
+      <span class="text-xs text-orange font-bold uppercase tracking-widest block font-heading">NATIONWIDE PLUMBING REFERRAL MATCHING</span>
+      <h1 class="text-4xl font-extrabold font-heading">Complete Plumbing Sub-Services</h1>
+      <p class="text-white/70 max-w-xl mx-auto text-sm leading-relaxed">
+        Connecting home and business owners nationwide with vetted, independent local plumbing experts in real-time.
+      </p>
+    </div>
+  </section>
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 space-y-16">
+      
+    <div class="space-y-6" id="drain-sewer">
+      <h2 class="text-xl font-extrabold text-navy border-b border-gray-100 pb-3 flex items-center space-x-2 font-heading">
+        <span>🌊</span>
+        <span>Drain & Sewer Services</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Drain Cleaning</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Professional clearing of grease, hair, and scale buildup to restore complete water flow.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Sewer Line Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Trenchless and standard solutions for broken, cracked, or tree-root damaged sewer pipes.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Hydro Jetting</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">High-pressure water cleaning to scrub internal sewer pipe walls clean of debris and fat.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Septic System Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Complete planning and installation of durable septic tanks and absorption drain fields.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Septic Tank Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Structural repairs, baffle replacements, and sealing leakages within your septic tank.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Drain Line Replacement</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing new PVC or cast-iron lines to replace aged and collapsed drainage networks.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Drainage System Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">French drain, sump, and yard basin solutions for commercial and residential buildings.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Drain Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Fixing localized blocks, structural cracks, and minor joint leakages in active drains.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Drain & Sewer</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Rooter Services</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Heavy-duty snake and cutter solutions to physically clear stubborn root intrusions.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      </div>
+    </div>
+
+    <div class="space-y-6" id="water-heaters">
+      <h2 class="text-xl font-extrabold text-navy border-b border-gray-100 pb-3 flex items-center space-x-2 font-heading">
+        <span>🔥</span>
+        <span>Water Heaters Services</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Heater Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing energy-efficient gas, electric, and hybrid storage water heater systems.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Heater Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Thermocouple replacement, element troubleshooting, tank flushing, and leak sealing.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Softener Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing ion-exchange systems to combat hard water scale and protect your home piping.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Tankless Water Heater Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">High-efficiency, wall-mounted systems that supply endless hot water instantly on demand.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Filter Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Point-of-use and whole-house filtration setups for pure, chemical-free tap water.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Tankless Water Heater Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Descaling flush operations, sensor cleanings, and burner repairs for tankless units.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Water Heaters</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Whole House Water Filtration</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Advanced carbon and UV filter assemblies that purify water at the main entry point.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      </div>
+    </div>
+
+    <div class="space-y-6" id="leaks-pipes">
+      <h2 class="text-xl font-extrabold text-navy border-b border-gray-100 pb-3 flex items-center space-x-2 font-heading">
+        <span>🔧</span>
+        <span>Leaks & Pipes Services</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Pipe Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Emergency repair of copper, PEX, PVC, and galvanized steel piping systems.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Line Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing fresh main water supply lines from the street meter directly to the house.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Leak Detection</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Acoustic and thermal imaging tools to spot hidden leakages behind walls or underground.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Slab Leak Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Trenchless pipe routing or concrete penetration repairs for pipes leaking under foundations.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Backflow Prevention</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing and testing specialized check-valves to prevent dirty water siphoning backwards.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Gas Line Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Safe, certified black-iron and flexible gas piping for furnaces, ranges, and fireplaces.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Gas Line Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Emergency leak sealing, valve swap outs, and pressure testing for residential gas lines.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Pipe Relining</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">CIPP epoxy coating solutions that create a brand new pipe inner lining without trench digging.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing System Inspection</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Full camera runs and pressure logs to verify general home or building pipe status.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Line Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Splicing, patch clamping, or partial repiping of leaking underground main water lines.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing Leak Detection</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Advanced trace gases and digital tools to locate the source of damp spots.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing Leak Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Quick fix operations for ceiling leaks, wet basement walls, and fixture line drips.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Pipe Replacement</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Phased replacement of outdated polybutylene or lead supply pipes with modern PEX.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Pipe Insulation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Thermal foam and wrapping to defend lines against freezing winter temperatures.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing Pipe Corrosion Prevention</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing sacrificial anodes or water conditioners to slow down metal pipe decay.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Pressure Testing</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Gauging static supply pressure to prevent pipe fatigue and high-stress water hammer.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Gas Leak Detection</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Deploying combustible gas sniffers and bubble sprays to pinpoint dangerous line leaks.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing System Re-piping</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Complete building pipe overhaul replacing all interior distribution water lines.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Leaks & Pipes</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Line Trenching</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Professional excavation and deep dirt trench prep for incoming water service runs.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      </div>
+    </div>
+
+    <div class="space-y-6" id="fixtures-pumps">
+      <h2 class="text-xl font-extrabold text-navy border-b border-gray-100 pb-3 flex items-center space-x-2 font-heading">
+        <span>💧</span>
+        <span>Fixtures & Pumps Services</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Faucet Repair and Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Fixing worn out cartridges or installing designer kitchen and bathroom faucets.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Toilet Repair and Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Resolving chronic running, flush issues, or setting brand new high-efficiency toilets.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Sump Pump Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing submersible pit pumps with battery backup to prevent basement flooding.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Shower and Bathtub Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Fitting acrylic or fiberglass surrounds, tub basins, and associated drain plumbing.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Shower Valve Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Replacing pressure-balanced or thermostatic cartridges to cure hot/cold mix issues.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing Fixture Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Commercial and residential installation of sinks, washbasins, laundry trays, and spigots.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Toilet Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Unboxing, wax ring seating, supply connection, and testing of floor/wall mount toilets.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Water Pressure Regulator Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing PRV valves to step down extreme incoming municipal water pressures to safety.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Commercial Plumbing Services</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Grease trap maintenance, flushometer repair, and heavy-use building pipe maintenance.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Plumbing System Upgrades</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Modernizing home piping with touchless faucets, smart shutoff valves, and high-flow fixtures.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Washing Machine Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Routing water supply hoses and sewer discharge standpipes for clean, leak-free operation.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Dishwasher Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Secure mounting, electrical wire up, water line supply tap, and drain loop configuration.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Drainage Sump Pump Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Setting outdoor pit or crawlspace pumps to pump pooling rainwater away from foundations.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Faucet Replacement</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Swapping out aged, lime-scaled fixtures with brand new corrosion-resistant styles.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Outdoor Plumbing Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Fitting frost-free outdoor hose bibbs, yard hydrants, and outdoor shower fixtures.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Tub and Shower Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Fixing tub spouts, diverter valves, handles, drain plugs, and localized piping cracks.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Garbage Disposal Installation</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Installing quiet, high-torque grind units with proper tailpiece and dishwasher links.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      <div class="bg-white border border-slate-200/70 p-6 rounded-xl flex flex-col justify-between hover:border-teal transition-colors hover-lift shadow-sm">
+        <div>
+          <span class="text-[9px] font-bold text-teal tracking-wider uppercase bg-teal/5 px-2.5 py-0.5 rounded">Fixtures & Pumps</span>
+          <h3 class="text-base font-bold text-navy mt-3 mb-2 font-heading">Toilet Tank Repair</h3>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Replacing fill valves, flapper cups, flush levers, and tank-to-bowl gaskets.</p>
+        </div>
+        <a href="/contact" class="text-amber hover:text-amber-dark font-semibold text-xs inline-flex items-center space-x-1 font-heading"><span>Request Service Quote</span> <span>&rarr;</span></a>
+      </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+    </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Column 1 -->
+        <div class="footer-about">
+          <a href="/" class="logo footer-logo">
+            <img src="/public/images/logo.svg" alt="Home Plumbing USA Logo" class="logo-img" width="247" height="52" loading="lazy">
+          </a>
+          <h3 class="footer-title footer-brand-heading">Find Top-Rated Local Plumbing Experts Nationwide</h3>
+          <p class="footer-brand-subheading">We connect homeowners nationwide with vetted, background-checked, and licensed local plumbing contractors for fast &amp; reliable service.</p>
+        </div>
+        <!-- Column 2 -->
+        <div class="footer-col">
+          <div class="footer-title">Quick Links</div>
+          <a href="/">Home</a>
+          <a href="/services">Services Catalog</a>
+          <a href="/state/alaska/">Alaska Plumbers</a>
+          <a href="/state/texas/">Texas Plumbers</a>
+          <a href="/state/florida/">Florida Plumbers</a>
+          <a href="/about">About Us</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+        <!-- Column 3 -->
+        <div class="footer-col">
+          <div class="footer-title">Top Services</div>
+          <a href="/alaska/anchorage-99507/emergency-plumbing/">Emergency Plumbing</a>
+          <a href="/texas/houston-77002/water-heater-repair/">Water Heater Repair</a>
+          <a href="/alaska/anchorage-99507/drain-cleaning/">Drain Cleaning</a>
+          <a href="/florida/miami-33122/leak-detection/">Leak Detection</a>
+          <a href="/texas/dallas-75201/sewer-line-repair/">Sewer Line Repair</a>
+          <a href="/texas/houston-77002/burst-pipe-repair/">Burst Pipe Repair</a>
+        </div>
+        <!-- Column 4 -->
+        <div class="footer-col">
+          <div class="footer-title">Need Help Now?</div>
+          <p>Speak directly with an active dispatch supervisor 24/7.</p>
+          <a href="tel:877-516-8705" class="footer-call-btn"><i class="fas fa-phone"></i> Call 24/7</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Home Plumbing USA. All rights reserved. Nationwide Plumbing Referral Network</p>
+        <!-- Footer Links -->
+        <div class="footer-links flex justify-center space-x-4 mt-2 text-xs">
+          <a href="/privacy-policy" class="hover:text-white transition-colors" style="font-size: 12px;">Privacy Policy</a>
+          <span class="text-white/20">&middot;</span>
+          <a href="/terms-and-conditions" class="hover:text-white transition-colors" style="font-size: 12px;">Terms &amp; Conditions</a>
+          <span class="text-white/20">&middot;</span>
+          <a href="/disclaimer" class="hover:text-white transition-colors" style="font-size: 12px;">Disclaimer</a>
+        </div>
+        <!-- Visible One-Liner Disclaimer Text -->
+        <p class="footer-legal-disclaimer" style="color: #6b7280; font-size: 11.5px; margin-top: 8px; text-align: center;">
+          <strong>Disclaimer:</strong> Home Plumbing USA is a free referral service matching homeowners with independent local contractors. We do not directly provide plumbing services. <a href="/disclaimer" style="color: #3b82f6;">Read Full Disclaimer</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
+
+  <!-- Mobile Sticky Action Bar -->
+  <div class="mobile-sticky-bar">
+    <a href="tel:877-516-8705" class="sticky-btn call-btn phone-cta-upgraded" data-track="phone" data-location="sticky-bar" aria-label="Call toll-free (877) 516-8705 for a plumbing referral"><svg class="phone-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="phone-cta-copy"><span class="phone-cta-label">CALL TOLL-FREE</span><span class="phone-cta-number">(877) 516-8705</span></span></a>
+    <a href="/contact" class="sticky-btn quote-btn">
+      <i class="fas fa-paper-plane"></i> Get a Quote
+    </a>
+  </div>
+</body>
+</html>

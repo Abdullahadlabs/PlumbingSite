@@ -1,0 +1,40 @@
+name: Apply service mobile layout
+on:
+  push:
+    branches: [fix/service-mobile-layout-20261101]
+    paths:
+      - scripts/service-mobile-layout.js
+      - scripts/apply-service-mobile-layout.js
+      - scripts/test-service-mobile-layout.js
+      - scripts/template-service-page.js
+      - .github/workflows/service-mobile-layout.yml
+permissions:
+  contents: write
+jobs:
+  mobile-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/node_modules/
+            !/public/
+      - name: Apply and verify service-page layout
+        run: |
+          node scripts/test-service-mobile-layout.js
+          node scripts/apply-service-mobile-layout.js
+          node scripts/test-service-mobile-layout.js --all
+          node scripts/test-sitemaps.js
+          git diff --check
+      - name: Commit generated pages to repair branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Align service-page mobile headers and add sticky call and quote actions'
+          git push origin HEAD:fix/service-mobile-layout-20261101
