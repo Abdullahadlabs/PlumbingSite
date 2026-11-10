@@ -1,0 +1,44 @@
+name: Verify light and dark themes
+on:
+  push:
+    branches: [fix/theme-toggle-final-20261111]
+    paths: ['scripts/**', 'css/style.css', '.github/workflows/theme-toggle.yml']
+permissions:
+  contents: write
+jobs:
+  theme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/node_modules/
+            !/public/
+            /public/images/logo.svg
+      - name: Apply and verify theme markup
+        run: |
+          node scripts/apply-theme-toggle.js
+          node scripts/test-sitemaps.js
+          git diff --check
+      - name: Test mobile and desktop themes
+        run: |
+          npm install --prefix /tmp/theme-browser playwright
+          if command -v google-chrome >/dev/null; then
+            export CHROME_BIN="$(command -v google-chrome)"
+          else
+            /tmp/theme-browser/node_modules/.bin/playwright install --with-deps chromium
+          fi
+          python3 -m http.server 8090 >/tmp/theme-server.log 2>&1 &
+          NODE_PATH=/tmp/theme-browser/node_modules node scripts/test-theme-toggle.cjs
+      - name: Save generated pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add persistent light and dark theme toggle to website pages'
+          git push origin HEAD:fix/theme-toggle-final-20261111
