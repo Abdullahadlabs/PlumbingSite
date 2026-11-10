@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
+<meta charset="UTF-8">
+<script id="hpu-theme-init">(function(){var r=document.documentElement,k='hpu-theme';function read(){try{return localStorage.getItem(k)}catch(e){return null}}function set(t){r.setAttribute('data-theme',t==='light'?'light':'dark');var b=document.querySelector('[data-theme-toggle]');if(b){var d=r.getAttribute('data-theme')==='dark';b.setAttribute('aria-pressed',String(d));b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');b.title=d?'Switch to light mode':'Switch to dark mode'}}set(read());r.setAttribute('data-theme-ready','');document.addEventListener('DOMContentLoaded',function(){set(r.getAttribute('data-theme'))});document.addEventListener('click',function(e){if(!e.target.closest('[data-theme-toggle]'))return;var t=r.getAttribute('data-theme')==='dark'?'light':'dark';set(t);try{localStorage.setItem(k,t)}catch(e){}});window.addEventListener('storage',function(e){if(e.key===k)set(e.newValue)})})();</script>
+<script>
     (function() {
       function slugify(text) {
         if (!text) return '';
@@ -183,7 +185,6 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NHGT9PF7');</script>
   <!-- End Google Tag Manager -->
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Home Plumbing USA">
@@ -434,13 +435,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=theme-20261110">
   <style>
     /* Specific mobile-optimized styling */
     .hero-section {
       position: relative;
       padding: 130px 0 80px;
-      background: linear-gradient(135deg, #0a1628 0%, #111d33 100%) !important;
+      background: linear-gradient(135deg, var(--theme-surface, #0a1628) 0%, var(--theme-surface, #111d33) 100%) !important;
       overflow: hidden;
     }
     .hero-section::before {
@@ -590,7 +591,7 @@
     .final-cta-section h2 {
       font-size: 2.5rem;
       font-weight: 800;
-      color: #fff;
+      color:var(--theme-ink, #fff);
       margin-bottom: 16px;
     }
     .final-cta-section h2 span.dynamic-service {
@@ -763,7 +764,7 @@
         gap: 10px !important;
         padding: 12px 26px !important;
         background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-        color: #ffffff !important;
+        color:var(--theme-ink, #ffffff) !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
         border-radius: 8px !important;
@@ -872,7 +873,8 @@
         <a href="/contact" class="nav-link">Contact</a>
       </nav>
 
-      <div class="header-cta">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="true" aria-label="Switch to light mode" title="Switch to light mode"><svg class="theme-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.9 13.1A8.5 8.5 0 0 1 10.9 3.1a8.5 8.5 0 1 0 10 10Z"/></svg><svg class="theme-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+<div class="header-cta">
         <a href="tel:877-516-8705" class="header-phone phone-cta-upgraded" aria-label="Call toll-free (877) 516-8705 for a plumbing referral"><svg class="phone-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="phone-cta-copy"><span class="phone-cta-label">CALL TOLL-FREE</span><span class="phone-cta-number">(877) 516-8705</span></span></a>
         <a href="/contact" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
@@ -885,7 +887,7 @@
 
   <main>
     <!-- 2. Hero Section (Fixed Live Dispatch Board Layout with Spacious 2-Column Grid) -->
-    <section class="hero-section" id="hero" style="position: relative; padding: 140px 0 90px; background: linear-gradient(135deg, #0a1628 0%, #111d33 100%); overflow: hidden;">
+    <section class="hero-section" id="hero" style="position: relative; padding: 140px 0 90px; background: linear-gradient(135deg, var(--theme-surface, #0a1628) 0%, var(--theme-surface, #111d33) 100%); overflow: hidden;">
       <div class="container" style="max-width: 1280px; padding: 0 32px; margin: 0 auto;">
         <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; width: 100%; max-width: 100%;">
           
@@ -895,7 +897,7 @@
               <i class="fas fa-shield-halved"></i> Premium Certified Local Experts Nationwide
             </div>
             
-            <h1 style="font-size: 2.9rem; font-weight: 900; line-height: 1.2; color: #ffffff; margin-bottom: 20px; font-family: 'Outfit', sans-serif;">
+            <h1 style="font-size: 2.9rem; font-weight: 900; line-height: 1.2; color:var(--theme-ink, #ffffff); margin-bottom: 20px; font-family: 'Outfit', sans-serif;">
               Premium <span id="hero-title-prefix">Clogged Drain Repair Services</span> in <span class="city-name">Anchorage</span><span class="state-code-wrap">, <span class="state-code">AK</span></span>
             </h1>
             
@@ -907,15 +909,15 @@
             <!-- Stats Grid from Reference Image -->
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px; margin-top: 10px; max-width: 540px;">
               <div>
-                <div style="font-size: 1.8rem; font-weight: 900; color: #ffffff; line-height: 1.1;">Confirm</div>
+                <div style="font-size: 1.8rem; font-weight: 900; color:var(--theme-ink, #ffffff); line-height: 1.1;">Confirm</div>
                 <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Arrival Time</div>
               </div>
               <div>
-                <div style="font-size: 1.8rem; font-weight: 900; color: #ffffff; line-height: 1.1;">Compare</div>
+                <div style="font-size: 1.8rem; font-weight: 900; color:var(--theme-ink, #ffffff); line-height: 1.1;">Compare</div>
                 <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Provider Options</div>
               </div>
               <div>
-                <div style="font-size: 1.8rem; font-weight: 900; color: #ffffff; line-height: 1.1;">Review</div>
+                <div style="font-size: 1.8rem; font-weight: 900; color:var(--theme-ink, #ffffff); line-height: 1.1;">Review</div>
                 <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px;">Provider Credentials</div>
               </div>
             </div>
@@ -937,7 +939,7 @@
                 <i class="fas fa-truck-fast"></i>
               </div>
               <div>
-                <div style="font-weight: 800; color: #ffffff; font-size: 1rem; margin-bottom: 2px;">Check Local Availability</div>
+                <div style="font-weight: 800; color:var(--theme-ink, #ffffff); font-size: 1rem; margin-bottom: 2px;">Check Local Availability</div>
                 <div style="color: #94a3b8; font-size: 0.84rem;">All regions staffed with fully-vetted specialists</div>
               </div>
             </div>
@@ -948,7 +950,7 @@
                 <i class="fas fa-hand-holding-dollar"></i>
               </div>
               <div>
-                <div style="font-weight: 800; color: #ffffff; font-size: 1rem; margin-bottom: 2px;">Ask About All Fees</div>
+                <div style="font-weight: 800; color:var(--theme-ink, #ffffff); font-size: 1rem; margin-bottom: 2px;">Ask About All Fees</div>
                 <div style="color: #94a3b8; font-size: 0.84rem;">Get completely transparent rates up-front</div>
               </div>
             </div>
@@ -972,42 +974,42 @@
     </section>
 
     <!-- 3. Section 2: How It Works -->
-    <section class="workflow-section section" id="workflow" style="background: #0a1628; padding: 80px 0;">
+    <section class="workflow-section section" id="workflow" style="background: var(--theme-surface, #0a1628); padding: 80px 0;">
       <div class="container">
         <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 48px;">
           <div class="section-label" style="color: #f59e0b; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">SIMPLE 3-STEP MATCHING PROCESS</div>
-          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color: #ffffff;">How <span class="city-name">Your Local Area</span> Emergency Plumbing Dispatch Works</h2>
+          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color:var(--theme-ink, #ffffff);">How <span class="city-name">Your Local Area</span> Emergency Plumbing Dispatch Works</h2>
           <p class="section-desc" style="color: #94a3b8; max-width: 650px; margin: 12px auto 0;">We operate 24/7 in <span class="city-name">Your Local Area</span>. We connect you directly with available, vetted partners across <span class="city-name">Your Local Area</span>.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px;">
-          <div style="background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
+          <div style="background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
             <div style="font-size: 2.5rem; font-weight: 900; color: rgba(37, 99, 235, 0.25); position: absolute; top: 20px; right: 24px;">01</div>
             <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(37, 99, 235, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 20px;">
               <i class="fas fa-phone-volume"></i>
             </div>
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">1. Tell Us What's Wrong</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin-bottom: 12px;">1. Tell Us What's Wrong</h3>
             <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.65; margin: 0;">Tell us what plumbing issue you're facing. Home Plumbing USA operates 24/7 for all <span class="city-name">Your Local Area</span> homes &amp; businesses — call or submit online.</p>
           </div>
 
-          <div style="background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
+          <div style="background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
             <div style="font-size: 2.5rem; font-weight: 900; color: rgba(245, 158, 11, 0.25); position: absolute; top: 20px; right: 24px;">02</div>
             <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 20px;">
               <i class="fas fa-user-shield"></i>
             </div>
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">2. We Match You Instantly</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin-bottom: 12px;">2. We Match You Instantly</h3>
             <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.65; margin-bottom: 16px;">Once submitted, our system alerts available local plumbers in <span class="city-name">Your Local Area</span>. A verified emergency plumber will contact you with a free estimate in minutes.</p>
             <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid #f59e0b; padding: 10px 12px; border-radius: 0 6px 6px 0; font-size: 0.82rem; color: #e2e8f0;">
               <strong>Emergency Dispatch Notice:</strong> For active water leaks or pipe bursts in <span class="city-name">Your Local Area</span>, call immediately for priority 15-minute callback.
             </div>
           </div>
 
-          <div style="background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
+          <div style="background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; position: relative;">
             <div style="font-size: 2.5rem; font-weight: 900; color: rgba(34, 197, 94, 0.25); position: absolute; top: 20px; right: 24px;">03</div>
             <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(34, 197, 94, 0.15); color: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 20px;">
               <i class="fas fa-truck-fast"></i>
             </div>
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">3. Your Pro Is On The Way</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin-bottom: 12px;">3. Your Pro Is On The Way</h3>
             <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.65; margin: 0;">Confirm your quote, and a licensed expert arrives rapidly with fully equipped trucks to solve your issue in <span class="city-name">Your Local Area</span>.</p>
           </div>
         </div>
@@ -1022,48 +1024,48 @@
           <!-- Left Column: How We Vet Our Pros -->
           <div>
             <div style="color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">UNMATCHED SAFETY &amp; QUALITY STANDARDS</div>
-            <h2 style="font-size: 2.2rem; font-weight: 900; color: #ffffff; margin-bottom: 16px;">How We Vet Our Pros</h2>
+            <h2 style="font-size: 2.2rem; font-weight: 900; color:var(--theme-ink, #ffffff); margin-bottom: 16px;">How We Vet Our Pros</h2>
             <p style="color: #94a3b8; font-size: 1rem; line-height: 1.7; margin-bottom: 28px;">
               We only partner with top-tier local experts — verifying every plumber to protect your home in <span class="city-name">Your Local Area</span>.
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 20px;">
-              <div style="display: flex; gap: 16px; background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
+              <div style="display: flex; gap: 16px; background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
                 <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.25rem; margin-top: 2px;"></i>
                 <div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">1. Active License &amp; Status Verification</h4>
+                  <h4 style="font-size: 1rem; font-weight: 700; color:var(--theme-ink, #ffffff); margin-bottom: 4px;">1. Active License &amp; Status Verification</h4>
                   <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">Fully licensed in the state, standing with local licensing boards.</p>
                 </div>
               </div>
 
-              <div style="display: flex; gap: 16px; background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
+              <div style="display: flex; gap: 16px; background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
                 <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.25rem; margin-top: 2px;"></i>
                 <div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">2. Confirmed General Liability Insurance</h4>
+                  <h4 style="font-size: 1rem; font-weight: 700; color:var(--theme-ink, #ffffff); margin-bottom: 4px;">2. Confirmed General Liability Insurance</h4>
                   <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">Minimum $1M in general liability insurance, protecting your home &amp; property.</p>
                 </div>
               </div>
 
-              <div style="display: flex; gap: 16px; background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
+              <div style="display: flex; gap: 16px; background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
                 <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.25rem; margin-top: 2px;"></i>
                 <div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">3. Comprehensive Background Check</h4>
+                  <h4 style="font-size: 1rem; font-weight: 700; color:var(--theme-ink, #ffffff); margin-bottom: 4px;">3. Comprehensive Background Check</h4>
                   <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">Criminal record checks, identity verification, and business legitimacy screenings.</p>
                 </div>
               </div>
 
-              <div style="display: flex; gap: 16px; background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
+              <div style="display: flex; gap: 16px; background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
                 <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.25rem; margin-top: 2px;"></i>
                 <div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">4. Minimum Experience Threshold</h4>
+                  <h4 style="font-size: 1rem; font-weight: 700; color:var(--theme-ink, #ffffff); margin-bottom: 4px;">4. Minimum Experience Threshold</h4>
                   <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">Only plumbers with proven hands-on experience in residential and commercial plumbing.</p>
                 </div>
               </div>
 
-              <div style="display: flex; gap: 16px; background: #111d33; border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
+              <div style="display: flex; gap: 16px; background: var(--theme-surface, #111d33); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px 20px; border-radius: 10px;">
                 <i class="fas fa-check-circle" style="color: #22c55e; font-size: 1.25rem; margin-top: 2px;"></i>
                 <div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">5. Ongoing Customer Satisfaction</h4>
+                  <h4 style="font-size: 1rem; font-weight: 700; color:var(--theme-ink, #ffffff); margin-bottom: 4px;">5. Ongoing Customer Satisfaction</h4>
                   <p style="color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.5;">We track customer feedback and remove any partner who drops below our strict rating threshold.</p>
                 </div>
               </div>
@@ -1072,7 +1074,7 @@
 
           <!-- Right Column: Dispatch Reviews -->
           <div>
-            <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 20px;"><span class="city-name">Your Local Area</span> Dispatch Reviews</h3>
+            <h3 style="font-size: 1.5rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin-bottom: 20px;"><span class="city-name">Your Local Area</span> Dispatch Reviews</h3>
             <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 24px;">Real experiences from homeowners in <span class="city-name">Your Local Area</span> matched through our 24/7 network.</p>
 
             <div id="reviews-grid" style="display: flex; flex-direction: column; gap: 20px;">
@@ -1085,70 +1087,70 @@
     </section>
 
     <!-- 5. Section 4: Seasonal Plumbing Pain Points -->
-    <section class="section" id="seasonal-pain-points" style="background: #0a1628; padding: 80px 0;">
+    <section class="section" id="seasonal-pain-points" style="background: var(--theme-surface, #0a1628); padding: 80px 0;">
       <div class="container">
         <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 48px;">
           <div class="section-label" style="color: #f59e0b; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">CLIMATE DEFENSE &amp; MAINTENANCE</div>
-          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color: #ffffff;">Seasonal Plumbing Pain Points in <span class="city-name">Your Local Area</span>, <span class="state-code">AK</span></h2>
+          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color:var(--theme-ink, #ffffff);">Seasonal Plumbing Pain Points in <span class="city-name">Your Local Area</span>, <span class="state-code">AK</span></h2>
           <p class="section-desc" style="color: #94a3b8; max-width: 650px; margin: 12px auto 0;">Sub-zero winter temperatures and climate variations create specific pipe risks that require specialized local plumbing solutions.</p>
         </div>
 
         <div class="seasonal-grid">
           <!-- Winter Pain Points Card -->
-          <div style="background: #111d33; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 32px;">
+          <div style="background: var(--theme-surface, #111d33); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 32px;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
               <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
                 <i class="fas fa-snowflake"></i>
               </div>
               <div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin: 0;">Winter Pain Points</h3>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin: 0;">Winter Pain Points</h3>
                 <span style="font-size: 0.78rem; color: #60a5fa; font-weight: 600;">Sub-Zero Freeze Protection</span>
               </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 20px;">
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• Frozen Pipes</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• Frozen Pipes</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">Water freezes in uninsulated crawlspaces or exterior walls, causing pressure expansion and structural pipe cracks.</p>
               </div>
 
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• Burst Pipe Emergencies</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• Burst Pipe Emergencies</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">When frozen pipes thaw, sudden water pressure causes catastrophic indoor flooding requiring instant shutoff &amp; repair.</p>
               </div>
 
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• No Hot Water in Deep Freeze</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• No Hot Water in Deep Freeze</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">Heavy winter strain on water heaters leads to burner failures or tank element burnouts during sub-zero months.</p>
               </div>
             </div>
           </div>
 
           <!-- Summer Pain Points Card -->
-          <div style="background: #111d33; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 16px; padding: 32px;">
+          <div style="background: var(--theme-surface, #111d33); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 16px; padding: 32px;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
               <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
                 <i class="fas fa-sun"></i>
               </div>
               <div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin: 0;">Summer Pain Points</h3>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color:var(--theme-ink, #ffffff); margin: 0;">Summer Pain Points</h3>
                 <span style="font-size: 0.78rem; color: #fbbf24; font-weight: 600;">High Use &amp; Maintenance</span>
               </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 20px;">
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• Clogged Drain Strain</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• Clogged Drain Strain</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">Increased household water usage leads to heavy grease, hair, and food debris accumulation in kitchen and bath drains.</p>
               </div>
 
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• Sewer Line Failures</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• Sewer Line Failures</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">Summer tree root growth infiltrates aging underground clay or cast iron sewer lines, causing sewage backups.</p>
               </div>
 
               <div style="background: rgba(10, 22, 40, 0.6); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 10px;">
-                <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem; margin-bottom: 4px;">• Sump Pump Maintenance</div>
+                <div style="font-weight: 700; color:var(--theme-ink, #ffffff); font-size: 0.95rem; margin-bottom: 4px;">• Sump Pump Maintenance</div>
                 <p style="color: #94a3b8; font-size: 0.85rem; margin: 0; line-height: 1.5;">Heavy snowmelt runoff and rainstorms require active sump pump testing to keep basements dry.</p>
               </div>
             </div>
@@ -1162,7 +1164,7 @@
       <div class="container">
         <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 40px;">
           <div class="section-label" style="color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">LOCAL DISPATCH COVERAGE</div>
-          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color: #ffffff;"><span class="city-name">Your Local Area</span> Neighborhood Coverage Area</h2>
+          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color:var(--theme-ink, #ffffff);"><span class="city-name">Your Local Area</span> Neighborhood Coverage Area</h2>
           <p class="section-desc" style="color: #94a3b8; max-width: 650px; margin: 12px auto 0;">Urgent emergency plumbing trucks are active across all local neighborhoods and zip codes in <span class="city-name">Your Local Area</span>.</p>
         </div>
         <div class="areas-grid" id="areas-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
@@ -1172,11 +1174,11 @@
     </section>
 
     <!-- 7. Section 6: FAQ Section -->
-    <section class="faq-section section" id="faq" style="background: #0a1628; padding: 80px 0;">
+    <section class="faq-section section" id="faq" style="background: var(--theme-surface, #0a1628); padding: 80px 0;">
       <div class="container">
         <div class="section-header animate-on-scroll" style="text-align: center; margin-bottom: 40px;">
           <div class="section-label" style="color: #f59e0b; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 8px;">FREQUENTLY ASKED QUESTIONS</div>
-          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color: #ffffff;"><span class="dynamic-service">Plumbing</span> FAQ in <span class="city-name">Your Local Area</span></h2>
+          <h2 class="section-title" style="font-size: 2.4rem; font-weight: 900; color:var(--theme-ink, #ffffff);"><span class="dynamic-service">Plumbing</span> FAQ in <span class="city-name">Your Local Area</span></h2>
           <p class="section-desc" style="color: #94a3b8; max-width: 600px; margin: 12px auto 0;">Common questions regarding plumbing services in <span class="city-name">Your Local Area</span>.</p>
         </div>
         <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
@@ -1186,15 +1188,15 @@
     </section>
 
     <!-- 8. Section 7: Final Call Now Banner -->
-    <section class="final-cta-section" style="background: linear-gradient(135deg, #1e3a8a 0%, #0a1628 100%); text-align: center; padding: 80px 0;">
+    <section class="final-cta-section" style="background: linear-gradient(135deg, #1e3a8a 0%, var(--theme-surface, #0a1628) 100%); text-align: center; padding: 80px 0;">
       <div class="container">
-        <h2 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin-bottom: 16px;">Need Emergency Plumbing in <span class="city-name">Your Local Area</span>?</h2>
+        <h2 style="font-size: 2.5rem; font-weight: 900; color:var(--theme-ink, #ffffff); margin-bottom: 16px;">Need Emergency Plumbing in <span class="city-name">Your Local Area</span>?</h2>
         <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.1rem; max-width: 600px; margin: 0 auto 32px;">Dispatchers are standing by 24/7. Get matched with a licensed local expert now.</p>
         <div class="cta-buttons" style="display: flex; justify-content: center; gap: 16px;">
           <a href="tel:877-516-8705" class="btn btn-accent btn-lg" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 800; padding: 16px 36px; border-radius: 8px; font-size: 1.1rem; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
             <i class="fas fa-phone-alt"></i> Call Now
           </a>
-          <a href="/contact" class="btn btn-outline btn-lg" style="border: 2px solid #ffffff; color: #ffffff; font-weight: 700; padding: 16px 36px; border-radius: 8px; font-size: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
+          <a href="/contact" class="btn btn-outline btn-lg" style="border: 2px solid #ffffff; color:var(--theme-ink, #ffffff); font-weight: 700; padding: 16px 36px; border-radius: 8px; font-size: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
             Get a Quote
           </a>
         </div>
