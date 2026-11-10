@@ -18,7 +18,7 @@ function installBoot(html) {
  const prefix=html.slice(head.index+head[0].length).trimStart();
  if(prefix.startsWith(charset[0]+'\n'+BOOT))return html;
  let out=init?html.replace(init[0],''):html;
- out=out.replace(charset[0],'');
+ out=out.replace(/[ \t]*<meta\s+charset=[^>]*>[ \t]*(?:\r?\n)?/i,'');
  return out.replace(/(<head[^>]*>)\s*/i,'$1\n'+charset[0]+'\n'+BOOT+'\n');
 }
 function apply(html){
