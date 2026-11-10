@@ -9,19 +9,27 @@ function themeColors(css){
  css=css.replace(/(^|[;{\s])color\s*:\s*(#fff(?:fff)?\b|white\b)/gi,'$1color:var(--theme-ink, $2)');
  return css;
 }
+function installBoot(html) {
+ const charset=html.match(/<meta\s+charset=[^>]*>/i);
+ if(!charset)throw Error('Theme page is missing charset');
+ const init=html.match(/<script id="hpu-theme-init">[\s\S]*?<\/script>/);
+ const head=html.match(/<head[^>]*>/i);
+ if(!head)return html;
+ const prefix=html.slice(head.index+head[0].length).trimStart();
+ if(prefix.startsWith(charset[0]+'\n'+BOOT))return html;
+ let out=init?html.replace(init[0],''):html;
+ out=out.replace(charset[0],'');
+ return out.replace(/(<head[^>]*>)\s*/i,'$1\n'+charset[0]+'\n'+BOOT+'\n');
+}
 function apply(html){
- if(html.includes('id="hpu-theme-init"')) {
-  const init=html.match(/<script id="hpu-theme-init">[\s\S]*?<\/script>/);
-  if(init && html.indexOf('<meta charset=')>html.indexOf(init[0]))return html.replace(init[0],'').replace(/(<meta\s+charset=[^>]*>)/i,'$1\n'+init[0]);
-  return html;
- }
+ if(html.includes('id="hpu-theme-init"'))return installBoot(html);
  if(!/<header\b/.test(html)||!html.includes('/css/style.css'))return html;
  const pattern=/<div\s+class="(?:header-cta|nav-ctas)"/;
  if(!pattern.test(html))throw Error('Header CTA container missing');
  let out=html.replace(/<style\b([^>]*)>([\s\S]*?)<\/style>/gi,(_,a,css)=>'<style'+a+'>'+themeColors(css)+'</style>');
  // Convert inline palette only, without touching scripts, structured data or content.
  out=out.replace(/\bstyle="([^"]*)"/g,(_,css)=>'style="'+themeColors(css)+'"');
- out=out.replace(/(<meta\s+charset=[^>]*>)/i,'$1\n'+BOOT).replace(pattern,BUTTON+'\n$&');
+ out=installBoot(out).replace(pattern,BUTTON+'\n$&');
  out=out.replace(/href="\/css\/style\.css(?:\?[^"]*)?"/g,'href="/css/style.css?v=theme-20261110"');
  return out;
 }

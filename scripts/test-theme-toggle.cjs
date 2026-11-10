@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
   const before=await page.locator('a[href^="tel:"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
   for(const theme of ['dark','light']){
    if(await page.locator('html').getAttribute('data-theme')!==theme)await button.click();
-   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);await page.waitForTimeout(400);
    assert.equal(await button.getAttribute('aria-pressed'),String(theme==='dark'));
    assert(await button.locator(theme==='dark'?'.theme-moon':'.theme-sun').isVisible());
    const box=await button.boundingBox();assert(box.width>=44&&box.height>=44);assert(box.x>=0&&box.x+box.width<=width,path+' toggle outside viewport');
@@ -22,8 +22,8 @@ const {chromium}=require('playwright');
     const overlap=others.some(e=>{const r=e.getBoundingClientRect();return Math.min(b.right,r.right)-Math.max(b.left,r.left)>1&&Math.min(b.bottom,r.bottom)-Math.max(b.top,r.top)>1});
     const h=document.querySelector('h1');return {overlap,body:getComputedStyle(document.body).backgroundColor,h1:h?getComputedStyle(h).color:null,iconAnimation:document.querySelector('.phone-cta-icon')?getComputedStyle(document.querySelector('.phone-cta-icon')).animationName:null};
    });assert(!layout.overlap,path+' header overlap at '+width);console.log('THEME_CHECK '+JSON.stringify({path,width,theme,...layout}));
-   if(theme==='light'&&width===390&&(path==='/'||path.includes('fairbanks'))){
-    const img=await page.screenshot({type:'jpeg',quality:55});console.log('THEME_IMAGE:'+(path==='/'?'home':'service')+':'+img.toString('base64'));
+   if(theme==='light'&&((width===390&&(path==='/'||path.includes('fairbanks')))||(width===1440&&path==='/'))){
+    const img=await page.screenshot({type:'jpeg',quality:55});console.log('THEME_IMAGE:'+(path==='/'?'home':'service')+'-'+width+':'+img.toString('base64'));
    }
   }
   await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('html').getAttribute('data-theme'),'light','Saved preference lost');
