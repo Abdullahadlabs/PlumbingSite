@@ -3449,3 +3449,26 @@ a.footer-call-btn:hover {
 
 
 
+
+/* Accessible phone CTA: stationary button/text, transform-only icon animation. */
+a.phone-cta-upgraded {
+ display:inline-flex; align-items:center; justify-content:center; gap:10px;
+ box-sizing:border-box; min-height:48px; padding:8px 16px;
+ background:#c2410c !important; color:#fff !important; border:1px solid #ea580c;
+ border-radius:8px; text-decoration:none; line-height:1.2; flex-shrink:0;
+ transform:none !important; transition:background-color .2s ease;
+}
+a.phone-cta-upgraded:hover { background:#9a3412 !important; }
+a.phone-cta-upgraded:focus-visible { outline:3px solid #fff; outline-offset:3px; box-shadow:0 0 0 6px #0b1322; }
+.phone-cta-copy { display:flex; flex-direction:column; gap:3px; text-align:left; white-space:nowrap; }
+.phone-cta-label { font-size:11px; font-weight:700; letter-spacing:.04em; }
+.phone-cta-number { font-size:16px; font-weight:800; font-variant-numeric:tabular-nums; }
+a.phone-cta-upgraded .phone-cta-icon { display:block; width:20px; height:20px; flex:0 0 20px; animation:phone-cta-bounce 4s ease-in-out infinite; }
+@keyframes phone-cta-bounce { 0%,24%,100% {transform:translateY(0)} 8% {transform:translateY(-3px)} 16% {transform:translateY(0)} 20% {transform:translateY(-1.5px)} }
+.mobile-sticky-bar a.phone-cta-upgraded, .service-mobile-actions a.phone-cta-upgraded { border:0; border-radius:0; padding:6px 8px; min-width:0; }
+@media(max-width:1024px) {
+ .header-phone.phone-cta-upgraded { display:none; }
+ .mobile-sticky-bar .phone-cta-label, .service-mobile-actions .phone-cta-label { font-size:10px; }
+ .mobile-sticky-bar .phone-cta-number, .service-mobile-actions .phone-cta-number { font-size:14px; }
+}
+@media(prefers-reduced-motion:reduce) { a.phone-cta-upgraded .phone-cta-icon { animation:none !important; transform:none !important; } }

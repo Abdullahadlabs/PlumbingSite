@@ -1,0 +1,42 @@
+name: Apply accessible phone CTA
+on:
+  push:
+    branches: [fix/phone-cta-20261110]
+    paths:
+      - scripts/phone-cta.js
+      - scripts/apply-phone-cta.js
+      - .github/workflows/phone-cta.yml
+permissions:
+  contents: write
+jobs:
+  mobile-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/node_modules/
+            !/public/
+      - name: Apply and verify service-page layout
+        run: |
+          node scripts/apply-phone-cta.js
+          node scripts/test-sitemaps.js
+          git diff --check
+      - name: Check desktop and mobile rendering
+        run: |
+          npm install --prefix /tmp/cta-browser playwright
+          /tmp/cta-browser/node_modules/.bin/playwright install --with-deps chromium
+          python3 -m http.server 8090 >/tmp/cta-server.log 2>&1 &
+          NODE_PATH=/tmp/cta-browser/node_modules node scripts/test-phone-cta.cjs
+      - name: Commit generated pages to repair branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add accessible toll-free phone CTAs to headers and mobile bars'
+          git push origin HEAD:fix/phone-cta-20261110

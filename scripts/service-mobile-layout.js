@@ -48,4 +48,4 @@ function apply(html) {
  .replace("mainNav.style.height = 'calc(100vh - 70px)';", "mainNav.style.height = 'calc(100dvh - ' + headerBottom + 'px)';");
  return out;
 }
-module.exports={apply};
+module.exports={apply: html => require('./phone-cta').apply(apply(html))};
