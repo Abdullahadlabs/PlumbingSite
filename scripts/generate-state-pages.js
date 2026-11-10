@@ -492,7 +492,7 @@ function main() {
 
     const stateHtml = generateStateHtml(baseHtml, state, stateCitiesIndex);
     const outputFile = path.join(stateFolder, 'index.html');
-    fs.writeFileSync(outputFile, stateHtml, 'utf8');
+    fs.writeFileSync(outputFile, require('./theme-toggle').apply(stateHtml), 'utf8');
     count++;
   });
 

@@ -392,7 +392,7 @@ ${JSON.stringify(schemaObj, null, 2)}
 </body>
 </html>`;
 
-  fs.writeFileSync(path.join(COLORADO_DIR, 'index.html'), html, 'utf8');
+  fs.writeFileSync(path.join(COLORADO_DIR, 'index.html'), require('./theme-toggle').apply(html), 'utf8');
   console.log('Created State Hub: /colorado/index.html');
 }
 
@@ -864,7 +864,7 @@ ${JSON.stringify(schemaObj, null, 2)}
 </body>
 </html>`;
 
-  fs.writeFileSync(path.join(zipDir, 'index.html'), html, 'utf8');
+  fs.writeFileSync(path.join(zipDir, 'index.html'), require('./theme-toggle').apply(html), 'utf8');
   console.log(`Created City Hub: /colorado/${cityZipSlug}/index.html`);
 }
 
