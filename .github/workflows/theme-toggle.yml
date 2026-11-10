@@ -1,4 +1,5 @@
 name: Verify light and dark themes
+run-name: Verify complete website theme build
 on:
   push:
     branches: [fix/theme-toggle-final-20261111]
