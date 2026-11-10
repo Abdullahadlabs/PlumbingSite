@@ -8,7 +8,7 @@ const {chromium}=require('playwright');
  const paths=['/','/alaska/fairbanks-99701/water-heater-repair/','/state/texas/','/texas/houston-77002/','/contact.html','/blog/how-to-shut-off-main-water-valve/'];
  for(const path of paths)for(const width of (paths.indexOf(path)<2?[320,390,768,1024,1440]:[390,1440])){
   await page.setViewportSize({width,height:850});await page.goto('http://127.0.0.1:8090'+path,{waitUntil:'domcontentloaded'});
-  const button=page.locator('[data-theme-toggle]');assert.equal(await button.count(),1,path+' toggle count');assert(await button.isVisible(),path+' toggle visible');
+  const button=page.locator('[data-theme-toggle]');assert.equal(await button.count(),1,path+' toggle count');assert((await page.content()).indexOf('<meta charset=')<1024,'Charset placement');assert(await button.isVisible(),path+' toggle visible');
   const before=await page.locator('a[href^="tel:"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
   for(const theme of ['dark','light']){
    if(await page.locator('html').getAttribute('data-theme')!==theme)await button.click();
@@ -23,7 +23,7 @@ const {chromium}=require('playwright');
     const h=document.querySelector('h1');return {overlap,body:getComputedStyle(document.body).backgroundColor,h1:h?getComputedStyle(h).color:null,iconAnimation:document.querySelector('.phone-cta-icon')?getComputedStyle(document.querySelector('.phone-cta-icon')).animationName:null};
    });assert(!layout.overlap,path+' header overlap at '+width);console.log('THEME_CHECK '+JSON.stringify({path,width,theme,...layout}));
    if(theme==='light'&&width===390&&(path==='/'||path.includes('fairbanks'))){
-    await page.screenshot({path:'/tmp/theme-'+(path==='/'?'home':'service')+'.jpg',type:'jpeg',quality:55});
+    const img=await page.screenshot({type:'jpeg',quality:55});console.log('THEME_IMAGE:'+(path==='/'?'home':'service')+':'+img.toString('base64'));
    }
   }
   await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('html').getAttribute('data-theme'),'light','Saved preference lost');
@@ -35,6 +35,6 @@ const {chromium}=require('playwright');
  const denied=await browser.newContext();await denied.route('**/*',r=>r.request().url().startsWith('http://127.0.0.1:8090')?r.continue():r.abort());
  await denied.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw Error('Storage blocked')}})});
  const p=await denied.newPage();await p.goto('http://127.0.0.1:8090/');await p.locator('[data-theme-toggle]').click();assert.equal(await p.locator('html').getAttribute('data-theme'),'light');await denied.close();
- for(const name of ['home','service'])console.log('THEME_IMAGE:'+name+':'+require('fs').readFileSync('/tmp/theme-'+name+'.jpg').toString('base64'));
+
  console.log('THEME_TESTS_PASSED');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

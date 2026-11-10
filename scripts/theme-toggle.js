@@ -10,13 +10,18 @@ function themeColors(css){
  return css;
 }
 function apply(html){
- if(html.includes('id="hpu-theme-init"')||!/<header\b/.test(html)||!html.includes('/css/style.css'))return html;
+ if(html.includes('id="hpu-theme-init"')) {
+  const init=html.match(/<script id="hpu-theme-init">[\s\S]*?<\/script>/);
+  if(init && html.indexOf('<meta charset=')>html.indexOf(init[0]))return html.replace(init[0],'').replace(/(<meta\s+charset=[^>]*>)/i,'$1\n'+init[0]);
+  return html;
+ }
+ if(!/<header\b/.test(html)||!html.includes('/css/style.css'))return html;
  const pattern=/<div\s+class="(?:header-cta|nav-ctas)"/;
  if(!pattern.test(html))throw Error('Header CTA container missing');
  let out=html.replace(/<style\b([^>]*)>([\s\S]*?)<\/style>/gi,(_,a,css)=>'<style'+a+'>'+themeColors(css)+'</style>');
  // Convert inline palette only, without touching scripts, structured data or content.
  out=out.replace(/\bstyle="([^"]*)"/g,(_,css)=>'style="'+themeColors(css)+'"');
- out=out.replace(/<head([^>]*)>/i,'<head$1>\n'+BOOT).replace(pattern,BUTTON+'\n$&');
+ out=out.replace(/(<meta\s+charset=[^>]*>)/i,'$1\n'+BOOT).replace(pattern,BUTTON+'\n$&');
  out=out.replace(/href="\/css\/style\.css(?:\?[^"]*)?"/g,'href="/css/style.css?v=theme-20261110"');
  return out;
 }
