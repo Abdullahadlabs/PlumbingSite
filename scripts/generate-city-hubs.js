@@ -1251,7 +1251,7 @@ function main() {
 
       // Rebuilt Hub page with 16 sections
       const hubHtml = buildCityZipHub(stateCfg, loc, nearbyForLoc);
-      fs.writeFileSync(path.join(cityZipDir, 'index.html'), hubHtml, 'utf8');
+      fs.writeFileSync(path.join(cityZipDir, 'index.html'), require('./theme-toggle').apply(hubHtml), 'utf8');
       statePagesCount++;
 
       if ((index + 1) % 150 === 0 || index + 1 === locList.length) {

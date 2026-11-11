@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<script id="hpu-theme-init">(function(){var r=document.documentElement,k='hpu-theme';function read(){try{return localStorage.getItem(k)}catch(e){return null}}function set(t){r.setAttribute('data-theme',t==='light'?'light':'dark');var b=document.querySelector('[data-theme-toggle]');if(b){var d=r.getAttribute('data-theme')==='dark';b.setAttribute('aria-pressed',String(d));b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');b.title=d?'Switch to light mode':'Switch to dark mode'}}set(read());r.setAttribute('data-theme-ready','');document.addEventListener('DOMContentLoaded',function(){set(r.getAttribute('data-theme'))});document.addEventListener('click',function(e){if(!e.target.closest('[data-theme-toggle]'))return;var t=r.getAttribute('data-theme')==='dark'?'light':'dark';set(t);try{localStorage.setItem(k,t)}catch(e){}});window.addEventListener('storage',function(e){if(e.key===k)set(e.newValue)})})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sewer Line Repair Services in Houston, TX 77002 | Home Plumbing USA</title>
   <meta name="description" content="Explore sewer line repair in Houston, TX 77002 referral options. Confirm availability, credentials, and pricing with an independent provider.">
   <meta name="keywords" content="Sewer Line Repair Houston TX, Sewer Line Repair 77002, Emergency Plumber Houston TX, Home Plumbing USA">
@@ -27,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=theme-20261110">
   <link rel="icon" type="image/png" href="/public/images/favicon.png">
 
   <!-- JSON-LD Schemas -->
@@ -140,11 +141,11 @@
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; }
     .section-padding { padding: 5rem 0; }
-    .bg-light-custom { background-color: #0d1a2d; }
-    .bg-dark-custom { background-color: #070d18; }
+    .bg-light-custom { background-color: var(--theme-surface, #0d1a2d); }
+    .bg-dark-custom { background-color: var(--theme-surface, #070d18); }
 
     /* Header Nav */
-    .header .top-bar { background: #060f1d; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.85rem; padding: 0.4rem 0; }
+    .header .top-bar { background: var(--theme-surface, #060f1d); border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.85rem; padding: 0.4rem 0; }
     .header .top-bar a { color: var(--text-light); display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
     .header .nav-container { padding: 0.8rem 0; display: flex; justify-content: space-between; align-items: center; }
     .header nav > ul { display: flex; align-items: center; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
@@ -154,39 +155,39 @@
     .dropdown-trigger { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; }
     .dropdown-icon { transition: transform 0.2s ease; font-size: 0.75rem; }
     .dropdown:hover .dropdown-icon { transform: rotate(180deg); }
-    .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 280px; background: #111d33; border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); padding: 0.75rem 0; display: flex; flex-direction: column; z-index: 1010; margin-top: 0.5rem; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.25s ease; list-style: none; }
+    .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 280px; background: var(--theme-surface, #111d33); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); padding: 0.75rem 0; display: flex; flex-direction: column; z-index: 1010; margin-top: 0.5rem; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.25s ease; list-style: none; }
     .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     .scrollable-menu { max-height: 380px; overflow-y: auto; }
     .scrollable-menu::-webkit-scrollbar { width: 6px; }
     .scrollable-menu::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
     .dropdown-menu li a { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 1.25rem; color: var(--text-light); font-size: 0.88rem; white-space: nowrap; }
     .dropdown-menu li a:hover { background: rgba(37, 99, 235, 0.15); color: #38bdf8; }
-    .menu-toggle { display: none; background: none; border: none; font-size: 1.75rem; color: #fff; cursor: pointer; }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.75rem; color:var(--theme-ink, #fff); cursor: pointer; }
 
     /* Hero */
     .hero-lead-text { font-size: 1.15rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.75; max-width: 640px; }
     .stats-strip { display: flex; gap: 2.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 2rem; }
-    .stat-val { font-size: 2rem; font-weight: 800; color: #fff; font-family: var(--font-heading, 'Outfit', sans-serif); line-height: 1; }
+    .stat-val { font-size: 2rem; font-weight: 800; color:var(--theme-ink, #fff); font-family: var(--font-heading, 'Outfit', sans-serif); line-height: 1; }
     .stat-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem; }
 
     /* Live Dispatch Board Card */
-    .dispatch-board-card { background: #0d1527; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 2.25rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: left; }
+    .dispatch-board-card { background: var(--theme-surface, #0d1527); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); padding: 2.25rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: left; }
     .dispatch-board-badge { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); padding: 0.35rem 0.85rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.5rem; }
     .pulse-dot-red { display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 10px #ef4444; animation: pulseAnim 1.8s infinite; }
     @keyframes pulseAnim { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
     .dispatch-feature-row { display: flex; gap: 1.25rem; align-items: flex-start; background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.04); }
     .dispatch-feature-icon { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.15rem; }
-    .btn-dispatch-call { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff !important; width: 100%; justify-content: center; padding: 1.15rem; font-size: 1.45rem; font-weight: 800; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35); border: none; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .btn-dispatch-call { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:var(--theme-ink, #fff) !important; width: 100%; justify-content: center; padding: 1.15rem; font-size: 1.45rem; font-weight: 800; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35); border: none; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .btn-dispatch-call:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(245, 158, 11, 0.5); }
 
     /* Trust Badge Cards */
-    .trust-card { background: #111d33; padding: 2rem 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .trust-card { background: var(--theme-surface, #111d33); padding: 2rem 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center; transition: transform 0.2s ease, border-color 0.2s ease; }
     .trust-card:hover { transform: translateY(-3px); border-color: rgba(59, 130, 246, 0.4); }
     .trust-icon-circle { background: rgba(37, 99, 235, 0.15); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 50%; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: #38bdf8; font-size: 1.25rem; }
 
     /* Scope & Benefits */
-    .scope-card { background: #111d33; padding: 2.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
-    .benefit-card { background: #111d33; padding: 2.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
+    .scope-card { background: var(--theme-surface, #111d33); padding: 2.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+    .benefit-card { background: var(--theme-surface, #111d33); padding: 2.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
     .benefit-card:hover { transform: translateY(-3px); border-color: rgba(59, 130, 246, 0.4); }
 
     /* Process */
@@ -195,10 +196,10 @@
 
     /* FAQ Accordions */
     .faq-container-custom { max-width: 860px; margin: 0 auto; }
-    .faq-item-custom { background: #111d33; border: 1px solid var(--border-color); border-radius: var(--radius-sm); margin-bottom: 14px; overflow: hidden; transition: border-color 0.2s ease; }
+    .faq-item-custom { background: var(--theme-surface, #111d33); border: 1px solid var(--border-color); border-radius: var(--radius-sm); margin-bottom: 14px; overflow: hidden; transition: border-color 0.2s ease; }
     .faq-item-custom.active { border-color: var(--primary-light); }
     .faq-trigger-btn { width: 100%; text-align: left; padding: 1.25rem 1.5rem; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none; }
-    .faq-trigger-btn h3 { font-size: 1.05rem; margin: 0; font-weight: 700; color: #fff; padding-right: 1.5rem; }
+    .faq-trigger-btn h3 { font-size: 1.05rem; margin: 0; font-weight: 700; color:var(--theme-ink, #fff); padding-right: 1.5rem; }
     .faq-toggle-icon { font-size: 1.4rem; font-weight: 300; color: #38bdf8; transition: transform 0.25s ease; flex-shrink: 0; }
     .faq-item-custom.active .faq-toggle-icon { transform: rotate(45deg); color: #f87171; }
     .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -206,7 +207,7 @@
 
     /* Footer */
     .footer-grid-custom { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
-    .footer-col h3 { color: #fff; font-size: 1.15rem; margin-bottom: 1.25rem; position: relative; padding-bottom: 0.5rem; }
+    .footer-col h3 { color:var(--theme-ink, #fff); font-size: 1.15rem; margin-bottom: 1.25rem; position: relative; padding-bottom: 0.5rem; }
     .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 32px; height: 2px; background-color: var(--primary); }
     .footer-links-list { display: flex; flex-direction: column; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
     .footer-links-list a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; transition: color 0.2s, padding-left 0.2s; }
@@ -242,7 +243,7 @@
 @media(max-width:1024px) {
  body.service-page-wrapper { padding-bottom:calc(60px + env(safe-area-inset-bottom, 0px)) !important; }
  .service-mobile-actions { display:flex; position:fixed; left:0; right:0; bottom:0; width:100%; height:calc(60px + env(safe-area-inset-bottom, 0px)); padding-bottom:env(safe-area-inset-bottom, 0px); box-sizing:border-box; background:#003366; z-index:10000; box-shadow:0 -2px 10px rgba(0,0,0,.2); }
- .service-mobile-actions a { flex:1 1 50%; min-width:0; display:flex; align-items:center; justify-content:center; gap:8px; min-height:60px; color:#fff; font-size:16px; font-weight:700; text-decoration:none; }
+ .service-mobile-actions a { flex:1 1 50%; min-width:0; display:flex; align-items:center; justify-content:center; gap:8px; min-height:60px; color:var(--theme-ink, #fff); font-size:16px; font-weight:700; text-decoration:none; }
  .service-mobile-actions a:first-child { background:#d97706; }
  .service-mobile-actions a:last-child { background:#003366; }
  .service-mobile-actions a:focus-visible { outline:3px solid #fff; outline-offset:-5px; }
@@ -349,7 +350,8 @@
           <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
-      <div class="nav-ctas">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="true" aria-label="Switch to light mode" title="Switch to light mode"><svg class="theme-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.9 13.1A8.5 8.5 0 0 1 10.9 3.1a8.5 8.5 0 1 0 10 10Z"/></svg><svg class="theme-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+<div class="nav-ctas">
         <a href="tel:877-516-8705" class="btn btn-primary phone-cta-upgraded" aria-label="Call toll-free (877) 516-8705 for a plumbing referral"><svg class="phone-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="phone-cta-copy"><span class="phone-cta-label">CALL TOLL-FREE</span><span class="phone-cta-number">(877) 516-8705</span></span></a>
       </div>
     </div>
@@ -357,13 +359,13 @@
 
   <main style="padding-top: 0;">
     <!-- HERO SECTION -->
-    <section class="hero" style="padding: 5.5rem 0 4.5rem; background: linear-gradient(135deg, #0b1322 0%, #060b13 100%); color: #fff; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left;">
+    <section class="hero" style="padding: 5.5rem 0 4.5rem; background: linear-gradient(135deg, var(--theme-surface, #0b1322) 0%, var(--theme-surface, #060b13) 100%); color:var(--theme-ink, #fff); position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left;">
       <div class="container">
         <div class="grid-2" style="align-items: center; gap: 3.5rem;">
           
           <div class="hero-content">
             <div class="inner-hero-breadcrumbs" style="font-size: 0.85rem; margin-bottom: 1.5rem; opacity: 0.75;">
-              <a href="/" style="color: #fff; text-decoration: none;">Home</a> &gt; <a href="/texas/" style="color: #fff; text-decoration: none;">Texas</a> &gt; <a href="https://homeplumbingusa.com/texas/houston-77002/" style="color: #fff; text-decoration: none;">Houston (77002)</a> &gt; <span style="color: #38bdf8;">Sewer Line Repair</span>
+              <a href="/" style="color:var(--theme-ink, #fff); text-decoration: none;">Home</a> &gt; <a href="/texas/" style="color:var(--theme-ink, #fff); text-decoration: none;">Texas</a> &gt; <a href="https://homeplumbingusa.com/texas/houston-77002/" style="color:var(--theme-ink, #fff); text-decoration: none;">Houston (77002)</a> &gt; <span style="color: #38bdf8;">Sewer Line Repair</span>
             </div>
             
             <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37, 99, 235, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; color: #38bdf8;">
@@ -371,7 +373,7 @@
               Premium Certified Local Experts in Houston
             </div>
             
-            <h1 style="font-size: 3.25rem; margin-bottom: 1.5rem; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; color: #fff;">
+            <h1 style="font-size: 3.25rem; margin-bottom: 1.5rem; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; color:var(--theme-ink, #fff);">
               Expert Sewer Line Repair Services in Houston, TX 77002
             </h1>
             
@@ -412,7 +414,7 @@
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                 </div>
                 <div>
-                  <h4 style="color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Check Local Availability</h4>
+                  <h4 style="color:var(--theme-ink, #fff); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Check Local Availability</h4>
                   <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0;">Coverage varies by ZIP code, service, and provider availability.</p>
                 </div>
               </div>
@@ -421,7 +423,7 @@
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
                 <div>
-                  <h4 style="color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Ask About All Fees</h4>
+                  <h4 style="color:var(--theme-ink, #fff); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Ask About All Fees</h4>
                   <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0;">Ask the independent provider for a written estimate and confirm diagnostic, call-out, after-hours, and repair charges before approving work.</p>
                 </div>
               </div>
@@ -446,35 +448,35 @@
     </section>
 
     <!-- TRUST BADGES SECTION -->
-    <section class="trust-badges" style="background-color: #0d1a2d; border-bottom: 1px solid var(--border-color); padding: 4rem 0;">
+    <section class="trust-badges" style="background-color: var(--theme-surface, #0d1a2d); border-bottom: 1px solid var(--border-color); padding: 4rem 0;">
       <div class="container">
         <div class="grid-4" style="gap: 1.5rem;">
           <div class="trust-card">
             <div class="trust-icon-circle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <h3 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Verify License & Insurance</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Verify License & Insurance</h3>
             <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.5;">Check credentials before hiring</p>
           </div>
           <div class="trust-card">
             <div class="trust-icon-circle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
             </div>
-            <h3 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Request a Written Estimate</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Request a Written Estimate</h3>
             <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.5;">Confirm call-out and repair charges</p>
           </div>
           <div class="trust-card">
             <div class="trust-icon-circle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
-            <h3 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Confirm Service Hours</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Confirm Service Hours</h3>
             <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.5;">Hours vary by independent provider</p>
           </div>
           <div class="trust-card">
             <div class="trust-icon-circle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"/></svg>
             </div>
-            <h3 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Review Provider Terms</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700;">Review Provider Terms</h3>
             <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.5;">Ask about workmanship and warranty terms</p>
           </div>
         </div>
@@ -487,7 +489,7 @@
         <div class="grid-2" style="gap: 3.5rem; align-items: start;">
           <div>
             <div style="margin-bottom: 1.5rem;">
-              <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">Discuss Sewer Line Repair Options in Houston</h2>
+              <h2 style="font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff); margin-bottom: 1rem;">Discuss Sewer Line Repair Options in Houston</h2>
               <div style="width: 50px; height: 3px; background: var(--primary); border-radius: 2px;"></div>
             </div>
             <p style="line-height: 1.8; color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
@@ -499,7 +501,7 @@
           </div>
           
           <div class="scope-card">
-            <h3 style="color: #fff; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 700;">Service Scope Overview</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 700;">Service Scope Overview</h3>
             <ul style="list-style: none; padding: 0; margin: 0 0 2rem 0;">
               <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 0.25rem;"><polyline points="20 6 9 17 4 12"/></svg>
@@ -526,7 +528,7 @@
     <section class="section-padding bg-light-custom" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
       <div class="container">
         <div style="text-align: center; max-width: 800px; margin: 0 auto 3.5rem;">
-          <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">Benefits of Professional Sewer Line Repair</h2>
+          <h2 style="font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff); margin-bottom: 1rem;">Benefits of Professional Sewer Line Repair</h2>
           <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
             Home Plumbing USA helps you seek an independent provider. The contractor you choose is responsible for diagnosis, pricing, and repair work.
           </p>
@@ -534,19 +536,19 @@
         
         <div class="grid-3" style="gap: 2rem;">
           <div class="benefit-card">
-            <h3 style="color: #fff; margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">1. Landscape Preservation</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">1. Landscape Preservation</h3>
             <p style="font-size: 0.92rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.65;">
               <strong>No-Dig Solutions:</strong> Trenchless epoxy pipe lining restores damaged lines from existing cleanouts without destroying lawns or driveways.
             </p>
           </div>
           <div class="benefit-card">
-            <h3 style="color: #fff; margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">2. Root-Proof Barrier</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">2. Root-Proof Barrier</h3>
             <p style="font-size: 0.92rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.65;">
               <strong>Seamless Interior:</strong> Seamless CIPP epoxy sleeves seal joint gaps, permanently blocking tree roots from re-entering pipes.
             </p>
           </div>
           <div class="benefit-card">
-            <h3 style="color: #fff; margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">3. 50+ Year Longevity</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 700;">3. 50+ Year Longevity</h3>
             <p style="font-size: 0.92rem; margin-bottom: 0; color: var(--text-muted); line-height: 1.65;">
               <strong>Structural Renewal:</strong> Modern cured-in-place pipe materials match or exceed the durability of new schedule 40 PVC.
             </p>
@@ -561,13 +563,13 @@
         <div class="grid-2" style="gap: 3.5rem; align-items: start;">
           <div>
             <div style="margin-bottom: 1.5rem;">
-              <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">Environments and Applications Served</h2>
+              <h2 style="font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff); margin-bottom: 1rem;">Environments and Applications Served</h2>
               <div style="width: 50px; height: 3px; background: var(--primary); border-radius: 2px;"></div>
             </div>
             <p style="line-height: 1.8; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.05rem;">
               We service all types of residential and commercial properties in Houston (77002), adapting our equipment to the size, scale, and age of your plumbing infrastructure.
             </p>
-            <div style="background-color: #111d33; padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
+            <div style="background-color: var(--theme-surface, #111d33); padding: 1.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1.5rem;">
               <h4 style="color: #f87171; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-triangle-exclamation"></i> Emergency Warning Signs in Houston
               </h4>
@@ -581,24 +583,24 @@
           </div>
           
           <div>
-            <h3 style="color: #fff; margin-bottom: 1.5rem; font-size: 1.35rem; font-weight: 700;">Discuss Your Property Type</h3>
+            <h3 style="color:var(--theme-ink, #fff); margin-bottom: 1.5rem; font-size: 1.35rem; font-weight: 700;">Discuss Your Property Type</h3>
             <ul style="list-style: none; padding: 0; margin: 0;">
               <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.75rem;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 0.25rem;"><polyline points="20 6 9 17 4 12"/></svg>
                 <div style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-                  <strong style="color: #fff;">Residential Homes:</strong> We protect household plumbing across Houston by servicing kitchens, bathrooms, laundry standpipes, and basement drains.
+                  <strong style="color:var(--theme-ink, #fff);">Residential Homes:</strong> We protect household plumbing across Houston by servicing kitchens, bathrooms, laundry standpipes, and basement drains.
                 </div>
               </li>
               <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.75rem;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 0.25rem;"><polyline points="20 6 9 17 4 12"/></svg>
                 <div style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-                  <strong style="color: #fff;">Commercial Offices & Retail:</strong> We maintain restroom facilities, breakrooms, and drinking fountains to ensure smooth, uninterrupted business operations.
+                  <strong style="color:var(--theme-ink, #fff);">Commercial Offices & Retail:</strong> We maintain restroom facilities, breakrooms, and drinking fountains to ensure smooth, uninterrupted business operations.
                 </div>
               </li>
               <li style="margin-bottom: 0; display: flex; align-items: flex-start; gap: 0.75rem;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 0.25rem;"><polyline points="20 6 9 17 4 12"/></svg>
                 <div style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-                  <strong style="color: #fff;">Restaurants & Multi-Family:</strong> We handle high-demand commercial kitchens, utility manifolds, and municipal sewer lateral connections safely.
+                  <strong style="color:var(--theme-ink, #fff);">Restaurants & Multi-Family:</strong> We handle high-demand commercial kitchens, utility manifolds, and municipal sewer lateral connections safely.
                 </div>
               </li>
             </ul>
@@ -612,7 +614,7 @@
       <div class="container">
         <div style="text-align: center; margin-bottom: 4rem;">
           <span style="color: #38bdf8; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">How Referrals Work</span>
-          <h2 style="margin-top: 0.5rem; font-size: 2.25rem; font-weight: 800; color: #fff;">Steps to Arrange Independent Service</h2>
+          <h2 style="margin-top: 0.5rem; font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff);">Steps to Arrange Independent Service</h2>
           <p style="max-width: 600px; margin: 0.5rem auto 0; color: var(--text-muted); font-size: 1.05rem;">Ask about local availability, compare provider terms, and approve work directly with the contractor.</p>
         </div>
         
@@ -623,22 +625,22 @@
           <div class="grid-4" style="gap: 2rem; position: relative; z-index: 2;">
             <div class="process-step-box">
               <div class="step-badge-num">01</div>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Call Toll-Free</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Call Toll-Free</h3>
               <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Call 877-516-8705 to request a referral through Lead Smart.</p>
             </div>
             <div class="process-step-box">
               <div class="step-badge-num">02</div>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Local Matching</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Local Matching</h3>
               <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Call with your ZIP code and repair needs to ask about an independent provider. Matching is subject to availability.</p>
             </div>
             <div class="process-step-box">
               <div class="step-badge-num">03</div>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Clear Diagnosis</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Clear Diagnosis</h3>
               <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Confirm inspection charges and request a written estimate from the independent provider before work begins.</p>
             </div>
             <div class="process-step-box">
               <div class="step-badge-num">04</div>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Work Completed</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Work Completed</h3>
               <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Agree on the scope, payment terms, and warranty with the independent provider before approving work.</p>
             </div>
           </div>
@@ -653,7 +655,7 @@
           
           <div>
             <span style="color: #38bdf8; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.5rem;">Premium Nationwide Network</span>
-            <h2 style="color: #fff; font-size: 2.75rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.01em;">Why Property Owners Trust Home Plumbing USA</h2>
+            <h2 style="color:var(--theme-ink, #fff); font-size: 2.75rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.01em;">Why Property Owners Trust Home Plumbing USA</h2>
             <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; max-width: 540px;">
               Providers are independent businesses. Request and verify applicable licensing, insurance, and qualifications before hiring. This website does not guarantee individual credentials.
             </p>
@@ -664,7 +666,7 @@
               </div>
               <div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Direct Hotline: (877) 516-8705</div>
-                <div style="font-size: 0.95rem; color: #fff; font-weight: 700; margin-top: 0.15rem;">Ask About Local Availability</div>
+                <div style="font-size: 0.95rem; color:var(--theme-ink, #fff); font-weight: 700; margin-top: 0.15rem;">Ask About Local Availability</div>
               </div>
             </div>
           </div>
@@ -672,22 +674,22 @@
           <div class="grid-2" style="gap: 1.5rem; text-align: left;">
             <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 2rem 1.5rem; border-radius: var(--radius-md);">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Confirm Arrival Times</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Confirm Arrival Times</h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Availability and arrival times depend on the independent provider, location, and workload. Call to ask about availability; immediate or same-day attendance is not guaranteed.</p>
             </div>
             <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 2rem 1.5rem; border-radius: var(--radius-md);">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Verify Provider Credentials</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Verify Provider Credentials</h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Providers are independent businesses. Request and verify applicable licensing, insurance, and qualifications before hiring. This website does not guarantee individual credentials.</p>
             </div>
             <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 2rem 1.5rem; border-radius: var(--radius-md);">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Confirm Pricing</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Confirm Pricing</h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Ask the independent provider for a written estimate and confirm diagnostic, call-out, after-hours, and repair charges before approving work.</p>
             </div>
             <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 2rem 1.5rem; border-radius: var(--radius-md);">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <h3 style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Emergency & Routine</h3>
+              <h3 style="color:var(--theme-ink, #fff); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Emergency & Routine</h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">Ask whether an independent provider can handle your specific repair and preferred appointment time.</p>
             </div>
           </div>
@@ -700,7 +702,7 @@
     <section class="section-padding" style="background-color: var(--bg-dark);">
       <div class="container" style="max-width: 900px; text-align: center;">
         <div style="margin-bottom: 2rem;">
-          <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">Location Map for Houston, TX</h2>
+          <h2 style="font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff); margin-bottom: 0.75rem;">Location Map for Houston, TX</h2>
           <p style="color: var(--text-muted); font-size: 1.05rem;">This map identifies the location discussed on this page. It does not establish a local office or guarantee service coverage.</p>
         </div>
         <div style="width: 100%; height: 450px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
@@ -713,7 +715,7 @@
     <section class="section-padding bg-light-custom" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
       <div class="container">
         <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
-          <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">Frequently Asked Questions About Sewer Line Repair</h2>
+          <h2 style="font-size: 2.25rem; font-weight: 800; color:var(--theme-ink, #fff); margin-bottom: 0.75rem;">Frequently Asked Questions About Sewer Line Repair</h2>
           <p style="color: var(--text-muted); font-size: 1.05rem;">Common questions about sewer line repair solutions in Houston, TX (77002).</p>
         </div>
         
@@ -790,7 +792,7 @@
     <!-- CALL TO ACTION (CTA) SECTION -->
     <section class="section-padding bg-dark-custom" style="text-align: center; border-bottom: 1px solid var(--border-color);">
       <div class="container" style="max-width: 750px; margin: 0 auto;">
-        <h2 style="color: #fff; font-size: 2.35rem; margin-bottom: 1rem; font-weight: 800;">Need Professional Sewer Line Repair?</h2>
+        <h2 style="color:var(--theme-ink, #fff); font-size: 2.35rem; margin-bottom: 1rem; font-weight: 800;">Need Professional Sewer Line Repair?</h2>
         <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem;">
           Call to ask about an independent provider. Confirm availability, inspection fees, and pricing directly with the provider.
         </p>
@@ -804,7 +806,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer" style="background: #070d18; border-top: 1px solid var(--border-color); padding: 5rem 0 2rem;">
+  <footer class="footer" style="background: var(--theme-surface, #070d18); border-top: 1px solid var(--border-color); padding: 5rem 0 2rem;">
     <div class="container">
       <div class="footer-grid-custom">
         <div class="footer-col">
@@ -899,8 +901,8 @@
             Service hours and appointment availability depend on the independent provider.
           </p>
           <div style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
-            <div><strong style="color: #fff;">Referral Phone:</strong> 24 Hours / 7 Days</div>
-            <div><strong style="color: #fff;">Office Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</div>
+            <div><strong style="color:var(--theme-ink, #fff);">Referral Phone:</strong> 24 Hours / 7 Days</div>
+            <div><strong style="color:var(--theme-ink, #fff);">Office Hours:</strong> Mon - Sat: 8:00 AM - 6:00 PM</div>
           </div>
         </div>
       </div>
