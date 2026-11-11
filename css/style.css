@@ -3521,6 +3521,9 @@ html[data-theme="light"] .footer-legal-disclaimer { color:#526176 !important; }
 html[data-theme="light"] .mobile-toggle span { background:#14243c; }
 html[data-theme="light"] :is(.menu-toggle,.stat-val,.faq-trigger-btn h3,.footer-col h3) { color:var(--text-white); }
 /* Keep room for navigation, the 44px toggle, and the existing call CTA. */
+@media(min-width:1025px) {
+ .header-inner .nav-link { padding-top:20px; padding-bottom:20px; white-space:nowrap; }
+}
 @media(min-width:1025px) and (max-width:1439px) {
  .header-inner { gap:8px; }
  .header-inner .nav { gap:0; }
