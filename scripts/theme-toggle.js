@@ -24,7 +24,7 @@ function installBoot(html) {
 function apply(html){
  // Normalize legacy city headers without removing the mobile sticky call action.
  html=html.replace(/(<div class="top-bar-content">)([\s\S]*?)(<\/div>)/g,(_,start,body,end)=>start+body.replace(/<a\b[^>]*href="tel:[^"]*"[^>]*>[\s\S]*?<\/a>/g,'<span>Plumbing referrals — confirm availability and pricing</span>')+end);
- html=html.replace(/(<div class="header-cta"[^>]*>)([\s\S]*?)(<\/div>)/g,(_,start,body,end)=>{let calls=0;return start+body.replace(/<a\b[^>]*href="tel:[^"]*"[^>]*>[\s\S]*?<\/a>/g,a=>++calls===1?a:'')+end;});
+ html=html.replace(/(<div class="header-cta"[^>]*>)([\s\S]*?)(<\/div>)/g,(_,start,body,end)=>{let calls=0;return start+body.replace(/<a\b[^>]*href="tel:[^"]*"[^>]*>[\s\S]*?<\/a>/g,a=>++calls===1?a:'').replace(/^[ \t]+$/gm,'')+end;});
 
  html=html.replace(/href="\/css\/style\.css(?:\?[^"]*)?"/g,'href="/css/style.css?v=theme-20261111b"');
  if(html.includes('id="hpu-theme-init"'))return installBoot(html);
