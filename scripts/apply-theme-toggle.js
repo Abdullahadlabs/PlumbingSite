@@ -5,7 +5,7 @@ let changed=0;
 for(const p of cp.execFileSync('git',['ls-files','-z','*.html'],{maxBuffer:30e6}).toString().split('\0').filter(Boolean)){
  const before=fs.readFileSync(p,'utf8'),after=apply(before);
  assert.equal(apply(after),after,'Not idempotent: '+p);
- assert.deepEqual(after.match(/href="tel:[^"]*"/g),before.match(/href="tel:[^"]*"/g),'Phone changed: '+p);
+ assert.deepEqual(new Set(after.match(/href="tel:[^"]*"/g)),new Set(before.match(/href="tel:[^"]*"/g)),'Phone changed: '+p);
  assert.deepEqual(after.match(/<link[^>]*canonical[^>]*>/g),before.match(/<link[^>]*canonical[^>]*>/g),'Canonical changed: '+p);
  if(before!==after){fs.writeFileSync(p,after);changed++;}
 }

@@ -5,10 +5,11 @@ const {chromium}=require('playwright');
  const context=await browser.newContext();
  await context.route('**/*',r=>r.request().url().startsWith('http://127.0.0.1:8090')?r.continue():r.abort());
  const page=await context.newPage();
- const paths=['/','/alaska/fairbanks-99701/water-heater-repair/','/state/texas/','/texas/houston-77002/','/contact.html','/blog/how-to-shut-off-main-water-valve/'];
+ const paths=['/','/alaska/fairbanks-99701/water-heater-repair/','/state/texas/','/texas/houston-77002/','/alaska/anchorage-99502/','/contact.html','/blog/how-to-shut-off-main-water-valve/'];
  for(const path of paths)for(const width of (paths.indexOf(path)<2?[320,390,768,1024,1349,1440]:[390,1440])){
   await page.setViewportSize({width,height:850});await page.goto('http://127.0.0.1:8090'+path,{waitUntil:'domcontentloaded'});
   const button=page.locator('[data-theme-toggle]');assert.equal(await button.count(),1,path+' toggle count');assert((await page.content()).indexOf('<meta charset=')<1024,'Charset placement');assert(await button.isVisible(),path+' toggle visible');
+  assert.equal(await page.locator('.top-bar a[href^=\"tel:\"]').count(),0,'Top bar must not contain a call button');assert((await page.locator('.header-cta a[href^=\"tel:\"]').count())<=1,'Duplicate header calls');
   const before=await page.locator('a[href^="tel:"]').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
   for(const theme of ['dark','light']){
    if(await page.locator('html').getAttribute('data-theme')!==theme)await button.click();
