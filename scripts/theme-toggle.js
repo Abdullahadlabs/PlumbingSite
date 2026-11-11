@@ -22,6 +22,7 @@ function installBoot(html) {
  return out.replace(/(<head[^>]*>)\s*/i,'$1\n'+charset[0]+'\n'+BOOT+'\n');
 }
 function apply(html){
+ html=html.replace(/href="\/css\/style\.css(?:\?[^"]*)?"/g,'href="/css/style.css?v=theme-20261111"');
  if(html.includes('id="hpu-theme-init"'))return installBoot(html);
  if(!/<header\b/.test(html)||!html.includes('/css/style.css'))return html;
  const pattern=/<div\s+class="(?:header-cta|nav-ctas)"/;
@@ -30,7 +31,6 @@ function apply(html){
  // Convert inline palette only, without touching scripts, structured data or content.
  out=out.replace(/\bstyle="([^"]*)"/g,(_,css)=>'style="'+themeColors(css)+'"');
  out=installBoot(out).replace(pattern,BUTTON+'\n$&');
- out=out.replace(/href="\/css\/style\.css(?:\?[^"]*)?"/g,'href="/css/style.css?v=theme-20261110"');
  return out;
 }
 module.exports={apply,themeColors,BOOT,BUTTON};
