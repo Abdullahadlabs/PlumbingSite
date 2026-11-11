@@ -3585,3 +3585,11 @@ html[data-theme="light"] :is(.hero-content h1,.hero h1,.hero-title) { text-shado
 html[data-theme="light"] :is(.faq-item,.faq-question) { background:#fff !important; border-color:var(--border-color) !important; }
 html[data-theme="light"] :is(.faq-answer,.faq-answer-content) { background:#eef3fa !important; }
 html[data-theme="light"] :is(.faq-answer,.faq-answer *) { color:var(--text-light) !important; }
+
+/* Visible map boundaries and readable location cards in light mode. */
+html[data-theme="light"] .usa-map-svg path { fill:#dbeafe; stroke:#527298; stroke-width:1.5; }
+html[data-theme="light"] .usa-map-svg path:is(:hover,:focus-visible,.active-state) { fill:#2563eb; stroke:#14243c; }
+html[data-theme="light"] .area-card { background:linear-gradient(135deg,#fff,#edf4ff) !important; border-color:#b6c9e2 !important; }
+html[data-theme="light"] .area-card .area-title { color:#14243c !important; }
+html[data-theme="light"] .area-card .area-zip { color:#1d4ed8 !important; }
+html[data-theme="light"] .area-card i { color:#b45309 !important; }
