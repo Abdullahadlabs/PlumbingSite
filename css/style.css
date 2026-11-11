@@ -3521,9 +3521,13 @@ html[data-theme="light"] .footer-legal-disclaimer { color:#526176 !important; }
 html[data-theme="light"] .mobile-toggle span { background:#14243c; }
 html[data-theme="light"] :is(.menu-toggle,.stat-val,.faq-trigger-btn h3,.footer-col h3) { color:var(--text-white); }
 /* Keep room for navigation, the 44px toggle, and the existing call CTA. */
-@media(min-width:1025px) and (max-width:1250px) {
+@media(min-width:1025px) and (max-width:1439px) {
  .header-inner { gap:8px; }
- .header-inner .nav { gap:12px; }
+ .header-inner .nav { gap:0; }
+ .header-inner .nav-link { padding:20px 10px; font-size:.9rem; white-space:nowrap; }
+ .header-inner .nav-badge-pulse { display:none; }
+ .header-inner>.logo { flex:0 1 220px; min-width:140px; }
+ .header-inner>.logo img { max-width:100% !important; height:auto !important; }
  .header-inner .header-cta { gap:8px; }
  .header-inner .header-cta>.btn { display:none; }
  .header-inner .theme-toggle { margin:0 4px; }
